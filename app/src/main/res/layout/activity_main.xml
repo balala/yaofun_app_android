@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="18dp"
+    tools:context=".activity.LandingActivity">
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginRight="345dp"
+            android:src="@mipmap/guanbi" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/register"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="34dp"
+            android:text="@string/app_register"
+            android:textColor="@color/colorblack"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="91dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_hello"
+            android:textColor="@color/colorblack"
+            android:textSize="23sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_welcome"
+            android:textColor="@color/colorblack"
+            android:textSize="23sp" />
+    </LinearLayout>
+
+
+    <com.balala.yaofun.util.CustomEditText
+        android:id="@+id/et1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="227dp"
+        android:hint="@string/app_account"
+        android:inputType="phone"
+        android:maxLength="13"
+        android:maxLines="1"
+        android:textColor="@color/colorblack"
+        android:textSize="15sp" />
+
+    <!--<ImageView-->
+    <!--android:layout_width="375dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="264dp"-->
+    <!--android:src="@drawable/xiahua" />-->
+    <!--<ImageView-->
+    <!--android:layout_width=""-->
+    <!--android:layout_height="" />-->
+
+    <com.balala.yaofun.util.CustomEditText
+        android:id="@+id/et2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="278dp"
+        android:layout_marginBottom="363dp"
+        android:hint="@string/app_password"
+        android:maxLines="1"
+        android:password="true"
+        android:textSize="15sp" />
+
+    <!--<ImageView-->
+    <!--android:layout_width="375dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="335dp"-->
+    <!--android:layout_marginBottom="348dp"-->
+    <!--android:src="@drawable/xiahuas" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/clear"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginTop="240dp"-->
+    <!--android:layout_marginRight="20dp"-->
+    <!--android:src="@mipmap/delete"-->
+    <!--android:visibility="invisible" />-->
+
+    <CheckBox
+        android:id="@+id/watch"
+        android:layout_width="18dp"
+        android:layout_height="11dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="295dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="260dp"
+        android:background="@drawable/colse_eye"
+        android:button="@null" />
+
+    <TextView
+        android:id="@+id/froget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="343dp"
+        android:layout_marginBottom="320dp"
+        android:text="@string/app_froget"
+        android:textColor="@color/colordeepgray"
+        android:textSize="15sp" />
+
+
+    <Button
+        android:id="@+id/activity_go"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginBottom="247dp"
+        android:background="@drawable/yuan"
+        android:text="@string/app_login"
+        android:textColor="@color/colorwhite"
+        android:textSize="13dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="475dp"
+        android:layout_marginBottom="121dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/app_other"
+            android:textColor="@color/colorgray"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/wechat"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:src="@mipmap/weixin" />
+    </RelativeLayout>
+</RelativeLayout>

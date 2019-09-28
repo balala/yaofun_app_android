@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="18dp"
+    tools:context=".activity.FrogetpasswardActivity">
+
+    <LinearLayout
+        android:id="@+id/froget_edits"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginRight="345dp"
+        android:layout_marginBottom="621dp">
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@mipmap/guanbi" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="94dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="91dp"
+        android:layout_marginBottom="555dp"
+        android:text="忘记密码"
+        android:textColor="@color/colorblack"
+        android:textSize="23sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="190dp"
+        android:layout_marginBottom="462dp">
+
+        <com.balala.yaofun.util.CustomEditText
+            android:id="@+id/et6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/app_phone"
+            android:inputType="phone"
+            android:maxLength="13"
+            android:maxLines="1"
+            android:textColor="@color/colorblack"
+            android:textSize="15sp" />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/froget_clear"-->
+            <!--android:src="@mipmap/delete"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="80dp"-->
+            <!--android:layout_width="15dp"-->
+            <!--android:layout_height="15dp" />-->
+        <TextView
+            android:id="@+id/got_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:text="获取验证码"
+            android:textColor="@color/colordeepgray"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+
+    <!--<ImageView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="227dp"-->
+    <!--android:layout_marginBottom="448dp"-->
+    <!--android:src="@drawable/xiahua" />-->
+
+    <EditText
+        android:id="@+id/et7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="261dp"
+        android:layout_marginBottom="398dp"
+        android:hint="@string/app_verify"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:textColor="@color/colorblack"
+        android:textSize="15sp" />
+
+    <!--<ImageView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:layout_marginTop="298dp"-->
+    <!--android:layout_marginBottom="383dp"-->
+    <!--android:src="@drawable/xiahua" />-->
+
+    <EditText
+        android:id="@+id/et8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:layout_marginBottom="333dp"
+        android:hint="@string/new_password"
+        android:maxLines="1"
+        android:password="true"
+        android:textColor="@color/colorblack"
+        android:textSize="15sp" />
+
+
+    <CheckBox
+        android:id="@+id/froget_eyes"
+        android:layout_width="18dp"
+        android:layout_height="11dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="330dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/colse_eye"
+        android:button="@null" />
+    <!--<ImageView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:layout_marginTop="357dp"-->
+    <!--android:layout_marginBottom="318dp"-->
+    <!--android:src="@drawable/xiahua" />-->
+
+    <Button
+        android:id="@+id/froget_yes"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="382dp"
+        android:layout_marginBottom="246dp"
+        android:background="@drawable/yuan"
+        android:text="确定"
+        android:textColor="@color/colorwhite"
+        android:textSize="13dp" />
+</RelativeLayout>
