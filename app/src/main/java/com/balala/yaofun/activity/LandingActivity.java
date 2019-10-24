@@ -1,33 +1,38 @@
 package com.balala.yaofun.activity;
 
+import android.annotation.SuppressLint;
+import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.balala.yaofun.R;
 import com.balala.yaofun.base.BaseActivity;
-import com.balala.yaofun.bean.AccountBean;
-import com.balala.yaofun.bean.result.DefaultBean;
+import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.mylandingmvp.LandingPresenter;
 import com.balala.yaofun.mylandingmvp.LandingView;
-import com.balala.yaofun.util.CustomEditText;
 import com.balala.yaofun.util.TextWatcherUtil;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
@@ -36,6 +41,8 @@ import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXTextObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 public class LandingActivity extends BaseActivity<LandingPresenter, LandingView> implements LandingView {
@@ -47,10 +54,10 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
 
     // IWXAPI 是第三方app和微信通信的openApi接口
     private IWXAPI api;
-    private ImageView mEdit;
+    private LinearLayout mEdit;
     private RelativeLayout mRegister;
-    private CustomEditText mEt1;
-    private CustomEditText mEt2;
+    private com.balala.yaofun.util.CustomEditText mEt1;
+    private EditText mEt2;
     private CheckBox mWatch;
     private TextView mFroget;
     private Button mActivityGo;
@@ -58,14 +65,21 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
     private String phone;
     private String msg;
     private String password;
+    private View landing_clear;
+    private View decorView;
+    private FragmentManager fragmentManager;
 
     @Override
     protected int getlayout() {
-        return R.layout.activity_main;
+        return R.layout.activity_landing;
     }
 
     @Override
     protected void initView() {
+        //获取顶层视图
+        decorView = getWindow().getDecorView();
+        // 渲染系统toolbar
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         mEdit = findViewById(R.id.edit);
         mRegister = findViewById(R.id.register);
         mEt1 = findViewById(R.id.et1);
@@ -74,12 +88,55 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         mFroget = findViewById(R.id.froget);
         mActivityGo = findViewById(R.id.activity_go);
         mWechat = findViewById(R.id.wechat);
+        landing_clear = findViewById(R.id.landing_clear);
         initviews();
 
     }
 
     // 点击事件
     private void initviews() {
+
+        mEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //           finish();
+                startActivity(new Intent(LandingActivity.this, GeneralActivity.class));
+            }
+        });
+
+        //输入的点击事件
+        mEt2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (count < 0) {
+                    landing_clear.setVisibility(View.GONE);
+                } else {
+                    landing_clear.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 0) {
+                    landing_clear.setVisibility(View.GONE);
+                }
+            }
+
+        });
+        // 清除的点击事件
+        landing_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEt2.setText("");
+                landing_clear.setVisibility(View.GONE);
+            }
+        });
         // 点击跳转到注册页面
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,18 +148,16 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         // 点击立即注册 开始解析和进入首页
         mActivityGo.setOnClickListener(new View.OnClickListener() {
 
-
             @Override
             public void onClick(View v) {
-//                Toast.makeText(LandingActivity.this, "开始解析登陆接口", Toast.LENGTH_SHORT).show();
                 // 设置跳转到首页
                 phone = mEt1.getText().toString().replaceAll(" ", "");
                 //重新拼接手机号
                 password = mEt2.getText().toString();
-
                 Log.e("xuzhiqi", "initData: " + password + "\n" + phone);
                 basePresenter.getLandingData(phone, password);
                 // 提示用户登陆成功
+//                startActivity(new Intent(LandingActivity.this, GeneralActivity.class));
 
             }
         });
@@ -119,8 +174,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         mWechat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LandingActivity.this, "微信登陆", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(LandingActivity.this, WXEntryActivity.class));
+//                ToastUtil.showLong("微信登陆");
                 // 微信登陆方法
                 initWechat();
                 // 微信登陆授权方法
@@ -137,8 +191,9 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
                 if (mWatch.isClickable()) {
                     mWatch.setClickable(true);
                 }
-                Toast.makeText(LandingActivity.this, "查看密码", Toast.LENGTH_SHORT).show();
+//                ToastUtil.showLong("查看密码");
             }
+
         });
 
 
@@ -148,9 +203,9 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
             public void callback() {
                 //todo edittext changed后回调
 
-
             }
         });
+
 
         // 点击眼睛查看或隐藏密码
         mWatch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -173,31 +228,50 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
     }
 
     // 登陆成功方法
+    @SuppressLint("CommitPrefEdits")
     @Override
-    public void onSuccessLanding(DefaultBean bean) {
-        msg = bean.getMsg();
-        Toast.makeText(this, "登陆成功方法" + bean.getMsg(), Toast.LENGTH_SHORT).show();
-        Log.i("xuzhiqidsdwd", "onSuccessLanding: " + bean.getMsg());
+    public void onSuccessLanding(LandingBean bean) {
+        LandingBean.DataBean data = bean.getData();
+        Log.e("dada", "onSuccessLanding: " + data);
+        Log.i("登陆成功打印", "onSuccessLanding: " + bean.getMsg());
+        //将数据保存至SharedPreferences:
+        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("flag", true);
+        Log.i("aBoolean", "onSuccessLanding: " + editor);
+        editor.commit();
+        // 存储第一次登陆的信息
+        startActivity(new Intent(LandingActivity.this, GeneralActivity.class));
+        String userid = bean.getData().get_id();
+        String images = bean.getData().getImages();
+        String nick_name = bean.getData().getNick_name();
+        //发送参数
+        EventBus.getDefault().post(userid);
+        // 在这传userid images nick_name到landing页面
+        Log.i("EventBus", "这是我要传的 " + nick_name);
+        Log.i("登陆成功后返回的用户信息", "userid: " + userid + "" + images+""+nick_name);
     }
+
+
 
     // 登陆失败方法
     @Override
     public void onErrorLanding(String error) {
-
         Log.i("xuzhiqifndkf", "onErrorLanding: " + error);
+
     }
 
     // baseActivity 里面的方法 用作解析传递
     @Override
     protected void initData() {
-//        Log.i(TAG, "initData: " + phone);
-//        basePresenter.getLandingData(phone, password);
-        Log.i(TAG, "initData: "+phone);
+
+        Log.i(TAG, "initData: " + phone);
 
     }
 
     @Override
     protected void initData2() {
+
 
     }
 
@@ -259,6 +333,8 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
     private void initSou() {
 
         if (!api.isWXAppInstalled()) {
+//            ToastUtils.showLong("请先安装微信");
+            Toast.makeText(this, "您还没有安装微信", Toast.LENGTH_SHORT).show();
         } else {
             final SendAuth.Req req = new SendAuth.Req();
             req.scope = "snsapi_userinfo";
@@ -273,10 +349,8 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
 
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
         api = WXAPIFactory.createWXAPI(this, APP_ID, true);
-
         // 将应用的appId注册到微信
         api.registerApp(APP_ID);
-
         //建议动态监听微信启动广播进行注册到微信
         registerReceiver(new BroadcastReceiver() {
             @Override

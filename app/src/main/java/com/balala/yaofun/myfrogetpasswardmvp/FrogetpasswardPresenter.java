@@ -5,11 +5,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.balala.yaofun.base.BasePresenter;
-import com.balala.yaofun.bean.ChangeCodeBean;
 import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.VerificationCode;
 import com.balala.yaofun.httpUtils.MyApp;
 import com.balala.yaofun.httpUtils.ResultCallBack;
+import com.balala.yaofun.httpUtils.ToastUtil;
 
 import java.io.IOException;
 
@@ -41,8 +41,7 @@ public class FrogetpasswardPresenter extends BasePresenter<FrogetpasswardView> {
 
             @Override
             public void onFail(String msg) {
-
-                Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
+                ToastUtil.showLong(msg);
                 Log.d(TAG, "onFail: " + msg);
             }
         });
@@ -63,28 +62,31 @@ public class FrogetpasswardPresenter extends BasePresenter<FrogetpasswardView> {
 
             @Override
             public void onFail(String msg) {
-                Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
+                ToastUtil.showLong(msg);
+
                 Log.d(TAG, "onFail: " + msg);
+
             }
         });
     }
 
 
     // 修改密码
-    public void getAlterData(String phone, String code, String password,String key) {
+    public void getAlterData(String phone, String code, String password, String key) {
 
-        frogetpasswardModel.ChangepasswordData(phone, code, password,key, new ResultCallBack<ResponseBody>() {
+        frogetpasswardModel.ChangepasswordData(phone, code, password, key, new ResultCallBack<ResponseBody>() {
             @Override
             public void onSuccess(ResponseBody bean) throws IOException {
                 if (bean != null) {
                     mView.onSuccessAlterpassward(bean.toString());
+                    ToastUtil.showLong("更改成功");
                     Toast.makeText(MyApp.getInstance(), "更改成功", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFail(String msg) {
-                Toast.makeText(MyApp.getInstance(), "更改失败", Toast.LENGTH_SHORT).show();
+                ToastUtil.showLong("更改失败");
                 Log.d("更改密码", "onFail: " + msg);
             }
         });

@@ -1,19 +1,13 @@
 package com.balala.yaofun.mylandingmvp;
 
-import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
-
-import androidx.core.app.NavUtils;
 
 import com.balala.yaofun.base.BaseModel;
 import com.balala.yaofun.bean.AccountBean;
-import com.balala.yaofun.bean.VerificationResult;
-import com.balala.yaofun.bean.result.DefaultBean;
 import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.httpUtils.HttpUtils;
-import com.balala.yaofun.httpUtils.MyApp;
 import com.balala.yaofun.httpUtils.ResultCallBack;
+import com.balala.yaofun.httpUtils.ToastUtil;
 import com.balala.yaofun.util.MyServer;
 import com.balala.yaofun.util.Utils;
 
@@ -26,7 +20,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.ResponseBody;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -35,7 +28,7 @@ public class LandingModel extends BaseModel {
     private AccountBean accountBean;
 
     // 登陆解析
-    public void LandingData(String phone, String password, ResultCallBack<DefaultBean> resultCallBack) {
+    public void LandingData(String phone, String password, ResultCallBack<LandingBean> resultCallBack) {
         MyServer apiserver = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
         accountBean = new AccountBean();
         accountBean.setUser_id("-1");
@@ -74,16 +67,21 @@ public class LandingModel extends BaseModel {
                     @Override
                     public void onNext(LandingBean landingBean) {
                         if (landingBean != null) {
-
                             Log.e("登陆成功出来的", "Phone: " + landingBean.getMsg());
-                            Toast.makeText(MyApp.getInstance(), "登陆成功", Toast.LENGTH_SHORT).show();
+                            ToastUtil.showLong("登陆成功");
+                            try {
+                                resultCallBack.onSuccess(landingBean);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.d(TAG, "onError: " + e.getMessage());
-                        Toast.makeText(MyApp.getInstance(), "登陆错误", Toast.LENGTH_SHORT).show();
+                        ToastUtil.showLong("登陆错误");
 
                     }
 

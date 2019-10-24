@@ -1,0 +1,75 @@
+package com.balala.yaofun.adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.balala.yaofun.R;
+import com.balala.yaofun.bean.result.HomeAllBean;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
+
+import java.util.ArrayList;
+
+public class HomeAroundAdapter extends RecyclerView.Adapter<HomeAroundAdapter.ViewHolder> {
+    private Context context;
+    private ArrayList<HomeAllBean.DataBean.AroundBean> aroundBeans;
+
+    public HomeAroundAdapter(Context context, ArrayList<HomeAllBean.DataBean.AroundBean> aroundBeans) {
+        this.context = context;
+        this.aroundBeans = aroundBeans;
+    }
+
+    @NonNull
+    @Override
+    public HomeAroundAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View inflate = LayoutInflater.from(context).inflate(R.layout.home_item2s, null);
+        ViewHolder viewHolder = new ViewHolder(inflate);
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull HomeAroundAdapter.ViewHolder holder, int position) {
+        holder.homeitem2_distance.setText(aroundBeans.get(position).getLocation());
+        holder.homeitem2_title.setText(aroundBeans.get(position).getTitle());
+        holder.homeitem2_time.setText(aroundBeans.get(position).getStart_end_time());
+        holder.homeitem2_site.setText(aroundBeans.get(position).getLocation_name());
+        double costs = aroundBeans.get(position).getCost();
+        String cost = String.valueOf(costs);
+        holder.homeitem2_price.setText(cost);
+        Glide.with(context).load(aroundBeans.get(position).getCover()).apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).into(holder.homeitem2_img);
+    }
+
+    @Override
+    public int getItemCount() {
+        return aroundBeans.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        private final ImageView homeitem2_img;
+        private final TextView homeitem2_title;
+        private final TextView homeitem2_time;
+        private final TextView homeitem2_price;
+        private final TextView homeitem2_site;
+        private final TextView homeitem2_distance;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            homeitem2_img = itemView.findViewById(R.id.homeitem2_img);
+            homeitem2_title = itemView.findViewById(R.id.homeitem2_title);
+            homeitem2_time = itemView.findViewById(R.id.homeitem2_time);
+            homeitem2_site = itemView.findViewById(R.id.homeitem2_site);
+            homeitem2_price = itemView.findViewById(R.id.homeitem2_price);
+            homeitem2_distance = itemView.findViewById(R.id.homeitem2_distance);
+
+        }
+    }
+}

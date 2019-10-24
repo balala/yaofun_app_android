@@ -4,50 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="18dp"
+    android:layout_margin="@dimen/dp_18"
     android:orientation="vertical"
     tools:context=".activity.RegisterActivity">
 
     <LinearLayout
         android:id="@+id/froget_edits"
-        android:layout_width="50dp"
-        android:layout_height="50dp">
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50">
 
         <ImageView
-            android:layout_width="13dp"
-            android:layout_height="13dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginRight="345dp"
-            android:layout_marginBottom="621dp"
+            android:layout_width="@dimen/dp_13"
+            android:layout_height="@dimen/dp_13"
+            android:layout_marginTop="@dimen/dp_34"
+            android:layout_marginRight="@dimen/dp_345"
+            android:layout_marginBottom="@dimen/dp_621"
             android:src="@mipmap/guanbi" />
     </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/register"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="34dp">
+        android:layout_marginTop="@dimen/dp_34">
 
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="15dp"
+            android:layout_height="@dimen/dp_15"
             android:layout_alignParentRight="true"
             android:text="登陆"
             android:textColor="@color/colorblack"
-            android:textSize="13sp" />
+            android:textSize="@dimen/sp_13" />
     </RelativeLayout>
 
     <TextView
-        android:layout_width="94dp"
+        android:layout_width="@dimen/dp_94"
         android:layout_height="wrap_content"
         android:layout_marginTop="91dp"
-        android:layout_marginRight="264dp"
-        android:layout_marginBottom="555dp"
+        android:layout_marginRight="@dimen/dp_264"
+        android:layout_marginBottom="@dimen/dp_555"
         android:text="注册"
         android:textColor="@color/colorblack"
-        android:textSize="23sp" />
+        android:textSize="@dimen/sp_23" />
 
     <!--<TextView-->
     <!--android:id="@+id/get_code"-->
@@ -64,10 +64,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="190dp"
-        android:layout_marginBottom="463dp">
+        android:layout_marginTop="@dimen/dp_190"
+        android:layout_marginBottom="@dimen/dp_462">
 
-        <com.balala.yaofun.util.CustomEditText
+        <!--<com.balala.yaofun.util.CustomEditText
             android:id="@+id/et_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,27 +77,38 @@
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="@color/colorblack"
-            android:textSize="15sp" />
+            android:textSize="@dimen/sp_15" />-->
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/app_phone"
+            android:inputType="phone"
+            android:maxLength="13"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorblack"
+            android:textSize="@dimen/sp_15" />
 
         <TextView
             android:id="@+id/get_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/dp_5"
             android:text="获取验证码"
             android:textColor="@color/colordeepgray"
-            android:textSize="15sp" />
+            android:textSize="@dimen/sp_15" />
 
-        <!--<ImageView-->
-        <!--android:id="@+id/clear2"-->
-        <!--android:layout_width="12dp"-->
-        <!--android:layout_height="12dp"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:layout_marginRight="90dp"-->
-        <!--android:src="@mipmap/delete"-->
-        <!--android:visibility="invisible" />-->
+        <ImageView
+            android:id="@+id/clear"
+            android:layout_width="@dimen/dp_12"
+            android:layout_height="@dimen/dp_12"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/dp_80"
+            android:src="@mipmap/delete" />
         <!--<TextView-->
         <!--android:id="@+id/froget_code"-->
         <!--android:layout_width="wrap_content"-->
@@ -120,44 +131,54 @@
         android:id="@+id/et_identifiing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="261dp"
-        android:layout_marginBottom="398dp"
+        android:layout_marginTop="@dimen/dp_261"
+        android:layout_marginBottom="@dimen/dp_398"
         android:hint="@string/app_verify"
         android:inputType="phone"
         android:maxLength="5"
         android:maxLines="1"
         android:textColor="@color/colorblack"
-        android:textSize="15sp" />
+        android:textSize="@dimen/sp_15" />
 
     <EditText
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="320dp"
-        android:layout_marginBottom="333dp"
+        android:layout_marginTop="@dimen/dp_320"
+        android:layout_marginBottom="@dimen/dp_333"
         android:hint="@string/app_password"
         android:maxLines="1"
         android:password="true"
         android:textColor="@color/colorblack"
-        android:textSize="15sp" />
+        android:textSize="@dimen/sp_15" />
+
+    <ImageView
+        android:id="@+id/clear2"
+        android:layout_width="@dimen/dp_12"
+        android:layout_height="@dimen/dp_12"
+        android:layout_toLeftOf="@id/eyes"
+        android:layout_marginTop="@dimen/dp_335"
+        android:layout_marginRight="@dimen/dp_10"
+        android:visibility="gone"
+        android:src="@mipmap/delete" />
 
     <CheckBox
         android:id="@+id/eyes"
-        android:layout_width="18dp"
-        android:layout_height="11dp"
+        android:layout_width="@dimen/dp_18"
+        android:layout_height="@dimen/dp_11"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="335dp"
-        android:layout_marginRight="22dp"
-        android:background="@drawable/colse_eye"
+        android:layout_marginTop="@dimen/dp_335"
+        android:layout_marginRight="@dimen/dp_22"
+        android:background="@drawable/landing_eyes"
         android:button="@null" />
 
     <CheckBox
         android:id="@+id/box"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="@dimen/dp_20"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="370dp"
-        android:layout_marginBottom="261dp"
+        android:layout_marginTop="@dimen/dp_370"
+        android:layout_marginBottom="@dimen/dp_261"
         android:checked="true" />
 
     <TextView
@@ -165,34 +186,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/box"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="370dp"
-        android:layout_marginBottom="270dp"
+        android:layout_marginLeft="@dimen/dp_35"
+        android:layout_marginTop="@dimen/dp_370"
+        android:layout_marginBottom="@dimen/dp_270"
         android:text="我已阅读《要FUN用户协议》"
         android:textColor="@color/colordeepgray"
-        android:textSize="12sp" />
+        android:textSize="@dimen/sp_12" />
 
     <TextView
         android:id="@+id/red_speak"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="393dp"
+        android:layout_marginLeft="@dimen/dp_35"
+        android:layout_marginTop="@dimen/dp_393"
         android:text="请输入正确的手机号"
         android:textColor="@color/colorred"
-        android:textSize="12sp"
+        android:textSize="@dimen/sp_12"
         android:visibility="invisible" />
 
     <Button
         android:id="@+id/froget_yes"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="422dp"
-        android:layout_marginBottom="236dp"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_422"
+        android:layout_marginBottom="@dimen/dp_236"
         android:background="@drawable/yuan"
         android:text="立即注册"
         android:textColor="@color/colorwhite"
-        android:textSize="13dp" />
-
+        android:textSize="@dimen/sp_13" />
 
 </RelativeLayout>

@@ -4,16 +4,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.balala.yaofun.base.BaseModel;
-import com.balala.yaofun.bean.AccountBean;
-import com.balala.yaofun.bean.ChangeCodeBean;
 import com.balala.yaofun.bean.IdentifyingBean;
 import com.balala.yaofun.bean.VerificationBean;
 import com.balala.yaofun.bean.VerificationResult;
-import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.bean.result.VerificationCode;
 import com.balala.yaofun.httpUtils.HttpUtils;
 import com.balala.yaofun.httpUtils.MyApp;
 import com.balala.yaofun.httpUtils.ResultCallBack;
+import com.balala.yaofun.httpUtils.ToastUtil;
 import com.balala.yaofun.util.MyServer;
 import com.balala.yaofun.util.Utils;
 
@@ -26,7 +24,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
-import okhttp3.internal.Util;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -36,6 +33,7 @@ public class FrogetpasswardModel extends BaseModel {
     private String key;
     private int code;
     private VerificationBean verificationBean;
+    private String time;
 
     //  发送验证码解析
     public void GetData(String phone, final ResultCallBack<VerificationResult> listBeanResultCallBack) {
@@ -86,9 +84,7 @@ public class FrogetpasswardModel extends BaseModel {
                         if (verificationResult != null) {
                             code = verificationResult.getData().getCode();
                             key = verificationResult.getData().getKey();
-                            Log.e("发送验证码解析出来的", "onNext: " + verificationResult.getData().toString());
-                            Log.e("发送验证码解析出来的", "code: " + verificationResult.getData().getCode());
-                            Log.e("发送验证码解析出来的", "key: " + verificationResult.getData().getKey());
+                            Log.e("发送验证码解析出来的", "onNext: " + verificationResult.getData().toString()+"\n"+verificationResult.getData().getCode()+"\n"+verificationResult.getData().getKey());
                             try {
                                 listBeanResultCallBack.onSuccess(verificationResult);
                             } catch (IOException e) {
@@ -207,10 +203,11 @@ public class FrogetpasswardModel extends BaseModel {
         changemap.put("phone", phone);
         changemap.put("purpose", "找回密码");
         changemap.put("password", password);
-        changemap.put("sign2", Utils.md5(nowDate + phone + Utils.Signs));
+        time = Utils.md5(nowDate + phone + Utils.Signs);
+        changemap.put("sign2", time);
         changemap.put("key", key);
         changemap.put("code", code);
-        String time = Utils.md5(nowDate + phone + Utils.Signs);
+
         Log.e("修改密码 M层 解析", "修改密码 M层 解析: " + time + "\n" + phone + "\n" + key + "\n" + code + "\n" + password + "\n" + nowDate);
 
 
@@ -228,8 +225,10 @@ public class FrogetpasswardModel extends BaseModel {
 
                         try {
                             Log.i("修改密码 M层 解析", "onSubscribe: " + responseBody.string());
-                            Toast.makeText(MyApp.getInstance(), "更改密码成功", Toast.LENGTH_SHORT).show();
+                            ToastUtil.showLong("更改密码成功");
+
                         } catch (IOException e) {
+
                             e.printStackTrace();
                         }
                     }
@@ -237,7 +236,8 @@ public class FrogetpasswardModel extends BaseModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.i("修改密码 M层 解析", "onSubscribe: " + e.toString());
+                        ToastUtil.showLong("更改密码失败");
+
                         Toast.makeText(MyApp.getInstance(), e.toString(), Toast.LENGTH_SHORT).show();
 
                     }

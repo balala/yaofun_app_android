@@ -1,11 +1,10 @@
 package com.balala.yaofun.util;
 
 
-import com.balala.yaofun.bean.AccountBean;
-import com.balala.yaofun.bean.ChangeCodeBean;
-import com.balala.yaofun.bean.VerificationBean;
 import com.balala.yaofun.bean.VerificationResult;
-import com.balala.yaofun.bean.result.DefaultBean;
+import com.balala.yaofun.bean.result.DayBeans;
+import com.balala.yaofun.bean.result.HomeAllBean;
+import com.balala.yaofun.bean.result.HomeBannerDean;
 import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.bean.result.VerificationCode;
 
@@ -26,8 +25,10 @@ import retrofit2.http.QueryMap;
 
 public interface MyServer {
 
-    //    String url = "http://192.168.0.164:8088/api/";
+    //   String url = "https://192.168.0.164:8088/api/";
+    // String url = "http://192.168.110.144:5001/api/";
     String url = "https://test.yaofun.vip/api/";
+//    String url = "https://api.yaofun.vip/api";
 
     // http://test.yaofun.vip/api/verification_code/send
     // 发送验证码的接口 verification code
@@ -58,5 +59,31 @@ public interface MyServer {
     @POST("user/change/password")
     @FormUrlEncoded
     Observable<ResponseBody> getChangePasswardData(@FieldMap Map<String, Object> map);
+
+    //顶部每日一句
+    // https://test.yaofun.vip/api/mood/one
+
+    @GET("mood/one")
+    Observable<DayBeans> getDayData(@QueryMap HashMap<String, Object> map);
+
+
+    // 首页banner
+//    http://test.yaofun.vip/api/rotary_planting_map/all
+    @GET("rotary_planting_map/all")
+    Observable<HomeBannerDean> getbannerData(@QueryMap HashMap<String, Object> map);
+
+
+    //首页接口
+    //http://test.yaofun.vip/api/activity/good_choice/all
+
+    @GET("activity/good_choice/all")
+    Observable<HomeAllBean> getDoodchoice(@QueryMap HashMap<String, Object> map);
+
+    //发布活动
+    //http://test.yaofun.vip/api/activity/upload
+    @POST("activity/upload")
+    @FormUrlEncoded
+    Observable<ResponseBody> getReleaseactivitData(@FieldMap Map<String, Object> map);
+
 
 }

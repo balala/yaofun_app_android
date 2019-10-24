@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorblack"
+    tools:context=".fragment.MessageFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/message_tab"
+        app:tabIndicatorFullWidth="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
+        app:tabIndicatorColor="@color/colorred"
+        app:tabSelectedTextColor="@color/colorwhite"
+        app:tabTextColor="@color/colordeepgray" />
+
+    <ImageView
+        android:layout_width="@dimen/dp_22"
+        android:layout_height="@dimen/dp_21"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_58"
+        android:layout_marginRight="@dimen/dp_29"
+        android:scaleType="fitXY"
+        android:src="@mipmap/phone" />
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/message_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/message_tab" />
+
+</RelativeLayout>

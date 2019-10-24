@@ -7,7 +7,6 @@ import com.balala.yaofun.bean.AccountBean;
 import com.balala.yaofun.bean.IdentifyingBean;
 import com.balala.yaofun.bean.VerificationBean;
 import com.balala.yaofun.bean.VerificationResult;
-import com.balala.yaofun.bean.result.DefaultBean;
 import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.bean.result.VerificationCode;
 import com.balala.yaofun.httpUtils.HttpUtils;

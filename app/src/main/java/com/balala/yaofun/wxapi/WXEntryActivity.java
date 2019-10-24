@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.balala.yaofun.activity.RegisterActivity;
+import com.balala.yaofun.activity.GeneralActivity;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -57,9 +57,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 result = "授权成功";
                 Toast.makeText(this, result, Toast.LENGTH_LONG).show();
 
-                // 跳转到注册页面 为了检验是否会报错或者第二次需不需要再次授权
-
-                startActivity(new Intent(WXEntryActivity.this, RegisterActivity.class));
+                // 跳转到注册页面 为了检验是否会报错或者第二次需不需要再次授权改为跳到主页面
+                startActivity(new Intent(WXEntryActivity.this, GeneralActivity.class));
                 finish();
                 break;
             case BaseResp.ErrCode.ERR_USER_CANCEL:

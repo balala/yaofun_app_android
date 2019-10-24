@@ -1,12 +1,11 @@
 package com.balala.yaofun.mylandingmvp;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.balala.yaofun.base.BasePresenter;
-import com.balala.yaofun.bean.result.DefaultBean;
-import com.balala.yaofun.httpUtils.MyApp;
+import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.httpUtils.ResultCallBack;
+import com.balala.yaofun.httpUtils.ToastUtil;
 
 public class LandingPresenter extends BasePresenter<LandingView> {
 
@@ -19,21 +18,22 @@ public class LandingPresenter extends BasePresenter<LandingView> {
     }
 
     public void getLandingData(String phone, String password) {
-        landingModel.LandingData(phone, password, new ResultCallBack<DefaultBean>() {
+        landingModel.LandingData(phone, password, new ResultCallBack<LandingBean>() {
 
             @Override
-            public void onSuccess(DefaultBean bean) {
+            public void onSuccess(LandingBean bean) {
                 if (bean != null) {
                     mView.onSuccessLanding(bean);
-                    Toast.makeText(MyApp.getInstance(), bean.getMsg(), Toast.LENGTH_SHORT).show();
+                    ToastUtil.showLong(bean.getMsg());
+                
                 }
+
             }
 
             @Override
             public void onFail(String msg) {
 
-                Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
-
+                ToastUtil.showLong(msg);
                 Log.d("xuzhiqi", "onFail: " + msg);
             }
         });

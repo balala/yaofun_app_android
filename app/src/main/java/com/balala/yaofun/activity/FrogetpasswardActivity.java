@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -23,13 +25,11 @@ import android.widget.Toast;
 
 import com.balala.yaofun.R;
 import com.balala.yaofun.base.BaseActivity;
-import com.balala.yaofun.bean.ChangeCodeBean;
 import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.VerificationCode;
+import com.balala.yaofun.httpUtils.ToastUtil;
 import com.balala.yaofun.myfrogetpasswardmvp.FrogetpasswardPresenter;
 import com.balala.yaofun.myfrogetpasswardmvp.FrogetpasswardView;
-import com.balala.yaofun.myregistermvp.MyPresenter;
-import com.balala.yaofun.myregistermvp.MyView;
 import com.balala.yaofun.util.TextWatcherUtil;
 
 
@@ -38,7 +38,7 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
 
     private static final String TAG = "xuzhiqiaa";
     private LinearLayout mFrogetEdits;
-    private com.balala.yaofun.util.CustomEditText mEphone;
+    private EditText mEphone;
     private TextView mGotCode;
     private EditText mECode;
     private EditText mEtpassword;
@@ -51,6 +51,7 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
     private CheckBox mFrogeteyes;
     private String password;
     private ImageView mFrogetclear;
+    private ImageView froget_clear2;
     private int code1;
 
 
@@ -68,7 +69,8 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
         mEtpassword = findViewById(R.id.et8);
         mFrogetYes = findViewById(R.id.froget_yes);
         mFrogeteyes = findViewById(R.id.froget_eyes);
-//        mFrogetclear = findViewById(R.id.froget_clear);
+        mFrogetclear = findViewById(R.id.froget_clear);
+        froget_clear2 = findViewById(R.id.froget_clear2);
 //        froget_eyes
         // 点击事件
         initviews();
@@ -86,21 +88,85 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
                 startActivity(new Intent(FrogetpasswardActivity.this, LandingActivity.class));
             }
         });
+        //账号输入的点击事件
+        mEphone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (count < 0) {
+                    mFrogetclear.setVisibility(View.GONE);
+                } else {
+                    mFrogetclear.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 0) {
+                    mFrogetclear.setVisibility(View.GONE);
+                }
+            }
+
+        });
+        // 清除的点击事件
+        mFrogetclear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEphone.setText("");
+                mFrogetclear.setVisibility(View.GONE);
+            }
+        });
+        //密码输入的点击事件
+        mEtpassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (count < 0) {
+                    froget_clear2.setVisibility(View.GONE);
+                } else {
+                    froget_clear2.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 0) {
+                    froget_clear2.setVisibility(View.GONE);
+                }
+            }
+
+        });
+        // 清除的点击事件
+        froget_clear2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEtpassword.setText("");
+                froget_clear2.setVisibility(View.GONE);
+            }
+        });
 
         //获取验证码
         mGotCode.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText
-                        (FrogetpasswardActivity.this, "获取验证码", Toast.LENGTH_SHORT).show();
+                ToastUtil.showLong("获取验证码");
                 //比较手机号是否符合规则 符合规则弹出"获取验证码"并且验证码开始倒计时，红色文字隐藏
                 phoneNum = mEphone.getText().toString().trim();
                 // 判断手机号为空或者小于11位时 也可以点击
                 if (phoneNum.length() <= 0 || phoneNum.length() <= 11) {
 
-                    Toast.makeText(FrogetpasswardActivity.this, "请输入正确的手机号码", Toast.LENGTH_SHORT).show();
-
+                    ToastUtil.showLong("请输入正确的手机号码");
 
                 } else {
                     // 这个方法是用来判断手机验证码相关的
@@ -115,7 +181,8 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
         mFrogetYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FrogetpasswardActivity.this, "开始更改密码", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(FrogetpasswardActivity.this, "开始更改密码", Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "开始更改密码 ");
                 code = mECode.getText().toString();
                 password = mEtpassword.getText().toString();
                 initData3();
@@ -152,6 +219,7 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
             }
         });
 
+
     }
 
     private void initCode() {
@@ -169,12 +237,12 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
 //            mRedSpeak.setVisibility(View.GONE);
             Log.i(TAG, "手机号码 " + phone);
             // 获取手机号码 返回后台进行解析
-//
-//
             initData();
             // 如果手机号码不符合规则 提示用户正确输入手机号 红色文字显示 字体变成"请输入正确的手机号码"
         } else {
-            Toast.makeText(FrogetpasswardActivity.this, " 请输入正确的手机号码", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(FrogetpasswardActivity.this, " 请输入正确的手机号码", Toast.LENGTH_SHORT).show();
+            ToastUtil.showLong("请输入正确的手机号码");
+
 //            mRedSpeak.setVisibility(View.VISIBLE);
 //            mRedSpeak.setText("请输入正确的手机号码");
         }
@@ -199,7 +267,7 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
 
     private void initData3() {
 
-        Log.i("确定更改密码点击事件", "onSuccessAlterpassward: " + phone + "\n" + code + "\n" + password + "\n" + key + "\n" );
+        Log.i("确定更改密码点击事件", "onSuccessAlterpassward: " + phone + "\n" + code + "\n" + password + "\n" + key + "\n");
         basePresenter.getAlterData(phone, code, password, key);
 
     }
@@ -226,8 +294,10 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
     @Override
     public void onSuccessVerificationpassward(VerificationCode verificationBean) {
         Log.e("xuzhiqi4", "onSuccessyanzheng: " + verificationBean.toString());
-        Toast.makeText(this, "SuccessVerificationpassward"+verificationBean.toString(), Toast.LENGTH_SHORT).show();
+        ToastUtil.showLong(verificationBean.toString());
+
     }
+
 
     @Override
     public void onFailVerificationpassward(String msg) {
@@ -237,7 +307,8 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
     @Override
     public void onSuccessAlterpassward(String str) {
 
-        Toast.makeText(this, "更改密码成功", Toast.LENGTH_SHORT).show();
+        ToastUtil.showLong("更改密码成功");
+        startActivity(new Intent(FrogetpasswardActivity.this,GeneralActivity.class));
 
     }
 

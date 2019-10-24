@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorwhite"
+    android:orientation="vertical"
+    tools:context=".activity.SearchActivity">
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/community_search_et"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_width="@dimen/dp_300"
+        android:textCursorDrawable="@drawable/editcolor"
+        android:layout_height="@dimen/dp_36"
+        android:layout_marginTop="@dimen/dp_40"
+        android:background="@drawable/layout_release_asplaza_line"
+        android:hint="输入内容"
+        android:maxLength="16"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/dp_38"
+        android:singleLine="false"
+        android:textColorHint="@color/colordeepgray"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/community_search_iv"
+        android:layout_width="@dimen/dp_14"
+        android:layout_height="@dimen/dp_14"
+        android:background="@drawable/searchs"
+        android:padding="@dimen/dp_8"
+        android:layout_marginLeft="@dimen/dp_5"
+        app:layout_constraintBottom_toBottomOf="@id/community_search_et"
+        app:layout_constraintStart_toStartOf="@id/community_search_et"
+        app:layout_constraintTop_toTopOf="@id/community_search_et" />
+
+    <TextView
+        android:id="@+id/community_search_cancle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_50"
+        android:text="取消"
+        android:textColor="@color/black"
+        android:layout_marginRight="@dimen/dp_10"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/community_search_fiste"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/community_search_et">
+
+        <TextView
+            android:id="@+id/community_search_tv_histroysearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="搜索历史"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/tv_clear"
+            android:src="@drawable/rubbish"
+            android:layout_width="@dimen/dp_14"
+            android:layout_height="@dimen/dp_14"
+            android:layout_marginLeft="@dimen/dp_350"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.balala.yaofun.activity.FlowLayout
+            android:id="@+id/search_fl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/community_search_tv_histroysearch" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/comment_search_last"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/community_search_et">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/community_search_tab"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/community_search_vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

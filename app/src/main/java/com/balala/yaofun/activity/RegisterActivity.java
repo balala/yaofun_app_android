@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -27,9 +29,9 @@ import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.bean.VerificationBean;
 import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.VerificationCode;
+import com.balala.yaofun.httpUtils.ToastUtil;
 import com.balala.yaofun.myregistermvp.MyPresenter;
 import com.balala.yaofun.myregistermvp.MyView;
-import com.balala.yaofun.util.CustomEditText;
 import com.balala.yaofun.util.TextWatcherUtil;
 import com.balala.yaofun.webview.AboutyaofunActivity;
 
@@ -49,7 +51,7 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
     private String key;
     private LinearLayout mFrogetEdits;
     private RelativeLayout mRegister;
-    private CustomEditText mEtPhone;
+    private EditText mEtPhone;
     private TextView mGetCode;
     private ImageView mClear2;
     private EditText mEtIdentifiing;
@@ -60,7 +62,7 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
     private TextView mRedSpeak;
     private Button mFrogetYes;
     private TimeCount time;
-
+    private View mClear;
 
     @Override
     protected int getlayout() {
@@ -80,6 +82,8 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
         mAbout = findViewById(R.id.about);
         mRedSpeak = findViewById(R.id.red_speak);
         mFrogetYes = findViewById(R.id.froget_yes);
+        mClear2 = findViewById(R.id.clear2);
+        mClear = findViewById(R.id.clear);
         initOtherView();
         time = new TimeCount(60000, 1000);
 
@@ -87,6 +91,75 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
 
     //  点击事件
     private void initOtherView() {
+
+        //输入的点击事件
+        mEtPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (count < 0) {
+                    mClear.setVisibility(View.GONE);
+                } else {
+                    mClear.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 0) {
+                    mClear.setVisibility(View.GONE);
+                }
+            }
+
+        });
+
+        // 清除的点击事件
+        mClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEtPhone.setText("");
+                mClear.setVisibility(View.GONE);
+            }
+        });
+        //输入的点击事件
+        mEtPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (count < 0) {
+                    mClear2.setVisibility(View.GONE);
+                } else {
+                    mClear2.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 0) {
+                    mClear2.setVisibility(View.GONE);
+                }
+            }
+
+        });
+
+        // 清除的点击事件
+        mClear2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEtPassword.setText("");
+                mClear2.setVisibility(View.GONE);
+            }
+        });
 
         //点击 获取验证码 进行以下操作
         mGetCode.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +170,8 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
                 // 判断手机号为空或者小于11位时 也可以点击
                 if (phoneNum.length() <= 0 || phoneNum.length() <= 11) {
 
-                    Toast.makeText(RegisterActivity.this, "请输入正确的手机号码", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(RegisterActivity.this, "请输入正确的手机号码", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showLong("请输入正确的手机号码");
 
                 } else {
                     // 这个方法是用来判断手机验证码相关的
@@ -139,12 +213,10 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(RegisterActivity.this, "开始验证验证码", Toast.LENGTH_SHORT).show();
+                ToastUtil.showLong("开始验证验证码");
                 // 验证验证码
                 code = mEtIdentifiing.getText().toString().trim();
-                Log.e("xuzhiqi", "initData3: " + code);
-                Log.e("xuzhiqi", "initData3: " + phone);
-                Log.e("xuzhiqi", "initData3: " + key);
+                Log.e("xuzhiqi", "initData3: " + code + "\n" + phone + "\n" + key);
                 initData2();
             }
         });
@@ -207,9 +279,12 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
             initData();
             // 如果手机号码不符合规则 提示用户正确输入手机号 红色文字显示 字体变成"请输入正确的手机号码"
         } else {
-            Toast.makeText(RegisterActivity.this, " 请输入正确的手机号码", Toast.LENGTH_SHORT).show();
+            ToastUtil.showLong("请输入正确的手机号码");
+
             mRedSpeak.setVisibility(View.VISIBLE);
+
             mRedSpeak.setText("请输入正确的手机号码");
+
         }
 
     }
@@ -222,12 +297,9 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
 
     @Override
     protected void initData2() {
-        Toast.makeText(this, "跳过来了", Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "跳过来了", Toast.LENGTH_SHORT).show();
         code = mEtIdentifiing.getText().toString().trim();
-        Log.e("liangxq", "initData3: " + code);
-        Log.e("liangxq", "initData3: " + phone);
-        Log.e("liangxq", "initData3: " + key);
+        Log.e("验证验证码", "initData3: " + code + "\n" + phone + "\n" + key);
+
         if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(code) && !TextUtils.isEmpty(key)) {
             basePresenter.getData2(phone, code, key);
         }
@@ -241,9 +313,8 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
 
     @Override
     public void onSS(VerificationResult verificationResult) {
-        Log.i(TAG, "onSS: " + verificationResult.toString());
         key = verificationResult.getData().getKey();
-        Log.e("xuzhiqi4", "onSSSS: " + key);
+        Log.e("注册成功的回调方法", "onSS: " + verificationResult.toString() + "\n" + "\n" + key);
 
     }
 
@@ -260,7 +331,8 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
         if (verificationBean.isSuccess() & !TextUtils.isEmpty(code) & !TextUtils.isEmpty(password)) {
             basePresenter.getData3(phone, code, key, password);
         }
-        Toast.makeText(this, verificationBean.getMsg(), Toast.LENGTH_SHORT).show();
+        ToastUtil.showLong(verificationBean.getMsg());
+
     }
 
     @Override
@@ -272,14 +344,18 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
     @Override
     public void onSuccessRegister(String sucess) {
 
-        Log.e("xuzhiqiaa", "onSuccessRegister: " + sucess.toString());
-        Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+        Log.e("xuzhiqiaa", "onSuccessRegister: " + sucess);
+        ToastUtil.showLong("注册成功");
+        startActivity(new Intent(RegisterActivity.this,GeneralActivity.class));
+
 
     }
 
     @Override
     public void onError(String error) {
-        Toast.makeText(this, "注册失败", Toast.LENGTH_SHORT).show();
+
+        ToastUtil.showLong("注册失败");
+
     }
 
 
@@ -307,6 +383,8 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
     }
 
     //当isShouldHideInput(v, ev)为true时，表示的是点击输入框区域，则需要显示键盘，同时显示光标，反之，需要隐藏键盘、光标
+
+    //
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
@@ -357,7 +435,7 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
     public static class HttpLogger implements HttpLoggingInterceptor.Logger {
         @Override
         public void log(String message) {
-            //
+
             Log.e("HttpLogger解析出来的", message);
 
         }
