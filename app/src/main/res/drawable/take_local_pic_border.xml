@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <corners android:bottomLeftRadius="6dp" android:bottomRightRadius="6dp" android:topLeftRadius="6dp" android:topRightRadius="6dp" tools:ignore="StateListReachable"></corners>
+    <stroke android:width="2dp" android:color="#999999" tools:ignore="StateListReachable"></stroke>
+    <solid android:color="#fefefe"></solid>
+
+</selector>

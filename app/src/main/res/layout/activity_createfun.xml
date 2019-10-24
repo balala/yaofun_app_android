@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".activity.CreateFunActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_23">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/createfunback"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_20">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_8"
+                        android:layout_height="@dimen/dp_15"
+                        android:src="@drawable/whirtback" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="@dimen/dp_87"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_85"
+                    android:text="@string/fun_create"
+                    android:textColor="@color/colorwhite"
+                    android:textSize="@dimen/sp_16" />
+                <!---->
+
+                <LinearLayout
+                    android:id="@+id/createfunwhy"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_marginLeft="@dimen/dp_114">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_18"
+                        android:layout_height="@dimen/dp_18"
+                        android:src="@drawable/createfunhint" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <RelativeLayout
+            android:id="@+id/createfunaddimg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/createfunrv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/home_background" />
+
+            <ImageView
+                android:id="@+id/createfunimg"
+                android:layout_width="@dimen/dp_11"
+                android:layout_height="@dimen/dp_12"
+                android:layout_marginLeft="@dimen/dp_148"
+                android:layout_marginTop="@dimen/dp_95"
+                android:layout_marginRight="@dimen/dp_5"
+                android:src="@drawable/createfunuploading" />
+
+            <TextView
+                android:id="@+id/createfuntext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_163"
+                android:layout_marginTop="@dimen/dp_30"
+                android:text="FUN团封面"
+                android:textColor="@color/colorwhite"
+                android:textSize="@dimen/sp_15" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_201"
+            android:layout_alignBottom="@+id/funrl1"
+            android:background="@color/funback">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_17"
+                android:layout_marginTop="@dimen/dp_23"
+                android:text="@string/fun_name"
+                android:textColor="@color/colorwhite"
+                android:textSize="@dimen/sp_14" />
+
+            <com.balala.yaofun.util.CustomEditText
+                android:id="@+id/createfun_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_82"
+                android:layout_marginTop="@dimen/dp_23"
+                android:background="@color/funback"
+                android:hint="@string/fun_look"
+                android:textColor="@color/fungray"
+                android:textColorHint="@color/fungray"
+                android:textCursorDrawable="@drawable/editcolor"
+                android:textSize="@dimen/sp_14" />
+
+            <View
+                android:layout_width="@dimen/dp_320"
+                android:layout_height="@dimen/dp_1"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_59"
+                android:background="@color/colordeepgrays" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_17"
+                android:layout_marginTop="@dimen/dp_82"
+                android:text="@string/fun_resume"
+                android:textColor="@color/colorwhite"
+                android:textSize="@dimen/sp_14" />
+
+            <com.balala.yaofun.util.CustomEditText
+                android:id="@+id/createfun_resume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_82"
+                android:layout_marginTop="@dimen/dp_82"
+                android:background="@color/funback"
+                android:hint="@string/fun_love"
+                android:textColor="@color/fungray"
+                android:textColorHint="@color/fungray"
+                android:textCursorDrawable="@drawable/editcolor"
+                android:textSize="@dimen/sp_14" />
+
+            <View
+                android:layout_width="@dimen/dp_320"
+                android:layout_height="@dimen/dp_1"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_118"
+                android:background="@color/colordeepgrays" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_17"
+                android:layout_marginTop="@dimen/dp_141"
+                android:text="@string/fun_introduce"
+                android:textColor="@color/colorwhite"
+                android:textSize="@dimen/sp_14" />
+
+            <com.balala.yaofun.util.CustomEditText
+                android:id="@+id/createfun_dotext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_85"
+                android:layout_marginTop="@dimen/dp_141"
+                android:background="@color/funback"
+                android:hint="@string/fun_do"
+                android:textColor="@color/fungray"
+                android:textColorHint="@color/fungray"
+                android:textCursorDrawable="@drawable/editcolor"
+                android:textSize="@dimen/sp_14" />
+
+            <ImageView
+                android:id="@+id/createfun_doback"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_12"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/dp_142"
+                android:layout_marginRight="@dimen/dp_17"
+                android:src="@drawable/funbanck" />
+
+            <View
+                android:layout_width="@dimen/dp_320"
+                android:layout_height="@dimen/dp_1"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_178"
+                android:background="@color/colordeepgrays" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_141"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/funback">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_17"
+                android:layout_marginTop="@dimen/dp_23"
+                android:text="@string/fun_activity"
+                android:textColor="@color/colorwhite"
+                android:textSize="@dimen/sp_14" />
+
+            <com.balala.yaofun.util.CustomEditText
+                android:id="@+id/createfun_jointext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_85"
+                android:layout_marginTop="@dimen/dp_23"
+                android:background="@color/funback"
+                android:hint="@string/fun_join"
+                android:textColor="@color/fungray"
+                android:textColorHint="@color/fungray"
+                android:textCursorDrawable="@drawable/editcolor"
+                android:textSize="@dimen/sp_14" />
+
+            <ImageView
+                android:id="@+id/createfuninterestback"
+                android:layout_width="@dimen/dp_7"
+                android:layout_height="@dimen/dp_12"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/dp_17"
+                android:layout_marginRight="@dimen/dp_17"
+                android:src="@drawable/funbanck" />
+
+            <View
+                android:layout_width="@dimen/dp_320"
+                android:layout_height="@dimen/dp_1"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_59"
+                android:background="@color/colordeepgrays" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_17"
+                android:layout_marginTop="@dimen/dp_82"
+                android:text="@string/fun_interest"
+                android:textColor="@color/colorwhite"
+                android:textSize="@dimen/sp_14" />
+
+            <com.balala.yaofun.util.CustomEditText
+                android:id="@+id/createfun_interesttext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_85"
+                android:layout_marginTop="@dimen/dp_82"
+                android:background="@color/funback"
+                android:hint="@string/fun_interestfun"
+                android:textColor="@color/fungray"
+                android:textColorHint="@color/fungray"
+                android:textCursorDrawable="@drawable/editcolor"
+                android:textSize="@dimen/sp_14" />
+
+            <ImageView
+                android:id="@+id/createfun_interestback"
+                android:layout_width="@dimen/dp_7"
+                android:layout_height="@dimen/dp_12"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/dp_83"
+                android:layout_marginRight="@dimen/dp_17"
+                android:src="@drawable/funbanck" />
+
+            <View
+                android:layout_width="@dimen/dp_320"
+                android:layout_height="@dimen/dp_1"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_118"
+                android:background="@color/colordeepgrays" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_115"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/funback">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_17"
+                android:layout_marginTop="@dimen/dp_23"
+                android:text="@string/fun_jointure"
+                android:textColor="@color/colorwhite"
+                android:textSize="@dimen/sp_14" />
+
+            <ImageView
+                android:id="@+id/createfun_choose"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_30"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/dp_17"
+                android:layout_marginRight="@dimen/dp_17"
+                android:src="@drawable/createfunopencolse" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_56"
+                android:text="@string/fun_newpeople"
+                android:textColor="@color/fungray"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_76"
+                android:text="@string/fun_newpeopleout"
+                android:textColor="@color/fungray"
+                android:textSize="@dimen/sp_14" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/immediately"
+            android:layout_width="@dimen/dp_342"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_34"
+            android:layout_marginBottom="@dimen/dp_45"
+            android:background="@drawable/xiahua"
+            android:text="@string/fun_immediately"
+            android:textColor="@color/colorwhite" />
+    </LinearLayout>
+</ScrollView>
