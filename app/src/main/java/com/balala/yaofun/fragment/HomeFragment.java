@@ -199,11 +199,11 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 //        }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+ /*   @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void getDatas(String cord) {
         Log.i("EventBus", "这是传过来的 " +cord);
 
-    }
+    }*/
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

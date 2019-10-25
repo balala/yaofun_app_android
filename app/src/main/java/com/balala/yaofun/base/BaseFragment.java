@@ -29,7 +29,7 @@ public class BaseFragment<p extends BasePresenter, v extends BaseView> extends F
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         View inflate = inflater.inflate(getlayoutId(), null);
         unbinder = ButterKnife.bind(this, inflate);
-        EventBus.getDefault().register(this);
+       // EventBus.getDefault().register(this);
         presenter = initGeekP();
         if (presenter != null) {
             presenter.bind(this);

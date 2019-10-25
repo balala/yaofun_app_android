@@ -1,6 +1,7 @@
 package com.balala.yaofun.util;
 
 
+import com.balala.yaofun.bean.FunhomeData;
 import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.DayBeans;
 import com.balala.yaofun.bean.result.HomeAllBean;
@@ -85,5 +86,8 @@ public interface MyServer {
     @FormUrlEncoded
     Observable<ResponseBody> getReleaseactivitData(@FieldMap Map<String, Object> map);
 
-
+    // fun团首页列表
+    // http://test.yaofun.vip/api/user_group/recommend_1_8
+    @GET("user_group/recommend_1_8")
+    Observable<FunhomeData> getFunhomeData(@QueryMap HashMap<String, Object> map);
 }
