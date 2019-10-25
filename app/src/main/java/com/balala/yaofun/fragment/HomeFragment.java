@@ -5,7 +5,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
@@ -17,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +29,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -133,8 +132,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     ImageView homeCreateparty;
     @BindView(R.id.home_toolbar)
     Toolbar homeToolbar;
-    @BindView(R.id.swipe_container)
-    SwipeRefreshLayout swipeContainer;
+    @BindView(R.id.sw)
+    ScrollView sw;
     @BindView(R.id.sitetext)
     TextView sitetext;
     @BindView(R.id.homeperchs)
@@ -180,7 +179,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     public void onSuccessHome(DayBeans dayBean) {
         initCreame();
         Log.i("每日一句话解析", "onSuccessHome: " + dayBean.toString());
-        SharedPreferences preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+//        SharedPreferences preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
 //        boolean aBoolean = preferences.getBoolean("flag", false);
 //        if (aBoolean) {
 ////            Log.i("onCheckedChanged", "第二次登陆完了");
@@ -276,7 +275,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 
     @Override
     public void onSuccessHomeall(HomeAllBean homeAllBean) throws IOException {
-        swipeContainer.setVisibility(View.VISIBLE);
+        sw.setVisibility(View.VISIBLE);
         Log.i("首页解析", "onSuccessHome: " + homeAllBean.toString());
 
         List<HomeAllBean.DataBean.HotBean> hot = homeAllBean.getData().getHot();
@@ -347,22 +346,22 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     protected void initData() {
         presenter.getHomeData();
         presenter.getHomeBannerData();
-        swipeContainer.setRefreshing(false); //显示或隐藏刷新进度条
-        swipeContainer.post(new Runnable() {
-
-            @Override
-            public void run() {
-                swipeContainer.setRefreshing(true);
-            }
-
-        });
-        swipeContainer.post(new Runnable() {
-
-            @Override
-            public void run() {
-                swipeContainer.setRefreshing(false);
-            }
-        });
+//        swipeContainer.setRefreshing(false); //显示或隐藏刷新进度条
+//        swipeContainer.post(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                swipeContainer.setRefreshing(true);
+//            }
+//
+//        });
+//        swipeContainer.post(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                swipeContainer.setRefreshing(false);
+//            }
+//        });
 
     }
 

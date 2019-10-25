@@ -6,19 +6,13 @@ import com.balala.yaofun.httpUtils.BaseObserver;
 import com.balala.yaofun.httpUtils.HttpUtils;
 import com.balala.yaofun.httpUtils.ResultCallBack;
 import com.balala.yaofun.util.MyServer;
-import com.balala.yaofun.util.Utils;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.reactivestreams.Subscriber;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.internal.Util;
 
 public class FunModel extends BaseModel {
 
@@ -49,12 +43,10 @@ public class FunModel extends BaseModel {
 
                     @Override
                     public void onNext(FunhomeData funhomeData) {
-                        if ( funhomeData.getData() != null) {
-                            try {
-                                resultCallBack.onSuccess(funhomeData);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                        if ( funhomeData.getData() != null) try {
+                            resultCallBack.onSuccess(funhomeData);
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
                 });

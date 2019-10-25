@@ -7,6 +7,7 @@
     <!--背景黑颜色-->
     <color name="colorblack">#181818</color>
     <color name="black">#ff1c1919</color>
+    <color name="homedetailsblack">#ff000000</color>
     <color name="colorred">#EC573D</color>
     <color name="colorgray">#ffc3c1c1</color>
     <color name="gray">#fff5f6f8</color>

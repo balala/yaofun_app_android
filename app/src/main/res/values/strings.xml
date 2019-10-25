@@ -59,6 +59,10 @@
     <string name="openfun_interests">兴趣标签</string>
     <string name="openfun_interestspeople">精准的兴趣标签，可以吸引志同道合的人</string>
     <string name="openfun_issue">立即发布</string>
+    <string name="homedetails_share">分享</string>
+    <string name="homedetails_inform">举报</string>
+    <string name="homedetails_alter">修改</string>
+    <string name="homedetails_delete">删除</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
