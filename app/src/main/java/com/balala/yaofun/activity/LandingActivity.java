@@ -44,6 +44,8 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.List;
+
 
 public class LandingActivity extends BaseActivity<LandingPresenter, LandingView> implements LandingView {
 
@@ -68,7 +70,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
     private View landing_clear;
     private View decorView;
     private FragmentManager fragmentManager;
-
+//    private List<UserEvent> mdata;;
     @Override
     protected int getlayout() {
         return R.layout.activity_landing;
@@ -230,6 +232,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
     // 登陆成功方法
     @SuppressLint("CommitPrefEdits")
     @Override
+
     public void onSuccessLanding(LandingBean bean) {
         LandingBean.DataBean data = bean.getData();
         Log.e("dada", "onSuccessLanding: " + data);
@@ -242,16 +245,27 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         editor.commit();
         // 存储第一次登陆的信息
         startActivity(new Intent(LandingActivity.this, GeneralActivity.class));
+        //发送参数
+        initvalueData(bean);
+
+    }
+
+    private void initvalueData(LandingBean bean) {
         String userid = bean.getData().get_id();
         String images = bean.getData().getImages();
         String nick_name = bean.getData().getNick_name();
-        //发送参数
-        EventBus.getDefault().post(userid);
+//        EventBus.getDefault().postSticky(new UserEvent(userid,images,nick_name));
+
+//        Intent intent = new Intent(getApplicationContext(), LandingActivity.class);
+//        intent.putExtra("userid", userid);
+//        intent.putExtra("images", images);
+//        intent.putExtra("nick_name", nick_name);
+//        startActivity(intent);
+
         // 在这传userid images nick_name到landing页面
         Log.i("EventBus", "这是我要传的 " + nick_name);
-        Log.i("登陆成功后返回的用户信息", "userid: " + userid + "" + images+""+nick_name);
+        Log.i("登陆成功后返回的用户信息", "userid: " + userid + "" + images + "" + nick_name + "" + bean);
     }
-
 
 
     // 登陆失败方法

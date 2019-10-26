@@ -7,17 +7,19 @@
     android:orientation="vertical"
     tools:context=".fragment.FunFragment">
 
-    <!--<ImageView-->
-    <!--android:id="@+id/funperch"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:scaleType="fitXY"-->
-    <!--android:src="@drawable/funperchimg" />-->
+    <ImageView
+        android:id="@+id/funperch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@mipmap/funperchimg" />
 
     <ScrollView
+        android:id="@+id/funsw"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <!--android:visibility="gone"-->
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
 
         <LinearLayout
             android:id="@+id/ll"
@@ -32,7 +34,7 @@
                 android:layout_height="@dimen/dp_38"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_50"
                 android:layout_marginRight="@dimen/dp_20"
                 android:background="@drawable/home_search"
                 android:hint="搜索感兴趣的内容" />
@@ -40,8 +42,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_56">
-
+                android:layout_marginTop="@dimen/dp_50">
 
                 <TextView
                     android:layout_width="wrap_content"

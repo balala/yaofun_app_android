@@ -38,7 +38,7 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
     //    @BindView(R.id.openfunrv)
 //    RecyclerView mOpenfunrv;
     @BindView(R.id.openfunimg)
-    LinearLayout mOpenfunimg;
+    ImageView mOpenfunimg;
     @BindView(R.id.openfunaddimg)
     RelativeLayout mOpenfunaddimg;
     @BindView(R.id.openfun_name)

@@ -11,12 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_320">
 
+
         <ImageView
             android:id="@+id/home_background"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_320"
-            android:scaleType="centerCrop"
-            android:src="@color/colorblack" />
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_320"
+            android:alpha="0.6"
+            android:background="@color/homeblack"
+            android:scaleType="centerCrop" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/home_toolbar"
@@ -56,15 +63,21 @@
 
         </androidx.appcompat.widget.Toolbar>
 
+        <TextView
+            android:layout_width="@dimen/dp_108"
+            android:layout_height="@dimen/dp_118"
+            android:layout_marginLeft="@dimen/dp_22"
+            android:layout_marginTop="@dimen/dp_98"
+            android:alpha="0.3"
+            android:background="@drawable/home_time" />
 
         <LinearLayout
             android:layout_width="@dimen/dp_108"
             android:layout_height="@dimen/dp_118"
             android:layout_marginLeft="@dimen/dp_22"
             android:layout_marginTop="@dimen/dp_98"
-            android:alpha="0.5"
-            android:background="@drawable/home_time"
             android:orientation="vertical">
+
 
             <TextView
                 android:id="@+id/codetext"
@@ -90,7 +103,7 @@
                 android:layout_marginLeft="@dimen/dp_18"
                 android:layout_marginTop="@dimen/dp_5"
                 android:text="@string/app_day"
-                android:textColor="@color/colordeepgray"
+                android:textColor="@color/colorwhite"
                 android:textSize="9sp" />
 
             <TextView
@@ -99,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_18"
                 android:text="@string/app_month"
-                android:textColor="@color/colordeepgray"
+                android:textColor="@color/colorwhite"
                 android:textSize="9sp" />
         </LinearLayout>
 
@@ -108,7 +121,7 @@
             android:layout_height="@dimen/dp_118"
             android:layout_marginLeft="@dimen/dp_143"
             android:layout_marginTop="@dimen/dp_98"
-            android:alpha="0.5"
+            android:alpha="0.3"
             android:background="@drawable/home_time">
 
             <TextView

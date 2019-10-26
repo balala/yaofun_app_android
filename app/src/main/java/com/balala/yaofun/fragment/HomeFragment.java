@@ -122,10 +122,10 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     RelativeLayout rl2;
     @BindView(R.id.rl3)
     RelativeLayout rl3;
-    @BindView(R.id.home_search2)
-    ImageView homeSearch2;
-    @BindView(R.id.recycle_view4)
-    RecyclerView recycleView4;
+    //    @BindView(R.id.home_search2)
+//    ImageView homeSearch2;
+//    @BindView(R.id.recycle_view4)
+//    RecyclerView recycleView4;
     @BindView(R.id.home_outparty)
     ImageView homeOutparty;
     @BindView(R.id.home_createparty)
@@ -151,7 +151,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     private AMapLocationClient aMapLocationClient;
     private String y;
     private String x;
-//    private DecimalFormat decimalFormat = new DecimalFormat(".00");//取小数点后
 
     @SuppressLint("HandlerLeak")
     final Handler handler = new Handler() {
@@ -174,10 +173,12 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     private HomeAroundAdapter homeAroundAdapter;
     private HomeRecommendAdapter adapter;
 
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onSuccessHome(DayBeans dayBean) {
-        initCreame();
+
+        // 在这收值
         Log.i("每日一句话解析", "onSuccessHome: " + dayBean.toString());
 //        SharedPreferences preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
 //        boolean aBoolean = preferences.getBoolean("flag", false);
@@ -187,61 +188,18 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 //
 //        } else {
 //            codetext.setText(dayBean.getData().getNumber_time());
-            daytext.setText(dayBean.getData().getSolar_time());
-            monthtext.setText(dayBean.getData().getLunar_time());
-            tabootext.setText(dayBean.getData().getPrompt());
-            people_name.setText(dayBean.getData().getUse_time());
-            homeBackground.setColorFilter(R.color.colorblacks);
-            Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
-            peopleTitle.setText(dayBean.getData().getTitle());
-            peopleContent.setText(dayBean.getData().getContent());
+        daytext.setText(dayBean.getData().getSolar_time());
+        monthtext.setText(dayBean.getData().getLunar_time());
+        tabootext.setText(dayBean.getData().getPrompt());
+        people_name.setText(dayBean.getData().getUse_time());
+        homeBackground.setColorFilter(R.color.colorblacks);
+        Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
+        peopleTitle.setText(dayBean.getData().getTitle());
+        peopleContent.setText(dayBean.getData().getContent());
 //        }
-    }
-
- /*   @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void getDatas(String cord) {
-        Log.i("EventBus", "这是传过来的 " +cord);
-
-    }*/
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 200://刚才的识别码
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//用户同意权限,执行我们的操作
-                    startLocaion();//开始定位
-                } else {//用户拒绝之后,当然我们也可以弹出一个窗口,直接跳转到系统设置页面
-                    Toast.makeText(getContext(), "未开启定位权限,请手动到设置去开启权限", Toast.LENGTH_LONG).show();
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    // 集成地图接口
-    public void startLocaion() {
-        Log.i("走", "开始走了");
-        mLocationClient = new AMapLocationClient(getContext().getApplicationContext());
-        mLocationClient.setLocationListener(mLocationListener);
-        mLocationOption = new AMapLocationClientOption();
-        //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        //设置是否返回地址信息（默认返回地址信息）
-        mLocationOption.setNeedAddress(true);
-        //获取一次定位结果：
-        //该方法默认为false。
-        mLocationOption.setOnceLocation(true);
-        //设置是否允许模拟位置,默认为false，不允许模拟位置
-        mLocationOption.setMockEnable(false);
-
-        //给定位客户端对象设置定位参数
-        mLocationClient.setLocationOption(mLocationOption);
-        //启动定位
-        mLocationClient.startLocation();
 
     }
+
 
     //声明定位回调监听器
     public AMapLocationListener mLocationListener = new AMapLocationListener() {
@@ -275,9 +233,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 
     @Override
     public void onSuccessHomeall(HomeAllBean homeAllBean) throws IOException {
-        sw.setVisibility(View.VISIBLE);
         Log.i("首页解析", "onSuccessHome: " + homeAllBean.toString());
-
+        //热门
         List<HomeAllBean.DataBean.HotBean> hot = homeAllBean.getData().getHot();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recycleView1.setLayoutManager(linearLayoutManager);
@@ -287,7 +244,10 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         //展示全部的recycleView
         recycleView1.setNestedScrollingEnabled(false);
         homeAdapter.notifyDataSetChanged();
+        // 解析成功显示布局
+        sw.setVisibility(View.VISIBLE);
 
+        //附近
         List<HomeAllBean.DataBean.AroundBean> around = homeAllBean.getData().getAround();
         Log.i("around", "onSuccessHomeall: " + around.toString());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
@@ -297,6 +257,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         homeAroundAdapter.notifyDataSetChanged();
         //展示全部的recycleView
         recycleView2.setNestedScrollingEnabled(false);
+
+        //推荐
         List<HomeAllBean.DataBean.RecommendBean> recommend = homeAllBean.getData().getRecommend();
         LinearLayoutManager linearLayout = new LinearLayoutManager(getContext());
         recycleView3.setLayoutManager(linearLayout);
@@ -304,6 +266,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         adapter = new HomeRecommendAdapter(getContext(), (ArrayList<HomeAllBean.DataBean.RecommendBean>) recommend, (ArrayList<HomeBannerDean.DataBean.SecondBean>) second);
         recycleView3.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        //热门适配器点击事件
         homeAdapter.setOnClickListener(new HomeAdapter.OnClickListener() {
             @Override
             public void OnClick(int position) {
@@ -316,6 +280,36 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
                 startActivity(new Intent(getContext(), HomebannerdetailsActivity.class));
             }
         });
+
+        //附近适配器点击事件
+        homeAroundAdapter.setOnClickListener(new HomeAdapter.OnClickListener() {
+            @Override
+            public void OnClick(int position) {
+                startActivity(new Intent(getContext(), HomedetailsActivity.class));
+            }
+        });
+        homeAroundAdapter.setOnClickListenerBanner(new HomeAdapter.OnClickListenerBanner() {
+            @Override
+            public void OnClick(int position) {
+                startActivity(new Intent(getContext(), HomebannerdetailsActivity.class));
+            }
+        });
+
+        //推荐适配器点击事件
+        adapter.setOnClickListener(new HomeAdapter.OnClickListener() {
+            @Override
+            public void OnClick(int position) {
+                startActivity(new Intent(getContext(), HomedetailsActivity.class));
+            }
+        });
+        adapter.setOnClickListenerBanner(new HomeAdapter.OnClickListenerBanner() {
+            @Override
+            public void OnClick(int position) {
+                startActivity(new Intent(getContext(), HomebannerdetailsActivity.class));
+            }
+        });
+
+
     }
 
 
@@ -342,27 +336,13 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         return R.layout.fragment_home;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initData() {
+        // 开启定位
+        startLocaion();
         presenter.getHomeData();
         presenter.getHomeBannerData();
-//        swipeContainer.setRefreshing(false); //显示或隐藏刷新进度条
-//        swipeContainer.post(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                swipeContainer.setRefreshing(true);
-//            }
-//
-//        });
-//        swipeContainer.post(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                swipeContainer.setRefreshing(false);
-//            }
-//        });
-
     }
 
     @Override
@@ -391,10 +371,9 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
+                // 开启相机权限
+                initCreame();
 
-                // 跳转扫码页面
-                Intent intent = new Intent(getActivity(), CaptureActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -407,21 +386,12 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             // 解析所需要的方法
         });
 
-        homeSearch2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 跳转搜索页面
-                startActivity(new Intent(getActivity(), SearchActivity.class));
-            }
-        });
-
         //首页红色按钮添加页面
         homeAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 跳入
                 startActivity(new Intent(getContext(), PromotionalActivitiesActivity.class));
-//                startActivity(new Intent(getContext(), AddActivity.class));
             }
         });
         //创建fun团页面
@@ -452,22 +422,64 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
                         REQUEST_CODE_ASK_PERMISSIONS);
                 return;//没有权限，结束
             } else {
-                //做自己的操作
+                // 跳转扫码页面
+                Intent intent = new Intent(getActivity(), CaptureActivity.class);
+                startActivity(intent);
             }
         } catch (Exception e) {
             e.printStackTrace();
             ToastUtils.showLong("权限异常");
         }
+
+    }
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        switch (requestCode) {
+//            case 200://刚才的识别码
+//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//用户同意权限,执行我们的操作
+//                    startLocaion();//开始定位
+//                } else {//用户拒绝之后,当然我们也可以弹出一个窗口,直接跳转到系统设置页面
+//                    Toast.makeText(getContext(), "未开启定位权限,请手动到设置去开启权限", Toast.LENGTH_LONG).show();
+//                }
+//                break;
+//            default:
+//                break;
+//        }
+//    }
+
+    // 集成地图接口
+    public void startLocaion() {
+
         // 集成地图接口
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {//未开启定位权限
             //开启定位权限,200是标识码
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 200);
         } else {
-            startLocaion();//开始定位
             Log.i(TAG, "已开启定位权限 ");
 
         }
+        Log.i("走", "开始走了");
+        mLocationClient = new AMapLocationClient(getContext().getApplicationContext());
+        mLocationClient.setLocationListener(mLocationListener);
+        mLocationOption = new AMapLocationClientOption();
+        //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        //设置是否返回地址信息（默认返回地址信息）
+        mLocationOption.setNeedAddress(true);
+        //获取一次定位结果：
+        //该方法默认为false。
+        mLocationOption.setOnceLocation(true);
+        //设置是否允许模拟位置,默认为false，不允许模拟位置
+        mLocationOption.setMockEnable(false);
+
+        //给定位客户端对象设置定位参数
+        mLocationClient.setLocationOption(mLocationOption);
+        //启动定位
+        mLocationClient.startLocation();
+
     }
 
 

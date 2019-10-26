@@ -20,7 +20,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     private IWXAPI api;
     private BaseResp resp = null;
     //wx24009bcc9adc6318
-    //wx24009bcc9adc6318
+//    wx24009bcc9adc6318
     public static String WX_APP_ID = "wx24009bcc9adc6318";
     // 获取第一步的code后，请求以下链接获取access_token
 //    private String GetCodeRequest = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code";

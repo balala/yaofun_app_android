@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/homeperch"
+        android:src="@mipmap/homeperch"
         android:visibility="visible" />
 
 
@@ -113,45 +113,45 @@
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_marginRight="@dimen/dp_10" />
 
-                    <ImageView
-                        android:layout_width="@dimen/dp_138"
-                        android:layout_height="@dimen/dp_92"
-                        android:layout_gravity="center"
-                        android:src="@drawable/home_watch" />
+                    <!--<ImageView-->
+                        <!--android:layout_width="@dimen/dp_138"-->
+                        <!--android:layout_height="@dimen/dp_92"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:src="@drawable/home_watch" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp_17"
-                        android:text="找不到想找的内容？"
-                        android:textColor="@color/colordeepgray"
-                        android:textSize="@dimen/sp_15" />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_marginTop="@dimen/dp_17"-->
+                        <!--android:text="找不到想找的内容？"-->
+                        <!--android:textColor="@color/colordeepgray"-->
+                        <!--android:textSize="@dimen/sp_15" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:text="使用关键词搜索。"
-                        android:textColor="@color/colordeepgray"
-                        android:textSize="@dimen/sp_13" />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_marginTop="@dimen/dp_6"-->
+                        <!--android:text="使用关键词搜索。"-->
+                        <!--android:textColor="@color/colordeepgray"-->
+                        <!--android:textSize="@dimen/sp_13" />-->
 
-                    <ImageView
-                        android:id="@+id/home_search2"
-                        android:layout_width="@dimen/dp_335"
-                        android:layout_height="@dimen/dp_38"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp_25"
-                        android:background="@mipmap/search" />
+                    <!--<ImageView-->
+                        <!--android:id="@+id/home_search2"-->
+                        <!--android:layout_width="@dimen/dp_335"-->
+                        <!--android:layout_height="@dimen/dp_38"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_marginTop="@dimen/dp_25"-->
+                        <!--android:background="@mipmap/search" />-->
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycle_view4"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/dp_20"
-                        android:layout_marginLeft="@dimen/dp_10"
-                        android:layout_marginRight="@dimen/dp_10" />
+                    <!--<androidx.recyclerview.widget.RecyclerView-->
+                        <!--android:id="@+id/recycle_view4"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_margin="@dimen/dp_20"-->
+                        <!--android:layout_marginLeft="@dimen/dp_10"-->
+                        <!--android:layout_marginRight="@dimen/dp_10" />-->
 
                     <ImageView
                         android:id="@+id/home_outparty"

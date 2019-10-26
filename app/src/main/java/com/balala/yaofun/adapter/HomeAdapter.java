@@ -24,6 +24,7 @@ import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,27 +42,26 @@ public class HomeAdapter extends RecyclerView.Adapter {
         this.ban = first;
     }
 
+
     @NonNull
     @Override
-    public HomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder holder = null;
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        if (viewType == 3) {
+        if (viewType == 0) {
             View banner = inflater.inflate(R.layout.banner_item, null);
-            holder = new BannerHolder(banner);
+            return new BannerHolder(banner);
         } else {
             View inflate = inflater.inflate(R.layout.home_item1s, null);
-            holder = new ViewHolder(inflate);
+            return new ViewHolder(inflate);
         }
-        return (ViewHolder) holder;
     }
 
     @SuppressLint("NewApi")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int itemViewType = getItemViewType(position);
-        if (itemViewType == 3) {
-            BannerHolder banq = (HomeAdapter.BannerHolder) holder;
+        if (itemViewType == 0) {
+            BannerHolder banq = (BannerHolder) holder;
             banq.banner_item.setImages(ban);
             banq.banner_item.setImageLoader(new MyLoder());
             banq.banner_item.start();
@@ -85,16 +85,15 @@ public class HomeAdapter extends RecyclerView.Adapter {
         } else {
 
             if (homeAllBeans != null && !homeAllBeans.isEmpty()) {
-                int pos = (position - 3) < 0 ? 0 : (position - 3);
                 ViewHolder holder1 = (ViewHolder) holder;
                 Log.i("热门解析", "热门解析: " + homeAllBeans.toString());
-                holder1.item1time.setText(homeAllBeans.get(pos).getStart_end_time());
-                holder1.item1title.setText(homeAllBeans.get(pos).getTitle());
-                double costs = homeAllBeans.get(pos).getCost();
+                holder1.item1time.setText(homeAllBeans.get(position).getStart_end_time());
+                holder1.item1title.setText(homeAllBeans.get(position).getTitle());
+                double costs = homeAllBeans.get(position).getCost();
                 String cost = String.valueOf(costs);
                 holder1.item1price.setText(cost);
-                holder1.item1site.setText(homeAllBeans.get(pos).getLocation_name());
-                Glide.with(context).load(homeAllBeans.get(pos).getCover()).apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).into(holder1.iconcard1);
+                holder1.item1site.setText(homeAllBeans.get(position).getLocation_name());
+                Glide.with(context).load(homeAllBeans.get(position).getCover()).apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).into(holder1.iconcard1);
             }
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,6 +121,14 @@ public class HomeAdapter extends RecyclerView.Adapter {
         return homeAllBeans.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if(position == 3){
+            return 0;
+        }else {
+            return 1;
+        }
+    }
 
     public class BannerHolder extends RecyclerView.ViewHolder {
         private final Banner banner_item;

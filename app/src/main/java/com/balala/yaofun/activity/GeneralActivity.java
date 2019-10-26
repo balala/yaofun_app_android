@@ -82,8 +82,6 @@ public class GeneralActivity extends AppCompatActivity {
     public void initListener() {
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
-
-
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
@@ -96,17 +94,23 @@ public class GeneralActivity extends AppCompatActivity {
                     case R.id.bottom_message:
                         SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
                         boolean aBoolean = preferences.getBoolean("flag", false);
-                        if (aBoolean){
+                        if (aBoolean) {
                             Log.i("onCheckedChanged", "第二次登陆完了");
-                        }else {
-                            startActivity(new Intent(GeneralActivity.this,LandingActivity.class));
+                        } else {
+                            startActivity(new Intent(GeneralActivity.this, LandingActivity.class));
                         }
-                        Log.i("aBoolean", "onCheckedChanged: "+aBoolean);
+                        Log.i("aBoolean", "onCheckedChanged: " + aBoolean);
 
                         switchFragment(TYPE_WX);
                         break;
                     case R.id.bottom_me:
-
+                        SharedPreferences pre = getSharedPreferences("user", Context.MODE_PRIVATE);
+                        boolean booleans = pre.getBoolean("flag", false);
+                        if (booleans) {
+                            Log.i("onCheckedChanged", "第二次登陆完了");
+                        } else {
+                            startActivity(new Intent(GeneralActivity.this, LandingActivity.class));
+                        }
                         switchFragment(TYPE_NOTACTION);
                         break;
                     default:

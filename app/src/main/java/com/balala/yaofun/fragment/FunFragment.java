@@ -2,9 +2,11 @@ package com.balala.yaofun.fragment;
 
 
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -61,6 +63,10 @@ public class FunFragment extends BaseFragment<FunPresenter, FunView> implements 
     RecyclerView funRv8;
     @BindView(R.id.fun_rv9)
     RecyclerView funRv9;
+    @BindView(R.id.funperch)
+    ImageView funperch;
+    @BindView(R.id.funsw)
+    ScrollView funsw;
     @BindView(R.id.ll)
     LinearLayout ll;
 //    @BindView(R.id.funperch)
@@ -149,7 +155,8 @@ public class FunFragment extends BaseFragment<FunPresenter, FunView> implements 
         cateAdapter.notifyDataSetChanged();
         artAdapter.notifyDataSetChanged();
         socialContactAdapter.notifyDataSetChanged();
-
+        funperch.setVisibility(View.GONE);
+        funsw.setVisibility(View.VISIBLE);
     }
 
     @Override

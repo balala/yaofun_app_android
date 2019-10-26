@@ -2,6 +2,7 @@ package com.balala.yaofun.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
@@ -63,6 +64,7 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
     private Button mFrogetYes;
     private TimeCount time;
     private View mClear;
+    private String password;
 
     @Override
     protected int getlayout() {
@@ -303,6 +305,7 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
         if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(code) && !TextUtils.isEmpty(key)) {
             basePresenter.getData2(phone, code, key);
         }
+
     }
 
 
@@ -327,12 +330,21 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
     public void onSuccessyanzheng(VerificationCode verificationBean) {
         Log.e("xuzhiqi4", "onSuccessyanzheng: " + verificationBean.toString());
         code = mEtIdentifiing.getText().toString().trim();
-        String password = mEtPassword.getText().toString().trim();
+        password = mEtPassword.getText().toString().trim();
         if (verificationBean.isSuccess() & !TextUtils.isEmpty(code) & !TextUtils.isEmpty(password)) {
             basePresenter.getData3(phone, code, key, password);
         }
+
         ToastUtil.showLong(verificationBean.getMsg());
 
+        // 后加的
+        //将数据保存至SharedPreferences:
+        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("flag", true);
+        Log.i("aBoolean", "onSuccessLanding: " + editor);
+        editor.commit();
+        startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
     }
 
     @Override
@@ -346,7 +358,7 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
 
         Log.e("xuzhiqiaa", "onSuccessRegister: " + sucess);
         ToastUtil.showLong("注册成功");
-        startActivity(new Intent(RegisterActivity.this,GeneralActivity.class));
+        startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
 
 
     }
@@ -356,6 +368,25 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
 
         ToastUtil.showLong("注册失败");
 
+    }
+
+    @Override
+    public void onSuccessRegisterss(String sucess) {
+
+        basePresenter.getData4(phone, password);
+        //将数据保存至SharedPreferences:
+        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("flag", true);
+        Log.i("aBoolean", "onSuccessLanding: " + editor);
+        editor.commit();
+        startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
+        Log.i("注册成功", "注册成功" + sucess);
+    }
+
+    @Override
+    public void onErrors(String msg) {
+        Log.i(TAG, "onErrors: " + msg);
     }
 
 

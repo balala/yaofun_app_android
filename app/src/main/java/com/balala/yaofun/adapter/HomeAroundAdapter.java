@@ -21,6 +21,8 @@ import java.util.ArrayList;
 public class HomeAroundAdapter extends RecyclerView.Adapter<HomeAroundAdapter.ViewHolder> {
     private Context context;
     private ArrayList<HomeAllBean.DataBean.AroundBean> aroundBeans;
+    private HomeAdapter.OnClickListener mListener;
+    private HomeAdapter.OnClickListenerBanner mListenerBanner;
 
     public HomeAroundAdapter(Context context, ArrayList<HomeAllBean.DataBean.AroundBean> aroundBeans) {
         this.context = context;
@@ -45,6 +47,14 @@ public class HomeAroundAdapter extends RecyclerView.Adapter<HomeAroundAdapter.Vi
         String cost = String.valueOf(costs);
         holder.homeitem2_price.setText(cost);
         Glide.with(context).load(aroundBeans.get(position).getCover()).apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).into(holder.homeitem2_img);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.OnClick(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -71,5 +81,23 @@ public class HomeAroundAdapter extends RecyclerView.Adapter<HomeAroundAdapter.Vi
             homeitem2_distance = itemView.findViewById(R.id.homeitem2_distance);
 
         }
+    }
+
+    public interface OnClickListener {
+        void OnClick(int position);
+    }
+
+    public void setOnClickListener(HomeAdapter.OnClickListener listener) {
+
+        mListener = listener;
+    }
+
+    public interface OnClickListenerBanner {
+        void OnClick(int position);
+    }
+
+    public void setOnClickListenerBanner(HomeAdapter.OnClickListenerBanner listener) {
+
+        mListenerBanner = listener;
     }
 }

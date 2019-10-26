@@ -164,7 +164,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 //                }.getType());
 //        // 控制台输出结果，便于查看
 //        String str = getUserInfo(appList.getAccess_token(), appList.getOpenid());
-//        Log.e("wz", "parseJSONWithGSON: str : " + str);
+//        Log.e("wz", "parseJSONWithGSON: st/Applications/Androidr : " + str);
 //        getUserInfo(str);
 //    }
 //

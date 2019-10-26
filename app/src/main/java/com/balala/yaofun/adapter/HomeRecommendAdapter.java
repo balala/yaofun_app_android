@@ -1,6 +1,7 @@
 package com.balala.yaofun.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Outline;
 import android.os.Build;
 import android.util.Log;
@@ -10,14 +11,17 @@ import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.balala.yaofun.R;
+import com.balala.yaofun.activity.SearchActivity;
 import com.balala.yaofun.bean.result.HomeAllBean;
 import com.balala.yaofun.bean.result.HomeBannerDean;
+import com.balala.yaofun.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
@@ -26,16 +30,20 @@ import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 
-public class HomeRecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HomeRecommendAdapter extends RecyclerView.Adapter {
     private Context context;
     private ArrayList<HomeAllBean.DataBean.RecommendBean> recommendBeans;
     private ArrayList<HomeBannerDean.DataBean.SecondBean> beanArrayList;
+    private ViewHolder2 holder2;
+    private HomeAdapter.OnClickListener mListener;
+    private HomeAdapter.OnClickListenerBanner mListenerBanner;
 
     public HomeRecommendAdapter(Context context, ArrayList<HomeAllBean.DataBean.RecommendBean> recommendBeans, ArrayList<HomeBannerDean.DataBean.SecondBean> beanArrayList) {
         this.context = context;
         this.recommendBeans = recommendBeans;
         this.beanArrayList = beanArrayList;
     }
+
 
     @NonNull
     @Override
@@ -46,42 +54,15 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter<RecyclerView.View
             View banner = inflater.inflate(R.layout.banner_item, null);
             holder = new BannerHolder(banner);
 
+        } else if (viewType == 1) {
+            View inflate2 = inflater.inflate(R.layout.home_item3s, null);
+            holder2 = new ViewHolder2(inflate2);
         } else {
             View inflate = inflater.inflate(R.layout.home_item1s, null);
             holder = new ViewHolder1(inflate);
         }
 
         return holder;
-    }
-
-    private int po;
-
-    @Override
-    public int getItemViewType(int position) {
-        po = position;
-        if (beanArrayList.size() > 0 && po == 0) {
-            return 0;
-        } else if (recommendBeans.size() > 0 && po == 1) {
-            return 1;
-        }
-        return 1;
-    }
-
-    @Override
-    public int getItemCount() {
-        // 注意看这里
-//        int a = 0;
-        if (beanArrayList != null && beanArrayList.size() > 0) {
-            beanArrayList.size();
-        }
-//        if (recommendBeans.size() > 0) {
-//            a++;
-//        }
-//        if (beanArrayList != null && beanArrayList.size() > 0) {
-//            a += beanArrayList.size();
-//        }
-//        return a;
-        return recommendBeans.size();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -99,9 +80,27 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter<RecyclerView.View
                     outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), 10);
                 }
             });
-
             banq.banner_item.setClipToOutline(true);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.OnClick(position);
+                    }
+                }
+            });
         } else if (itemViewType == 1) {
+            ViewHolder2 holder2 = (ViewHolder2) holder;
+            holder2.home_search2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    ToastUtils.showLong("搜索页面");
+                    Log.i("xuzhiqi", "搜索页面跳转成功");
+                    Intent intent = new Intent(context, SearchActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+        } else {
             ViewHolder1 holder1 = (ViewHolder1) holder;
             Log.i("热门解析", "热门解析: " + recommendBeans.toString());
             holder1.item1time.setText(recommendBeans.get(position).getStart_end_time());
@@ -110,10 +109,34 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter<RecyclerView.View
             double costs = recommendBeans.get(position).getCost();
             String cost = String.valueOf(costs);
             ((ViewHolder1) holder).item1price.setText(cost);
-//            holder1.item1price.setText((int) recommendBeans.get(position).getCost());
             Glide.with(context).load(recommendBeans.get(position).getCover()).apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).into(holder1.iconcard1);
-
+            holder1.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.OnClick(position);
+                    }
+                }
+            });
         }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0) {
+            return 0;
+        } else if (position == 4) {
+            return 1;
+        } else {
+            return 2;
+        }
+
+    }
+
+    @Override
+    public int getItemCount() {
+
+        return recommendBeans.size();
     }
 
     class MyLoder extends ImageLoader {
@@ -146,6 +169,16 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    public class ViewHolder2 extends RecyclerView.ViewHolder {
+
+        private final ImageView home_search2;
+
+        public ViewHolder2(@NonNull View itemView) {
+            super(itemView);
+            home_search2 = itemView.findViewById(R.id.home_search2);
+        }
+    }
+
     public class BannerHolder extends RecyclerView.ViewHolder {
 
 
@@ -156,4 +189,23 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter<RecyclerView.View
             banner_item = itemView.findViewById(R.id.banners_item);
         }
     }
+
+    public interface OnClickListener {
+        void OnClick(int position);
+    }
+
+    public void setOnClickListener(HomeAdapter.OnClickListener listener) {
+
+        mListener = listener;
+    }
+
+    public interface OnClickListenerBanner {
+        void OnClick(int position);
+    }
+
+    public void setOnClickListenerBanner(HomeAdapter.OnClickListenerBanner listener) {
+
+        mListenerBanner = listener;
+    }
+
 }

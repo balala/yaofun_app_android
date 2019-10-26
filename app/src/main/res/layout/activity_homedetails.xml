@@ -56,28 +56,28 @@
                 android:src="@drawable/home_background" />
 
 
-                <RelativeLayout
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                    <ImageView
-                        android:layout_marginLeft="@dimen/dp_21"
-                        android:id="@+id/homedetails_back"
-                        android:layout_width="@dimen/dp_26"
-                        android:layout_height="@dimen/dp_26"
-                        android:layout_marginTop="@dimen/dp_20"
-                        android:src="@drawable/back" />
+                <ImageView
+                    android:layout_marginLeft="@dimen/dp_21"
+                    android:id="@+id/homedetails_back"
+                    android:layout_width="@dimen/dp_26"
+                    android:layout_height="@dimen/dp_26"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:src="@drawable/back" />
 
-                    <ImageView
-                        android:id="@+id/homedetails_menu"
-                        android:layout_width="@dimen/dp_26"
-                        android:layout_height="@dimen/dp_26"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="@dimen/dp_20"
-                        android:layout_marginRight="@dimen/dp_20"
-                        android:src="@drawable/topmenu" />
-                </RelativeLayout>
+                <ImageView
+                    android:id="@+id/homedetails_menu"
+                    android:layout_width="@dimen/dp_26"
+                    android:layout_height="@dimen/dp_26"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:src="@drawable/topmenu" />
+            </RelativeLayout>
 
 
 

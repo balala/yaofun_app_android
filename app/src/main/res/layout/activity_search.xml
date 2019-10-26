@@ -73,8 +73,10 @@
             android:id="@+id/tv_clear"
             android:src="@drawable/rubbish"
             android:layout_width="@dimen/dp_14"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_height="@dimen/dp_14"
-            android:layout_marginLeft="@dimen/dp_350"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_320"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
