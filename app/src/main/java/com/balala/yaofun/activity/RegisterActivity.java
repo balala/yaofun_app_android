@@ -31,15 +31,15 @@ import com.balala.yaofun.bean.VerificationBean;
 import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.VerificationCode;
 import com.balala.yaofun.httpUtils.ToastUtil;
-import com.balala.yaofun.myregistermvp.MyPresenter;
-import com.balala.yaofun.myregistermvp.MyView;
+import com.balala.yaofun.myregistermvp.RegisterPresenter;
+import com.balala.yaofun.myregistermvp.RegisterView;
 import com.balala.yaofun.util.TextWatcherUtil;
 import com.balala.yaofun.webview.AboutyaofunActivity;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 
 //
-public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implements MyView {
+public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterView> implements RegisterView {
 
     private static final String TAG = "xzq";
 
@@ -173,8 +173,8 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
                 if (phoneNum.length() <= 0 || phoneNum.length() <= 11) {
 
 //                    Toast.makeText(RegisterActivity.this, "请输入正确的手机号码", Toast.LENGTH_SHORT).show();
-                    ToastUtil.showLong("请输入正确的手机号码");
-
+//                    ToastUtil.showLong("请输入正确的手机号码");
+                    mRedSpeak.setVisibility(View.VISIBLE);
                 } else {
                     // 这个方法是用来判断手机验证码相关的
                     initCode();
@@ -197,7 +197,7 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
         mFrogetEdits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this, LandingActivity.class));
+                startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
             }
         });
 
@@ -215,7 +215,8 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
 
             @Override
             public void onClick(View v) {
-                ToastUtil.showLong("开始验证验证码");
+//                ToastUtil.showLong("开始验证验证码");
+                Log.i(TAG, "开始验证验证码");
                 // 验证验证码
                 code = mEtIdentifiing.getText().toString().trim();
                 Log.e("xuzhiqi", "initData3: " + code + "\n" + phone + "\n" + key);
@@ -270,7 +271,7 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
         phone = split[0] + split[1] + split[2];
         Log.e("手机号码：", phone);
         // 判断输入的手机号 是否符合手机号规范
-        if (phone.matches("^13[0-9]{1}[0-9]{8}$|15[0125689]{1}[0-9]{8}$|18[0-3,5-9]{1}[0-9]{8}$|17[0-3,5-9]{1}[0-9]{8}$|19[0-3,5-9]{1}[0-9]{8}$")) {
+        if (phone.matches("^13[0-9]{1}[0-9]{8}$|15[0125689]{1}[0-9]{8}$|18[0-3,5-9]{1}[0-9]{8}$|17[0-3,5-9]{1}[0-9]{8}$|19[0-3,5-9]{1}[0-9]{8}$|16[0-3,5-9]{1}[0-9]{8}$")) {
             Toast.makeText(RegisterActivity.this, "获取验证码", Toast.LENGTH_SHORT).show();
             // 开始执行倒计时的方法
             time.start();
@@ -281,7 +282,7 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
             initData();
             // 如果手机号码不符合规则 提示用户正确输入手机号 红色文字显示 字体变成"请输入正确的手机号码"
         } else {
-            ToastUtil.showLong("请输入正确的手机号码");
+//            ToastUtil.showLong("请输入正确的手机号码");
 
             mRedSpeak.setVisibility(View.VISIBLE);
 
@@ -310,8 +311,8 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
 
 
     @Override
-    protected MyPresenter initPresenter() {
-        return new MyPresenter();
+    protected RegisterPresenter initPresenter() {
+        return new RegisterPresenter();
     }
 
     @Override
@@ -370,24 +371,24 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
 
     }
 
-    @Override
-    public void onSuccessRegisterss(String sucess) {
-
-        basePresenter.getData4(phone, password);
-        //将数据保存至SharedPreferences:
-        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("flag", true);
-        Log.i("aBoolean", "onSuccessLanding: " + editor);
-        editor.commit();
-        startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
-        Log.i("注册成功", "注册成功" + sucess);
-    }
-
-    @Override
-    public void onErrors(String msg) {
-        Log.i(TAG, "onErrors: " + msg);
-    }
+//    @Override
+//    public void onSuccessRegisterss(String sucess) {
+//
+//        basePresenter.getData4(phone, password);
+//        //将数据保存至SharedPreferences:
+//        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putBoolean("flag", true);
+//        Log.i("aBoolean", "onSuccessLanding: " + editor);
+//        editor.commit();
+//        startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
+//        Log.i("注册成功", "注册成功" + sucess);
+//    }
+//
+//    @Override
+//    public void onErrors(String msg) {
+//        Log.i(TAG, "onErrors: " + msg);
+//    }
 
 
     // 倒计时 验证码
@@ -400,7 +401,7 @@ public class RegisterActivity extends BaseActivity<MyPresenter, MyView> implemen
 
         @Override
         public void onTick(long millisUntilFinished) {
-            mGetCode.setBackgroundColor(Color.parseColor("#ffffff"));
+//            mGetCode.setBackgroundColor(Color.parseColor("#ffffff"));
             mGetCode.setClickable(false);
             mGetCode.setText("(" + millisUntilFinished / 1000 + "s" + ")重新获取");
         }

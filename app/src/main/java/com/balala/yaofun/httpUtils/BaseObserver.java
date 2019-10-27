@@ -13,8 +13,8 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
-        Log.d(TAG, "onError: "+e.toString());
-        ToastUtil.showShort("数据加载失败");
+        Log.d(TAG, "数据加载失败: "+e.toString());
+//        ToastUtil.showShort("数据加载失败");
     }
 
     @Override

@@ -38,34 +38,41 @@
     <!--</RelativeLayout>-->
 
     <!--</androidx.appcompat.widget.Toolbar>-->
+    <!--<ImageView-->
+        <!--android:id="@+id/funactivityiconimg"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:src="@mipmap/funactivityicon"-->
+        <!--android:visibility="visible" />-->
 
     <ScrollView
+        android:id="@+id/sll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+       >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            >
 
             <ImageView
                 android:id="@+id/homedetailsimg"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_494"
-                android:scaleType="fitXY"
-                android:src="@drawable/home_background" />
+                android:scaleType="fitXY" />
 
 
             <RelativeLayout
-                android:layout_marginTop="@dimen/dp_10"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dp_10">
 
                 <ImageView
-                    android:layout_marginLeft="@dimen/dp_21"
                     android:id="@+id/homedetails_back"
                     android:layout_width="@dimen/dp_26"
                     android:layout_height="@dimen/dp_26"
+                    android:layout_marginLeft="@dimen/dp_21"
                     android:layout_marginTop="@dimen/dp_20"
                     android:src="@drawable/back" />
 
@@ -80,9 +87,9 @@
             </RelativeLayout>
 
 
-
             <LinearLayout
                 android:id="@+id/llt"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dp_500"
@@ -96,7 +103,6 @@
                     android:layout_marginLeft="@dimen/dp_19"
                     android:layout_marginTop="@dimen/dp_34"
                     android:layout_marginRight="@dimen/dp_51"
-                    android:text="花植设计节——送给每一个敢于做梦的你"
                     android:textColor="@color/colorwhite"
                     android:textSize="@dimen/sp_22" />
 
@@ -115,7 +121,6 @@
                     android:layout_marginLeft="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_63"
                     android:layout_marginRight="@dimen/dp_249"
-                    android:text="王野蛮野.."
                     android:textColor="@color/colorwhite"
                     android:textSize="@dimen/sp_24" />
 
@@ -130,7 +135,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_29"
-                        android:text="#风华正茂"
+                        android:text="#我不需要标签"
                         android:textColor="@color/colorwhite"
                         android:textSize="@dimen/sp_15" />
 
@@ -140,7 +145,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_19"
                         android:layout_marginTop="@dimen/dp_29"
-                        android:text="#亭亭玉立"
+                        android:text="#我不是Jack波"
                         android:textColor="@color/colorwhite"
                         android:textSize="@dimen/sp_15" />
                 </LinearLayout>
@@ -208,7 +213,6 @@
                         android:layout_width="@dimen/dp_211"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_14"
-                        android:text="本周二19:00 - 本周三22:00"
                         android:textColor="@color/colorwhite"
                         android:textSize="@dimen/sp_15" />
                 </LinearLayout>
@@ -229,7 +233,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_14"
-                        android:text="三里屯兰桂坊"
                         android:textColor="@color/colorwhite"
                         android:textSize="@dimen/sp_15" />
 
@@ -257,7 +260,7 @@
                         android:layout_width="@dimen/dp_211"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_14"
-                        android:text="¥100"
+                        android:text="free"
                         android:textColor="@color/colorwhite"
                         android:textSize="@dimen/sp_15" />
                 </LinearLayout>
@@ -290,8 +293,7 @@
                     android:layout_marginLeft="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_70"
                     android:layout_marginRight="@dimen/dp_21"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/home_background" />
+                    android:scaleType="fitXY" />
 
                 <TextView
                     android:id="@+id/homedetails_text2"
@@ -311,8 +313,7 @@
                     android:layout_marginLeft="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_70"
                     android:layout_marginRight="@dimen/dp_21"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/home_background" />
+                    android:scaleType="fitXY" />
 
                 <TextView
                     android:id="@+id/homedetails_text3"
@@ -332,8 +333,7 @@
                     android:layout_marginLeft="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_70"
                     android:layout_marginRight="@dimen/dp_21"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/home_background" />
+                    android:scaleType="fitXY" />
 
                 <TextView
                     android:id="@+id/homedetails_text4"
@@ -362,8 +362,7 @@
                     android:layout_marginLeft="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_70"
                     android:layout_marginRight="@dimen/dp_20"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/home_background" />
+                    android:scaleType="fitXY" />
 
                 <TextView
                     android:id="@+id/homedetails_text5"
@@ -514,8 +513,7 @@
                 android:layout_width="@dimen/dp_120"
                 android:layout_height="@dimen/dp_120"
                 android:layout_marginLeft="@dimen/dp_235"
-                android:layout_marginTop="@dimen/dp_670"
-                android:src="@drawable/home_fun" />
+                android:layout_marginTop="@dimen/dp_670" />
 
         </RelativeLayout>
 

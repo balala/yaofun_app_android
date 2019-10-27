@@ -67,8 +67,9 @@ public class LandingModel extends BaseModel {
                     @Override
                     public void onNext(LandingBean landingBean) {
                         if (landingBean != null) {
-                            Log.e("登陆成功出来的", "Phone: " + landingBean.getMsg());
-                            ToastUtil.showLong("登陆成功");
+                            Log.e("登陆成功出来的", "登陆成功: " + landingBean.getMsg());
+//                            ToastUtil.showLong("登陆成功");
+
                             try {
                                 resultCallBack.onSuccess(landingBean);
                             } catch (IOException e) {
@@ -81,7 +82,7 @@ public class LandingModel extends BaseModel {
                     @Override
                     public void onError(Throwable e) {
                         Log.d(TAG, "onError: " + e.getMessage());
-                        ToastUtil.showLong("登陆错误");
+                        ToastUtil.showLong("登陆失败");
 
                     }
 

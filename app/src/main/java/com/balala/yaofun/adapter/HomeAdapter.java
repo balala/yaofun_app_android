@@ -29,17 +29,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter {
-    private final List<HomeBannerDean.DataBean.FirstBean> ban;
+    private final ArrayList<HomeBannerDean.DataBean.FirstBean> first;
     private Context context;
     private ArrayList<HomeAllBean.DataBean.HotBean> homeAllBeans;
     private OnClickListener mListener;
     private OnClickListenerBanner mListenerBanner;
 
 
-    public HomeAdapter(Context context, ArrayList<HomeAllBean.DataBean.HotBean> homeAllBeans, List<HomeBannerDean.DataBean.FirstBean> first) {
+    public HomeAdapter(Context context, ArrayList<HomeAllBean.DataBean.HotBean> homeAllBeans, ArrayList<HomeBannerDean.DataBean.FirstBean> first) {
         this.context = context;
         this.homeAllBeans = homeAllBeans;
-        this.ban = first;
+        this.first = first;
     }
 
 
@@ -62,7 +62,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         int itemViewType = getItemViewType(position);
         if (itemViewType == 0) {
             BannerHolder banq = (BannerHolder) holder;
-            banq.banner_item.setImages(ban);
+            banq.banner_item.setImages(first);
             banq.banner_item.setImageLoader(new MyLoder());
             banq.banner_item.start();
             Banner banner = ((BannerHolder) holder).banner_item.setOnBannerListener(new OnBannerListener() {

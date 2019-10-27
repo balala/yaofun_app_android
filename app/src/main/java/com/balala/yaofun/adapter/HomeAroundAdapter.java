@@ -92,12 +92,12 @@ public class HomeAroundAdapter extends RecyclerView.Adapter<HomeAroundAdapter.Vi
         mListener = listener;
     }
 
-    public interface OnClickListenerBanner {
-        void OnClick(int position);
-    }
-
-    public void setOnClickListenerBanner(HomeAdapter.OnClickListenerBanner listener) {
-
-        mListenerBanner = listener;
-    }
+//    public interface OnClickListenerBanner {
+//        void OnClick(int position);
+//    }
+//
+//    public void setOnClickListenerBanner(HomeAdapter.OnClickListenerBanner listener) {
+//
+//        mListenerBanner = listener;
+//    }
 }

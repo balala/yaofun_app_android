@@ -233,13 +233,14 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 
     @Override
     public void onSuccessHomeall(HomeAllBean homeAllBean) throws IOException {
+
         Log.i("首页解析", "onSuccessHome: " + homeAllBean.toString());
         //热门
         List<HomeAllBean.DataBean.HotBean> hot = homeAllBean.getData().getHot();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recycleView1.setLayoutManager(linearLayoutManager);
         Log.e(TAG, "onSuccessHomeall: " + first);
-        homeAdapter = new HomeAdapter(getContext(), (ArrayList<HomeAllBean.DataBean.HotBean>) hot, first);
+        homeAdapter = new HomeAdapter(getContext(), (ArrayList<HomeAllBean.DataBean.HotBean>) hot, (ArrayList<HomeBannerDean.DataBean.FirstBean>) first);
         recycleView1.setAdapter(homeAdapter);
         //展示全部的recycleView
         recycleView1.setNestedScrollingEnabled(false);
@@ -271,13 +272,22 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         homeAdapter.setOnClickListener(new HomeAdapter.OnClickListener() {
             @Override
             public void OnClick(int position) {
-                startActivity(new Intent(getContext(), HomedetailsActivity.class));
+                String id = hot.get(position).get_id();
+                Intent intent = new Intent(getContext(), HomedetailsActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+//                startActivity(new Intent(getContext(), HomedetailsActivity.class));
             }
         });
         homeAdapter.setOnClickListenerBanner(new HomeAdapter.OnClickListenerBanner() {
             @Override
             public void OnClick(int position) {
-                startActivity(new Intent(getContext(), HomebannerdetailsActivity.class));
+                HomeBannerDean.DataBean.FirstBean firstBean = new HomeBannerDean.DataBean.FirstBean();
+                String id = firstBean.get_id();
+                Intent intent = new Intent(getContext(), HomedetailsActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+//                startActivity(new Intent(getContext(), HomebannerdetailsActivity.class));
             }
         });
 
@@ -285,13 +295,10 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         homeAroundAdapter.setOnClickListener(new HomeAdapter.OnClickListener() {
             @Override
             public void OnClick(int position) {
-                startActivity(new Intent(getContext(), HomedetailsActivity.class));
-            }
-        });
-        homeAroundAdapter.setOnClickListenerBanner(new HomeAdapter.OnClickListenerBanner() {
-            @Override
-            public void OnClick(int position) {
-                startActivity(new Intent(getContext(), HomebannerdetailsActivity.class));
+                String id = around.get(position).get_id();
+                Intent intent = new Intent(getContext(), HomedetailsActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
             }
         });
 
@@ -299,13 +306,20 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         adapter.setOnClickListener(new HomeAdapter.OnClickListener() {
             @Override
             public void OnClick(int position) {
-                startActivity(new Intent(getContext(), HomedetailsActivity.class));
+                String id = recommend.get(position).get_id();
+                Intent intent = new Intent(getContext(), HomedetailsActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
             }
         });
         adapter.setOnClickListenerBanner(new HomeAdapter.OnClickListenerBanner() {
             @Override
             public void OnClick(int position) {
-                startActivity(new Intent(getContext(), HomebannerdetailsActivity.class));
+                HomeBannerDean.DataBean.SecondBean secondBean = new HomeBannerDean.DataBean.SecondBean();
+                String id = secondBean.get_id();
+                Intent intent = new Intent(getContext(), HomedetailsActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
             }
         });
 
@@ -394,6 +408,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
                 startActivity(new Intent(getContext(), PromotionalActivitiesActivity.class));
             }
         });
+
         //创建fun团页面
         homeCreateparty.setOnClickListener(new View.OnClickListener() {
             @Override

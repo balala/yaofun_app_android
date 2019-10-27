@@ -4,28 +4,24 @@
 
     <item
         android:id="@+id/item1"
-        android:checkable="false"
+        android:checkable="true"
         android:icon="@drawable/homedetails_share"
-        android:title="@string/homedetails_share"
-        app:showAsAction="never" />
+        android:title="@string/homedetails_share" />
     <item
         android:id="@+id/item2"
-        android:checkable="false"
+        android:checkable="true"
         android:icon="@drawable/homedetails_alter"
-        android:title="@string/homedetails_alter"
-        app:showAsAction="never" />
+        android:title="@string/homedetails_alter" />
     <item
         android:id="@+id/item3"
-        android:checkable="false"
+        android:checkable="true"
         android:icon="@drawable/homedetails_delete"
-        android:title="@string/homedetails_delete"
-        app:showAsAction="never" />
+        android:title="@string/homedetails_delete" />
     <item
         android:id="@+id/item4"
-        android:checkable="false"
+        android:checkable="true"
         android:icon="@drawable/homedetails_report"
-        android:title="@string/homedetails_inform"
-        app:showAsAction="never" />
+        android:title="@string/homedetails_inform" />
 
 
 </menu>

@@ -6,6 +6,7 @@ import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.DayBeans;
 import com.balala.yaofun.bean.result.HomeAllBean;
 import com.balala.yaofun.bean.result.HomeBannerDean;
+import com.balala.yaofun.bean.result.HomedetailsBean;
 import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.bean.result.VerificationCode;
 
@@ -18,6 +19,7 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
 /**
@@ -90,4 +92,10 @@ public interface MyServer {
     // http://test.yaofun.vip/api/user_group/recommend_1_8
     @GET("user_group/recommend_1_8")
     Observable<FunhomeData> getFunhomeData(@QueryMap HashMap<String, Object> map);
+
+    @GET("activity/detail/{id}")
+    Observable<HomedetailsBean> getHomedetailsData(@Path("id")String id, @QueryMap HashMap<String, Object> map);
+
+    //  /activity/detail/5ce368ffe6b187cf63e4289a
+
 }

@@ -226,7 +226,6 @@ public class FrogetpasswardModel extends BaseModel {
                         try {
                             Log.i("修改密码 M层 解析", "onSubscribe: " + responseBody.string());
                             ToastUtil.showLong("更改密码成功");
-
                         } catch (IOException e) {
 
                             e.printStackTrace();
@@ -236,7 +235,7 @@ public class FrogetpasswardModel extends BaseModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        ToastUtil.showLong("更改密码失败");
+//                        ToastUtil.showLong("更改密码失败");
 
                         Toast.makeText(MyApp.getInstance(), e.toString(), Toast.LENGTH_SHORT).show();
 

@@ -26,7 +26,7 @@ import okhttp3.ResponseBody;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class MyModel extends BaseModel {
+public class RegisterModel extends BaseModel {
     private IdentifyingBean identifying;
 
     private String key;
@@ -216,12 +216,7 @@ public class MyModel extends BaseModel {
                     @Override
                     public void onNext(ResponseBody responseBody) {
 
-                        try {
-                            Log.e("xuzhiqi", "onNext: " + responseBody.string());
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        Log.e("注册成功", "onNext: " + responseBody.toString());
 
                     }
 
@@ -238,52 +233,52 @@ public class MyModel extends BaseModel {
     }
 
     // 登陆解析
-    public void GetLandingData(String phone, String password, ResultCallBack<AccountBean> resultCallBack) {
-        MyServer apiserver = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
-        // 创建一个集合 来存储数据
-        final HashMap<String, Object> map3 = new HashMap<>();
-        String nowDate = Utils.getNowDate();
-        // map.put("key",key); key
-        map3.put("user_id", "-1");
-        map3.put("version", "-1");
-        map3.put("current_device", "安卓");
-        map3.put("unique_identifier", "");
-        map3.put("user_defined_name", "");
-        map3.put("download_channel", "");
-        map3.put("phone_version", "");
-        map3.put("phone_model", "");
-        map3.put("wx_unionid", "");
-        map3.put("request_start_time", nowDate);
-        map3.put("phone", phone);
-        map3.put("password", password);
-        Log.e("xuzhiqi4", "getData3: " + Utils.getNowDate() + "\n" + phone + "\n" + key + "\n" + code + "\n" + password);
-        map3.put("key", key);
-        map3.put("code", code);
-        apiserver.getLoginData(map3).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<LandingBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
+//    public void GetLandingData(String phone, String password, ResultCallBack<AccountBean> resultCallBack) {
+//        MyServer apiserver = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
+//        // 创建一个集合 来存储数据
+//        final HashMap<String, Object> map3 = new HashMap<>();
+//        String nowDate = Utils.getNowDate();
+//        // map.put("key",key); key
+//        map3.put("user_id", "-1");
+//        map3.put("version", "-1");
+//        map3.put("current_device", "安卓");
+//        map3.put("unique_identifier", "");
+//        map3.put("user_defined_name", "");
+//        map3.put("download_channel", "");
+//        map3.put("phone_version", "");
+//        map3.put("phone_model", "");
+//        map3.put("wx_unionid", "");
+//        map3.put("request_start_time", nowDate);
+//        map3.put("phone", phone);
+//        map3.put("password", password);
+//        Log.e("xuzhiqi4", "getData3: " + Utils.getNowDate() + "\n" + phone + "\n" + key + "\n" + code + "\n" + password);
+//        map3.put("key", key);
+//        map3.put("code", code);
+//        apiserver.getLoginData(map3).subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<LandingBean>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(LandingBean landingBean) {
+//                        Log.i("xuzhqizz", "onSubscribe: " + landingBean.toString());
+//
+//                    }
+//
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Log.e("xuzhqizz", "onNext: " + e.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
 
-                    }
-
-                    @Override
-                    public void onNext(LandingBean landingBean) {
-                        Log.i("xuzhqizz", "onSubscribe: " + landingBean.toString());
-
-                    }
-
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("xuzhqizz", "onNext: " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-
-    }
+//    }
 }

@@ -41,7 +41,7 @@ public class FrogetpasswardPresenter extends BasePresenter<FrogetpasswardView> {
 
             @Override
             public void onFail(String msg) {
-                ToastUtil.showLong(msg);
+//                ToastUtil.showLong(msg);
                 Log.d(TAG, "onFail: " + msg);
             }
         });
@@ -62,7 +62,7 @@ public class FrogetpasswardPresenter extends BasePresenter<FrogetpasswardView> {
 
             @Override
             public void onFail(String msg) {
-                ToastUtil.showLong(msg);
+//                ToastUtil.showLong(msg);
 
                 Log.d(TAG, "onFail: " + msg);
 
@@ -79,8 +79,9 @@ public class FrogetpasswardPresenter extends BasePresenter<FrogetpasswardView> {
             public void onSuccess(ResponseBody bean) throws IOException {
                 if (bean != null) {
                     mView.onSuccessAlterpassward(bean.toString());
-                    ToastUtil.showLong("更改成功");
-                    Toast.makeText(MyApp.getInstance(), "更改成功", Toast.LENGTH_SHORT).show();
+//                    ToastUtil.showLong("更改成功");
+//                    Toast.makeText(MyApp.getInstance(), "更改成功", Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "更改成功");
                 }
             }
 

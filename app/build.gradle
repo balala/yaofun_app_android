@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('private_key.pepk')
+            storePassword 'android'
+            keyAlias = 'Users/xuzhiqi/Desktop/private_key.pepk'
+            keyPassword 'android'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
@@ -10,11 +18,18 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //是否移除无用资源
+            zipAlignEnabled true
+
+        }
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
@@ -86,6 +101,7 @@ dependencies {
 
     //Eventbus
     implementation 'org.greenrobot:eventbus:3.0.0'
+
 
 
 }

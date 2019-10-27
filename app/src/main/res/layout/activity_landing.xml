@@ -129,7 +129,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_100"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_458"
         android:orientation="vertical">
 
@@ -138,6 +138,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="@string/app_other"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_100"
             android:textColor="@color/colorgray"
             android:textSize="@dimen/sp_12" />
 
@@ -145,8 +147,10 @@
             android:id="@+id/wechat"
             android:layout_width="@dimen/dp_47"
             android:layout_height="@dimen/dp_47"
+            android:layout_marginBottom="@dimen/dp_40"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_25"
+            android:layout_alignParentBottom="true"
+
             android:src="@mipmap/weixin" />
     </RelativeLayout>
 </RelativeLayout>

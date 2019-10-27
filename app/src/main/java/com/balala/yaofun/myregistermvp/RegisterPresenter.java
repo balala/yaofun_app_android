@@ -17,13 +17,13 @@ import okhttp3.ResponseBody;
 import static org.greenrobot.eventbus.EventBus.TAG;
 
 
-public class MyPresenter extends BasePresenter<MyView> {
+public class RegisterPresenter extends BasePresenter<RegisterView> {
 
-    private MyModel myModel;
+    private RegisterModel myModel;
 
     @Override
     protected void initModel() {
-        myModel = new MyModel();
+        myModel = new RegisterModel();
     }
 
 
@@ -90,23 +90,23 @@ public class MyPresenter extends BasePresenter<MyView> {
 
     }
     // 登陆成功
-    public void getData4(String phone, String password) {
-        myModel.GetLandingData(phone, password, new ResultCallBack<AccountBean>() {
-            @Override
-            public void onSuccess(AccountBean bean) throws IOException {
-                if (bean != null) {
-                    mView.onSuccessRegisterss(bean.toString());
-                }
-            }
-
-            @Override
-            public void onFail(String msg) {
-
-                Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
+//    public void getData4(String phone, String password) {
+//        myModel.GetLandingData(phone, password, new ResultCallBack<AccountBean>() {
+//            @Override
+//            public void onSuccess(AccountBean bean) throws IOException {
+//                if (bean != null) {
+//                    mView.onSuccessRegisterss(bean.toString());
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(String msg) {
+//
+//                Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//    }
 
 
 }

@@ -24,8 +24,10 @@ public class LandingPresenter extends BasePresenter<LandingView> {
             public void onSuccess(LandingBean bean) {
                 if (bean != null) {
                     mView.onSuccessLanding(bean);
-                    ToastUtil.showLong(bean.getMsg());
-                
+//                    ToastUtil.showLong(bean.getMsg());
+//                    if (bean.getData().get)
+                    Log.i("xuzhiqi登陆model", "onSuccess: " + bean.getMsg());
+
                 }
 
             }
@@ -33,8 +35,8 @@ public class LandingPresenter extends BasePresenter<LandingView> {
             @Override
             public void onFail(String msg) {
 
-                ToastUtil.showLong(msg);
-                Log.d("xuzhiqi", "onFail: " + msg);
+//                ToastUtil.showLong(msg);
+                Log.d("xuzhiqi登陆model", "onFail: " + msg);
             }
         });
 

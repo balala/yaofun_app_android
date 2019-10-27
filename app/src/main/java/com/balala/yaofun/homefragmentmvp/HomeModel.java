@@ -22,6 +22,8 @@ import io.reactivex.schedulers.Schedulers;
 public class HomeModel extends BaseModel {
     private static final String TAG = "xuzhiqi";
 //    private HomeBean homeBean;
+
+    // 传过来用户的id和sign的值
     private String sign = "1";
     // 用户登陆的Id
     private String userId = "1";
@@ -81,13 +83,13 @@ public class HomeModel extends BaseModel {
         map.put("max_distance", "5000");
         map.put("x", x);
         map.put("y", y);
-        Log.i("啦啦啦啦", "经纬度HomeData: "+ x + y);
+        Log.i("啦啦啦啦", "经纬度HomeData: " + x + y);
         // sign=md5(request_start_time+用户id+key_ios+每次登陆返回的key)
         String nowDate = Utils.getNowDate();
         map.put("request_start_time", nowDate);
         sign = Utils.md5(nowDate + userId + "安卓" + "1");
         map.put("sign", sign);
-        Log.i("首页", "进入app时间 " + nowDate + "/n" + "进入app的sign" + sign );
+        Log.i("首页", "进入app时间 " + nowDate + "/n" + "进入app的sign" + sign);
         Log.i("时间", "HomeData: " + nowDate);
         apiserver.getDoodchoice(map).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -137,11 +139,12 @@ public class HomeModel extends BaseModel {
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(HomeBannerDean responseBody) {
                         try {
                             resultCallBack.onSuccess(responseBody);
-                            Log.i("首页banner解析", "成功"+responseBody.toString());
+                            Log.i("首页banner解析", "成功" + responseBody.toString());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

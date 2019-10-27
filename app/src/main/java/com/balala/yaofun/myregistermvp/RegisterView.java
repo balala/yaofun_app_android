@@ -6,7 +6,7 @@ import com.balala.yaofun.bean.AccountBean;
 import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.VerificationCode;
 
-public interface MyView extends BaseView {
+public interface RegisterView extends BaseView {
 
     void onSS(VerificationResult verificationResult);
 
@@ -21,8 +21,8 @@ public interface MyView extends BaseView {
 
     void onError(String error);
 
-    void onSuccessRegisterss(String sucess);
-
-    void onErrors(String msg);
+//    void onSuccessRegisterss(String sucess);
+//
+//    void onErrors(String msg);
 
 }

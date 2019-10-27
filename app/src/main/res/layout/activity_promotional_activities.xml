@@ -489,7 +489,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/dp_34"
             android:layout_marginBottom="@dimen/dp_45"
-            android:background="@drawable/xiahua"
+            android:background="@drawable/yuangary"
             android:text="@string/openfun_issue"
             android:textColor="@color/colorwhite" />
     </LinearLayout>

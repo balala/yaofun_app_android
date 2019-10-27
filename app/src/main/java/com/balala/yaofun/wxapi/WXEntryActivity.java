@@ -7,6 +7,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.balala.yaofun.activity.GeneralActivity;
+import com.balala.yaofun.util.ToastUtils;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -19,8 +20,7 @@ import java.net.URLEncoder;
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     private IWXAPI api;
     private BaseResp resp = null;
-    //wx24009bcc9adc6318
-//    wx24009bcc9adc6318
+    //wx24009bcc·9adc6318   AppID：wx24009bcc9adc6318
     public static String WX_APP_ID = "wx24009bcc9adc6318";
     // 获取第一步的code后，请求以下链接获取access_token
 //    private String GetCodeRequest = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code";
@@ -56,24 +56,26 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
             case BaseResp.ErrCode.ERR_OK:
                 result = "授权成功";
                 Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-
                 // 跳转到注册页面 为了检验是否会报错或者第二次需不需要再次授权改为跳到主页面
                 startActivity(new Intent(WXEntryActivity.this, GeneralActivity.class));
                 finish();
                 break;
             case BaseResp.ErrCode.ERR_USER_CANCEL:
                 result = "取消授权";
-                Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+                ToastUtils.showLong("微信登陆失败");
                 finish();
                 break;
             case BaseResp.ErrCode.ERR_AUTH_DENIED:
                 result = "拒绝授权";
-                Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+                ToastUtils.showLong("微信登陆失败");
                 finish();
                 break;
             default:
                 result = "授权返回";
-                Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+                ToastUtils.showLong("微信登陆失败");
                 finish();
                 break;
         }

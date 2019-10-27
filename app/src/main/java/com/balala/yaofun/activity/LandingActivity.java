@@ -34,6 +34,7 @@ import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.mylandingmvp.LandingPresenter;
 import com.balala.yaofun.mylandingmvp.LandingView;
 import com.balala.yaofun.util.TextWatcherUtil;
+import com.balala.yaofun.util.ToastUtils;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
@@ -78,10 +79,6 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
 
     @Override
     protected void initView() {
-        //获取顶层视图
-        decorView = getWindow().getDecorView();
-        // 渲染系统toolbar
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         mEdit = findViewById(R.id.edit);
         mRegister = findViewById(R.id.register);
         mEt1 = findViewById(R.id.et1);
@@ -147,7 +144,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
 
             }
         });
-        // 点击立即注册 开始解析和进入首页
+        // 点击登陆 开始解析和进入首页
         mActivityGo.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -254,13 +251,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         String userid = bean.getData().get_id();
         String images = bean.getData().getImages();
         String nick_name = bean.getData().getNick_name();
-//        EventBus.getDefault().postSticky(new UserEvent(userid,images,nick_name));
 
-//        Intent intent = new Intent(getApplicationContext(), LandingActivity.class);
-//        intent.putExtra("userid", userid);
-//        intent.putExtra("images", images);
-//        intent.putExtra("nick_name", nick_name);
-//        startActivity(intent);
 
         // 在这传userid images nick_name到landing页面
         Log.i("EventBus", "这是我要传的 " + nick_name);
@@ -347,7 +338,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
     private void initSou() {
 
         if (!api.isWXAppInstalled()) {
-//            ToastUtils.showLong("请先安装微信");
+//            ToastUtils.showLong("您还没有安装微信");
             Toast.makeText(this, "您还没有安装微信", Toast.LENGTH_SHORT).show();
         } else {
             final SendAuth.Req req = new SendAuth.Req();
