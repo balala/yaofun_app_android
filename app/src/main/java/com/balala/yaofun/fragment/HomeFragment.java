@@ -180,11 +180,10 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         SharedPreferences preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         boolean aBoolean = preferences.getBoolean("flag", false);
         if (aBoolean) {
-//            Log.i("onCheckedChanged", "第二次登陆完了");
             getDatas();
 
         } else {
-//            codetext.setText(dayBean.getData().getNumber_time());  15986996699
+//            codetext.setText(dayBean.getData().getNumber_time());
             daytext.setText(dayBean.getData().getSolar_time());
             monthtext.setText(dayBean.getData().getLunar_time());
             tabootext.setText(dayBean.getData().getPrompt());
