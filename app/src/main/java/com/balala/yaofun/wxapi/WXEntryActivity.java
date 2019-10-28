@@ -58,25 +58,28 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 Toast.makeText(this, result, Toast.LENGTH_LONG).show();
                 // 跳转到注册页面 为了检验是否会报错或者第二次需不需要再次授权改为跳到主页面
                 startActivity(new Intent(WXEntryActivity.this, GeneralActivity.class));
-                finish();
+//                finish();
                 break;
             case BaseResp.ErrCode.ERR_USER_CANCEL:
                 result = "取消授权";
 //                Toast.makeText(this, result, Toast.LENGTH_LONG).show();
                 ToastUtils.showLong("微信登陆失败");
-                finish();
+                startActivity(new Intent(WXEntryActivity.this, GeneralActivity.class));
+//                finish();
                 break;
             case BaseResp.ErrCode.ERR_AUTH_DENIED:
                 result = "拒绝授权";
 //                Toast.makeText(this, result, Toast.LENGTH_LONG).show();
                 ToastUtils.showLong("微信登陆失败");
-                finish();
+                startActivity(new Intent(WXEntryActivity.this, GeneralActivity.class));
+//                finish();
                 break;
             default:
                 result = "授权返回";
 //                Toast.makeText(this, result, Toast.LENGTH_LONG).show();
                 ToastUtils.showLong("微信登陆失败");
-                finish();
+                startActivity(new Intent(WXEntryActivity.this, GeneralActivity.class));
+//                finish();
                 break;
         }
     }

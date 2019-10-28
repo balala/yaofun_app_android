@@ -1,4 +1,4 @@
-package com.balala.yaofun.homefragmentmvp;
+package com.balala.yaofun.model;
 
 import android.util.Log;
 

@@ -1,33 +1,25 @@
 package com.balala.yaofun.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.balala.yaofun.R;
 import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.bean.result.HomedetailsBean;
-import com.balala.yaofun.homedetailsmvp.HomedetailsModel;
-import com.balala.yaofun.homedetailsmvp.HomedetailsPersenter;
-import com.balala.yaofun.homedetailsmvp.HomedetailsView;
+import com.balala.yaofun.model.HomedetailsModel;
+import com.balala.yaofun.presenter.HomedetailsPersenter;
+import com.balala.yaofun.view.HomedetailsView;
 import com.bumptech.glide.Glide;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.lang.reflect.Method;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +37,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
 //    Toolbar mHomedetailsToolbar;
     @BindView(R.id.homedetails_title)
     TextView mHomedetailsTitle;
+    //    @BindView(R.id.appbar)
+//    AppBarLayout appbar;
     @BindView(R.id.homedetails_xiahua)
     ImageView mHomedetailsXiahua;
     @BindView(R.id.homedetails_peoplename)
@@ -99,10 +93,12 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
     ImageView mHomedetailsFunimg;
     @BindView(R.id.homedetails_funmessage)
     TextView mHomedetailsFunmessage;
+    @BindView(R.id.homedetails_personcount)
+    TextView homedetails_personcount;
     @BindView(R.id.homedetails_wirte)
     ImageView mHomedetailsWirte;
-//    @BindView(R.id.funactivityiconimg)
-//    ImageView funactivityiconimg;
+    @BindView(R.id.homedetailsicon)
+    ImageView homedetailsicon;
     @BindView(R.id.homedetails_rv2)
     RecyclerView mHomedetailsRv2;
     @BindView(R.id.homedetails_message)
@@ -113,14 +109,20 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
     LinearLayout mLlt;
     @BindView(R.id.homedetails_people)
     ImageView mHomedetailsPeople;
-    @BindView(R.id.homedetails_fab)
-    FloatingActionButton mHomedetailsFab;
+    //    @BindView(R.id.homedetails_fab)
+//    FloatingActionButton mHomedetailsFab;
     @BindView(R.id.sll)
     ScrollView sll;
 
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+//        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+//            @Override
+//            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+//
+//            }
+//        });
 
     }
 
@@ -128,12 +130,12 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
     protected void initData() {
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
-//        String bannerid1 = intent.getStringExtra("bannerid1");
-//        basePresenter.getHomedetailsdata(id);
+        basePresenter.getHomedetailsdata(id);
     }
 
     @Override
     protected void initData2() {
+
 
     }
 
@@ -148,8 +150,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
         return new HomedetailsPersenter();
     }
 
-    //    R.id.homedetails_toolbar,
-    @OnClick({R.id.homedetailsimg, R.id.homedetails_back, R.id.homedetails_menu, R.id.homedetails_title, R.id.homedetails_xiahua, R.id.homedetails_peoplename, R.id.homedetails_label1, R.id.homedetails_label2, R.id.homedetails_signature, R.id.homedetails_peoplecount, R.id.homedetails_peoplerv, R.id.homedetails_peopleback, R.id.homedetails_time, R.id.homedetails_site, R.id.homedetails_navigation, R.id.homedetails_ticket, R.id.homedetails_img1, R.id.homedetails_text1, R.id.homedetails_img2, R.id.homedetails_text2, R.id.homedetails_img3, R.id.homedetails_text3, R.id.homedetails_img4, R.id.homedetails_text4, R.id.homedetails_textback, R.id.homedetails_img5, R.id.homedetails_text5, R.id.homedetails_img6, R.id.homedetails_funtitle, R.id.homedetails_funimg, R.id.homedetails_funmessage, R.id.homedetails_wirte, R.id.homedetails_rv2, R.id.homedetails_message, R.id.homedetailsgo, R.id.llt, R.id.homedetails_people, R.id.homedetails_fab})
+    //    R.id.homedetails_toolbar, , R.id.homedetails_fab
+    @OnClick({R.id.homedetailsimg, R.id.homedetails_back, R.id.homedetails_menu, R.id.homedetails_title, R.id.homedetails_xiahua, R.id.homedetails_peoplename, R.id.homedetails_label1, R.id.homedetails_label2, R.id.homedetails_signature, R.id.homedetails_peoplecount, R.id.homedetails_peoplerv, R.id.homedetails_peopleback, R.id.homedetails_time, R.id.homedetails_site, R.id.homedetails_navigation, R.id.homedetails_ticket, R.id.homedetails_img1, R.id.homedetails_text1, R.id.homedetails_img2, R.id.homedetails_text2, R.id.homedetails_img3, R.id.homedetails_text3, R.id.homedetails_img4, R.id.homedetails_text4, R.id.homedetails_textback, R.id.homedetails_img5, R.id.homedetails_text5, R.id.homedetails_img6, R.id.homedetails_funtitle, R.id.homedetails_funimg, R.id.homedetails_funmessage, R.id.homedetails_wirte, R.id.homedetails_rv2, R.id.homedetails_message, R.id.homedetailsgo, R.id.llt, R.id.homedetails_people})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -233,56 +235,18 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
                 break;
             case R.id.homedetails_people:
                 break;
-            case R.id.homedetails_fab:
-                break;
+//            case R.id.homedetails_fab:
+//                break;
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        menu.add(Menu.NONE, Menu.FIRST + 1, 5, "删除").setIcon(
-//                android.R.drawable.ic_menu_delete);
-//        // setIcon()方法设置菜单图标
-//        menu.add(Menu.NONE, Menu.FIRST + 2, 2, "保存").setIcon(
-//                android.R.drawable.ic_menu_save);
-//        menu.add(Menu.NONE, Menu.FIRST + 3, 6, "帮助").setIcon(
-//                android.R.drawable.ic_menu_help);
-//        menu.add(Menu.NONE, Menu.FIRST + 4, 1, "添加").setIcon(
-//                android.R.drawable.ic_menu_add);
-//        menu.add(Menu.NONE, Menu.FIRST + 5, 4, "详细").setIcon(
-//                android.R.drawable.ic_menu_info_details);
-//        menu.add(Menu.NONE, Menu.FIRST + 6, 3, "发送").setIcon(
-//                android.R.drawable.ic_menu_send);
-//        //调用这个方法设置图标的可见性
-//        setIconVisible(menu);
-//        return true;
-//    }
-    //使用反射设置menu图标的可见性
-//    private void setIconVisible(Menu menu) {
-//        try {
-//            @SuppressLint("PrivateApi") Class clazz = Class
-//                    .forName("com.android.internal.view.menu.MenuBuilder");
-//            Method m = clazz.getDeclaredMethod("setOptionalIconsVisible",
-//                    boolean.class);
-//            m.setAccessible(true);
-//            m.invoke(menu, true);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
     @Override
     public void onSuccessHomedetails(HomedetailsBean funhomeData) {
-//        funactivityiconimg.setVisibility(View.GONE);
-//        mLlt.setVisibility(View.VISIBLE);
+        homedetailsicon.setVisibility(View.GONE);
+        sll.setVisibility(View.VISIBLE);
         int po = 0;
         HomedetailsBean.DataBean data = funhomeData.getData();
+
         Log.i("首页详情解析", "onSuccessHomedetails: " + funhomeData);
         Glide.with(this).load(data.getCover()).into(mHomedetailsimg);
         mHomedetailsFuntitle.setText(data.getTitle());
@@ -296,7 +260,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
 //        Glide.with(this).load(data.getContent_array().get(po + 2)).into(mHomedetailsImg2);
 //        mHomedetailsText2.setText(funhomeData.getData().getGroup_count());
         mHomedetailsFuntitle.setText(data.getUser_nick_name());
-//        Glide.with(this).load(data.getUser_images()).into(mHomedetailsimg3);
+//        Glide.with(this).load(data.getUser_images()).into(mHomedetailsimg3);  homedetails_personcount
+//        homedetails_personcount.setText(data.getGroup_count());
     }
 
     @Override

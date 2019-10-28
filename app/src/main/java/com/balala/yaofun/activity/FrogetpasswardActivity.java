@@ -28,8 +28,9 @@ import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.VerificationCode;
 import com.balala.yaofun.httpUtils.ToastUtil;
-import com.balala.yaofun.myfrogetpasswardmvp.FrogetpasswardPresenter;
-import com.balala.yaofun.myfrogetpasswardmvp.FrogetpasswardView;
+import com.balala.yaofun.presenter.FrogetpasswardPresenter;
+import com.balala.yaofun.util.ToastUtils;
+import com.balala.yaofun.view.FrogetpasswardView;
 import com.balala.yaofun.util.TextWatcherUtil;
 
 
@@ -85,9 +86,10 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
         mFrogetEdits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FrogetpasswardActivity.this, LandingActivity.class));
+                startActivity(new Intent(FrogetpasswardActivity.this, GeneralActivity.class));
             }
         });
+
         //账号输入的点击事件
         mEphone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -183,9 +185,24 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
             public void onClick(View v) {
 //                Toast.makeText(FrogetpasswardActivity.this, "开始更改密码", Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "开始更改密码 ");
+                phone = mEphone.getText().toString();
                 code = mECode.getText().toString();
                 password = mEtpassword.getText().toString();
-                initData3();
+                if (phone.isEmpty() || code.isEmpty() || password.isEmpty()) {
+//                    ToastUtils.showLong("请正确输入");
+                    Toast.makeText(FrogetpasswardActivity.this, "不能为空", Toast.LENGTH_SHORT).show();
+//                } else if (phone.isEmpty()) {
+//                    ToastUtils.showLong("手机号不能为空");
+//                } else if (code.isEmpty()) {
+//                    ToastUtils.showLong("请输入验证码");
+//
+//                } else if (password.isEmpty()) {
+//                    ToastUtils.showLong("密码不能为空");
+                } else {
+                    initData3();
+                }
+
+
             }
 
 
@@ -293,9 +310,9 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
 
     @Override
     public void onSuccessVerificationpassward(VerificationCode verificationBean) {
-        Log.e("xuzhiqi4", "onSuccessyanzheng: " + verificationBean.toString());
-        ToastUtil.showLong(verificationBean.toString());
-
+        Log.e("onSuccessyanzheng", "onSuccessyanzheng: " + verificationBean.toString());
+//        ToastUtil.showLong(verificationBean.toString());
+        startActivity(new Intent(FrogetpasswardActivity.this, GeneralActivity.class));
     }
 
 
@@ -306,10 +323,8 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
 
     @Override
     public void onSuccessAlterpassward(String str) {
-
         ToastUtil.showLong("更改密码成功");
-        startActivity(new Intent(FrogetpasswardActivity.this,GeneralActivity.class));
-
+        startActivity(new Intent(FrogetpasswardActivity.this, GeneralActivity.class));
     }
 
     @Override
@@ -328,7 +343,7 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
 
         @Override
         public void onTick(long millisUntilFinished) {
-            mGotCode.setBackgroundColor(Color.parseColor("#ffffff"));
+//            mGotCode.setBackgroundColor(Color.parseColor("#ffffff"));
             mGotCode.setClickable(false);
             mGotCode.setText("(" + millisUntilFinished / 1000 + "s" + ")重新获取");
         }
@@ -337,7 +352,7 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
         public void onFinish() {
             mGotCode.setText("重新发送");
             mGotCode.setClickable(true);
-            mGotCode.setBackgroundColor(Color.parseColor("#ffffff"));
+//            mGotCode.setBackgroundColor(Color.parseColor("#ffffff"));
         }
     }
 

@@ -31,8 +31,8 @@ import com.balala.yaofun.bean.VerificationBean;
 import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.VerificationCode;
 import com.balala.yaofun.httpUtils.ToastUtil;
-import com.balala.yaofun.myregistermvp.RegisterPresenter;
-import com.balala.yaofun.myregistermvp.RegisterView;
+import com.balala.yaofun.presenter.RegisterPresenter;
+import com.balala.yaofun.view.RegisterView;
 import com.balala.yaofun.util.TextWatcherUtil;
 import com.balala.yaofun.webview.AboutyaofunActivity;
 

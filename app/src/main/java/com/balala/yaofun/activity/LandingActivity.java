@@ -16,7 +16,6 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -31,10 +30,10 @@ import android.widget.Toast;
 import com.balala.yaofun.R;
 import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.bean.result.LandingBean;
-import com.balala.yaofun.mylandingmvp.LandingPresenter;
-import com.balala.yaofun.mylandingmvp.LandingView;
-import com.balala.yaofun.util.TextWatcherUtil;
+import com.balala.yaofun.presenter.LandingPresenter;
 import com.balala.yaofun.util.ToastUtils;
+import com.balala.yaofun.view.LandingView;
+import com.balala.yaofun.util.TextWatcherUtil;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
@@ -42,10 +41,6 @@ import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXTextObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
-import org.greenrobot.eventbus.EventBus;
-
-import java.util.List;
 
 
 public class LandingActivity extends BaseActivity<LandingPresenter, LandingView> implements LandingView {
@@ -144,6 +139,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
 
             }
         });
+
         // 点击登陆 开始解析和进入首页
         mActivityGo.setOnClickListener(new View.OnClickListener() {
 
@@ -154,7 +150,11 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
                 //重新拼接手机号
                 password = mEt2.getText().toString();
                 Log.e("xuzhiqi", "initData: " + password + "\n" + phone);
-                basePresenter.getLandingData(phone, password);
+                if (password.isEmpty()||phone.isEmpty()){
+                    Toast.makeText(LandingActivity.this, "请输入正确输入", Toast.LENGTH_SHORT).show();
+                }else {
+                    basePresenter.getLandingData(phone, password);
+                }
                 // 提示用户登陆成功
 //                startActivity(new Intent(LandingActivity.this, GeneralActivity.class));
 
@@ -176,7 +176,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
 //                ToastUtil.showLong("微信登陆");
                 // 微信登陆方法
                 initWechat();
-                // 微信登陆授权方法
+                // 微信登陆授权方法    15939856989
                 initSou();
             }
         });
@@ -227,12 +227,10 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
     }
 
     // 登陆成功方法
-    @SuppressLint("CommitPrefEdits")
     @Override
-
     public void onSuccessLanding(LandingBean bean) {
         LandingBean.DataBean data = bean.getData();
-        Log.e("dada", "onSuccessLanding: " + data);
+        Log.e("dada", "onSuccessLanding: " + data.toString());
         Log.i("登陆成功打印", "onSuccessLanding: " + bean.getMsg());
         //将数据保存至SharedPreferences:
         SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -251,7 +249,6 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         String userid = bean.getData().get_id();
         String images = bean.getData().getImages();
         String nick_name = bean.getData().getNick_name();
-
 
         // 在这传userid images nick_name到landing页面
         Log.i("EventBus", "这是我要传的 " + nick_name);

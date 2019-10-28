@@ -18,9 +18,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -36,7 +34,6 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.balala.yaofun.R;
 import com.balala.yaofun.activity.CreateFunActivity;
-import com.balala.yaofun.activity.HomebannerdetailsActivity;
 import com.balala.yaofun.activity.HomedetailsActivity;
 import com.balala.yaofun.activity.PromotionalActivitiesActivity;
 import com.balala.yaofun.activity.SearchActivity;
@@ -47,8 +44,8 @@ import com.balala.yaofun.base.BaseFragment;
 import com.balala.yaofun.bean.result.DayBeans;
 import com.balala.yaofun.bean.result.HomeAllBean;
 import com.balala.yaofun.bean.result.HomeBannerDean;
-import com.balala.yaofun.homefragmentmvp.HomePresenter;
-import com.balala.yaofun.homefragmentmvp.Homeview;
+import com.balala.yaofun.presenter.HomePresenter;
+import com.balala.yaofun.view.Homeview;
 import com.balala.yaofun.util.ToastUtils;
 import com.balala.yaofun.zxing.activity.CaptureActivity;
 import com.bumptech.glide.Glide;
@@ -60,9 +57,6 @@ import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.util.ArrayList;

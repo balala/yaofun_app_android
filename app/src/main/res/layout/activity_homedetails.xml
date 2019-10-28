@@ -8,53 +8,23 @@
     android:orientation="vertical"
     tools:context=".activity.HomedetailsActivity">
 
-
-    <!--<androidx.appcompat.widget.Toolbar-->
-    <!--android:id="@+id/homedetails_toolbar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/dp_54"-->
-    <!--android:alpha="0.6"-->
-    <!--android:background="@color/homedetailsblack">-->
-
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/homedetails_back"-->
-    <!--android:layout_width="@dimen/dp_26"-->
-    <!--android:layout_height="@dimen/dp_26"-->
-    <!--android:layout_marginTop="@dimen/dp_20"-->
-    <!--android:src="@drawable/back" />-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/homedetails_menu"-->
-    <!--android:layout_width="@dimen/dp_26"-->
-    <!--android:layout_height="@dimen/dp_26"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:layout_marginTop="@dimen/dp_20"-->
-    <!--android:layout_marginRight="@dimen/dp_20"-->
-    <!--android:src="@drawable/topmenu" />-->
-    <!--</RelativeLayout>-->
-
-    <!--</androidx.appcompat.widget.Toolbar>-->
-    <!--<ImageView-->
-        <!--android:id="@+id/funactivityiconimg"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:src="@mipmap/funactivityicon"-->
-        <!--android:visibility="visible" />-->
+    <ImageView
+        android:id="@+id/homedetailsicon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/homedetails"
+        android:scaleType="fitXY"
+        android:visibility="visible" />
 
     <ScrollView
         android:id="@+id/sll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       >
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/homedetailsimg"
@@ -89,7 +59,6 @@
 
             <LinearLayout
                 android:id="@+id/llt"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dp_500"
@@ -116,7 +85,7 @@
 
                 <TextView
                     android:id="@+id/homedetails_peoplename"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_63"
@@ -125,7 +94,7 @@
                     android:textSize="@dimen/sp_24" />
 
                 <LinearLayout
-                    android:layout_width="@dimen/dp_200"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_20"
                     android:orientation="horizontal">
@@ -141,7 +110,7 @@
 
                     <TextView
                         android:id="@+id/homedetails_label2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_19"
                         android:layout_marginTop="@dimen/dp_29"
@@ -247,7 +216,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_21">
+                    android:layout_marginTop="@dimen/dp_21"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="@dimen/dp_14"
@@ -263,6 +233,29 @@
                         android:text="free"
                         android:textColor="@color/colorwhite"
                         android:textSize="@dimen/sp_15" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_21"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_14"
+                        android:layout_height="@dimen/dp_16"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:src="@drawable/peopleconut" />
+
+                    <TextView
+                        android:id="@+id/homedetails_personcount"
+                        android:layout_width="@dimen/dp_211"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_14"
+                        android:textColor="@color/colorwhite"
+                        android:textSize="@dimen/sp_15" />
+
                 </LinearLayout>
 
                 <ImageView
@@ -272,8 +265,7 @@
                     android:layout_marginLeft="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_60"
                     android:layout_marginRight="@dimen/dp_21"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/home_background" />
+                    android:scaleType="fitXY" />
 
                 <TextView
                     android:id="@+id/homedetails_text1"

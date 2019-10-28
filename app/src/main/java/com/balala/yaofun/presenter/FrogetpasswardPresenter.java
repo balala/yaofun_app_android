@@ -1,15 +1,15 @@
-package com.balala.yaofun.myfrogetpasswardmvp;
+package com.balala.yaofun.presenter;
 
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.balala.yaofun.base.BasePresenter;
 import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.VerificationCode;
-import com.balala.yaofun.httpUtils.MyApp;
 import com.balala.yaofun.httpUtils.ResultCallBack;
 import com.balala.yaofun.httpUtils.ToastUtil;
+import com.balala.yaofun.model.FrogetpasswardModel;
+import com.balala.yaofun.view.FrogetpasswardView;
 
 import java.io.IOException;
 
@@ -82,12 +82,13 @@ public class FrogetpasswardPresenter extends BasePresenter<FrogetpasswardView> {
 //                    ToastUtil.showLong("更改成功");
 //                    Toast.makeText(MyApp.getInstance(), "更改成功", Toast.LENGTH_SHORT).show();
                     Log.i(TAG, "更改成功");
+
                 }
             }
 
             @Override
             public void onFail(String msg) {
-                ToastUtil.showLong("更改失败");
+//                ToastUtil.showLong("更改失败");
                 Log.d("更改密码", "onFail: " + msg);
             }
         });

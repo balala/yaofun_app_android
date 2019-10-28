@@ -20,8 +20,8 @@ import com.balala.yaofun.adapter.FunMovieAdapter;
 import com.balala.yaofun.adapter.FunSocialContactAdapter;
 import com.balala.yaofun.base.BaseFragment;
 import com.balala.yaofun.bean.FunhomeData;
-import com.balala.yaofun.funfragmentmvp.FunPresenter;
-import com.balala.yaofun.funfragmentmvp.FunView;
+import com.balala.yaofun.presenter.FunPresenter;
+import com.balala.yaofun.view.FunView;
 
 import java.util.ArrayList;
 

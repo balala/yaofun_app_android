@@ -1,14 +1,15 @@
-package com.balala.yaofun.myregistermvp;
+package com.balala.yaofun.presenter;
 
 import android.util.Log;
 import android.widget.Toast;
 
 import com.balala.yaofun.base.BasePresenter;
-import com.balala.yaofun.bean.AccountBean;
 import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.VerificationCode;
 import com.balala.yaofun.httpUtils.MyApp;
 import com.balala.yaofun.httpUtils.ResultCallBack;
+import com.balala.yaofun.model.RegisterModel;
+import com.balala.yaofun.view.RegisterView;
 
 import java.io.IOException;
 

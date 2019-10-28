@@ -1,4 +1,4 @@
-package com.balala.yaofun.myregistermvp;
+package com.balala.yaofun.view;
 
 
 import com.balala.yaofun.base.BaseView;

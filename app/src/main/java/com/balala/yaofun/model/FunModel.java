@@ -1,4 +1,4 @@
-package com.balala.yaofun.funfragmentmvp;
+package com.balala.yaofun.model;
 
 import com.balala.yaofun.base.BaseModel;
 import com.balala.yaofun.bean.FunhomeData;

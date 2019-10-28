@@ -1,4 +1,4 @@
-package com.balala.yaofun.homedetailsmvp;
+package com.balala.yaofun.view;
 
 import com.balala.yaofun.base.BaseView;
 import com.balala.yaofun.bean.FunhomeData;

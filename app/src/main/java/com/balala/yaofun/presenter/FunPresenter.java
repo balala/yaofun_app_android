@@ -1,8 +1,10 @@
-package com.balala.yaofun.funfragmentmvp;
+package com.balala.yaofun.presenter;
 
 import com.balala.yaofun.base.BasePresenter;
 import com.balala.yaofun.bean.FunhomeData;
+import com.balala.yaofun.view.FunView;
 import com.balala.yaofun.httpUtils.ResultCallBack;
+import com.balala.yaofun.model.FunModel;
 
 import java.io.IOException;
 

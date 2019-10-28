@@ -1,4 +1,4 @@
-package com.balala.yaofun.homedetailsmvp;
+package com.balala.yaofun.model;
 
 import android.util.Log;
 
@@ -14,6 +14,7 @@ import com.balala.yaofun.util.MyServer;
 import java.io.IOException;
 import java.util.HashMap;
 
+import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -22,8 +23,8 @@ import okhttp3.ResponseBody;
 
 public class HomedetailsModel extends BaseModel implements BaseView {
 
-//
-    public void homedetailsData(String id,ResultCallBack<HomedetailsBean> resultCallBack) {
+    //
+    public void homedetailsData(String id, ResultCallBack<HomedetailsBean> resultCallBack) {
         MyServer apiserver = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
         HashMap<String, Object> map = new HashMap<>();
         map.put("user_id", "-1");
@@ -35,10 +36,13 @@ public class HomedetailsModel extends BaseModel implements BaseView {
         map.put("phone_version", "");
         map.put("phone_model", "");
         map.put("wx_unionid", "");
-//        .subscribeOn(Schedulers.io())
-        apiserver.getHomedetailsData(id,map).subscribeOn(Schedulers.io())
+//        apiserver.getChangePasswardData(changemap)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<ResponseBody>() {
+        apiserver.getHomedetailsData(id, map).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<HomedetailsBean>() {
+                .subscribe(new Observer<HomedetailsBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
@@ -48,10 +52,20 @@ public class HomedetailsModel extends BaseModel implements BaseView {
                     public void onNext(HomedetailsBean responseBody) {
                         try {
                             resultCallBack.onSuccess(responseBody);
-                            Log.i("首页详情解析", "成功" + responseBody.getMsg());
+                            Log.i("首页详情解析", "成功" + responseBody.toString());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
 

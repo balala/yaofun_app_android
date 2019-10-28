@@ -1,10 +1,12 @@
-package com.balala.yaofun.homefragmentmvp;
+package com.balala.yaofun.presenter;
 
 import com.balala.yaofun.base.BasePresenter;
 import com.balala.yaofun.bean.result.DayBeans;
 import com.balala.yaofun.bean.result.HomeAllBean;
 import com.balala.yaofun.bean.result.HomeBannerDean;
+import com.balala.yaofun.view.Homeview;
 import com.balala.yaofun.httpUtils.ResultCallBack;
+import com.balala.yaofun.model.HomeModel;
 
 import java.io.IOException;
 

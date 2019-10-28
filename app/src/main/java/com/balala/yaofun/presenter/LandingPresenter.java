@@ -1,4 +1,4 @@
-package com.balala.yaofun.mylandingmvp;
+package com.balala.yaofun.presenter;
 
 import android.util.Log;
 
@@ -6,6 +6,10 @@ import com.balala.yaofun.base.BasePresenter;
 import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.httpUtils.ResultCallBack;
 import com.balala.yaofun.httpUtils.ToastUtil;
+import com.balala.yaofun.model.LandingModel;
+import com.balala.yaofun.view.LandingView;
+
+import okhttp3.ResponseBody;
 
 public class LandingPresenter extends BasePresenter<LandingView> {
 
@@ -24,9 +28,7 @@ public class LandingPresenter extends BasePresenter<LandingView> {
             public void onSuccess(LandingBean bean) {
                 if (bean != null) {
                     mView.onSuccessLanding(bean);
-//                    ToastUtil.showLong(bean.getMsg());
-//                    if (bean.getData().get)
-                    Log.i("xuzhiqi登陆model", "onSuccess: " + bean.getMsg());
+                    Log.i("xuzhiqi登陆model", "onSuccess: " + bean.toString());
 
                 }
 
@@ -34,8 +36,7 @@ public class LandingPresenter extends BasePresenter<LandingView> {
 
             @Override
             public void onFail(String msg) {
-
-//                ToastUtil.showLong(msg);
+                ToastUtil.showLong("登陆失败");
                 Log.d("xuzhiqi登陆model", "onFail: " + msg);
             }
         });

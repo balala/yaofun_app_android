@@ -1,12 +1,12 @@
-package com.balala.yaofun.homedetailsmvp;
+package com.balala.yaofun.presenter;
 
 import com.balala.yaofun.base.BasePresenter;
 import com.balala.yaofun.bean.result.HomedetailsBean;
+import com.balala.yaofun.view.HomedetailsView;
 import com.balala.yaofun.httpUtils.ResultCallBack;
+import com.balala.yaofun.model.HomedetailsModel;
 
 import java.io.IOException;
-
-import okhttp3.ResponseBody;
 
 public class HomedetailsPersenter extends BasePresenter<HomedetailsView> {
 

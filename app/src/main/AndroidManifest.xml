@@ -33,7 +33,6 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activity.PromotionalActivitiesActivity"></activity>
         <activity android:name=".activity.CreateFunActivity" />
-        <activity android:name=".activity.HomebannerdetailsActivity" />
         <activity android:name=".activity.HomedetailsActivity" />
         <activity android:name=".activity.MapActivity" />
         <activity android:name=".activity.SearchActivity" />

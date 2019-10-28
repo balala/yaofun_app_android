@@ -1,17 +1,22 @@
-package com.balala.yaofun.myregistermvp;
+package com.balala.yaofun.model;
 
+import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.balala.yaofun.activity.FrogetpasswardActivity;
+import com.balala.yaofun.activity.GeneralActivity;
 import com.balala.yaofun.base.BaseModel;
-import com.balala.yaofun.bean.AccountBean;
 import com.balala.yaofun.bean.IdentifyingBean;
 import com.balala.yaofun.bean.VerificationBean;
 import com.balala.yaofun.bean.VerificationResult;
-import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.bean.result.VerificationCode;
 import com.balala.yaofun.httpUtils.HttpUtils;
+import com.balala.yaofun.httpUtils.MyApp;
 import com.balala.yaofun.httpUtils.ResultCallBack;
+import com.balala.yaofun.httpUtils.ToastUtil;
 import com.balala.yaofun.util.MyServer;
+import com.balala.yaofun.util.ToastUtils;
 import com.balala.yaofun.util.Utils;
 
 import java.io.IOException;
@@ -26,12 +31,13 @@ import okhttp3.ResponseBody;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class RegisterModel extends BaseModel {
+public class FrogetpasswardModel extends BaseModel {
     private IdentifyingBean identifying;
 
     private String key;
     private int code;
     private VerificationBean verificationBean;
+    private String time;
 
     //  发送验证码解析
     public void GetData(String phone, final ResultCallBack<VerificationResult> listBeanResultCallBack) {
@@ -41,15 +47,15 @@ public class RegisterModel extends BaseModel {
         identifying.setUser_id("-1");
         identifying.setVersion("-1");
         identifying.setCurrent_device("安卓");
-        Log.e("xuzhiqi", "initData: " + Utils.getNowDate());
+        Log.e("发送验证码解析", "initData: " + Utils.getNowDate());
         identifying.setRequest_start_time(Utils.getNowDate());
         identifying.setPhone(phone);
-        Log.e("xuzhiqi", "initData: " + identifying.getPhone());
-        identifying.setPurpose("注册");
+        Log.e("发送验证码解析", "initData: " + identifying.getPhone());
+        identifying.setPurpose("找回密码");
         //设置签名
         identifying.setSign2(Utils.md5(identifying.getRequest_start_time() + identifying.getPhone() + Utils.Signs));
 
-        Log.e("xuzhiqis", "GetData: " + identifying.getSign2());
+        Log.e("发送验证码解析", "GetData: " + identifying.getSign2());
         // 创建一个集合 来存储数据
         final HashMap<String, Object> map = new HashMap<>();
         // map.put("key",key); key
@@ -82,9 +88,7 @@ public class RegisterModel extends BaseModel {
                         if (verificationResult != null) {
                             code = verificationResult.getData().getCode();
                             key = verificationResult.getData().getKey();
-                            Log.e("发送验证码解析出来的", "onNext: " + verificationResult.getData().toString());
-                            Log.e("发送验证码解析出来的", "code: " + verificationResult.getData().getCode());
-                            Log.e("发送验证码解析出来的", "key: " + verificationResult.getData().getKey());
+                            Log.e("发送验证码解析出来的", "onNext: " + verificationResult.getData().toString()+"\n"+verificationResult.getData().getCode()+"\n"+verificationResult.getData().getKey());
                             try {
                                 listBeanResultCallBack.onSuccess(verificationResult);
                             } catch (IOException e) {
@@ -122,7 +126,7 @@ public class RegisterModel extends BaseModel {
         verificationBean.setKey(key);
         verificationBean.setPhone(phone);
         Log.e("xuzhiqi", "initData: " + verificationBean.getPhone());
-        verificationBean.setPurpose("注册");
+        verificationBean.setPurpose("找回密码");
         verificationBean.setSign2(Utils.md5(verificationBean.getRequest_start_time() + verificationBean.getPhone() + Utils.Signs));
         //设置签名
 //        verificationBean.setSign2(identifying.getSign2());
@@ -148,64 +152,71 @@ public class RegisterModel extends BaseModel {
         map2.put("code", verificationBean.getCode());
 
         Observable<VerificationCode> data = apiserver.getVerificationCodes(map2);
-        data.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<VerificationCode>() {
+        data.subscribeOn(Schedulers.io());
+        data.observeOn(AndroidSchedulers.mainThread());
+        data.subscribe(new Observer<VerificationCode>() {
 
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        compositeDisposable.add(d);
-                    }
+            @Override
+            public void onSubscribe(Disposable d) {
+                compositeDisposable.add(d);
+            }
 
-                    @Override
-                    public void onNext(VerificationCode verificationBean) {
-                        try {
-                            verificationBeanResultCallBack.onSuccess(verificationBean);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+            @Override
+            public void onNext(VerificationCode verificationBean) {
+                try {
+                    verificationBeanResultCallBack.onSuccess(verificationBean);
+                    Log.e("验证验证码", "onError: " + verificationBean.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-                    }
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("xuzhiqi", "onError: " + e.getMessage());
+            @Override
+            public void onError(Throwable e) {
+                Log.e("验证验证码", "onError: " + e.getMessage());
 
-                    }
+            }
 
-                    @Override
-                    public void onComplete() {
+            @Override
+            public void onComplete() {
 
-                    }
-                });
+            }
+        });
 
     }
 
-    // 注册解析方法
-    public void getData3(String phone, String key, String code, String password, ResultCallBack<ResponseBody> resultCallBack) {
+
+    // 修改密码解析
+    public void ChangepasswordData(String phone, String code, String password, String key, ResultCallBack<ResponseBody> resultCallBack) {
+
         MyServer apiserver = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
-        // 创建一个集合 来存储数据
-        final HashMap<String, Object> map2 = new HashMap<>();
+//        apiserver.getChangePasswardData()
+        HashMap<String, Object> changemap = new HashMap<>();
         String nowDate = Utils.getNowDate();
-        // map.put("key",key); key
-        map2.put("user_id", "-1");
-        map2.put("version", "-1");
-        map2.put("current_device", "安卓");
-        map2.put("unique_identifier", "");
-        map2.put("user_defined_name", "");
-        map2.put("download_channel", "");
-        map2.put("phone_version", "");
-        map2.put("phone_model", "");
-        map2.put("wx_unionid", "");
-        map2.put("request_start_time", nowDate);
-        map2.put("phone", phone);
-        map2.put("password", password);
-        map2.put("purpose", "注册");
-        map2.put("sign2", Utils.md5(nowDate + phone + Utils.Signs));
-        Log.e("xuzhiqi", "getData3: " + Utils.getNowDate() + "\n" + phone + "\n" + key + "\n" + code + "\n" + password);
-        map2.put("key", key);
-        map2.put("code", code);
-        apiserver.getRegistData(map2).subscribeOn(Schedulers.io())
+        changemap.put("user_id", "-1");
+        changemap.put("version", "-1");
+        changemap.put("current_device", "安卓");
+        changemap.put("unique_identifier", "");
+        changemap.put("user_defined_name", "");
+        changemap.put("download_channel", "");
+        changemap.put("phone_version", "");
+        changemap.put("phone_model", "");
+        changemap.put("wx_unionid", "");
+        changemap.put("request_start_time", nowDate);
+        changemap.put("phone", phone);
+        changemap.put("purpose", "找回密码");
+        changemap.put("password", password);
+        time = Utils.md5(nowDate + phone + Utils.Signs);
+        changemap.put("sign2", time);
+        changemap.put("key", key);
+        changemap.put("code", code);
+
+        Log.e("修改密码 M层 解析", "修改密码 M层 解析: " + time + "\n" + phone + "\n" + key + "\n" + code + "\n" + password + "\n" + nowDate);
+
+
+        apiserver.getChangePasswardData(changemap)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
                     @Override
@@ -216,13 +227,25 @@ public class RegisterModel extends BaseModel {
                     @Override
                     public void onNext(ResponseBody responseBody) {
 
-                        Log.e("注册成功", "onNext: " + responseBody.toString());
+                        try {
+                            Log.i("修改密码 M层 解析", "onSubscribe: " + responseBody.string());
+                            ToastUtil.showLong("更改密码成功");
+//                            startActivity(new Intent(FrogetpasswardActivity.this, GeneralActivity.class));
+//                            Toast.makeText(MyApp.getInstance(), responseBody.toString(), Toast.LENGTH_SHORT).show();
+                        } catch (IOException e) {
 
+                            e.printStackTrace();
+                        }
                     }
+
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("xuzhiqi", "onNext: " + e.getMessage());
+
+                        ToastUtil.showLong("更改密码失败");
+
+//                        Toast.makeText(MyApp.getInstance(), e.toString(), Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
@@ -232,53 +255,4 @@ public class RegisterModel extends BaseModel {
                 });
     }
 
-    // 登陆解析
-//    public void GetLandingData(String phone, String password, ResultCallBack<AccountBean> resultCallBack) {
-//        MyServer apiserver = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
-//        // 创建一个集合 来存储数据
-//        final HashMap<String, Object> map3 = new HashMap<>();
-//        String nowDate = Utils.getNowDate();
-//        // map.put("key",key); key
-//        map3.put("user_id", "-1");
-//        map3.put("version", "-1");
-//        map3.put("current_device", "安卓");
-//        map3.put("unique_identifier", "");
-//        map3.put("user_defined_name", "");
-//        map3.put("download_channel", "");
-//        map3.put("phone_version", "");
-//        map3.put("phone_model", "");
-//        map3.put("wx_unionid", "");
-//        map3.put("request_start_time", nowDate);
-//        map3.put("phone", phone);
-//        map3.put("password", password);
-//        Log.e("xuzhiqi4", "getData3: " + Utils.getNowDate() + "\n" + phone + "\n" + key + "\n" + code + "\n" + password);
-//        map3.put("key", key);
-//        map3.put("code", code);
-//        apiserver.getLoginData(map3).subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<LandingBean>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(LandingBean landingBean) {
-//                        Log.i("xuzhqizz", "onSubscribe: " + landingBean.toString());
-//
-//                    }
-//
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        Log.e("xuzhqizz", "onNext: " + e.getMessage());
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//
-//                    }
-//                });
-
-//    }
 }
