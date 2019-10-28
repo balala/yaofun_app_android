@@ -5,7 +5,7 @@ import java.util.List;
 public class LandingBean {
 
     /**
-     * data : {"_id":"5cd2755c64f7c507f6e8dfe3","autograph":"","autograph_img":"https://img.yaofun.vip/2019/09/10/2ca4931a-d3a9-11e9-954c-acde48001122.png","back_image":"","birthday":"请选择生日","both_follow":false,"city":"","come_form":"微信小程序","country":"冰岛","create_time":"2019-05-08 14:21","current_balance":0,"email":"","fans_count":1,"first_in_ios":false,"follow_count":10,"has_follow":false,"identity_card":"","images":"https://img.yaofun.vip/2019/09/16/66ce5f1a-d856-11e9-824d-acde48001122.png","interest":["宠物","运动"],"is_delete":false,"is_top":false,"key":"5d8c5da1fa09e5f3dd82c9d0","language":"zh_CN","max_group":5,"medal":[],"nick_name":"Mark333","openid":"oy3_c4reXKy3YA-2yMFfJQwY_cVI","openid_ios":"","openid_public":"","openid_service":"","openid_web":"","operator_tags":{},"phone":"19965772170","province":"","rc_refresh_number":"","rc_status":"1","rc_time":"2019-07-01 14:49:08","rc_token":"/v5VkOsK3Wm31z2VUudSUotDThrZbuv4tvKiHu/pQzXLtr1UMVUjnjwyqLwzYmMCHki+js1vA5DPmjDW+CElkJ1HjsJzlHXglN5j9zAZhXAp9CZQH8upYw==","real_name":"","real_name_authentication":true,"rule":"群众","selected_city":"北京","self_create_group_count":3,"setting_nick_name":true,"sex":"男","tags_aggr":{"宠物":10,"运动":10},"umeng_device":"ios","umeng_device_token":"c084d4ce7fba24608359f09e9d710b2962e90db91aabacfa139810693b7c6a55","user_tags":{},"wx_unionid":"or7ly1ooRfr230FVr9c9DUD4YytA"}
+     * data : {"_id":"5db6f5aaa77870fcf9d9cb0b","autograph":["不秃头的小白说没有签名会变胖！"],"autograph_img":"","back_image":"","both_follow":false,"city":"","come_form":"安卓","country":"","create_time":"2019-10-28 22:05","current_balance":0,"email":"","fans_count":0,"first_in_ios":true,"follow_count":0,"friend":[],"has_follow":false,"identity_card":"","images":"https://img.yaofun.vip/2019/10/11/97e47172-ebd2-11e9-b241-0242ac130002.png","interest":[],"is_delete":false,"is_top":false,"key":"5db6ff66a77870fcf9d9cbb9","language":"","max_group":5,"medal":[],"nick_name":"Fun粒45461","openid":"","openid_ios":"","openid_public":"","openid_service":"","openid_web":"","operator_tags":{},"phone":"15648550590","province":"","rc_refresh_number":"","rc_token":"mb9GVLoUdAhU3lXAMQ8aYItDThrZbuv4tvKiHu/pQzVsegLaQ6JF2JVV2SlEJX1QUT/pvxNoXzF3SXM2tNL2+b17hRxNpsXZ0RduRjSie5QvGhZWNmIcyA==","real_name":"","real_name_authentication":false,"rule":"群众","selected_city":"北京","self_create_group_count":0,"setting_nick_name":false,"sex":"","tags_aggr":{},"user_label":[],"user_tags":{},"wx_unionid":""}
      * msg : 请求成功
      * page : 0
      * pageSize : 0
@@ -70,63 +70,58 @@ public class LandingBean {
 
     public static class DataBean {
         /**
-         * _id : 5cd2755c64f7c507f6e8dfe3
-         * autograph :
-         * autograph_img : https://img.yaofun.vip/2019/09/10/2ca4931a-d3a9-11e9-954c-acde48001122.png
+         * _id : 5db6f5aaa77870fcf9d9cb0b
+         * autograph : ["不秃头的小白说没有签名会变胖！"]
+         * autograph_img :
          * back_image :
-         * birthday : 请选择生日
          * both_follow : false
          * city :
-         * come_form : 微信小程序
-         * country : 冰岛
-         * create_time : 2019-05-08 14:21
+         * come_form : 安卓
+         * country :
+         * create_time : 2019-10-28 22:05
          * current_balance : 0
          * email :
-         * fans_count : 1
-         * first_in_ios : false
-         * follow_count : 10
+         * fans_count : 0
+         * first_in_ios : true
+         * follow_count : 0
+         * friend : []
          * has_follow : false
          * identity_card :
-         * images : https://img.yaofun.vip/2019/09/16/66ce5f1a-d856-11e9-824d-acde48001122.png
-         * interest : ["宠物","运动"]
+         * images : https://img.yaofun.vip/2019/10/11/97e47172-ebd2-11e9-b241-0242ac130002.png
+         * interest : []
          * is_delete : false
          * is_top : false
-         * key : 5d8c5da1fa09e5f3dd82c9d0
-         * language : zh_CN
+         * key : 5db6ff66a77870fcf9d9cbb9
+         * language :
          * max_group : 5
          * medal : []
-         * nick_name : Mark333
-         * openid : oy3_c4reXKy3YA-2yMFfJQwY_cVI
+         * nick_name : Fun粒45461
+         * openid :
          * openid_ios :
          * openid_public :
          * openid_service :
          * openid_web :
          * operator_tags : {}
-         * phone : 19965772170
+         * phone : 15648550590
          * province :
          * rc_refresh_number :
-         * rc_status : 1
-         * rc_time : 2019-07-01 14:49:08
-         * rc_token : /v5VkOsK3Wm31z2VUudSUotDThrZbuv4tvKiHu/pQzXLtr1UMVUjnjwyqLwzYmMCHki+js1vA5DPmjDW+CElkJ1HjsJzlHXglN5j9zAZhXAp9CZQH8upYw==
+         * rc_token : mb9GVLoUdAhU3lXAMQ8aYItDThrZbuv4tvKiHu/pQzVsegLaQ6JF2JVV2SlEJX1QUT/pvxNoXzF3SXM2tNL2+b17hRxNpsXZ0RduRjSie5QvGhZWNmIcyA==
          * real_name :
-         * real_name_authentication : true
+         * real_name_authentication : false
          * rule : 群众
          * selected_city : 北京
-         * self_create_group_count : 3
-         * setting_nick_name : true
-         * sex : 男
-         * tags_aggr : {"宠物":10,"运动":10}
-         * umeng_device : ios
-         * umeng_device_token : c084d4ce7fba24608359f09e9d710b2962e90db91aabacfa139810693b7c6a55
+         * self_create_group_count : 0
+         * setting_nick_name : false
+         * sex :
+         * tags_aggr : {}
+         * user_label : []
          * user_tags : {}
-         * wx_unionid : or7ly1ooRfr230FVr9c9DUD4YytA
+         * wx_unionid :
          */
 
         private String _id;
-        private String autograph;
         private String autograph_img;
         private String back_image;
-        private String birthday;
         private boolean both_follow;
         private String city;
         private String come_form;
@@ -155,8 +150,6 @@ public class LandingBean {
         private String phone;
         private String province;
         private String rc_refresh_number;
-        private String rc_status;
-        private String rc_time;
         private String rc_token;
         private String real_name;
         private boolean real_name_authentication;
@@ -166,12 +159,13 @@ public class LandingBean {
         private boolean setting_nick_name;
         private String sex;
         private TagsAggrBean tags_aggr;
-        private String umeng_device;
-        private String umeng_device_token;
         private UserTagsBean user_tags;
         private String wx_unionid;
-        private List<String> interest;
+        private List<String> autograph;
+        private List<?> friend;
+        private List<?> interest;
         private List<?> medal;
+        private List<?> user_label;
 
         public String get_id() {
             return _id;
@@ -179,14 +173,6 @@ public class LandingBean {
 
         public void set_id(String _id) {
             this._id = _id;
-        }
-
-        public String getAutograph() {
-            return autograph;
-        }
-
-        public void setAutograph(String autograph) {
-            this.autograph = autograph;
         }
 
         public String getAutograph_img() {
@@ -203,14 +189,6 @@ public class LandingBean {
 
         public void setBack_image(String back_image) {
             this.back_image = back_image;
-        }
-
-        public String getBirthday() {
-            return birthday;
-        }
-
-        public void setBirthday(String birthday) {
-            this.birthday = birthday;
         }
 
         public boolean isBoth_follow() {
@@ -437,22 +415,6 @@ public class LandingBean {
             this.rc_refresh_number = rc_refresh_number;
         }
 
-        public String getRc_status() {
-            return rc_status;
-        }
-
-        public void setRc_status(String rc_status) {
-            this.rc_status = rc_status;
-        }
-
-        public String getRc_time() {
-            return rc_time;
-        }
-
-        public void setRc_time(String rc_time) {
-            this.rc_time = rc_time;
-        }
-
         public String getRc_token() {
             return rc_token;
         }
@@ -525,22 +487,6 @@ public class LandingBean {
             this.tags_aggr = tags_aggr;
         }
 
-        public String getUmeng_device() {
-            return umeng_device;
-        }
-
-        public void setUmeng_device(String umeng_device) {
-            this.umeng_device = umeng_device;
-        }
-
-        public String getUmeng_device_token() {
-            return umeng_device_token;
-        }
-
-        public void setUmeng_device_token(String umeng_device_token) {
-            this.umeng_device_token = umeng_device_token;
-        }
-
         public UserTagsBean getUser_tags() {
             return user_tags;
         }
@@ -557,11 +503,27 @@ public class LandingBean {
             this.wx_unionid = wx_unionid;
         }
 
-        public List<String> getInterest() {
+        public List<String> getAutograph() {
+            return autograph;
+        }
+
+        public void setAutograph(List<String> autograph) {
+            this.autograph = autograph;
+        }
+
+        public List<?> getFriend() {
+            return friend;
+        }
+
+        public void setFriend(List<?> friend) {
+            this.friend = friend;
+        }
+
+        public List<?> getInterest() {
             return interest;
         }
 
-        public void setInterest(List<String> interest) {
+        public void setInterest(List<?> interest) {
             this.interest = interest;
         }
 
@@ -571,6 +533,14 @@ public class LandingBean {
 
         public void setMedal(List<?> medal) {
             this.medal = medal;
+        }
+
+        public List<?> getUser_label() {
+            return user_label;
+        }
+
+        public void setUser_label(List<?> user_label) {
+            this.user_label = user_label;
         }
 
         public static class OperatorTagsBean {

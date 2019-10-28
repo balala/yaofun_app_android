@@ -30,17 +30,6 @@ public class LandingModel extends BaseModel {
     // 登陆解析
     public void LandingData(String phone, String password, ResultCallBack<LandingBean> resultCallBack) {
 
-//        accountBean = new AccountBean();
-//        accountBean.setUser_id("-1");
-//        accountBean.setVersion("-1");
-//        accountBean.setCurrent_device("安卓");
-//        Log.e("xuzhiqi", "initData: " + Utils.getNowDate());
-//        accountBean.setRequest_start_time(Utils.getNowDate());
-//        accountBean.setPhone(phone);
-//        accountBean.setPassword(password);
-//        Log.e("xuzhiqi", "initData: " + accountBean.getPhone());
-        //设置签名
-
         Map<String, Object> map = new HashMap<>();
         map.put("user_id", "-1");
         map.put("version", "-1");

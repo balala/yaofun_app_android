@@ -2,12 +2,14 @@ package com.balala.yaofun.activity;
 
 import android.annotation.SuppressLint;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -30,6 +32,7 @@ import android.widget.Toast;
 import com.balala.yaofun.R;
 import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.bean.result.LandingBean;
+import com.balala.yaofun.fragment.HomeFragment;
 import com.balala.yaofun.presenter.LandingPresenter;
 import com.balala.yaofun.util.ToastUtils;
 import com.balala.yaofun.view.LandingView;
@@ -66,7 +69,9 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
     private View landing_clear;
     private View decorView;
     private FragmentManager fragmentManager;
-//    private List<UserEvent> mdata;;
+    private HomeFragment mFragment;
+
+    //    private List<UserEvent> mdata;;
     @Override
     protected int getlayout() {
         return R.layout.activity_landing;
@@ -232,10 +237,14 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         LandingBean.DataBean data = bean.getData();
         Log.e("dada", "onSuccessLanding: " + data.toString());
         Log.i("登陆成功打印", "onSuccessLanding: " + bean.getMsg());
+        String nick_name = data.getNick_name();
+        String images = data.getImages();
         //将数据保存至SharedPreferences:
         SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean("flag", true);
+        editor.putString("nick_name",nick_name);
+        editor.putString("images",images);
         Log.i("aBoolean", "onSuccessLanding: " + editor);
         editor.commit();
         // 存储第一次登陆的信息
@@ -249,8 +258,15 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         String userid = bean.getData().get_id();
         String images = bean.getData().getImages();
         String nick_name = bean.getData().getNick_name();
-
-        // 在这传userid images nick_name到landing页面
+//        Intent intent = new Intent(LandingActivity.this, HomeFragment.class);
+//        startActivity(intent);
+//        transaction.add(R.id.main_view, Fragment.newInstance(name)).commit();
+//        mFragment = new HomeFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putString("userid", userid);
+//        bundle.putString("images", "1");
+//        bundle.putString("nick_name", nick_name);
+//        mFragment.setArguments(bundle);
         Log.i("EventBus", "这是我要传的 " + nick_name);
         Log.i("登陆成功后返回的用户信息", "userid: " + userid + "" + images + "" + nick_name + "" + bean);
     }

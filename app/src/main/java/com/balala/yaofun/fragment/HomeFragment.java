@@ -5,6 +5,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
@@ -35,6 +36,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.balala.yaofun.R;
 import com.balala.yaofun.activity.CreateFunActivity;
 import com.balala.yaofun.activity.HomedetailsActivity;
+import com.balala.yaofun.activity.LandingActivity;
 import com.balala.yaofun.activity.PromotionalActivitiesActivity;
 import com.balala.yaofun.activity.SearchActivity;
 import com.balala.yaofun.adapter.HomeAdapter;
@@ -168,30 +170,40 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     private HomeRecommendAdapter adapter;
 
 
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onSuccessHome(DayBeans dayBean) {
 
         // 在这收值
         Log.i("每日一句话解析", "onSuccessHome: " + dayBean.toString());
-//        SharedPreferences preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-//        boolean aBoolean = preferences.getBoolean("flag", false);
-//        if (aBoolean) {
-////            Log.i("onCheckedChanged", "第二次登陆完了");
-//            getDatas();
-//
-//        } else {
-//            codetext.setText(dayBean.getData().getNumber_time());
-        daytext.setText(dayBean.getData().getSolar_time());
-        monthtext.setText(dayBean.getData().getLunar_time());
-        tabootext.setText(dayBean.getData().getPrompt());
-        people_name.setText(dayBean.getData().getUse_time());
-        homeBackground.setColorFilter(R.color.colorblacks);
-        Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
-        peopleTitle.setText(dayBean.getData().getTitle());
-        peopleContent.setText(dayBean.getData().getContent());
-//        }
+        SharedPreferences preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        boolean aBoolean = preferences.getBoolean("flag", false);
+        if (aBoolean) {
+//            Log.i("onCheckedChanged", "第二次登陆完了");
+            getDatas();
 
+        } else {
+//            codetext.setText(dayBean.getData().getNumber_time());  15986996699
+            daytext.setText(dayBean.getData().getSolar_time());
+            monthtext.setText(dayBean.getData().getLunar_time());
+            tabootext.setText(dayBean.getData().getPrompt());
+            people_name.setText(dayBean.getData().getUse_time());
+            homeBackground.setColorFilter(R.color.colorblacks);
+            Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
+            peopleTitle.setText(dayBean.getData().getTitle());
+            peopleContent.setText(dayBean.getData().getContent());
+        }
+
+    }
+
+    private void getDatas() {
+        SharedPreferences preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        String nick_name = preferences.getString("nick_name", "");
+        String images = preferences.getString("images", "");
+        Glide.with(this).load(images).into(peopleIcon);
+        people_name.setText(nick_name);
+        Log.i("登陆返回的值", "getDatas: "+""+images+""+ nick_name);
     }
 
 
@@ -351,6 +363,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         startLocaion();
         presenter.getHomeData();
         presenter.getHomeBannerData();
+        getDatas();
     }
 
     @Override

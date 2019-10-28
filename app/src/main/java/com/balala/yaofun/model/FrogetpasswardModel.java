@@ -229,7 +229,7 @@ public class FrogetpasswardModel extends BaseModel {
 
                         try {
                             Log.i("修改密码 M层 解析", "onSubscribe: " + responseBody.string());
-                            ToastUtil.showLong("更改密码成功");
+                           // ToastUtil.showLong("更改密码成功");
 //                            startActivity(new Intent(FrogetpasswardActivity.this, GeneralActivity.class));
 //                            Toast.makeText(MyApp.getInstance(), responseBody.toString(), Toast.LENGTH_SHORT).show();
                         } catch (IOException e) {
