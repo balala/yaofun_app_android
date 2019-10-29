@@ -155,9 +155,9 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
                 //重新拼接手机号
                 password = mEt2.getText().toString();
                 Log.e("xuzhiqi", "initData: " + password + "\n" + phone);
-                if (password.isEmpty()||phone.isEmpty()){
+                if (password.isEmpty() || phone.isEmpty()) {
                     Toast.makeText(LandingActivity.this, "请输入正确输入", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     basePresenter.getLandingData(phone, password);
                 }
                 // 提示用户登陆成功
@@ -243,8 +243,8 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean("flag", true);
-        editor.putString("nick_name",nick_name);
-        editor.putString("images",images);
+        editor.putString("nick_name", nick_name);
+        editor.putString("images", images);
         Log.i("aBoolean", "onSuccessLanding: " + editor);
         editor.commit();
         // 存储第一次登陆的信息

@@ -117,13 +117,6 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-//        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-//            @Override
-//            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-//
-//            }
-//        });
-
     }
 
     @Override

@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -90,8 +91,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     TextView tabootext;
     @BindView(R.id.people_icon)
     ImageView peopleIcon;
-    @BindView(R.id.people_title)
-    TextView peopleTitle;
+//    @BindView(R.id.people_title)
+//    TextView peopleTitle;
     @BindView(R.id.people_name)
     TextView people_name;
     @BindView(R.id.people_content)
@@ -183,14 +184,15 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             getDatas();
 
         } else {
-//            codetext.setText(dayBean.getData().getNumber_time());
+            codetext.setText(dayBean.getData().getNumber_time());
             daytext.setText(dayBean.getData().getSolar_time());
             monthtext.setText(dayBean.getData().getLunar_time());
             tabootext.setText(dayBean.getData().getPrompt());
             people_name.setText(dayBean.getData().getUse_time());
             homeBackground.setColorFilter(R.color.colorblacks);
+//            peopleIcon.setImageDrawable(R.drawable.home_people);
             Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
-            peopleTitle.setText(dayBean.getData().getTitle());
+//            peopleTitle.setText(dayBean.getData().getTitle());
             peopleContent.setText(dayBean.getData().getContent());
         }
 
@@ -453,22 +455,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         }
 
     }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        switch (requestCode) {
-//            case 200://刚才的识别码
-//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//用户同意权限,执行我们的操作
-//                    startLocaion();//开始定位
-//                } else {//用户拒绝之后,当然我们也可以弹出一个窗口,直接跳转到系统设置页面
-//                    Toast.makeText(getContext(), "未开启定位权限,请手动到设置去开启权限", Toast.LENGTH_LONG).show();
-//                }
-//                break;
-//            default:
-//                break;
-//        }
-//    }
 
     // 集成地图接口
     public void startLocaion() {
