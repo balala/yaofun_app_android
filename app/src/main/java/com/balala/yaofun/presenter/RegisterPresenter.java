@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.balala.yaofun.base.BasePresenter;
 import com.balala.yaofun.bean.VerificationResult;
+import com.balala.yaofun.bean.result.RegisterBean;
 import com.balala.yaofun.bean.result.VerificationCode;
 import com.balala.yaofun.httpUtils.MyApp;
 import com.balala.yaofun.httpUtils.ResultCallBack;
@@ -74,11 +75,14 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
 
     // 注册成功
     public void getData3(String phone, String code, String key, String password) {
-        myModel.getData3(phone, key, code, password, new ResultCallBack<ResponseBody>() {
+        myModel.getData3(phone, key, code, password, new ResultCallBack<RegisterBean>() {
             @Override
-            public void onSuccess(ResponseBody bean) throws IOException {
+            public void onSuccess(RegisterBean bean) throws IOException {
                 if (bean != null) {
-                    mView.onSuccessRegister(bean.string());
+                    mView.onSuccessRegister(bean);
+                    Log.i("注册成功", "onSuccess: " + bean.getMsg());
+                    Toast.makeText(MyApp.getInstance(), bean.getMsg(), Toast.LENGTH_SHORT).show();
+
                 }
             }
 
@@ -90,24 +94,5 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
         });
 
     }
-    // 登陆成功
-//    public void getData4(String phone, String password) {
-//        myModel.GetLandingData(phone, password, new ResultCallBack<AccountBean>() {
-//            @Override
-//            public void onSuccess(AccountBean bean) throws IOException {
-//                if (bean != null) {
-//                    mView.onSuccessRegisterss(bean.toString());
-//                }
-//            }
-//
-//            @Override
-//            public void onFail(String msg) {
-//
-//                Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//    }
-
 
 }

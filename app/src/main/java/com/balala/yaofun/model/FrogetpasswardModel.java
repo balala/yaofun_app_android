@@ -88,7 +88,7 @@ public class FrogetpasswardModel extends BaseModel {
                         if (verificationResult != null) {
                             code = verificationResult.getData().getCode();
                             key = verificationResult.getData().getKey();
-                            Log.e("发送验证码解析出来的", "onNext: " + verificationResult.getData().toString()+"\n"+verificationResult.getData().getCode()+"\n"+verificationResult.getData().getKey());
+                            Log.e("发送验证码解析出来的", "onNext: " + verificationResult.getData().toString() + "\n" + verificationResult.getData().getCode() + "\n" + verificationResult.getData().getKey());
                             try {
                                 listBeanResultCallBack.onSuccess(verificationResult);
                             } catch (IOException e) {
@@ -204,7 +204,7 @@ public class FrogetpasswardModel extends BaseModel {
         changemap.put("phone_model", "");
         changemap.put("wx_unionid", "");
         changemap.put("request_start_time", nowDate);
-        changemap.put("phone", phone);
+        changemap.put("phone", phone.isEmpty());
         changemap.put("purpose", "找回密码");
         changemap.put("password", password);
         time = Utils.md5(nowDate + phone + Utils.Signs);
@@ -212,6 +212,7 @@ public class FrogetpasswardModel extends BaseModel {
         changemap.put("key", key);
         changemap.put("code", code);
 
+        //  15954648486
         Log.e("修改密码 M层 解析", "修改密码 M层 解析: " + time + "\n" + phone + "\n" + key + "\n" + code + "\n" + password + "\n" + nowDate);
 
 
@@ -228,8 +229,8 @@ public class FrogetpasswardModel extends BaseModel {
                     public void onNext(ResponseBody responseBody) {
 
                         try {
-                            Log.i("修改密码 M层 解析", "onSubscribe: " + responseBody.string());
-                           // ToastUtil.showLong("更改密码成功");
+                            Log.i("修改密码M层解析", "onSubscribe: " + responseBody.string());
+                            // ToastUtil.showLong("更改密码成功");
 //                            startActivity(new Intent(FrogetpasswardActivity.this, GeneralActivity.class));
 //                            Toast.makeText(MyApp.getInstance(), responseBody.toString(), Toast.LENGTH_SHORT).show();
                         } catch (IOException e) {

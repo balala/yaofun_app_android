@@ -34,7 +34,6 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter {
     private Context context;
     private ArrayList<HomeAllBean.DataBean.RecommendBean> recommendBeans;
     private ArrayList<HomeBannerDean.DataBean.SecondBean> beanArrayList;
-    private ViewHolder2 holder2;
     private HomeAdapter.OnClickListener mListener;
     private HomeAdapter.OnClickListenerBanner mListenerBanner;
 
@@ -52,14 +51,14 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter {
         LayoutInflater inflater = LayoutInflater.from(context);
         if (viewType == 0) {
             View banner = inflater.inflate(R.layout.banner_item, null);
-            holder = new BannerHolder(banner);
+            return new BannerHolder(banner);
 
         } else if (viewType == 1) {
             View inflate2 = inflater.inflate(R.layout.home_item3s, null);
-            holder2 = new ViewHolder2(inflate2);
-        } else {
+            return new ViewHolder2(inflate2);
+        } else if (viewType == 2) {
             View inflate = inflater.inflate(R.layout.home_item1s, null);
-            holder = new ViewHolder1(inflate);
+            return new ViewHolder1(inflate);
         }
 
         return holder;
@@ -91,16 +90,16 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter {
             });
         } else if (itemViewType == 1) {
             ViewHolder2 holder2 = (ViewHolder2) holder;
-            holder2.home_search2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    ToastUtils.showLong("搜索页面");
-                    Log.i("xuzhiqi", "搜索页面跳转成功");
-                    Intent intent = new Intent(context, SearchActivity.class);
-                    context.startActivity(intent);
-                }
-            });
-        } else {
+//            holder2.home_search2.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+////                    ToastUtils.showLong("搜索页面");
+//                    Log.i("xuzhiqi", "搜索页面跳转成功");
+//                    Intent intent = new Intent(context, SearchActivity.class);
+//                    context.startActivity(intent);
+//                }
+//            });
+        } else if (itemViewType == 2) {
             ViewHolder1 holder1 = (ViewHolder1) holder;
             Log.i("热门解析", "热门解析: " + recommendBeans.toString());
             holder1.item1time.setText(recommendBeans.get(position).getStart_end_time());

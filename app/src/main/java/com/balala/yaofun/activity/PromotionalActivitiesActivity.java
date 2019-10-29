@@ -1,7 +1,15 @@
 package com.balala.yaofun.activity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Base64;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -11,28 +19,33 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.balala.yaofun.R;
 import com.balala.yaofun.bean.LoadFileVo;
 import com.balala.yaofun.util.CustomEditText;
+import com.balala.yaofun.util.OkHttp;
 import com.bumptech.glide.annotation.GlideModule;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 @GlideModule
 public class PromotionalActivitiesActivity extends AppCompatActivity {
-    private int maximgcount = 8;        //允许选择图片最大数
-    public static final int image_item_add = -1;
-    public static final int request_code_select = 100;
-    public static final int request_code_preview = 101;
-    List<LoadFileVo> fileList = new ArrayList<>();
+
     @BindView(R.id.openfunback)
     LinearLayout mOpenfunback;
     //    @BindView(R.id.openfunrv)
@@ -73,8 +86,12 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
     ImageView mOpenfunInterestadd;
     @BindView(R.id.open_immediately)
     Button mOpenImmediately;
-//    private LoadPicAdapter adapter;
-
+    //    private LoadPicAdapter adapter;
+    private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
+    /**
+     * 选择图片的返回码
+     */
+    public final static int SELECT_IMAGE_RESULT_CODE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +111,11 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
 //            case R.id.openfunrv:
 //                break;
             case R.id.openfunimg:
+                // 激活系统图库，选择一张图片
+                Intent intent1 = new Intent(Intent.ACTION_PICK);
+                intent1.setType("image/*");
+                // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_GALLERY
+                startActivityForResult(intent1, PHOTO_REQUEST_GALLERY);
 
                 break;
             case R.id.openfunaddimg:
@@ -134,54 +156,6 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
     }
 
 
-    //判断点击输入框区域，则需要显示键盘，同时显示光标，反之，需要隐藏键盘、光标
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            View v = getCurrentFocus();
-            //当isShouldHideInput(v, ev)为true时，表示的是点击输入框区域，则需要显示键盘，同时显示光标，反之，需要隐藏键盘、光标
-            if (isShouldHideInput(v, ev)) {
-
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    //处理Editext的光标隐藏、显示逻辑
-                    mOpenfunName.clearFocus();
-                    mOpenfunResume.clearFocus();
-                    mOpenfunDotext.clearFocus();
-                    mOpenfunActivitytext.clearFocus();
-                    mOpenfunJointext.clearFocus();
-                    mOpenfunInteresttext.clearFocus();
-                    mOpenfunApplypeoplecontent.clearFocus();
-                }
-            }
-            return super.dispatchTouchEvent(ev);
-        }
-        // 必不可少，否则所有的组件都不会有TouchEvent了
-        if (getWindow().superDispatchTouchEvent(ev)) {
-            return true;
-        }
-        return onTouchEvent(ev);
-    }
-
-    // 获取文本框点击事件
-    public boolean isShouldHideInput(View v, MotionEvent event) {
-        if (v != null && (v instanceof EditText)) {
-            int[] leftTop = {0, 0};
-            //获取输入框当前的location位置
-            v.getLocationInWindow(leftTop);
-            int left = leftTop[0];
-            int top = leftTop[1];
-            int bottom = top + v.getHeight();
-            int right = left + v.getWidth();
-            if (event.getX() > left && event.getX() < right
-                    && event.getY() > top && event.getY() < bottom) {
-                // 点击的是输入框区域，保留点击EditText的事件
-                return false;
-            } else {
-                return true;
-            }
-        }
-        return false;
-    }
 }
+
+

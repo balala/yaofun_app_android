@@ -52,7 +52,7 @@ public class GeneralActivity extends AppCompatActivity {
     private static final int TYPE_KONWLOGE = 1;
     private static final int TYPE_WX = 2;
     private static final int TYPE_NOTACTION = 3;
-
+    Boolean up = false;//默认false不刷新
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +143,30 @@ public class GeneralActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    public void onPause() {
+//        // TODO Auto-generated method stub
+//        super.onPause();
+//
+//        up = true;//不可见的时候将刷新开启
+//
+//    }
+//
+//    @Override
+//    protected void onResume() {
+//        // TODO Auto-generated method stub
+//        super.onResume();
+//
+////判断是否刷新
+//        if (up) {
+//
+////            submit();//向服务器发送请求
+//
+//            up = false;//刷新一次即可，不需要一直刷新
+//
+//        }
+//
+//    }
 
     /**
      * 隐藏虚拟按键，并且全屏

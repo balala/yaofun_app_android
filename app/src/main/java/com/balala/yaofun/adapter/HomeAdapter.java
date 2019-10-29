@@ -109,7 +109,6 @@ public class HomeAdapter extends RecyclerView.Adapter {
     class MyLoder extends ImageLoader {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
-
             HomeBannerDean.DataBean.FirstBean da = (HomeBannerDean.DataBean.FirstBean) path;
             String imagePath = da.getCover();
             Glide.with(context).load(imagePath).into(imageView);

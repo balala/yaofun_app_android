@@ -52,12 +52,12 @@
             android:layout_height="@dimen/dp_200"
             android:layout_marginTop="@dimen/dp_10">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/openfunrv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@drawable/home_background" />
+            <!--<androidx.recyclerview.widget.RecyclerView-->
+                <!--android:id="@+id/openfunrv"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/home_background" />-->
 
 
             <LinearLayout

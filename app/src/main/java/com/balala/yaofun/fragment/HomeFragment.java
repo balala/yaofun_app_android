@@ -91,8 +91,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     TextView tabootext;
     @BindView(R.id.people_icon)
     ImageView peopleIcon;
-//    @BindView(R.id.people_title)
-//    TextView peopleTitle;
+    @BindView(R.id.people_title)
+    TextView peopleTitle;
     @BindView(R.id.people_name)
     TextView people_name;
     @BindView(R.id.people_content)
@@ -169,7 +169,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     private HomeAdapter homeAdapter;
     private HomeAroundAdapter homeAroundAdapter;
     private HomeRecommendAdapter adapter;
-
+    private SharedPreferences preferences;
+    private SharedPreferences preferences1;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -178,34 +179,37 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 
         // 在这收值
         Log.i("每日一句话解析", "onSuccessHome: " + dayBean.toString());
-        SharedPreferences preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         boolean aBoolean = preferences.getBoolean("flag", false);
         if (aBoolean) {
-            getDatas();
-
+//            getDatas();
+            preferences1 = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+            String nick_name = preferences1.getString("nick_name", "");
+            String images = preferences1.getString("images", "");
+            Glide.with(this).load(images).into(peopleIcon);
+            people_name.setText(nick_name);
+            Log.i("登陆返回的值", "getDatas: " + "" + images + "" + nick_name);
+            codetext.setText(dayBean.getData().getNumber_time());
+            daytext.setText(dayBean.getData().getSolar_time());
+            monthtext.setText(dayBean.getData().getLunar_time());
+            tabootext.setText(dayBean.getData().getPrompt());
+            Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
         } else {
             codetext.setText(dayBean.getData().getNumber_time());
             daytext.setText(dayBean.getData().getSolar_time());
             monthtext.setText(dayBean.getData().getLunar_time());
             tabootext.setText(dayBean.getData().getPrompt());
-            people_name.setText(dayBean.getData().getUse_time());
-            homeBackground.setColorFilter(R.color.colorblacks);
-//            peopleIcon.setImageDrawable(R.drawable.home_people);
+//            people_name.setText(dayBean.getData().getUse_time());
             Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
-//            peopleTitle.setText(dayBean.getData().getTitle());
+            peopleTitle.setText(dayBean.getData().getTitle());
             peopleContent.setText(dayBean.getData().getContent());
         }
 
     }
 
-    private void getDatas() {
-        SharedPreferences preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-        String nick_name = preferences.getString("nick_name", "");
-        String images = preferences.getString("images", "");
-        Glide.with(this).load(images).into(peopleIcon);
-        people_name.setText(nick_name);
-        Log.i("登陆返回的值", "getDatas: "+""+images+""+ nick_name);
-    }
+//    private void getDatas() {
+//
+//    }
 
 
     //声明定位回调监听器
@@ -364,7 +368,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         startLocaion();
         presenter.getHomeData();
         presenter.getHomeBannerData();
-        getDatas();
+//        getDatas();
     }
 
     @Override

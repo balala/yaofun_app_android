@@ -8,6 +8,7 @@ import com.balala.yaofun.bean.IdentifyingBean;
 import com.balala.yaofun.bean.VerificationBean;
 import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.LandingBean;
+import com.balala.yaofun.bean.result.RegisterBean;
 import com.balala.yaofun.bean.result.VerificationCode;
 import com.balala.yaofun.httpUtils.HttpUtils;
 import com.balala.yaofun.httpUtils.ResultCallBack;
@@ -182,7 +183,7 @@ public class RegisterModel extends BaseModel {
     }
 
     // 注册解析方法
-    public void getData3(String phone, String key, String code, String password, ResultCallBack<ResponseBody> resultCallBack) {
+    public void getData3(String phone, String key, String code, String password, ResultCallBack<RegisterBean> resultCallBack) {
         MyServer apiserver = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
         // 创建一个集合 来存储数据
         final HashMap<String, Object> map2 = new HashMap<>();
@@ -207,15 +208,14 @@ public class RegisterModel extends BaseModel {
         map2.put("code", code);
         apiserver.getRegistData(map2).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
+                .subscribe(new Observer<RegisterBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-
+                    public void onNext(RegisterBean responseBody) {
                         Log.e("注册成功", "onNext: " + responseBody.toString());
 
                     }
@@ -232,53 +232,4 @@ public class RegisterModel extends BaseModel {
                 });
     }
 
-    // 登陆解析
-//    public void GetLandingData(String phone, String password, ResultCallBack<AccountBean> resultCallBack) {
-//        MyServer apiserver = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
-//        // 创建一个集合 来存储数据
-//        final HashMap<String, Object> map3 = new HashMap<>();
-//        String nowDate = Utils.getNowDate();
-//        // map.put("key",key); key
-//        map3.put("user_id", "-1");
-//        map3.put("version", "-1");
-//        map3.put("current_device", "安卓");
-//        map3.put("unique_identifier", "");
-//        map3.put("user_defined_name", "");
-//        map3.put("download_channel", "");
-//        map3.put("phone_version", "");
-//        map3.put("phone_model", "");
-//        map3.put("wx_unionid", "");
-//        map3.put("request_start_time", nowDate);
-//        map3.put("phone", phone);
-//        map3.put("password", password);
-//        Log.e("xuzhiqi4", "getData3: " + Utils.getNowDate() + "\n" + phone + "\n" + key + "\n" + code + "\n" + password);
-//        map3.put("key", key);
-//        map3.put("code", code);
-//        apiserver.getLoginData(map3).subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<LandingBean>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(LandingBean landingBean) {
-//                        Log.i("xuzhqizz", "onSubscribe: " + landingBean.toString());
-//
-//                    }
-//
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        Log.e("xuzhqizz", "onNext: " + e.getMessage());
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//
-//                    }
-//                });
-
-//    }
 }

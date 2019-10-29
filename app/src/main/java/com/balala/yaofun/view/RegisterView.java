@@ -4,6 +4,7 @@ package com.balala.yaofun.view;
 import com.balala.yaofun.base.BaseView;
 import com.balala.yaofun.bean.AccountBean;
 import com.balala.yaofun.bean.VerificationResult;
+import com.balala.yaofun.bean.result.RegisterBean;
 import com.balala.yaofun.bean.result.VerificationCode;
 
 public interface RegisterView extends BaseView {
@@ -17,7 +18,7 @@ public interface RegisterView extends BaseView {
     void onFails(String msg);
 
 
-    void onSuccessRegister(String sucess);
+    void onSuccessRegister(RegisterBean bean);
 
     void onError(String error);
 

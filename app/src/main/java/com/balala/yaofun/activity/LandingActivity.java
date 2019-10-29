@@ -249,27 +249,9 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         editor.commit();
         // 存储第一次登陆的信息
         startActivity(new Intent(LandingActivity.this, GeneralActivity.class));
-        //发送参数
-        initvalueData(bean);
 
     }
 
-    private void initvalueData(LandingBean bean) {
-        String userid = bean.getData().get_id();
-        String images = bean.getData().getImages();
-        String nick_name = bean.getData().getNick_name();
-//        Intent intent = new Intent(LandingActivity.this, HomeFragment.class);
-//        startActivity(intent);
-//        transaction.add(R.id.main_view, Fragment.newInstance(name)).commit();
-//        mFragment = new HomeFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putString("userid", userid);
-//        bundle.putString("images", "1");
-//        bundle.putString("nick_name", nick_name);
-//        mFragment.setArguments(bundle);
-        Log.i("EventBus", "这是我要传的 " + nick_name);
-        Log.i("登陆成功后返回的用户信息", "userid: " + userid + "" + images + "" + nick_name + "" + bean);
-    }
 
 
     // 登陆失败方法

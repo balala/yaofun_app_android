@@ -29,7 +29,9 @@ import com.balala.yaofun.R;
 import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.bean.VerificationBean;
 import com.balala.yaofun.bean.VerificationResult;
+import com.balala.yaofun.bean.result.RegisterBean;
 import com.balala.yaofun.bean.result.VerificationCode;
+import com.balala.yaofun.fragment.HomeFragment;
 import com.balala.yaofun.httpUtils.ToastUtil;
 import com.balala.yaofun.presenter.RegisterPresenter;
 import com.balala.yaofun.view.RegisterView;
@@ -318,7 +320,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
     @Override
     public void onSS(VerificationResult verificationResult) {
         key = verificationResult.getData().getKey();
-        Log.e("注册成功的回调方法", "onSS: " + verificationResult.toString() + "\n" + "\n" + key);
+        Log.e("发送验证码的成功方法", "onSS: " + verificationResult.toString() + "\n" + "\n" + key);
 
     }
 
@@ -329,39 +331,41 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
 
     @Override
     public void onSuccessyanzheng(VerificationCode verificationBean) {
-        Log.e("xuzhiqi4", "onSuccessyanzheng: " + verificationBean.toString());
+        Log.e("xuzhiqi4", "onSuccessyanzheng: " + verificationBean.getMsg());
+        mRedSpeak.setText(verificationBean.getMsg());
+        mRedSpeak.setVisibility(View.VISIBLE);
         code = mEtIdentifiing.getText().toString().trim();
         password = mEtPassword.getText().toString().trim();
         if (verificationBean.isSuccess() & !TextUtils.isEmpty(code) & !TextUtils.isEmpty(password)) {
             basePresenter.getData3(phone, code, key, password);
         }
-
-        ToastUtil.showLong(verificationBean.getMsg());
-
-        // 后加的
-        //将数据保存至SharedPreferences:
-        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("flag", true);
-        Log.i("aBoolean", "onSuccessLanding: " + editor);
-        editor.commit();
-        startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
+        Log.i(TAG, "验证码验证成功 ");
+//        ToastUtil.showLong("验证码验证成功");
+//        startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
     }
 
     @Override
     public void onFails(String msg) {
-
         Log.i(TAG, "onFails: " + msg);
     }
 
     @Override
-    public void onSuccessRegister(String sucess) {
+    public void onSuccessRegister(RegisterBean bean) {
+        String nick_name = bean.getData().getNick_name();
+        String images = bean.getData().getImages();
+        Log.e("xuzhiqiaa", "onSuccessRegister: " + bean.toString());
+//        ToastUtil.showLong(bean.getMsg());
 
-        Log.e("xuzhiqiaa", "onSuccessRegister: " + sucess);
-        ToastUtil.showLong("注册成功");
-        startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
-
-
+        //将数据保存至SharedPreferences:
+        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("flag", true);
+        editor.putString("nick_name", nick_name);
+        editor.putString("images", images);
+        Log.i("aBoolean", "onSuccessLanding: " + editor);
+        editor.commit();
+        startActivity(new Intent(RegisterActivity.this, HomeFragment.class));
+        Log.i("注册成功保存", "onSuccessRegister: " + "nick_name" + nick_name + "" + images);
     }
 
     @Override
@@ -370,25 +374,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
         ToastUtil.showLong("注册失败");
 
     }
-
-//    @Override
-//    public void onSuccessRegisterss(String sucess) {
-//
-//        basePresenter.getData4(phone, password);
-//        //将数据保存至SharedPreferences:
-//        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = preferences.edit();
-//        editor.putBoolean("flag", true);
-//        Log.i("aBoolean", "onSuccessLanding: " + editor);
-//        editor.commit();
-//        startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
-//        Log.i("注册成功", "注册成功" + sucess);
-//    }
-//
-//    @Override
-//    public void onErrors(String msg) {
-//        Log.i(TAG, "onErrors: " + msg);
-//    }
 
 
     // 倒计时 验证码

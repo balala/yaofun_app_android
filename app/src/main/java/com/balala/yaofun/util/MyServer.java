@@ -8,6 +8,7 @@ import com.balala.yaofun.bean.result.HomeAllBean;
 import com.balala.yaofun.bean.result.HomeBannerDean;
 import com.balala.yaofun.bean.result.HomedetailsBean;
 import com.balala.yaofun.bean.result.LandingBean;
+import com.balala.yaofun.bean.result.RegisterBean;
 import com.balala.yaofun.bean.result.VerificationCode;
 
 import java.util.HashMap;
@@ -31,7 +32,7 @@ public interface MyServer {
     //   String url = "https://192.168.0.164:8088/api/";
     // String url = "http://192.168.110.144:5001/api/";
     String url = "https://test.yaofun.vip/api/";
-//    String url = "https://api.yaofun.vip/api";
+    //  String url = "https://api.yaofun.vip/api";
 
     // http://test.yaofun.vip/api/verification_code/send
     // 发送验证码的接口 verification code
@@ -49,7 +50,7 @@ public interface MyServer {
     // 注册接口
     @POST("user/regist")
     @FormUrlEncoded
-    Observable<ResponseBody> getRegistData(@FieldMap Map<String, Object> map);
+    Observable<RegisterBean> getRegistData(@FieldMap Map<String, Object> map);
 
     // 登陆接口
     @POST("user/login")
@@ -94,7 +95,7 @@ public interface MyServer {
     Observable<FunhomeData> getFunhomeData(@QueryMap HashMap<String, Object> map);
 
     @GET("activity/detail/{id}")
-    Observable<HomedetailsBean> getHomedetailsData(@Path("id")String id, @QueryMap HashMap<String, Object> map);
+    Observable<HomedetailsBean> getHomedetailsData(@Path("id") String id, @QueryMap HashMap<String, Object> map);
 
     //  /activity/detail/5ce368ffe6b187cf63e4289a
 
