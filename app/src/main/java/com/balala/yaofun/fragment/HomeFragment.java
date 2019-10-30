@@ -19,6 +19,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -29,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -63,6 +65,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 
@@ -119,6 +122,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     RelativeLayout rl2;
     @BindView(R.id.rl3)
     RelativeLayout rl3;
+    @BindView(R.id.swipe_ly)
+    SwipeRefreshLayout mSwipeLayout;
     //    @BindView(R.id.home_search2)
 //    ImageView homeSearch2;
 //    @BindView(R.id.recycle_view4)
@@ -159,11 +164,35 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
                     Message message = handler.obtainMessage(1);
                     handler.sendMessageDelayed(message, 4000);
                     popupWindow.dismiss();
+
             }
 
             super.handleMessage(msg);
         }
     };
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case 1:
+//                    Toast.makeText(getContext(), "开始刷新", Toast.LENGTH_SHORT).show();
+                    homeAdapter.notifyDataSetChanged();
+                    homeAroundAdapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
+                    //为了保险起见可以先判断当前是否在刷新中（旋转的小圈圈在旋转）....
+                    if (mSwipeLayout.isRefreshing()) {
+                        //关闭刷新动画
+                        mSwipeLayout.setRefreshing(false);
+                    }
+
+                    break;
+
+            }
+        }
+
+        ;
+    };
+
     private List<HomeBannerDean.DataBean.FirstBean> first;
     private List<HomeBannerDean.DataBean.SecondBean> second;
     private HomeAdapter homeAdapter;
@@ -206,10 +235,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         }
 
     }
-
-//    private void getDatas() {
-//
-//    }
 
 
     //声明定位回调监听器
@@ -368,7 +393,14 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         startLocaion();
         presenter.getHomeData();
         presenter.getHomeBannerData();
-//        getDatas();
+        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //这里可以做一下下拉刷新的操作
+                //例如下面代码，在方法中发送一个handler模拟延时操作
+                mHandler.sendEmptyMessageDelayed(1, 2000);
+            }
+        });
     }
 
     @Override

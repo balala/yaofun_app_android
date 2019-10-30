@@ -2,18 +2,27 @@ package com.balala.yaofun.activity;
 
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.balala.yaofun.R;
 import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.bean.result.HomedetailsBean;
+import com.balala.yaofun.fragment.HomeFragment;
 import com.balala.yaofun.model.HomedetailsModel;
 import com.balala.yaofun.presenter.HomedetailsPersenter;
 import com.balala.yaofun.view.HomedetailsView;
@@ -22,6 +31,8 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.lang.reflect.Field;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -117,6 +128,11 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
 //    FloatingActionButton mHomedetailsFab;
     @BindView(R.id.sll)
     ScrollView sll;
+    private PopupMenu mMenu;
+    private LinearLayout popitem1;
+    private LinearLayout popitem2;
+    private LinearLayout popitem3;
+    private LinearLayout popitem4;
 
     @Override
     protected void initView() {
@@ -155,6 +171,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
                 break;
 //
             case R.id.homedetailsimg:
+
                 break;
             case R.id.homedetails_back:
                 finish();
@@ -162,7 +179,10 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
             case R.id.homedetails_menu:
                 // 在这弹出menu选项
                 //为按钮绑定上下文菜单（注意不是绑定监听器）
-//                registerForContextMenu(mHomedetailsMenu);
+                showPopupMenu();
+//                mMenu = new PopupMenu(this, mHomedetailsMenu);
+//                mMenu.getMenuInflater().inflate(R.menu.homedetailsmenu, mMenu.getMenu());
+//                mMenu.show();
                 break;
             case R.id.homedetails_title:
                 break;
@@ -237,6 +257,51 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
         }
     }
 
+    private void showPopupMenu() {
+        Toast.makeText(this, "点击弹出", Toast.LENGTH_SHORT).show();
+//        popupWindow.showAtLocation(mHomedetailsMenu, Gravity.BOTTOM, 0, 0);
+        View mPopView = getLayoutInflater().inflate(R.layout.popitem, null);
+        PopupWindow popupWindow = new PopupWindow(mPopView);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAsDropDown(mHomedetailsMenu);
+//        popupWindow.setFocusable(true);
+
+        popitem1 = mPopView.findViewById(R.id.popitem1);
+        popitem2 = mPopView.findViewById(R.id.popitem2);
+        popitem3 = mPopView.findViewById(R.id.popitem3);
+        popitem4 = mPopView.findViewById(R.id.popitem4);
+
+        //分享
+        popitem1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        //修改
+        popitem2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+        //删除
+        popitem3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        //举报
+        popitem4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
     @Override
     public void onSuccessHomedetails(HomedetailsBean funhomeData) {
         homedetailsicon.setVisibility(View.GONE);
@@ -250,15 +315,15 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
         mHomedetailsTime.setText(data.getStart_end_time());
         mHomedetailsSite.setText(data.getPlace_text().getAddress());
         mHomedetailsFuntitle.setText(data.getLocation_name());
-        Glide.with(this).load(data.getUser_images()) .apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mHomedetailsPeople);
+        Glide.with(this).load(data.getUser_images()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mHomedetailsPeople);
         homedetails_personcount.setText(data.getMy_status());
-        if (data.getErrollment_number().isEmpty()){
+        if (data.getErrollment_number().isEmpty()) {
             mHomedetailsTicket.setText(data.getErrollment_number());
-        }else {
+        } else {
             mHomedetailsTicket.setText("free");
             tvv.setVisibility(View.GONE);
         }
-        Log.i("My_status", "onSuccessHomedetails: " + data.getMy_status()+data.getCost());
+        Log.i("My_status", "onSuccessHomedetails: " + data.getMy_status() + data.getCost());
     }
 
     @Override

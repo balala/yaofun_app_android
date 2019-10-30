@@ -38,6 +38,7 @@
                     android:layout_width="@dimen/dp_87"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_85"
+                    android:gravity="center"
                     android:text="@string/fun_open"
                     android:textColor="@color/colorwhite"
                     android:textSize="@dimen/sp_16" />
@@ -52,32 +53,22 @@
             android:layout_height="@dimen/dp_200"
             android:layout_marginTop="@dimen/dp_10">
 
-            <!--<androidx.recyclerview.widget.RecyclerView-->
-                <!--android:id="@+id/openfunrv"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:scaleType="fitXY"-->
-                <!--android:src="@drawable/home_background" />-->
-
-
-            <LinearLayout
+            <ImageView
+                android:id="@+id/openfunimg"
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="@dimen/dp_100"
+                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp_138"
-                android:layout_marginTop="@dimen/dp_30"
                 android:alpha="0.5"
-                android:background="@drawable/home_time"
-                android:orientation="vertical">
+                android:background="@drawable/home_time" />
 
-                <ImageView
-                    android:id="@+id/openfunimg"
-                    android:layout_width="@dimen/dp_25"
-                    android:layout_height="@dimen/dp_21"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dp_40"
-                    android:src="@drawable/fun_camera" />
-            </LinearLayout>
+            <ImageView
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_21"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/dp_90"
+                android:src="@drawable/fun_camera" />
         </RelativeLayout>
 
         <RelativeLayout

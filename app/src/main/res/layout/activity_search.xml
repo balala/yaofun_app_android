@@ -80,7 +80,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.balala.yaofun.activity.FlowLayout
+        <com.balala.yaofun.util.FlowLayout
             android:id="@+id/search_fl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

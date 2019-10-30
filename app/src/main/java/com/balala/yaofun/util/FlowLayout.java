@@ -1,4 +1,4 @@
-package com.balala.yaofun.activity;
+package com.balala.yaofun.util;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -21,6 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.balala.yaofun.R;
@@ -155,7 +159,28 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
         }
     }
 
-
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.homedetailsmenu, menu);
+//        return true;
+//    }
+//
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.item1:
+//                break;
+//            case R.id.item2:
+//                break;
+//            case R.id.item3:
+//                break;
+//            case R.id.item4:
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }
 
 

@@ -50,8 +50,9 @@ public class MessageFragment extends Fragment {
 //            startActivity(new Intent(getContext(), LandingActivity.class));
 //        }
         ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(new MessageFragment2());
         fragments.add(new AuditFragment());
+        fragments.add(new MessageFragment2());
+
 
         mMessageTab.addTab(mMessageTab.newTab().setText("审核"));
         mMessageTab.addTab(mMessageTab.newTab().setText("消息"));
