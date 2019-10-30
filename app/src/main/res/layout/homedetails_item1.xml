@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_250"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/homedetails_peoplecount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_24"
+        android:layout_marginTop="@dimen/dp_53"
+        android:layout_marginRight="@dimen/dp_214"
+        android:text="3/10人已参与"
+        android:textColor="@color/colorwhite"
+        android:textSize="@dimen/sp_24" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
+        android:orientation="horizontal">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homedetails_peoplerv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_90"
+            android:layout_marginLeft="@dimen/dp_21"
+            android:layout_marginRight="@dimen/dp_33"
+            android:background="@color/black" />
+
+        <ImageView
+            android:id="@+id/homedetails_peopleback"
+            android:layout_width="@dimen/dp_7"
+            android:layout_height="@dimen/dp_13"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_9"
+            android:layout_marginRight="@dimen/dp_21"
+            android:src="@drawable/homedetails_back" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

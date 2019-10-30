@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,43 +25,50 @@
             android:background="@color/homeblack"
             android:scaleType="centerCrop" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/home_toolbar"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
             android:layout_marginTop="@dimen/dp_40"
             android:alpha="0.8"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:background="@color/black">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/sitetext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dp_25"
-                    android:text="@string/app_city"
-                    android:textColor="@color/colorwhite"
-                    android:textSize="@dimen/sp_16" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/home_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                app:layout_scrollFlags="scroll|enterAlways">
 
                 <RelativeLayout
-                    android:layout_width="@dimen/dp_70"
-                    android:layout_height="@dimen/dp_70"
-                    android:layout_alignParentRight="true">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/homescan"
-                        android:layout_width="@dimen/dp_22"
-                        android:layout_height="@dimen/dp_21"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/dp_17"
-                        android:src="@mipmap/home_scan" />
+                    <TextView
+                        android:id="@+id/sitetext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_25"
+                        android:text="@string/app_city"
+                        android:textColor="@color/colorwhite"
+                        android:textSize="@dimen/sp_16" />
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/dp_70"
+                        android:layout_height="@dimen/dp_70"
+                        android:layout_alignParentRight="true">
+
+                        <ImageView
+                            android:id="@+id/homescan"
+                            android:layout_width="@dimen/dp_22"
+                            android:layout_height="@dimen/dp_21"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="@dimen/dp_17"
+                            android:src="@mipmap/home_scan" />
+                    </RelativeLayout>
+
                 </RelativeLayout>
 
-            </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
 
-        </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <TextView
             android:layout_width="@dimen/dp_108"
@@ -187,4 +194,4 @@
                 android:textSize="@dimen/sp_14" />
         </RelativeLayout>
     </RelativeLayout>
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

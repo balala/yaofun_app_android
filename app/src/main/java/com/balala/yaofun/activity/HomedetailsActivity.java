@@ -18,6 +18,8 @@ import com.balala.yaofun.model.HomedetailsModel;
 import com.balala.yaofun.presenter.HomedetailsPersenter;
 import com.balala.yaofun.view.HomedetailsView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -63,32 +65,34 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
     ImageView mHomedetailsNavigation;
     @BindView(R.id.homedetails_ticket)
     TextView mHomedetailsTicket;
-    @BindView(R.id.homedetails_img1)
-    ImageView mHomedetailsImg1;
-    @BindView(R.id.homedetails_text1)
-    TextView mHomedetailsText1;
-    @BindView(R.id.homedetails_img2)
-    ImageView mHomedetailsImg2;
-    @BindView(R.id.homedetails_text2)
-    TextView mHomedetailsText2;
-    @BindView(R.id.homedetails_img3)
-    ImageView mHomedetailsImg3;
-    @BindView(R.id.homedetails_text3)
-    TextView mHomedetailsText3;
-    @BindView(R.id.homedetails_img4)
-    ImageView mHomedetailsImg4;
-    @BindView(R.id.homedetails_text4)
-    TextView mHomedetailsText4;
-    @BindView(R.id.homedetails_textback)
-    ImageView mHomedetailsTextback;
-    @BindView(R.id.homedetails_img5)
-    ImageView mHomedetailsImg5;
-    @BindView(R.id.homedetails_text5)
-    TextView mHomedetailsText5;
+    //    @BindView(R.id.homedetails_img1)
+//    ImageView mHomedetailsImg1;
+//    @BindView(R.id.homedetails_text1)
+//    TextView mHomedetailsText1;
+//    @BindView(R.id.homedetails_img2)
+//    ImageView mHomedetailsImg2;
+//    @BindView(R.id.homedetails_text2)
+//    TextView mHomedetailsText2;
+//    @BindView(R.id.homedetails_img3)
+//    ImageView mHomedetailsImg3;
+//    @BindView(R.id.homedetails_text3)
+//    TextView mHomedetailsText3;
+//    @BindView(R.id.homedetails_img4)
+//    ImageView mHomedetailsImg4;
+//    @BindView(R.id.homedetails_text4)
+//    TextView mHomedetailsText4;
+//    @BindView(R.id.homedetails_textback)
+//    ImageView mHomedetailsTextback;
+//    @BindView(R.id.homedetails_img5)
+//    ImageView mHomedetailsImg5;
+//    @BindView(R.id.homedetails_text5)
+//    TextView mHomedetailsText5;
     @BindView(R.id.homedetails_img6)
     ImageView mHomedetailsImg6;
     @BindView(R.id.homedetails_funtitle)
     TextView mHomedetailsFuntitle;
+    @BindView(R.id.tvv)
+    TextView tvv;
     @BindView(R.id.homedetails_funimg)
     ImageView mHomedetailsFunimg;
     @BindView(R.id.homedetails_funmessage)
@@ -143,8 +147,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
         return new HomedetailsPersenter();
     }
 
-    //    R.id.homedetails_toolbar, , R.id.homedetails_fab
-    @OnClick({R.id.homedetailsimg, R.id.homedetails_back, R.id.homedetails_menu, R.id.homedetails_title, R.id.homedetails_xiahua, R.id.homedetails_peoplename, R.id.homedetails_label1, R.id.homedetails_label2, R.id.homedetails_signature, R.id.homedetails_peoplecount, R.id.homedetails_peoplerv, R.id.homedetails_peopleback, R.id.homedetails_time, R.id.homedetails_site, R.id.homedetails_navigation, R.id.homedetails_ticket, R.id.homedetails_img1, R.id.homedetails_text1, R.id.homedetails_img2, R.id.homedetails_text2, R.id.homedetails_img3, R.id.homedetails_text3, R.id.homedetails_img4, R.id.homedetails_text4, R.id.homedetails_textback, R.id.homedetails_img5, R.id.homedetails_text5, R.id.homedetails_img6, R.id.homedetails_funtitle, R.id.homedetails_funimg, R.id.homedetails_funmessage, R.id.homedetails_wirte, R.id.homedetails_rv2, R.id.homedetails_message, R.id.homedetailsgo, R.id.llt, R.id.homedetails_people})
+    //    R.id.homedetails_toolbar, , R.id.homedetails_fab  , R.id.homedetails_img1, R.id.homedetails_text1, R.id.homedetails_img2, R.id.homedetails_text2, R.id.homedetails_img3, R.id.homedetails_text3, R.id.homedetails_img4, R.id.homedetails_text4, R.id.homedetails_textback, R.id.homedetails_img5, R.id.homedetails_text5,
+    @OnClick({R.id.homedetailsimg, R.id.homedetails_back, R.id.homedetails_menu, R.id.homedetails_title, R.id.homedetails_xiahua, R.id.homedetails_peoplename, R.id.homedetails_label1, R.id.homedetails_label2, R.id.homedetails_signature, R.id.homedetails_peoplecount, R.id.homedetails_peoplerv, R.id.homedetails_peopleback, R.id.homedetails_time, R.id.homedetails_site, R.id.homedetails_navigation, R.id.homedetails_ticket, R.id.homedetails_img6, R.id.homedetails_funtitle, R.id.homedetails_funimg, R.id.homedetails_funmessage, R.id.homedetails_wirte, R.id.homedetails_rv2, R.id.homedetails_message, R.id.homedetailsgo, R.id.llt, R.id.homedetails_people})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -186,28 +190,28 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
                 break;
             case R.id.homedetails_ticket:
                 break;
-            case R.id.homedetails_img1:
-                break;
-            case R.id.homedetails_text1:
-                break;
-            case R.id.homedetails_img2:
-                break;
-            case R.id.homedetails_text2:
-                break;
-            case R.id.homedetails_img3:
-                break;
-            case R.id.homedetails_text3:
-                break;
-            case R.id.homedetails_img4:
-                break;
-            case R.id.homedetails_text4:
-                break;
-            case R.id.homedetails_textback:
-                break;
-            case R.id.homedetails_img5:
-                break;
-            case R.id.homedetails_text5:
-                break;
+//            case R.id.homedetails_img1:
+//                break;
+//            case R.id.homedetails_text1:
+//                break;
+//            case R.id.homedetails_img2:
+//                break;
+//            case R.id.homedetails_text2:
+//                break;
+//            case R.id.homedetails_img3:
+//                break;
+//            case R.id.homedetails_text3:
+//                break;
+//            case R.id.homedetails_img4:
+//                break;
+//            case R.id.homedetails_text4:
+//                break;
+//            case R.id.homedetails_textback:
+//                break;
+//            case R.id.homedetails_img5:
+//                break;
+//            case R.id.homedetails_text5:
+//                break;
             case R.id.homedetails_img6:
                 break;
             case R.id.homedetails_funtitle:
@@ -237,24 +241,24 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
     public void onSuccessHomedetails(HomedetailsBean funhomeData) {
         homedetailsicon.setVisibility(View.GONE);
         sll.setVisibility(View.VISIBLE);
-        int po = 0;
         HomedetailsBean.DataBean data = funhomeData.getData();
 
         Log.i("首页详情解析", "onSuccessHomedetails: " + funhomeData);
         Glide.with(this).load(data.getCover()).into(mHomedetailsimg);
         mHomedetailsFuntitle.setText(data.getTitle());
-        mHomedetailsPeoplename.setText(data.getLocation_name());
+        mHomedetailsPeoplename.setText(data.getUser_nick_name());
         mHomedetailsTime.setText(data.getStart_end_time());
         mHomedetailsSite.setText(data.getPlace_text().getAddress());
-//        mHomedetailsTicket.setText(data.getCost());
-        mHomedetailsText1.setText(data.getContent_array().get(po));
-//        mHomedetailsImg1.
-//        Glide.with(this).load(data.getContent_array().get(po + 1)).into(mHomedetailsImg1);
-//        Glide.with(this).load(data.getContent_array().get(po + 2)).into(mHomedetailsImg2);
-//        mHomedetailsText2.setText(funhomeData.getData().getGroup_count());
-        mHomedetailsFuntitle.setText(data.getUser_nick_name());
-//        Glide.with(this).load(data.getUser_images()).into(mHomedetailsimg3);  homedetails_personcount
-//        homedetails_personcount.setText(data.getGroup_count());
+        mHomedetailsFuntitle.setText(data.getLocation_name());
+        Glide.with(this).load(data.getUser_images()) .apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mHomedetailsPeople);
+        homedetails_personcount.setText(data.getMy_status());
+        if (data.getErrollment_number().isEmpty()){
+            mHomedetailsTicket.setText(data.getErrollment_number());
+        }else {
+            mHomedetailsTicket.setText("free");
+            tvv.setVisibility(View.GONE);
+        }
+        Log.i("My_status", "onSuccessHomedetails: " + data.getMy_status()+data.getCost());
     }
 
     @Override

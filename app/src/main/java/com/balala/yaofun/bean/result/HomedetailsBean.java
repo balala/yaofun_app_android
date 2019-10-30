@@ -6,7 +6,7 @@ public class HomedetailsBean  {
 
 
     /**
-     * data : {"UM_wxFriends_url":"https://m.yaofun.vip/activityinfo?id=5db035396ae1cfb2130ef3f1","_id":"5db035396ae1cfb2130ef3f1","auditing_count":0,"content_array":["恶魔眼找我"],"cost":0,"cover":"https://img.yaofun.vip/2019/09/13/45df684a-d5f8-11e9-94d1-acde48001122.png","cover_height":600,"cover_width":451,"door_number":"","earliest5img":[],"el_id":"","errollment_ios":"报名中","errollment_ios_detail":"立即报名","errollment_number":25,"errollment_status":"normal","errollment_wx_detail":"立即报名","errollment_wx_list":"报名中","errollment_wx_list_my":"报名中","good_id":"5db035396ae1cfb2130ef3f2","group_count":0,"group_id":"","has_join_number":0,"has_join_user_group":false,"is_delete":false,"last24hours":false,"less24hours":false,"limit_number":2,"location_name":"新丝界美发沙龙","my_status":8,"need_audit":true,"place_text":{"adcode":"","address":"慧忠北里408楼1层3号门","businessArea":"","city":"","citycode":"","direction":"","distance":4,"district":"","email":"","gridcode":"","hasIndoorMap":false,"images":[],"location":{"latitude":40.002917,"longitude":116.405218},"name":"新丝界美发沙龙","parkingType":"","pcode":"","postcode":"","province":"","shopID":"","tel":"010-57720555","type":"生活服务;美容美发店;美容美发店","typecode":"071100","uid":"B0FFHJPRMK","website":""},"post_card_url":"https://img.yaofun.vip/2019/10/23/c6193138-f585-11e9-b6bf-0242ac130003.png","product_id":"5db035396ae1cfb2130ef3f1","qq_url":"","qr_code_state":"","qr_code_url":"","rich_introduce":"<p>恶魔眼找我<\/p>","rule_time":"10-30 20:00","show_picture":false,"signup_status":"未报名","start_end_time":"10/31 下周四 20:00 - 23:00","start_month_day":"10/31","start_year":2019,"temporary_user_group_id":"5db0354b6ae1cfb2130ef3ff","title":"审核活动吧","type_array":["文本"],"update_count":0,"user_autograph":[],"user_id":"5cde140a71ab1051bdada8b7","user_identity":"未报名用户","user_images":"https://img.yaofun.vip/2019/10/11/fa9ec260-ec02-11e9-abc2-0242ac13000c.png","user_label":["我就是我","职业秃头","专业写BUG"],"user_nick_name":"黄小明666","user_phone":"10000000000","wx_share_image":"https://img.yaofun.vip/2019/10/23/c5353528-f585-11e9-b6bf-0242ac130003.jpg","wx_share_url":"/pages/login/login?share_query=true&type=activity&id=5db035396ae1cfb2130ef3f1"}
+     * data : {"UM_wxFriends_url":"https://m.yaofun.vip/activityinfo?id=5db81532a77870fcf9d9d610","_id":"5db81532a77870fcf9d9d610","auditing_count":0,"content_array":["摁着我在真转我","https://img.yaofun.vip/2019/09/12/724829b2-d549-11e9-a450-0242ac130002.png","https://img.yaofun.vip/2019/09/12/74217bda-d549-11e9-a450-0242ac130002.png"],"cost":0,"cover":"https://img.yaofun.vip/2019/08/30/db23dec6-cafa-11e9-8483-acde48001122.png","cover_height":600,"cover_width":600,"door_number":"","earliest5img":[],"el_id":"","errollment_ios":"报名中","errollment_ios_detail":"立即报名","errollment_number":25,"errollment_status":"normal","errollment_wx_detail":"立即报名","errollment_wx_list":"报名中","errollment_wx_list_my":"报名中","good_id":"5db81532a77870fcf9d9d611","group_count":0,"group_id":"","has_join_number":0,"has_join_user_group":false,"is_delete":false,"last24hours":false,"less24hours":false,"limit_number":6,"location_name":"新丝界","my_status":8,"need_audit":false,"place_text":{"address":"大屯路慧忠北里309号楼D座1层附近","location":{"latitude":"40.002931","longitude":"116.405224"},"name":"新丝界"},"post_card_url":"https://img.yaofun.vip/2019/10/29/68579466-fa37-11e9-8724-0242ac13000c.png","product_id":"5db81532a77870fcf9d9d610","qq_url":"","qr_code_state":"","qr_code_url":"","rich_introduce":"<p>摁着我在真转我<\/p><img src='https://img.yaofun.vip/2019/09/12/724829b2-d549-11e9-a450-0242ac130002.png'><\/img><img src='https://img.yaofun.vip/2019/09/12/74217bda-d549-11e9-a450-0242ac130002.png'><\/img>","rule_time":"10-30 19:00","show_picture":false,"signup_status":"未报名","start_end_time":"10/31 本周四 19:00 - 22:00","start_month_day":"10/31","start_year":2019,"temporary_user_group_id":"5db81547a77870fcf9d9d61f","title":"黄小明同学测试一下","type_array":["文本","图片","图片"],"update_count":0,"user_autograph":[],"user_id":"5cde140a71ab1051bdada8b7","user_identity":"未报名用户","user_images":"https://img.yaofun.vip/2019/10/11/fa9ec260-ec02-11e9-abc2-0242ac13000c.png","user_label":["我就是我","职业秃头","专业写BUG"],"user_nick_name":"黄小明666","user_phone":"10000000000","wx_share_image":"https://img.yaofun.vip/2019/10/29/66643966-fa37-11e9-8724-0242ac13000c.jpg","wx_share_url":"/pages/login/login?share_query=true&type=activity&id=5db81532a77870fcf9d9d610"}
      * msg : 请求成功
      * page : 0
      * pageSize : 0
@@ -71,14 +71,14 @@ public class HomedetailsBean  {
 
     public static class DataBean {
         /**
-         * UM_wxFriends_url : https://m.yaofun.vip/activityinfo?id=5db035396ae1cfb2130ef3f1
-         * _id : 5db035396ae1cfb2130ef3f1
+         * UM_wxFriends_url : https://m.yaofun.vip/activityinfo?id=5db81532a77870fcf9d9d610
+         * _id : 5db81532a77870fcf9d9d610
          * auditing_count : 0
-         * content_array : ["恶魔眼找我"]
+         * content_array : ["摁着我在真转我","https://img.yaofun.vip/2019/09/12/724829b2-d549-11e9-a450-0242ac130002.png","https://img.yaofun.vip/2019/09/12/74217bda-d549-11e9-a450-0242ac130002.png"]
          * cost : 0
-         * cover : https://img.yaofun.vip/2019/09/13/45df684a-d5f8-11e9-94d1-acde48001122.png
+         * cover : https://img.yaofun.vip/2019/08/30/db23dec6-cafa-11e9-8483-acde48001122.png
          * cover_height : 600
-         * cover_width : 451
+         * cover_width : 600
          * door_number :
          * earliest5img : []
          * el_id :
@@ -89,7 +89,7 @@ public class HomedetailsBean  {
          * errollment_wx_detail : 立即报名
          * errollment_wx_list : 报名中
          * errollment_wx_list_my : 报名中
-         * good_id : 5db035396ae1cfb2130ef3f2
+         * good_id : 5db81532a77870fcf9d9d611
          * group_count : 0
          * group_id :
          * has_join_number : 0
@@ -97,26 +97,26 @@ public class HomedetailsBean  {
          * is_delete : false
          * last24hours : false
          * less24hours : false
-         * limit_number : 2
-         * location_name : 新丝界美发沙龙
+         * limit_number : 6
+         * location_name : 新丝界
          * my_status : 8
-         * need_audit : true
-         * place_text : {"adcode":"","address":"慧忠北里408楼1层3号门","businessArea":"","city":"","citycode":"","direction":"","distance":4,"district":"","email":"","gridcode":"","hasIndoorMap":false,"images":[],"location":{"latitude":40.002917,"longitude":116.405218},"name":"新丝界美发沙龙","parkingType":"","pcode":"","postcode":"","province":"","shopID":"","tel":"010-57720555","type":"生活服务;美容美发店;美容美发店","typecode":"071100","uid":"B0FFHJPRMK","website":""}
-         * post_card_url : https://img.yaofun.vip/2019/10/23/c6193138-f585-11e9-b6bf-0242ac130003.png
-         * product_id : 5db035396ae1cfb2130ef3f1
+         * need_audit : false
+         * place_text : {"address":"大屯路慧忠北里309号楼D座1层附近","location":{"latitude":"40.002931","longitude":"116.405224"},"name":"新丝界"}
+         * post_card_url : https://img.yaofun.vip/2019/10/29/68579466-fa37-11e9-8724-0242ac13000c.png
+         * product_id : 5db81532a77870fcf9d9d610
          * qq_url :
          * qr_code_state :
          * qr_code_url :
-         * rich_introduce : <p>恶魔眼找我</p>
-         * rule_time : 10-30 20:00
+         * rich_introduce : <p>摁着我在真转我</p><img src='https://img.yaofun.vip/2019/09/12/724829b2-d549-11e9-a450-0242ac130002.png'></img><img src='https://img.yaofun.vip/2019/09/12/74217bda-d549-11e9-a450-0242ac130002.png'></img>
+         * rule_time : 10-30 19:00
          * show_picture : false
          * signup_status : 未报名
-         * start_end_time : 10/31 下周四 20:00 - 23:00
+         * start_end_time : 10/31 本周四 19:00 - 22:00
          * start_month_day : 10/31
          * start_year : 2019
-         * temporary_user_group_id : 5db0354b6ae1cfb2130ef3ff
-         * title : 审核活动吧
-         * type_array : ["文本"]
+         * temporary_user_group_id : 5db81547a77870fcf9d9d61f
+         * title : 黄小明同学测试一下
+         * type_array : ["文本","图片","图片"]
          * update_count : 0
          * user_autograph : []
          * user_id : 5cde140a71ab1051bdada8b7
@@ -125,14 +125,14 @@ public class HomedetailsBean  {
          * user_label : ["我就是我","职业秃头","专业写BUG"]
          * user_nick_name : 黄小明666
          * user_phone : 10000000000
-         * wx_share_image : https://img.yaofun.vip/2019/10/23/c5353528-f585-11e9-b6bf-0242ac130003.jpg
-         * wx_share_url : /pages/login/login?share_query=true&type=activity&id=5db035396ae1cfb2130ef3f1
+         * wx_share_image : https://img.yaofun.vip/2019/10/29/66643966-fa37-11e9-8724-0242ac13000c.jpg
+         * wx_share_url : /pages/login/login?share_query=true&type=activity&id=5db81532a77870fcf9d9d610
          */
 
         private String UM_wxFriends_url;
         private String _id;
         private int auditing_count;
-        private int cost;
+        private String cost;
         private String cover;
         private int cover_height;
         private int cover_width;
@@ -140,22 +140,22 @@ public class HomedetailsBean  {
         private String el_id;
         private String errollment_ios;
         private String errollment_ios_detail;
-        private int errollment_number;
+        private String errollment_number;
         private String errollment_status;
         private String errollment_wx_detail;
         private String errollment_wx_list;
         private String errollment_wx_list_my;
         private String good_id;
-        private int group_count;
+        private String group_count;
         private String group_id;
         private int has_join_number;
         private boolean has_join_user_group;
         private boolean is_delete;
         private boolean last24hours;
         private boolean less24hours;
-        private int limit_number;
+        private String limit_number;
         private String location_name;
-        private int my_status;
+        private String my_status;
         private boolean need_audit;
         private PlaceTextBean place_text;
         private String post_card_url;
@@ -210,11 +210,11 @@ public class HomedetailsBean  {
             this.auditing_count = auditing_count;
         }
 
-        public int getCost() {
+        public String getCost() {
             return cost;
         }
 
-        public void setCost(int cost) {
+        public void setCost(String cost) {
             this.cost = cost;
         }
 
@@ -274,11 +274,11 @@ public class HomedetailsBean  {
             this.errollment_ios_detail = errollment_ios_detail;
         }
 
-        public int getErrollment_number() {
+        public String getErrollment_number() {
             return errollment_number;
         }
 
-        public void setErrollment_number(int errollment_number) {
+        public void setErrollment_number(String errollment_number) {
             this.errollment_number = errollment_number;
         }
 
@@ -322,11 +322,11 @@ public class HomedetailsBean  {
             this.good_id = good_id;
         }
 
-        public int getGroup_count() {
+        public String getGroup_count() {
             return group_count;
         }
 
-        public void setGroup_count(int group_count) {
+        public void setGroup_count(String group_count) {
             this.group_count = group_count;
         }
 
@@ -378,11 +378,11 @@ public class HomedetailsBean  {
             this.less24hours = less24hours;
         }
 
-        public int getLimit_number() {
+        public String getLimit_number() {
             return limit_number;
         }
 
-        public void setLimit_number(int limit_number) {
+        public void setLimit_number(String limit_number) {
             this.limit_number = limit_number;
         }
 
@@ -394,11 +394,11 @@ public class HomedetailsBean  {
             this.location_name = location_name;
         }
 
-        public int getMy_status() {
+        public String getMy_status() {
             return my_status;
         }
 
-        public void setMy_status(int my_status) {
+        public void setMy_status(String my_status) {
             this.my_status = my_status;
         }
 
@@ -636,64 +636,14 @@ public class HomedetailsBean  {
 
         public static class PlaceTextBean {
             /**
-             * adcode :
-             * address : 慧忠北里408楼1层3号门
-             * businessArea :
-             * city :
-             * citycode :
-             * direction :
-             * distance : 4
-             * district :
-             * email :
-             * gridcode :
-             * hasIndoorMap : false
-             * images : []
-             * location : {"latitude":40.002917,"longitude":116.405218}
-             * name : 新丝界美发沙龙
-             * parkingType :
-             * pcode :
-             * postcode :
-             * province :
-             * shopID :
-             * tel : 010-57720555
-             * type : 生活服务;美容美发店;美容美发店
-             * typecode : 071100
-             * uid : B0FFHJPRMK
-             * website :
+             * address : 大屯路慧忠北里309号楼D座1层附近
+             * location : {"latitude":"40.002931","longitude":"116.405224"}
+             * name : 新丝界
              */
 
-            private String adcode;
             private String address;
-            private String businessArea;
-            private String city;
-            private String citycode;
-            private String direction;
-            private int distance;
-            private String district;
-            private String email;
-            private String gridcode;
-            private boolean hasIndoorMap;
             private LocationBean location;
             private String name;
-            private String parkingType;
-            private String pcode;
-            private String postcode;
-            private String province;
-            private String shopID;
-            private String tel;
-            private String type;
-            private String typecode;
-            private String uid;
-            private String website;
-            private List<?> images;
-
-            public String getAdcode() {
-                return adcode;
-            }
-
-            public void setAdcode(String adcode) {
-                this.adcode = adcode;
-            }
 
             public String getAddress() {
                 return address;
@@ -701,78 +651,6 @@ public class HomedetailsBean  {
 
             public void setAddress(String address) {
                 this.address = address;
-            }
-
-            public String getBusinessArea() {
-                return businessArea;
-            }
-
-            public void setBusinessArea(String businessArea) {
-                this.businessArea = businessArea;
-            }
-
-            public String getCity() {
-                return city;
-            }
-
-            public void setCity(String city) {
-                this.city = city;
-            }
-
-            public String getCitycode() {
-                return citycode;
-            }
-
-            public void setCitycode(String citycode) {
-                this.citycode = citycode;
-            }
-
-            public String getDirection() {
-                return direction;
-            }
-
-            public void setDirection(String direction) {
-                this.direction = direction;
-            }
-
-            public int getDistance() {
-                return distance;
-            }
-
-            public void setDistance(int distance) {
-                this.distance = distance;
-            }
-
-            public String getDistrict() {
-                return district;
-            }
-
-            public void setDistrict(String district) {
-                this.district = district;
-            }
-
-            public String getEmail() {
-                return email;
-            }
-
-            public void setEmail(String email) {
-                this.email = email;
-            }
-
-            public String getGridcode() {
-                return gridcode;
-            }
-
-            public void setGridcode(String gridcode) {
-                this.gridcode = gridcode;
-            }
-
-            public boolean isHasIndoorMap() {
-                return hasIndoorMap;
-            }
-
-            public void setHasIndoorMap(boolean hasIndoorMap) {
-                this.hasIndoorMap = hasIndoorMap;
             }
 
             public LocationBean getLocation() {
@@ -791,116 +669,28 @@ public class HomedetailsBean  {
                 this.name = name;
             }
 
-            public String getParkingType() {
-                return parkingType;
-            }
-
-            public void setParkingType(String parkingType) {
-                this.parkingType = parkingType;
-            }
-
-            public String getPcode() {
-                return pcode;
-            }
-
-            public void setPcode(String pcode) {
-                this.pcode = pcode;
-            }
-
-            public String getPostcode() {
-                return postcode;
-            }
-
-            public void setPostcode(String postcode) {
-                this.postcode = postcode;
-            }
-
-            public String getProvince() {
-                return province;
-            }
-
-            public void setProvince(String province) {
-                this.province = province;
-            }
-
-            public String getShopID() {
-                return shopID;
-            }
-
-            public void setShopID(String shopID) {
-                this.shopID = shopID;
-            }
-
-            public String getTel() {
-                return tel;
-            }
-
-            public void setTel(String tel) {
-                this.tel = tel;
-            }
-
-            public String getType() {
-                return type;
-            }
-
-            public void setType(String type) {
-                this.type = type;
-            }
-
-            public String getTypecode() {
-                return typecode;
-            }
-
-            public void setTypecode(String typecode) {
-                this.typecode = typecode;
-            }
-
-            public String getUid() {
-                return uid;
-            }
-
-            public void setUid(String uid) {
-                this.uid = uid;
-            }
-
-            public String getWebsite() {
-                return website;
-            }
-
-            public void setWebsite(String website) {
-                this.website = website;
-            }
-
-            public List<?> getImages() {
-                return images;
-            }
-
-            public void setImages(List<?> images) {
-                this.images = images;
-            }
-
             public static class LocationBean {
                 /**
-                 * latitude : 40.002917
-                 * longitude : 116.405218
+                 * latitude : 40.002931
+                 * longitude : 116.405224
                  */
 
-                private double latitude;
-                private double longitude;
+                private String latitude;
+                private String longitude;
 
-                public double getLatitude() {
+                public String getLatitude() {
                     return latitude;
                 }
 
-                public void setLatitude(double latitude) {
+                public void setLatitude(String latitude) {
                     this.latitude = latitude;
                 }
 
-                public double getLongitude() {
+                public String getLongitude() {
                     return longitude;
                 }
 
-                public void setLongitude(double longitude) {
+                public void setLongitude(String longitude) {
                     this.longitude = longitude;
                 }
             }

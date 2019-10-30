@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_260"
+    android:layout_height="@dimen/dp_270"
     android:background="@color/black"
     android:orientation="vertical">
 
     <ImageView
         android:layout_width="@dimen/dp_138"
+        android:layout_marginTop="@dimen/dp_40"
         android:layout_height="@dimen/dp_92"
         android:layout_gravity="center"
         android:src="@drawable/home_watch" />
