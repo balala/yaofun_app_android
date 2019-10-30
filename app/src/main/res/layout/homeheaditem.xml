@@ -25,43 +25,6 @@
             android:background="@color/homeblack"
             android:scaleType="centerCrop" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/home_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40"
-            android:layout_marginTop="@dimen/dp_40"
-            android:alpha="0.8"
-            app:layout_scrollFlags="scroll|enterAlways">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/sitetext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dp_25"
-                    android:text="@string/app_city"
-                    android:textColor="@color/colorwhite"
-                    android:textSize="@dimen/sp_16" />
-
-                <RelativeLayout
-                    android:layout_width="@dimen/dp_70"
-                    android:layout_height="@dimen/dp_70"
-                    android:layout_alignParentRight="true">
-
-                    <ImageView
-                        android:id="@+id/homescan"
-                        android:layout_width="@dimen/dp_22"
-                        android:layout_height="@dimen/dp_21"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/dp_17"
-                        android:src="@mipmap/home_scan" />
-                </RelativeLayout>
-
-            </RelativeLayout>
-
-        </androidx.appcompat.widget.Toolbar>
 
         <TextView
             android:layout_width="@dimen/dp_108"
@@ -174,27 +137,6 @@
                     android:textColor="@color/colorwhite"
                     android:textSize="@dimen/sp_14" />
             </LinearLayout>
-            <!--<TextView-->
-            <!--android:id="@+id/people_name"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/dp_75"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="@dimen/dp_3"-->
-            <!--android:text="尼采"-->
-            <!--android:textColor="@color/colorwhite"-->
-            <!--android:textSize="@dimen/sp_14" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/people_title"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginRight="@dimen/dp_10"-->
-            <!--android:layout_marginBottom="@dimen/dp_3"-->
-            <!--android:text="早上好"-->
-            <!--android:layout_alignLeft="@id/people_name"-->
-            <!--android:layout_marginLeft="@dimen/dp_70"-->
-            <!--android:textColor="@color/colorwhite"-->
-            <!--android:textSize="@dimen/sp_14" />-->
 
             <TextView
                 android:id="@+id/people_content"

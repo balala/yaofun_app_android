@@ -135,7 +135,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     @BindView(R.id.home_toolbar)
     Toolbar homeToolbar;
     @BindView(R.id.sw)
-    ScrollView sw;
+    RelativeLayout sw;
     @BindView(R.id.sitetext)
     TextView sitetext;
     @BindView(R.id.homeperchs)

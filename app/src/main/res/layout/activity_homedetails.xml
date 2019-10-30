@@ -16,476 +16,479 @@
         android:src="@mipmap/homedetails"
         android:visibility="visible" />
 
-
-    <ScrollView
+    <RelativeLayout
         android:id="@+id/sll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
 
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/homedetailsimg"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_494"
-                android:scaleType="fitXY" />
-
-
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dp_10">
+                android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/homedetails_back"
-                    android:layout_width="@dimen/dp_26"
-                    android:layout_height="@dimen/dp_26"
-                    android:layout_marginLeft="@dimen/dp_21"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:src="@drawable/back" />
-
-                <ImageView
-                    android:id="@+id/homedetails_menu"
-                    android:layout_width="@dimen/dp_26"
-                    android:layout_height="@dimen/dp_26"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:layout_marginRight="@dimen/dp_20"
-                    android:src="@drawable/topmenu" />
-            </RelativeLayout>
-
-
-            <LinearLayout
-                android:id="@+id/llt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dp_500"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/homedetails_title"
+                    android:id="@+id/homedetailsimg"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/homedetailsimg"
-                    android:layout_marginLeft="@dimen/dp_19"
-                    android:layout_marginTop="@dimen/dp_34"
-                    android:layout_marginRight="@dimen/dp_51"
-                    android:textColor="@color/colorwhite"
-                    android:textSize="@dimen/sp_22" />
-
-                <ImageView
-                    android:id="@+id/homedetails_xiahua"
-                    android:layout_width="@dimen/dp_39"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_21"
-                    android:layout_marginTop="@dimen/dp_32"
-                    android:src="@drawable/xiahua" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_63"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/homedetails_peoplename"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_20"
-                        android:textColor="@color/colorwhite"
-                        android:textSize="@dimen/sp_24" />
-
-                    <ImageView
-                        android:layout_width="@dimen/dp_55"
-                        android:layout_height="@dimen/dp_24"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        android:layout_marginBottom="@dimen/dp_30"
-                        android:src="@drawable/homedetails_peoplered" />
-                </LinearLayout>
+                    android:layout_height="@dimen/dp_494"
+                    android:scaleType="fitXY" />
 
 
                 <LinearLayout
+                    android:id="@+id/llt"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_500"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/homedetails_label1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_29"
-                        android:text="#我不需要标签"
-                        android:textColor="@color/colorwhite"
-                        android:textSize="@dimen/sp_15" />
-
-                    <TextView
-                        android:id="@+id/homedetails_label2"
+                        android:id="@+id/homedetails_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/homedetailsimg"
                         android:layout_marginLeft="@dimen/dp_19"
-                        android:layout_marginTop="@dimen/dp_29"
-                        android:text="#我不是Jack波"
+                        android:layout_marginTop="@dimen/dp_34"
+                        android:layout_marginRight="@dimen/dp_51"
                         android:textColor="@color/colorwhite"
-                        android:textSize="@dimen/sp_15" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/homedetails_signature"
-                    android:layout_width="@dimen/dp_175"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:layout_marginTop="@dimen/dp_13"
-                    android:text="因为好奇，所以长生，因为好学，所以不老。因为爱所以爱。"
-                    android:textColor="@color/colorwhite"
-                    android:textSize="@dimen/sp_12" />
-
-                <include layout="@layout/homedetails_item1" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_60">
+                        android:textSize="@dimen/sp_22" />
 
                     <ImageView
-                        android:layout_width="@dimen/dp_14"
-                        android:layout_height="@dimen/dp_16"
-                        android:layout_marginLeft="@dimen/dp_20"
-                        android:src="@drawable/homedetails_time" />
-
-                    <TextView
-                        android:id="@+id/homedetails_time"
-                        android:layout_width="@dimen/dp_211"
+                        android:id="@+id/homedetails_xiahua"
+                        android:layout_width="@dimen/dp_39"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_14"
-                        android:textColor="@color/colorwhite"
-                        android:textSize="@dimen/sp_15" />
-                </LinearLayout>
+                        android:layout_marginLeft="@dimen/dp_21"
+                        android:layout_marginTop="@dimen/dp_32"
+                        android:src="@drawable/xiahua" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_21">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_63"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="@dimen/dp_14"
-                        android:layout_height="@dimen/dp_16"
+                        <TextView
+                            android:id="@+id/homedetails_peoplename"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_20"
+                            android:textColor="@color/colorwhite"
+                            android:textSize="@dimen/sp_24" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_55"
+                            android:layout_height="@dimen/dp_24"
+                            android:layout_marginLeft="@dimen/dp_5"
+                            android:layout_marginBottom="@dimen/dp_30"
+                            android:src="@drawable/homedetails_peoplered" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_20"
-                        android:src="@drawable/homedetails_site" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/homedetails_label1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_29"
+                            android:text="#我不需要标签"
+                            android:textColor="@color/colorwhite"
+                            android:textSize="@dimen/sp_15" />
+
+                        <TextView
+                            android:id="@+id/homedetails_label2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_19"
+                            android:layout_marginTop="@dimen/dp_29"
+                            android:text="#我不是Jack波"
+                            android:textColor="@color/colorwhite"
+                            android:textSize="@dimen/sp_15" />
+                    </LinearLayout>
 
                     <TextView
-                        android:id="@+id/homedetails_site"
+                        android:id="@+id/homedetails_signature"
+                        android:layout_width="@dimen/dp_175"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_13"
+                        android:text="因为好奇，所以长生，因为好学，所以不老。因为爱所以爱。"
+                        android:textColor="@color/colorwhite"
+                        android:textSize="@dimen/sp_12" />
+
+                    <include layout="@layout/homedetails_item1" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp_60">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_14"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_marginLeft="@dimen/dp_20"
+                            android:src="@drawable/homedetails_time" />
+
+                        <TextView
+                            android:id="@+id/homedetails_time"
+                            android:layout_width="@dimen/dp_211"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_14"
+                            android:textColor="@color/colorwhite"
+                            android:textSize="@dimen/sp_15" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp_21">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_14"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_marginLeft="@dimen/dp_20"
+                            android:src="@drawable/homedetails_site" />
+
+                        <TextView
+                            android:id="@+id/homedetails_site"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_14"
+                            android:textColor="@color/colorwhite"
+                            android:textSize="@dimen/sp_15" />
+
+                        <ImageView
+                            android:id="@+id/homedetails_navigation"
+                            android:layout_width="@dimen/dp_14"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_marginLeft="@dimen/dp_12"
+                            android:src="@drawable/homedetails_location" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp_21"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_14"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_marginLeft="@dimen/dp_20"
+                            android:src="@drawable/homedetails_ticket" />
+
+                        <TextView
+                            android:id="@+id/tvv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_14"
+                            android:text="¥"
+                            android:textColor="@color/colorwhite" />
+
+                        <TextView
+                            android:id="@+id/homedetails_ticket"
+                            android:layout_width="@dimen/dp_211"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_17"
+                            android:text=""
+                            android:textColor="@color/colorwhite"
+                            android:textSize="@dimen/sp_15" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp_21"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_14"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_marginLeft="@dimen/dp_20"
+                            android:src="@drawable/peopleconut" />
+
+                        <TextView
+                            android:id="@+id/homedetails_personcount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_14"
+                            android:textColor="@color/colorwhite"
+                            android:textSize="@dimen/sp_15" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/dp_100"
+                            android:text="人"
+                            android:textColor="@color/colorwhite" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/allrv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp_60" />
+                    <!--<ImageView-->
+                    <!--android:id="@+id/homedetails_img1"-->
+                    <!--android:layout_width="@dimen/dp_334"-->
+                    <!--android:layout_height="@dimen/dp_200"-->
+                    <!--android:layout_marginLeft="@dimen/dp_20"-->
+                    <!--android:layout_marginTop="@dimen/dp_60"-->
+                    <!--android:layout_marginRight="@dimen/dp_21"-->
+                    <!--android:scaleType="fitXY" />-->
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/homedetails_text1"-->
+                    <!--android:layout_width="@dimen/dp_332"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/dp_21"-->
+                    <!--android:layout_marginTop="@dimen/dp_41"-->
+                    <!--android:layout_marginRight="@dimen/dp_24"-->
+                    <!--android:text="无非是借着梦的名义做自己罢如果说戏剧是所有难以启齿的梦想的保护色此刻，到底是戏如人生还是人生如戏？白日悠长，不免梦多2019北京国际花植设计节意图收集所有白日绵长的时间与炙热的梦想送给每一个敢于做梦的你"-->
+                    <!--android:textColor="@color/colorwhite"-->
+                    <!--android:textSize="@dimen/sp_15" />-->
+
+                    <!--<ImageView-->
+                    <!--android:id="@+id/homedetails_img2"-->
+                    <!--android:layout_width="@dimen/dp_332"-->
+                    <!--android:layout_height="@dimen/dp_200"-->
+                    <!--android:layout_marginLeft="@dimen/dp_20"-->
+                    <!--android:layout_marginTop="@dimen/dp_70"-->
+                    <!--android:layout_marginRight="@dimen/dp_21"-->
+                    <!--android:scaleType="fitXY" />-->
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/homedetails_text2"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/dp_21"-->
+                    <!--android:layout_marginTop="@dimen/dp_33"-->
+                    <!--android:layout_marginRight="@dimen/dp_24"-->
+                    <!--android:text="【展览周期】 2019年9月6日-9月15日【展览时间】花植创作艺术展：2019年9月6日-9月15日，10:30-19:00（周一闭馆）花植时装秀：2019年9月13日，15:00-16:00花植节沙龙：2019年9月7、8日，10:00-17:20【主会场展览和沙龙场地】 繁星戏剧村【分会场花植时装秀场地】龙湖北京大兴天街"-->
+                    <!--android:textColor="@color/colorwhite"-->
+                    <!--android:textSize="@dimen/sp_15" />-->
+
+                    <!--<ImageView-->
+                    <!--android:id="@+id/homedetails_img3"-->
+                    <!--android:layout_width="@dimen/dp_332"-->
+                    <!--android:layout_height="@dimen/dp_200"-->
+                    <!--android:layout_marginLeft="@dimen/dp_20"-->
+                    <!--android:layout_marginTop="@dimen/dp_70"-->
+                    <!--android:layout_marginRight="@dimen/dp_21"-->
+                    <!--android:scaleType="fitXY" />-->
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/homedetails_text3"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/dp_21"-->
+                    <!--android:layout_marginTop="@dimen/dp_41"-->
+                    <!--android:layout_marginRight="@dimen/dp_24"-->
+                    <!--android:text="2019花植节跨界联合戏剧将主题定义为“白日梦”，以戏剧文学的力量模糊梦与现实的界限，为所有心怀“白日梦”的人提供一个舞台。花植节邀请到的每一位花艺设计师都拥有一个共同的身份标签“追梦人”，花承载着艺术与梦想，以一种柔软的充满香气的方式向这个世界宣告梦想的主权。"-->
+                    <!--android:textColor="@color/colorwhite"-->
+                    <!--android:textSize="@dimen/sp_15" />-->
+
+                    <!--<ImageView-->
+                    <!--android:id="@+id/homedetails_img4"-->
+                    <!--android:layout_width="@dimen/dp_332"-->
+                    <!--android:layout_height="@dimen/dp_200"-->
+                    <!--android:layout_marginLeft="@dimen/dp_20"-->
+                    <!--android:layout_marginTop="@dimen/dp_70"-->
+                    <!--android:layout_marginRight="@dimen/dp_21"-->
+                    <!--android:scaleType="fitXY" />-->
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/homedetails_text4"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/dp_21"-->
+                    <!--android:layout_marginTop="@dimen/dp_40"-->
+                    <!--android:layout_marginRight="@dimen/dp_24"-->
+                    <!--android:text="每个人都经历过梦境，梦境是能够实现欲望的一种原始的内在表达方式，它存在于每个人最隐秘的内心剧场。如果将梦仔细划分，你会发现有这么一群人，他们的梦不仅只存在于夜晚，更存在于每个灿烂的白昼，让心先身体一步晒上太阳。-->
+                    <!--花植节特邀14位不同身份不同领域的“追梦人”讲述自己的人生，为你的梦想给予点滴灵感。"-->
+                    <!--android:textColor="@color/colorwhite"-->
+                    <!--android:textSize="@dimen/sp_15" />-->
+
+                    <!--<ImageView-->
+                    <!--android:id="@+id/homedetails_textback"-->
+                    <!--android:layout_width="@dimen/dp_6"-->
+                    <!--android:layout_height="@dimen/dp_12"-->
+                    <!--android:layout_marginLeft="@dimen/dp_353"-->
+                    <!--android:layout_marginTop="@dimen/dp_5"-->
+                    <!--android:src="@drawable/homedetails_back" />-->
+
+                    <!--<ImageView-->
+                    <!--android:id="@+id/homedetails_img5"-->
+                    <!--android:layout_width="@dimen/dp_335"-->
+                    <!--android:layout_height="@dimen/dp_478"-->
+                    <!--android:layout_marginLeft="@dimen/dp_20"-->
+                    <!--android:layout_marginTop="@dimen/dp_70"-->
+                    <!--android:layout_marginRight="@dimen/dp_20"-->
+                    <!--android:scaleType="fitXY" />-->
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/homedetails_text5"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/dp_22"-->
+                    <!--android:layout_marginTop="@dimen/dp_40"-->
+                    <!--android:text="喜欢“做梦”的小伙伴速度约起来吧"-->
+                    <!--android:textColor="@color/colordeepgray"-->
+                    <!--android:textSize="@dimen/sp_15" />-->
+
+                    <ImageView
+                        android:id="@+id/homedetails_img6"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_21"
+                        android:layout_marginTop="@dimen/dp_30"
+                        android:layout_marginRight="@dimen/dp_315"
+                        android:src="@drawable/xiahua" />
+
+                    <include layout="@layout/homedetails_item2" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_53"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="@dimen/dp_20"
+                            android:text="给发起人留言"
+                            android:textColor="@color/colorwhite"
+                            android:textSize="@dimen/sp_15" />
+
+                        <ImageView
+                            android:id="@+id/homedetails_wirte"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dp_19"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="@dimen/dp_328"
+                            android:layout_marginRight="@dimen/dp_18"
+                            android:src="@drawable/homedetails_word" />
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/homedetails_rv2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_43"
+                        android:layout_marginRight="@dimen/dp_18" />
+
+                    <View
+                        android:layout_width="@dimen/dp_375"
+                        android:layout_height="@dimen/dp_1"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_56"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:background="@color/colordeepgray" />
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_14"
-                        android:textColor="@color/colorwhite"
-                        android:textSize="@dimen/sp_15" />
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dp_140"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:layout_marginRight="@dimen/dp_147"
+                        android:text="没有更多数据了"
+                        android:textColor="@color/colordeepgrays"
+                        android:textSize="@dimen/sp_13" />
 
-                    <ImageView
-                        android:id="@+id/homedetails_navigation"
-                        android:layout_width="@dimen/dp_14"
-                        android:layout_height="@dimen/dp_16"
-                        android:layout_marginLeft="@dimen/dp_12"
-                        android:src="@drawable/homedetails_location" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp_48"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/homedetails_message"
+                            android:layout_width="@dimen/dp_21"
+                            android:layout_height="@dimen/dp_22"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="@dimen/dp_21"
+                            android:layout_marginTop="@dimen/dp_35"
+                            android:layout_marginBottom="@dimen/dp_26"
+                            android:src="@drawable/homedetails_speak" />
+
+                        <Button
+                            android:id="@+id/homedetailsgo"
+                            android:layout_width="@dimen/dp_148"
+                            android:layout_height="@dimen/dp_45"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginLeft="@dimen/dp_72"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:layout_marginRight="@dimen/dp_114"
+                            android:layout_marginBottom="@dimen/dp_14"
+                            android:background="@drawable/yuan"
+                            android:gravity="center"
+                            android:text="立即报名"
+                            android:textColor="@color/black" />
+                    </RelativeLayout>
+
+
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_21"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/dp_14"
-                        android:layout_height="@dimen/dp_16"
-                        android:layout_marginLeft="@dimen/dp_20"
-                        android:src="@drawable/homedetails_ticket" />
-
-                    <TextView
-                        android:id="@+id/tvv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_14"
-                        android:text="¥"
-                        android:textColor="@color/colorwhite" />
-
-                    <TextView
-                        android:id="@+id/homedetails_ticket"
-                        android:layout_width="@dimen/dp_211"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_17"
-                        android:text=""
-                        android:textColor="@color/colorwhite"
-                        android:textSize="@dimen/sp_15" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_21"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/dp_14"
-                        android:layout_height="@dimen/dp_16"
-                        android:layout_marginLeft="@dimen/dp_20"
-                        android:src="@drawable/peopleconut" />
-
-                    <TextView
-                        android:id="@+id/homedetails_personcount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_14"
-                        android:textColor="@color/colorwhite"
-                        android:textSize="@dimen/sp_15" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/dp_100"
-                        android:text="人"
-                        android:textColor="@color/colorwhite" />
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/allrv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_60" />
-                <!--<ImageView-->
-                <!--android:id="@+id/homedetails_img1"-->
-                <!--android:layout_width="@dimen/dp_334"-->
-                <!--android:layout_height="@dimen/dp_200"-->
-                <!--android:layout_marginLeft="@dimen/dp_20"-->
-                <!--android:layout_marginTop="@dimen/dp_60"-->
-                <!--android:layout_marginRight="@dimen/dp_21"-->
-                <!--android:scaleType="fitXY" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/homedetails_text1"-->
-                <!--android:layout_width="@dimen/dp_332"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="@dimen/dp_21"-->
-                <!--android:layout_marginTop="@dimen/dp_41"-->
-                <!--android:layout_marginRight="@dimen/dp_24"-->
-                <!--android:text="无非是借着梦的名义做自己罢如果说戏剧是所有难以启齿的梦想的保护色此刻，到底是戏如人生还是人生如戏？白日悠长，不免梦多2019北京国际花植设计节意图收集所有白日绵长的时间与炙热的梦想送给每一个敢于做梦的你"-->
-                <!--android:textColor="@color/colorwhite"-->
-                <!--android:textSize="@dimen/sp_15" />-->
-
-                <!--<ImageView-->
-                <!--android:id="@+id/homedetails_img2"-->
-                <!--android:layout_width="@dimen/dp_332"-->
-                <!--android:layout_height="@dimen/dp_200"-->
-                <!--android:layout_marginLeft="@dimen/dp_20"-->
-                <!--android:layout_marginTop="@dimen/dp_70"-->
-                <!--android:layout_marginRight="@dimen/dp_21"-->
-                <!--android:scaleType="fitXY" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/homedetails_text2"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="@dimen/dp_21"-->
-                <!--android:layout_marginTop="@dimen/dp_33"-->
-                <!--android:layout_marginRight="@dimen/dp_24"-->
-                <!--android:text="【展览周期】 2019年9月6日-9月15日【展览时间】花植创作艺术展：2019年9月6日-9月15日，10:30-19:00（周一闭馆）花植时装秀：2019年9月13日，15:00-16:00花植节沙龙：2019年9月7、8日，10:00-17:20【主会场展览和沙龙场地】 繁星戏剧村【分会场花植时装秀场地】龙湖北京大兴天街"-->
-                <!--android:textColor="@color/colorwhite"-->
-                <!--android:textSize="@dimen/sp_15" />-->
-
-                <!--<ImageView-->
-                <!--android:id="@+id/homedetails_img3"-->
-                <!--android:layout_width="@dimen/dp_332"-->
-                <!--android:layout_height="@dimen/dp_200"-->
-                <!--android:layout_marginLeft="@dimen/dp_20"-->
-                <!--android:layout_marginTop="@dimen/dp_70"-->
-                <!--android:layout_marginRight="@dimen/dp_21"-->
-                <!--android:scaleType="fitXY" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/homedetails_text3"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="@dimen/dp_21"-->
-                <!--android:layout_marginTop="@dimen/dp_41"-->
-                <!--android:layout_marginRight="@dimen/dp_24"-->
-                <!--android:text="2019花植节跨界联合戏剧将主题定义为“白日梦”，以戏剧文学的力量模糊梦与现实的界限，为所有心怀“白日梦”的人提供一个舞台。花植节邀请到的每一位花艺设计师都拥有一个共同的身份标签“追梦人”，花承载着艺术与梦想，以一种柔软的充满香气的方式向这个世界宣告梦想的主权。"-->
-                <!--android:textColor="@color/colorwhite"-->
-                <!--android:textSize="@dimen/sp_15" />-->
-
-                <!--<ImageView-->
-                <!--android:id="@+id/homedetails_img4"-->
-                <!--android:layout_width="@dimen/dp_332"-->
-                <!--android:layout_height="@dimen/dp_200"-->
-                <!--android:layout_marginLeft="@dimen/dp_20"-->
-                <!--android:layout_marginTop="@dimen/dp_70"-->
-                <!--android:layout_marginRight="@dimen/dp_21"-->
-                <!--android:scaleType="fitXY" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/homedetails_text4"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="@dimen/dp_21"-->
-                <!--android:layout_marginTop="@dimen/dp_40"-->
-                <!--android:layout_marginRight="@dimen/dp_24"-->
-                <!--android:text="每个人都经历过梦境，梦境是能够实现欲望的一种原始的内在表达方式，它存在于每个人最隐秘的内心剧场。如果将梦仔细划分，你会发现有这么一群人，他们的梦不仅只存在于夜晚，更存在于每个灿烂的白昼，让心先身体一步晒上太阳。-->
-                <!--花植节特邀14位不同身份不同领域的“追梦人”讲述自己的人生，为你的梦想给予点滴灵感。"-->
-                <!--android:textColor="@color/colorwhite"-->
-                <!--android:textSize="@dimen/sp_15" />-->
-
-                <!--<ImageView-->
-                <!--android:id="@+id/homedetails_textback"-->
-                <!--android:layout_width="@dimen/dp_6"-->
-                <!--android:layout_height="@dimen/dp_12"-->
-                <!--android:layout_marginLeft="@dimen/dp_353"-->
-                <!--android:layout_marginTop="@dimen/dp_5"-->
-                <!--android:src="@drawable/homedetails_back" />-->
-
-                <!--<ImageView-->
-                <!--android:id="@+id/homedetails_img5"-->
-                <!--android:layout_width="@dimen/dp_335"-->
-                <!--android:layout_height="@dimen/dp_478"-->
-                <!--android:layout_marginLeft="@dimen/dp_20"-->
-                <!--android:layout_marginTop="@dimen/dp_70"-->
-                <!--android:layout_marginRight="@dimen/dp_20"-->
-                <!--android:scaleType="fitXY" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/homedetails_text5"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="@dimen/dp_22"-->
-                <!--android:layout_marginTop="@dimen/dp_40"-->
-                <!--android:text="喜欢“做梦”的小伙伴速度约起来吧"-->
-                <!--android:textColor="@color/colordeepgray"-->
-                <!--android:textSize="@dimen/sp_15" />-->
 
                 <ImageView
-                    android:id="@+id/homedetails_img6"
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_21"
-                    android:layout_marginTop="@dimen/dp_30"
-                    android:layout_marginRight="@dimen/dp_315"
-                    android:src="@drawable/xiahua" />
+                    android:id="@+id/homedetails_people"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="@dimen/dp_120"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/dp_670"
+                    android:layout_marginRight="@dimen/dp_10" />
 
-                <include layout="@layout/homedetails_item2" />
+            </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_53"
-                    android:orientation="horizontal">
+        </ScrollView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="@dimen/dp_20"
-                        android:text="给发起人留言"
-                        android:textColor="@color/colorwhite"
-                        android:textSize="@dimen/sp_15" />
-
-                    <ImageView
-                        android:id="@+id/homedetails_wirte"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dp_19"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginLeft="@dimen/dp_328"
-                        android:layout_marginRight="@dimen/dp_18"
-                        android:src="@drawable/homedetails_word" />
-                </RelativeLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/homedetails_rv2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:layout_marginTop="@dimen/dp_43"
-                    android:layout_marginRight="@dimen/dp_18" />
-
-                <View
-                    android:layout_width="@dimen/dp_375"
-                    android:layout_height="@dimen/dp_1"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:layout_marginTop="@dimen/dp_56"
-                    android:layout_marginRight="@dimen/dp_20"
-                    android:background="@color/colordeepgray" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/dp_140"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:layout_marginRight="@dimen/dp_147"
-                    android:text="没有更多数据了"
-                    android:textColor="@color/colordeepgrays"
-                    android:textSize="@dimen/sp_13" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_48"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/homedetails_message"
-                        android:layout_width="@dimen/dp_21"
-                        android:layout_height="@dimen/dp_22"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="@dimen/dp_21"
-                        android:layout_marginTop="@dimen/dp_35"
-                        android:layout_marginBottom="@dimen/dp_26"
-                        android:src="@drawable/homedetails_speak" />
-
-                    <Button
-                        android:id="@+id/homedetailsgo"
-                        android:layout_width="@dimen/dp_148"
-                        android:layout_height="@dimen/dp_45"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginLeft="@dimen/dp_72"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:layout_marginRight="@dimen/dp_114"
-                        android:layout_marginBottom="@dimen/dp_14"
-                        android:background="@drawable/yuan"
-                        android:gravity="center"
-                        android:text="立即报名"
-                        android:textColor="@color/black" />
-                </RelativeLayout>
-
-
-            </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_10">
 
             <ImageView
-                android:id="@+id/homedetails_people"
-                android:layout_width="@dimen/dp_120"
-                android:layout_height="@dimen/dp_120"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_670"
-                android:layout_marginRight="@dimen/dp_10" />
+                android:id="@+id/homedetails_back"
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_26"
+                android:layout_marginLeft="@dimen/dp_21"
+                android:layout_marginTop="@dimen/dp_20"
+                android:src="@drawable/back" />
 
+            <ImageView
+                android:id="@+id/homedetails_menu"
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_26"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:src="@drawable/topmenu" />
         </RelativeLayout>
 
-    </ScrollView>
-
-    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
-    <!--android:id="@+id/homedetails_fab"-->
-    <!--android:layout_width="@dimen/dp_40"-->
-    <!--android:layout_height="@dimen/dp_41"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_margin="5dp"-->
-    <!--android:layout_marginRight="@dimen/dp_100"-->
-    <!--android:layout_marginBottom="@dimen/dp_100"-->
-    <!--android:backgroundTint="@color/colordeepgray"-->
-    <!--android:scaleType="fitXY"-->
-    <!--android:src="@drawable/icon_stick"-->
-    <!--app:borderWidth="@dimen/dp_0"-->
-    <!--app:elevation="8dp" />-->
+        <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
+        <!--android:id="@+id/homedetails_fab"-->
+        <!--android:layout_width="@dimen/dp_40"-->
+        <!--android:layout_height="@dimen/dp_41"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:layout_marginRight="@dimen/dp_100"-->
+        <!--android:layout_marginBottom="@dimen/dp_100"-->
+        <!--android:backgroundTint="@color/colordeepgray"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@drawable/icon_stick"-->
+        <!--app:borderWidth="@dimen/dp_0"-->
+        <!--app:elevation="8dp" />-->
+    </RelativeLayout>
 
 </RelativeLayout>

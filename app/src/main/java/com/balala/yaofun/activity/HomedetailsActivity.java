@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,9 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -127,12 +131,14 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
     //    @BindView(R.id.homedetails_fab)
 //    FloatingActionButton mHomedetailsFab;
     @BindView(R.id.sll)
-    ScrollView sll;
+    RelativeLayout sll;
     private PopupMenu mMenu;
     private LinearLayout popitem1;
     private LinearLayout popitem2;
     private LinearLayout popitem3;
     private LinearLayout popitem4;
+//    private String[] str = new String[]{""};
+
 
     @Override
     protected void initView() {
@@ -144,11 +150,19 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         basePresenter.getHomedetailsdata(id);
+        // TYPE判断条件
+//        List<String> strings = Arrays.asList(str);
+//        if(strings.contains("文本")&&!strings.contains("图片")){
+//
+//        }else if(!strings.contains("文本")&&strings.contains("图片")){
+//
+//        }else if(strings.contains("文本")&&strings.contains("图片")){
+//
+//        }
     }
 
     @Override
     protected void initData2() {
-
 
     }
 
@@ -266,40 +280,40 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
         popupWindow.showAsDropDown(mHomedetailsMenu);
 //        popupWindow.setFocusable(true);
 
-        popitem1 = mPopView.findViewById(R.id.popitem1);
-        popitem2 = mPopView.findViewById(R.id.popitem2);
-        popitem3 = mPopView.findViewById(R.id.popitem3);
-        popitem4 = mPopView.findViewById(R.id.popitem4);
+//        popitem1 = mPopView.findViewById(R.id.popitem1);
+//        popitem2 = mPopView.findViewById(R.id.popitem2);
+//        popitem3 = mPopView.findViewById(R.id.popitem3);
+//        popitem4 = mPopView.findViewById(R.id.popitem4);
 
-        //分享
-        popitem1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        //修改
-        popitem2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
-        //删除
-        popitem3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        //举报
-        popitem4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        //分享
+//        popitem1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//        //修改
+//        popitem2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//            }
+//        });
+//        //删除
+//        popitem3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//        //举报
+//        popitem4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
     }
 
     @Override

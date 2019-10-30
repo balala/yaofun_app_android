@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".fragment.HomeFragment">
 
     <ImageView
@@ -12,7 +13,14 @@
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:src="@mipmap/homeperch"
-        android:visibility="visible" />
+        android:visibility="visible"
+        />
+
+<RelativeLayout
+    android:id="@+id/sw"
+    android:visibility="gone"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_ly"
@@ -20,10 +28,9 @@
         android:layout_height="match_parent">
 
         <ScrollView
-            android:id="@+id/sw"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -154,6 +161,43 @@
             </LinearLayout>
         </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/home_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_40"
+        android:alpha="0.8"
+        app:layout_scrollFlags="scroll|enterAlways">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/sitetext"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_25"
+                android:text="@string/app_city"
+                android:textColor="@color/colorwhite"
+                android:textSize="@dimen/sp_16" />
+
+            <RelativeLayout
+                android:layout_width="@dimen/dp_70"
+                android:layout_height="@dimen/dp_70"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:id="@+id/homescan"
+                    android:layout_width="@dimen/dp_22"
+                    android:layout_height="@dimen/dp_21"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_17"
+                    android:src="@mipmap/home_scan" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+</RelativeLayout>
 
 </RelativeLayout>
