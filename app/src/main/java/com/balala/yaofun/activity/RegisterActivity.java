@@ -297,7 +297,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
     @Override
     protected void initData() {
         Log.i(TAG, "initData: " + phone);
-        basePresenter.getData(phone);
+//        basePresenter.getData(phone);
     }
 
     @Override
@@ -306,7 +306,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
         Log.e("验证验证码", "initData3: " + code + "\n" + phone + "\n" + key);
 
         if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(code) && !TextUtils.isEmpty(key)) {
-            basePresenter.getData2(phone, code, key);
+//            basePresenter.getData2(phone, code, key);
         }
 
     }
@@ -337,7 +337,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
         code = mEtIdentifiing.getText().toString().trim();
         password = mEtPassword.getText().toString().trim();
         if (verificationBean.isSuccess() & !TextUtils.isEmpty(code) & !TextUtils.isEmpty(password)) {
-            basePresenter.getData3(phone, code, key, password);
+//            basePresenter.getData3(phone, code, key, password);
         }
         Log.i(TAG, "验证码验证成功 ");
 //        ToastUtil.showLong("验证码验证成功");

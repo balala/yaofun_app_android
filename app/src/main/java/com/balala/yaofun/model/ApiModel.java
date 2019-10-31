@@ -32,6 +32,10 @@ public class  ApiModel extends BaseModel {
         setSubscribe(movieService.wxLoginOrRegist(getBaseMap(map)), resultCallBack);
     }
 
+    public static void phonePwdLogin(Map<String, ? extends  Object> map, ResultCallBack<BaseBean<UserBean>> resultCallBack){
+        setSubscribe(movieService.phonePwdLogin(getBaseMap(map)), resultCallBack);
+    }
+
     private static <T> void setSubscribe(Observable<T> observable, ResultCallBack<T> resultCallBack) {
         observable.subscribeOn(Schedulers.io())
                 .subscribeOn(Schedulers.newThread())//子线程访问网络

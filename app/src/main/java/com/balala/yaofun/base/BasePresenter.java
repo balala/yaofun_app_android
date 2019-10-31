@@ -12,13 +12,6 @@ public abstract class BasePresenter <v extends BaseView> {
         v v = weakReference.get();
         this.mView=v;
     }
-
-    public BasePresenter( ) {
-        initModel();
-    }
-
-    protected abstract void initModel();
-
     public void OnDestroy(){
         mView=null;
         for (BaseModel model : models) {

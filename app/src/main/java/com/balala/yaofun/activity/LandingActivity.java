@@ -57,6 +57,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -110,8 +111,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         mEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //           finish();
-                startActivity(new Intent(LandingActivity.this, GeneralActivity.class));
+                           finish();
             }
         });
 
@@ -166,14 +166,14 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
                 phone = mEt1.getText().toString().replaceAll(" ", "");
                 //重新拼接手机号
                 password = mEt2.getText().toString();
-                Log.e("xuzhiqi", "initData: " + password + "\n" + phone);
                 if (password.isEmpty() || phone.isEmpty()) {
                     Toast.makeText(LandingActivity.this, "请输入正确输入", Toast.LENGTH_SHORT).show();
                 } else {
-                    basePresenter.getLandingData(phone, password);
+                    Map<String,String> map=new HashMap<>();
+                    map.put("phone",phone.toString());
+                    map.put("password",password.toString());
+                    basePresenter.phonePwdLogin(map);
                 }
-                // 提示用户登陆成功
-//                startActivity(new Intent(LandingActivity.this, GeneralActivity.class));
 
             }
         });
@@ -239,34 +239,16 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         });
     }
 
-    // 登陆成功方法
-    @Override
-    public void onSuccessLanding(LandingBean bean) {
-        LandingBean.DataBean data = bean.getData();
-        Log.e("dada", "onSuccessLanding: " + data.toString());
-        Log.i("登陆成功打印", "onSuccessLanding: " + bean.getMsg());
-        String nick_name = data.getNick_name();
-        String images = data.getImages();
-        //将数据保存至SharedPreferences:
-        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("flag", true);
-        editor.putString("nick_name", nick_name);
-        editor.putString("images", images);
-        Log.i("aBoolean", "onSuccessLanding: " + editor);
-        editor.commit();
-        // 存储第一次登陆的信息
-        startActivity(new Intent(LandingActivity.this, GeneralActivity.class));
 
+    @Override
+    public void phonePwdLoginSuccess(BaseBean<UserBean> bean) {
+        //账户秘密登陆成功
+        loginSuccess(bean);
     }
 
-
-
-    // 登陆失败方法
     @Override
-    public void onErrorLanding(String error) {
-        Log.i("xuzhiqifndkf", "onErrorLanding: " + error);
-
+    public void phonePwdLoginFail() {
+        ToastUtil.showShort("微信登陆失败，请稍后重拾");
     }
 
     @Override
@@ -277,7 +259,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
 
     @Override
     public void wxLoginOrRegistFail() {
-
+        ToastUtil.showShort("微信登陆失败，请稍后重拾");
     }
     private void loginSuccess(BaseBean<UserBean> bean){
         //登陆成功通用处理
@@ -355,54 +337,6 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         }
         return false;
     }
-
-//    // 授权微信登陆
-//    private void initSou() {
-//
-//        if (!api.isWXAppInstalled()) {
-////            ToastUtils.showLong("您还没有安装微信");
-//            Toast.makeText(this, "您还没有安装微信", Toast.LENGTH_SHORT).show();
-//        } else {
-//            final SendAuth.Req req = new SendAuth.Req();
-//            req.scope = "snsapi_userinfo";
-//            req.state = "wechat_sdk_demo_test";
-//            api.sendReq(req);
-//        }
-//
-//    }
-//
-//    // 微信登陆
-//    private void initWechat() {
-//
-//        // 通过WXAPIFactory工厂，获取IWXAPI的实例
-//        api = WXAPIFactory.createWXAPI(this, APP_ID, true);
-//        // 将应用的appId注册到微信
-//        api.registerApp(APP_ID);
-//        //建议动态监听微信启动广播进行注册到微信
-//        registerReceiver(new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//
-//                // 将该app注册到微信
-//                api.registerApp(APP_ID);
-//            }
-//        }, new IntentFilter(ConstantsAPI.ACTION_REFRESH_WXAPP));
-//        //初始化一个 WXTextObject 对象，填写分享的文本内容
-//        WXTextObject textObj = new WXTextObject();
-//        //        textObj.text = "";
-//
-//        //用 WXTextObject 对象初始化一个 WXMediaMessage 对象
-//        WXMediaMessage msg = new WXMediaMessage();
-//        msg.mediaObject = textObj;
-//        //        msg.description = text;
-//
-//        SendMessageToWX.Req req = new SendMessageToWX.Req();
-//        req.transaction = String.valueOf(System.currentTimeMillis());  //transaction字段用与唯一标示一个请求
-//        req.message = msg;
-//
-//        //调用api接口，发送数据到微信
-//        api.sendReq(req);
-//    }
 
     private void wechatLogin(){
         UMShareAPI.get(this).getPlatformInfo(LandingActivity.this,

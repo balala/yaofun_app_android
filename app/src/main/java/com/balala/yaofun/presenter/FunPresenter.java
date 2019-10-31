@@ -10,10 +10,10 @@ import java.io.IOException;
 
 public class FunPresenter extends BasePresenter<FunView> implements ResultCallBack<FunhomeData> {
     private FunModel funModel;
-    @Override
-    protected void initModel() {
-        funModel = new FunModel();
-    }
+//    @Override
+//    protected void initModel() {
+//        funModel = new FunModel();
+//    }
 
     public void getFunData(){
         funModel.FunHomeData(this);

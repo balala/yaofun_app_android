@@ -17,76 +17,76 @@ import com.balala.yaofun.view.RegisterView;
 
 public class RegisterPresenter extends BasePresenter<RegisterView> {
 
-    private RegisterModel myModel;
+//    private RegisterModel myModel;
+//
+//    @Override
+//    protected void initModel() {
+//        myModel = new RegisterModel();
+//    }
 
-    @Override
-    protected void initModel() {
-        myModel = new RegisterModel();
-    }
-
-
-    // 发送验证码
-    public void getData(String phone) {
-        myModel.GetData(phone, new ResultCallBack<VerificationResult>() {
-            @Override
-            public void onSuccess(VerificationResult bean) {
-                if (bean != null) {
-
-                    mView.onSS(bean);
-                }
-            }
-
-            @Override
-            public void onFail(String msg) {
-
-                Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
-    }
-
-    // 验证验证码
-    public void getData2(String phone, String code, String key) {
-
-        myModel.GetData2(phone, code, key, new ResultCallBack<VerificationCode>() {
-            @Override
-            public void onSuccess(VerificationCode bean) {
-                if (bean != null) {
-                    mView.onSuccessyanzheng(bean);
-                }
-
-            }
-
-            @Override
-            public void onFail(String msg) {
-                Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
-
-    // 注册成功
-    public void getData3(String phone, String code, String key, String password) {
-        myModel.getData3(phone, key, code, password, new ResultCallBack<RegisterBean>() {
-            @Override
-            public void onSuccess(RegisterBean bean) {
-                if (bean != null) {
-                    mView.onSuccessRegister(bean);
-                    Log.i("注册成功", "onSuccess: " + bean.getMsg());
-                    Toast.makeText(MyApp.getInstance(), bean.getMsg(), Toast.LENGTH_SHORT).show();
-
-                }
-            }
-
-            @Override
-            public void onFail(String msg) {
-
-                Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
+//
+//    // 发送验证码
+//    public void getData(String phone) {
+//        myModel.GetData(phone, new ResultCallBack<VerificationResult>() {
+//            @Override
+//            public void onSuccess(VerificationResult bean) {
+//                if (bean != null) {
+//
+//                    mView.onSS(bean);
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(String msg) {
+//
+//                Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//
+//
+//    }
+//
+//    // 验证验证码
+//    public void getData2(String phone, String code, String key) {
+//
+//        myModel.GetData2(phone, code, key, new ResultCallBack<VerificationCode>() {
+//            @Override
+//            public void onSuccess(VerificationCode bean) {
+//                if (bean != null) {
+//                    mView.onSuccessyanzheng(bean);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFail(String msg) {
+//                Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//    }
+//
+//    // 注册成功
+//    public void getData3(String phone, String code, String key, String password) {
+//        myModel.getData3(phone, key, code, password, new ResultCallBack<RegisterBean>() {
+//            @Override
+//            public void onSuccess(RegisterBean bean) {
+//                if (bean != null) {
+//                    mView.onSuccessRegister(bean);
+//                    Log.i("注册成功", "onSuccess: " + bean.getMsg());
+//                    Toast.makeText(MyApp.getInstance(), bean.getMsg(), Toast.LENGTH_SHORT).show();
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(String msg) {
+//
+//                Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//    }
 
 }

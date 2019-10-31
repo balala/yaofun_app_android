@@ -58,7 +58,7 @@ public interface MyServer {
     // 登陆接口
     @POST("user/login")
     @FormUrlEncoded
-    Observable<LandingBean> getLoginData(@FieldMap Map<String, Object> map);
+    Observable<BaseBean<UserBean>> phonePwdLogin(@FieldMap Map<String, Object> map);
 
     // 微信登录
     @POST("user/wx_login_regist")
