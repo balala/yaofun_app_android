@@ -244,11 +244,13 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
     public void phonePwdLoginSuccess(BaseBean<UserBean> bean) {
         //账户秘密登陆成功
         loginSuccess(bean);
+        ForLog.e("手机号秘密登陆成功"+bean);
     }
 
     @Override
-    public void phonePwdLoginFail() {
-        ToastUtil.showShort("微信登陆失败，请稍后重拾");
+    public void phonePwdLoginFail(String msg) {
+        ForLog.e("打印错误信息："+msg);
+        ToastUtil.showShort(msg);
     }
 
     @Override
@@ -258,8 +260,8 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
     }
 
     @Override
-    public void wxLoginOrRegistFail() {
-        ToastUtil.showShort("微信登陆失败，请稍后重拾");
+    public void wxLoginOrRegistFail(String msg) {
+        ToastUtil.showShort(msg);
     }
     private void loginSuccess(BaseBean<UserBean> bean){
         //登陆成功通用处理

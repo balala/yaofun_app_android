@@ -22,7 +22,7 @@ public class LandingPresenter extends BasePresenter<LandingView> {
             }
             @Override
             public void onFail(String msg) {
-                mView.phonePwdLoginFail();
+                mView.phonePwdLoginFail(msg);
             }
         });
     }
@@ -36,7 +36,7 @@ public class LandingPresenter extends BasePresenter<LandingView> {
             }
             @Override
             public void onFail(String msg) {
-                mView.wxLoginOrRegistFail();
+                mView.wxLoginOrRegistFail(msg);
             }
         });
     }

@@ -7,9 +7,9 @@ import com.balala.yaofun.bean.UserBean;
 public interface LandingView extends BaseView {
     void phonePwdLoginSuccess(BaseBean<UserBean> bean);
 
-    void phonePwdLoginFail();
+    void phonePwdLoginFail(String msg);
 
     void wxLoginOrRegistSuccess(BaseBean<UserBean> bean);
 
-    void wxLoginOrRegistFail();
+    void wxLoginOrRegistFail(String msg);
 }

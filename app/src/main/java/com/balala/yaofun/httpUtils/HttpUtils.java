@@ -40,7 +40,8 @@ public class HttpUtils {
     private Retrofit.Builder getRetrofit(OkHttpClient okHttpClient){
         return new Retrofit.Builder()
                 .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonDConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
     }
 

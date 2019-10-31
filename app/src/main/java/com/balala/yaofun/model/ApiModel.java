@@ -9,6 +9,7 @@ import com.balala.yaofun.bean.result.HomedetailsBean;
 import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.httpUtils.HttpUtils;
 import com.balala.yaofun.httpUtils.ResultCallBack;
+import com.balala.yaofun.httpUtils.ResultException;
 import com.balala.yaofun.httpUtils.ToastUtil;
 import com.balala.yaofun.util.ForLog;
 import com.balala.yaofun.util.MyServer;
@@ -55,8 +56,12 @@ public class  ApiModel extends BaseModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        ForLog.e("请求数据失败"+e.getMessage());
-                        resultCallBack.onFail(e.getMessage());
+                        if (e instanceof ResultException) {
+                            ForLog.e("这里说明没有登陆成功"+e);
+                            resultCallBack.onFail(((ResultException) e).getMsg());
+                        } else {
+                            resultCallBack.onFail("网络连接超时，请稍后再试...");
+                        }
 
                     }
 
