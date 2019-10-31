@@ -6,6 +6,7 @@ import com.balala.yaofun.base.BaseModel;
 import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.FunhomeData;
 import com.balala.yaofun.bean.UserBean;
+import com.balala.yaofun.bean.result.HomeAllBean;
 import com.balala.yaofun.bean.result.HomedetailsBean;
 import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.httpUtils.HttpUtils;
@@ -41,6 +42,9 @@ public class ApiModel extends BaseModel {
         setSubscribe(movieService.getFunhomeData(getBaseMap(map)), resultCallBack);
     }
 
+    public static void homealldata(Map<String, ? extends Object> map, ResultCallBack<BaseBean<HomeAllBean>> resultCallBack) {
+        setSubscribe(movieService.getDoodchoice(getBaseMap(map)), resultCallBack);
+    }
 
 
     private static <T> void setSubscribe(Observable<T> observable, ResultCallBack<T> resultCallBack) {

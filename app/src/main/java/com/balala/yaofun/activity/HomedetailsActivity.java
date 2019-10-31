@@ -248,8 +248,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
 //        /        DetailsactivityAdapter    allrv
 
         // 标签的个数
-        ArrayList<HomedetailsBean.DataBean> dataBeanslist = new ArrayList<>();
-        DetailsactivityAdapter adapter = new DetailsactivityAdapter(this, dataBeanslist);
+        DetailsactivityAdapter adapter = new DetailsactivityAdapter(this, data);
 //        LinearLayout linearLayout = new LinearLayout(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         allrv.setLayoutManager(linearLayoutManager);
@@ -258,10 +257,11 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
         Log.i("首页详情解析", "onSuccessHomedetails: " + funhomeData);
         Glide.with(this).load(data.getCover()).into(mHomedetailsimg);
         mHomedetailsTitle.setText(data.getTitle());
-        List<String> user_label = data.getUser_label();
-        for (int i = 0; i < user_label.size(); i++) {
-            mHomedetailsLabel1.setText(data.getUser_label().get(i));
-        }
+
+//        List<String> user_label = data.getUser_label();
+//        for (int i = 0; i < user_label.size(); i++) {
+//            mHomedetailsLabel1.setText(data.getUser_label().get(i));
+//        }
 //        mHomedetailsLabel2.setText(data.getUser_label().get(size));
         mHomedetailsPeoplename.setText(data.getUser_nick_name());
         mHomedetailsTime.setText(data.getStart_end_time());

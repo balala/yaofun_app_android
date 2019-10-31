@@ -88,7 +88,7 @@ public interface MyServer {
     //http://test.yaofun.vip/api/activity/good_choice/all
 
     @GET("activity/good_choice/all")
-    Observable<HomeAllBean> getDoodchoice(@QueryMap HashMap<String, Object> map);
+    Observable<BaseBean<HomeAllBean>> getDoodchoice(@QueryMap Map<String, Object> map);
 
     //发布活动
     //http://test.yaofun.vip/api/activity/upload

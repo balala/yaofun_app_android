@@ -20,10 +20,9 @@ import java.util.List;
 
 public class DetailsactivityAdapter extends RecyclerView.Adapter {
     private Context context;
-    private ArrayList<HomedetailsBean.DataBean> list;
-    private String[] str = new String[]{""};
+    private HomedetailsBean.DataBean list;
 
-    public DetailsactivityAdapter(Context context, ArrayList<HomedetailsBean.DataBean> list) {
+    public DetailsactivityAdapter(Context context, HomedetailsBean.DataBean list) {
         this.context = context;
         this.list = list;
     }
@@ -31,49 +30,50 @@ public class DetailsactivityAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder holder = null;
         LayoutInflater inflater = LayoutInflater.from(context);
         if (viewType == 0) {
-//            View banner = inflater.inflate(R.layout.banner_item, null);
-//            return new HomeRecommendAdapter.BannerHolder(banner);
             View inflate = inflater.inflate(R.layout.detailstextitems, null);
             return new ViewHolder1(inflate);
         } else if (viewType == 1) {
-//            View inflate2 = inflater.inflate(R.layout.home_item3s, null);
-//            return new ViewHolder2(inflate2);
             View inflate = inflater.inflate(R.layout.detailspictureitems, null);
             return new ViewHolder2(inflate);
+        }else {
+            //换布局
+            return null;
         }
 
-        return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        List<String> type_array = list.get(position).getType_array();
-        List<List<String>> lists = Arrays.asList(type_array);
-        List<String> content_array = list.get(position).getContent_array();
-
-        // TYPE判断条件
-//        List<String> strings = Arrays.asList(str);
-
-        if (lists.contains("文本") && !lists.contains("图片")) {
+        int viewType = getItemViewType(position);
+        List<String> content_array = list.getContent_array();
+        if(viewType==0){
             ViewHolder1 holder1 = (ViewHolder1) holder;
             holder1.homedetails_text1.setText(content_array.get(position));
-        } else if (!lists.contains("文本") && lists.contains("图片")) {
+        }else if(viewType==1){
             ViewHolder2 holder2 = (ViewHolder2) holder;
-//            holder2.homedetails_img1.
-            Glide.with(context).load(content_array.get(position)).into((ImageView) ((ViewHolder2) holder).homedetails_img1);
+            Glide.with(context).load(content_array.get(position)).into(holder2.homedetails_img1);
+        }else {
+
         }
 
-//        else if (lists.contains("文本") && lists.contains("图片")) {
-//
-//        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if("文本".equals(list.getType_array().get(position))){
+            return 0;
+        }else if("图片".equals(list.getType_array().get(position))){
+            return 1;
+        }else {
+            return 2;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list.getType_array().size();
     }
 
     public class ViewHolder1 extends RecyclerView.ViewHolder {
@@ -89,7 +89,7 @@ public class DetailsactivityAdapter extends RecyclerView.Adapter {
 
     public class ViewHolder2 extends RecyclerView.ViewHolder {
 
-        private final View homedetails_img1;
+        private final ImageView homedetails_img1;
 
         public ViewHolder2(View itemView) {
             super(itemView);

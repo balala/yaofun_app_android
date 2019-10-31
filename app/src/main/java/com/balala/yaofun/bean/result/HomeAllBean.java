@@ -1,8 +1,10 @@
 package com.balala.yaofun.bean.result;
 
+import com.balala.yaofun.bean.BaseBean;
+
 import java.util.List;
 
-public class HomeAllBean {
+public class HomeAllBean extends BaseBean {
 
 
     /**
@@ -13,61 +15,6 @@ public class HomeAllBean {
      * success : true
      * total : 0
      */
-
-    private DataBean data;
-    private String msg;
-    private String page;
-    private int pageSize;
-    private boolean success;
-    private int total;
-
-    public DataBean getData() {
-        return data;
-    }
-
-    public void setData(DataBean data) {
-        this.data = data;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public String getPage() {
-        return page;
-    }
-
-    public void setPage(String page) {
-        this.page = page;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
 
     public static class DataBean {
         private List<AroundBean> around;

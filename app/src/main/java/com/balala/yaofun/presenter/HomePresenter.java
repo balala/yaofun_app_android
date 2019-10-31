@@ -4,11 +4,13 @@ import com.balala.yaofun.base.BasePresenter;
 import com.balala.yaofun.bean.result.DayBeans;
 import com.balala.yaofun.bean.result.HomeAllBean;
 import com.balala.yaofun.bean.result.HomeBannerDean;
+import com.balala.yaofun.model.ApiModel;
 import com.balala.yaofun.view.Homeview;
 import com.balala.yaofun.httpUtils.ResultCallBack;
 import com.balala.yaofun.model.HomeModel;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class HomePresenter extends BasePresenter<Homeview> {
 
@@ -21,7 +23,19 @@ public class HomePresenter extends BasePresenter<Homeview> {
 
 
     // 顶部每日一句
-    public void getHomeData() {
+    public void getHomeData(Map<String, ? extends Object> map) {
+        ApiModel.homealldata(map,new ResultCallBack<>() {
+            @Override
+            public void onSuccess(Object bean) {
+                mView.onSuccessBannerall((HomeBannerDean) bean
+                );
+            }
+
+            @Override
+            public void onFail(String msg) {
+
+            }
+        });
 //        homeModel.HomeDayData(new ResultCallBack<DayBeans>() {
 //            @Override
 //            public void onSuccess(DayBeans bean) {
