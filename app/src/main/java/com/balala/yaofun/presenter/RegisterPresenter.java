@@ -12,11 +12,7 @@ import com.balala.yaofun.httpUtils.ResultCallBack;
 import com.balala.yaofun.model.RegisterModel;
 import com.balala.yaofun.view.RegisterView;
 
-import java.io.IOException;
 
-import okhttp3.ResponseBody;
-
-import static org.greenrobot.eventbus.EventBus.TAG;
 
 
 public class RegisterPresenter extends BasePresenter<RegisterView> {
@@ -45,7 +41,6 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
 
                 Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
 
-                Log.d(TAG, "onFail: " + msg);
             }
         });
 
@@ -67,7 +62,6 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
             @Override
             public void onFail(String msg) {
                 Toast.makeText(MyApp.getInstance(), msg, Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "onFail: " + msg);
             }
         });
 
@@ -77,7 +71,7 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
     public void getData3(String phone, String code, String key, String password) {
         myModel.getData3(phone, key, code, password, new ResultCallBack<RegisterBean>() {
             @Override
-            public void onSuccess(RegisterBean bean) throws IOException {
+            public void onSuccess(RegisterBean bean) {
                 if (bean != null) {
                     mView.onSuccessRegister(bean);
                     Log.i("注册成功", "onSuccess: " + bean.getMsg());

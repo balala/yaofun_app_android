@@ -20,7 +20,7 @@ public class HomedetailsPersenter extends BasePresenter<HomedetailsView> {
     public void getHomedetailsdata(String id) {
         homedetailsModel.homedetailsData(id, new ResultCallBack<HomedetailsBean>() {
             @Override
-            public void onSuccess(HomedetailsBean bean) throws IOException {
+            public void onSuccess(HomedetailsBean bean) {
                 if (bean!=null){
                     mView.onSuccessHomedetails(bean);
                 }

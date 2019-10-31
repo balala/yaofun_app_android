@@ -50,12 +50,7 @@ public class HomedetailsModel extends BaseModel implements BaseView {
 
                     @Override
                     public void onNext(HomedetailsBean responseBody) {
-                        try {
-                            resultCallBack.onSuccess(responseBody);
-                            Log.i("首页详情解析", "成功" + responseBody.toString());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        resultCallBack.onSuccess(responseBody);
                     }
 
                     @Override

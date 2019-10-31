@@ -45,7 +45,7 @@ public class HomePresenter extends BasePresenter<Homeview> {
         homeModel.HomeData(x, y, new ResultCallBack<HomeAllBean>() {
 
             @Override
-            public void onSuccess(HomeAllBean bean) throws IOException {
+            public void onSuccess(HomeAllBean bean) {
                 if (bean != null) {
                     mView.onSuccessHomeall(bean);
                 }
@@ -65,7 +65,7 @@ public class HomePresenter extends BasePresenter<Homeview> {
     public void getHomeBannerData() {
         homeModel.HomeBannerData(new ResultCallBack<HomeBannerDean>() {
             @Override
-            public void onSuccess(HomeBannerDean bean) throws IOException {
+            public void onSuccess(HomeBannerDean bean) {
                 if (bean!=null){
                     mView.onSuccessBannerall(bean);
                 }

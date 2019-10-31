@@ -60,11 +60,7 @@ public class LandingModel extends BaseModel {
                         if (landingBean != null) {
                             Log.e("xuzhiqi登陆model", "登陆成功: " + landingBean.getMsg());
                             ToastUtil.showLong(landingBean.getMsg());
-                            try {
-                                resultCallBack.onSuccess(landingBean);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            resultCallBack.onSuccess(landingBean);
 
                         }
                     }

@@ -89,11 +89,8 @@ public class FrogetpasswardModel extends BaseModel {
                             code = verificationResult.getData().getCode();
                             key = verificationResult.getData().getKey();
                             Log.e("发送验证码解析出来的", "onNext: " + verificationResult.getData().toString() + "\n" + verificationResult.getData().getCode() + "\n" + verificationResult.getData().getKey());
-                            try {
-                                listBeanResultCallBack.onSuccess(verificationResult);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            listBeanResultCallBack.onSuccess(verificationResult);
+
 
                         }
                     }
@@ -163,13 +160,7 @@ public class FrogetpasswardModel extends BaseModel {
 
             @Override
             public void onNext(VerificationCode verificationBean) {
-                try {
-                    verificationBeanResultCallBack.onSuccess(verificationBean);
-                    Log.e("验证验证码", "onError: " + verificationBean.toString());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+                verificationBeanResultCallBack.onSuccess(verificationBean);
             }
 
             @Override

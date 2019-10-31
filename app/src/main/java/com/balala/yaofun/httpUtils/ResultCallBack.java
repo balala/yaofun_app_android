@@ -9,6 +9,6 @@ import java.io.IOException;
  */
 
 public interface ResultCallBack<T> {
-    void onSuccess(T bean) throws IOException;
+    void onSuccess(T bean);
     void onFail(String msg);
 }

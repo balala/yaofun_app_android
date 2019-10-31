@@ -86,11 +86,8 @@ public class RegisterModel extends BaseModel {
                             Log.e("发送验证码解析出来的", "onNext: " + verificationResult.getData().toString());
                             Log.e("发送验证码解析出来的", "code: " + verificationResult.getData().getCode());
                             Log.e("发送验证码解析出来的", "key: " + verificationResult.getData().getKey());
-                            try {
-                                listBeanResultCallBack.onSuccess(verificationResult);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            listBeanResultCallBack.onSuccess(verificationResult);
+
 
                         }
                     }
@@ -160,12 +157,7 @@ public class RegisterModel extends BaseModel {
 
                     @Override
                     public void onNext(VerificationCode verificationBean) {
-                        try {
-                            verificationBeanResultCallBack.onSuccess(verificationBean);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
+                        verificationBeanResultCallBack.onSuccess(verificationBean);
                     }
 
                     @Override

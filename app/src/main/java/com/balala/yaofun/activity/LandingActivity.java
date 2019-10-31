@@ -31,9 +31,16 @@ import android.widget.Toast;
 
 import com.balala.yaofun.R;
 import com.balala.yaofun.base.BaseActivity;
+import com.balala.yaofun.bean.BaseBean;
+import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.bean.result.LandingBean;
+import com.balala.yaofun.event.LoginSuccessEvent;
 import com.balala.yaofun.fragment.HomeFragment;
+import com.balala.yaofun.httpUtils.ToastUtil;
 import com.balala.yaofun.presenter.LandingPresenter;
+import com.balala.yaofun.util.ACache;
+import com.balala.yaofun.util.ForLog;
+import com.balala.yaofun.util.MyApp;
 import com.balala.yaofun.util.ToastUtils;
 import com.balala.yaofun.view.LandingView;
 import com.balala.yaofun.util.TextWatcherUtil;
@@ -44,13 +51,18 @@ import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXTextObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.Map;
 
 
 public class LandingActivity extends BaseActivity<LandingPresenter, LandingView> implements LandingView {
 
 
-    // AAppID：wx24009bcc9adc6318
-    private static final String APP_ID = "wx24009bcc9adc6318";
     private static final String TAG = "xzq";
 
     // IWXAPI 是第三方app和微信通信的openApi接口
@@ -178,11 +190,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         mWechat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ToastUtil.showLong("微信登陆");
-                // 微信登陆方法
-                initWechat();
-                // 微信登陆授权方法    15939856989
-                initSou();
+                wechatLogin();
             }
         });
 
@@ -261,6 +269,25 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
 
     }
 
+    @Override
+    public void wxLoginOrRegistSuccess(BaseBean<UserBean> bean) {
+        //微信登陆成功
+        loginSuccess(bean);
+    }
+
+    @Override
+    public void wxLoginOrRegistFail() {
+
+    }
+    private void loginSuccess(BaseBean<UserBean> bean){
+        //登陆成功通用处理
+        ACache aCache=ACache.get(this);
+        aCache.put("user",bean.getData());
+        MyApp.user=bean.getData();
+        EventBus.getDefault().post(new LoginSuccessEvent());
+        this.finish();
+    }
+
     // baseActivity 里面的方法 用作解析传递
     @Override
     protected void initData() {
@@ -329,53 +356,110 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         return false;
     }
 
-    // 授权微信登陆
-    private void initSou() {
+//    // 授权微信登陆
+//    private void initSou() {
+//
+//        if (!api.isWXAppInstalled()) {
+////            ToastUtils.showLong("您还没有安装微信");
+//            Toast.makeText(this, "您还没有安装微信", Toast.LENGTH_SHORT).show();
+//        } else {
+//            final SendAuth.Req req = new SendAuth.Req();
+//            req.scope = "snsapi_userinfo";
+//            req.state = "wechat_sdk_demo_test";
+//            api.sendReq(req);
+//        }
+//
+//    }
+//
+//    // 微信登陆
+//    private void initWechat() {
+//
+//        // 通过WXAPIFactory工厂，获取IWXAPI的实例
+//        api = WXAPIFactory.createWXAPI(this, APP_ID, true);
+//        // 将应用的appId注册到微信
+//        api.registerApp(APP_ID);
+//        //建议动态监听微信启动广播进行注册到微信
+//        registerReceiver(new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//
+//                // 将该app注册到微信
+//                api.registerApp(APP_ID);
+//            }
+//        }, new IntentFilter(ConstantsAPI.ACTION_REFRESH_WXAPP));
+//        //初始化一个 WXTextObject 对象，填写分享的文本内容
+//        WXTextObject textObj = new WXTextObject();
+//        //        textObj.text = "";
+//
+//        //用 WXTextObject 对象初始化一个 WXMediaMessage 对象
+//        WXMediaMessage msg = new WXMediaMessage();
+//        msg.mediaObject = textObj;
+//        //        msg.description = text;
+//
+//        SendMessageToWX.Req req = new SendMessageToWX.Req();
+//        req.transaction = String.valueOf(System.currentTimeMillis());  //transaction字段用与唯一标示一个请求
+//        req.message = msg;
+//
+//        //调用api接口，发送数据到微信
+//        api.sendReq(req);
+//    }
 
-        if (!api.isWXAppInstalled()) {
-//            ToastUtils.showLong("您还没有安装微信");
-            Toast.makeText(this, "您还没有安装微信", Toast.LENGTH_SHORT).show();
-        } else {
-            final SendAuth.Req req = new SendAuth.Req();
-            req.scope = "snsapi_userinfo";
-            req.state = "wechat_sdk_demo_test";
-            api.sendReq(req);
+    private void wechatLogin(){
+        UMShareAPI.get(this).getPlatformInfo(LandingActivity.this,
+                SHARE_MEDIA.WEIXIN, umAuthListener);
+    }
+    UMAuthListener umAuthListener = new UMAuthListener() {
+        /**
+         * @desc 授权开始的回调
+         * @param platform 平台名称
+         */
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+            ForLog.e(platform.toString());
         }
 
-    }
+        /**
+         * @desc 授权成功的回调
+         * @param platform 平台名称
+         * @param action 行为序号，开发者用不上
+         * @param data 用户资料返回
+         */
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+            ForLog.e(data.toString());
+            basePresenter.wxLoginOrRegist(data);
+            //此处获取了用户信息，完成授权登录
 
-    // 微信登陆
-    private void initWechat() {
 
-        // 通过WXAPIFactory工厂，获取IWXAPI的实例
-        api = WXAPIFactory.createWXAPI(this, APP_ID, true);
-        // 将应用的appId注册到微信
-        api.registerApp(APP_ID);
-        //建议动态监听微信启动广播进行注册到微信
-        registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
+//            Toast.makeText(mContext, "成功了", Toast.LENGTH_LONG).show();
 
-                // 将该app注册到微信
-                api.registerApp(APP_ID);
-            }
-        }, new IntentFilter(ConstantsAPI.ACTION_REFRESH_WXAPP));
-        //初始化一个 WXTextObject 对象，填写分享的文本内容
-        WXTextObject textObj = new WXTextObject();
-        //        textObj.text = "";
+        }
 
-        //用 WXTextObject 对象初始化一个 WXMediaMessage 对象
-        WXMediaMessage msg = new WXMediaMessage();
-        msg.mediaObject = textObj;
-        //        msg.description = text;
+        /**
+         * @desc 授权失败的回调
+         * @param platform 平台名称
+         * @param action 行为序号，开发者用不上
+         * @param t 错误原因
+         */
+        @Override
+        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+            ForLog.e(t.getMessage());
+            ToastUtil.showShort("授权失败，请重试");
+//            Toast.makeText(mContext, "失败：" + t.getMessage(),                                     Toast.LENGTH_LONG).show();
+        }
 
-        SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = String.valueOf(System.currentTimeMillis());  //transaction字段用与唯一标示一个请求
-        req.message = msg;
-
-        //调用api接口，发送数据到微信
-        api.sendReq(req);
-    }
+        /**
+         * @desc 授权取消的回调
+         * @param platform 平台名称
+         * @param action 行为序号，开发者用不上
+         */
+        @Override
+        public void onCancel(SHARE_MEDIA platform, int action) {
+            ForLog.e(action+"");
+            ToastUtils.showShort("取消了授权");
+//            Toast.makeText(mContext, "取消了", Toast.LENGTH_LONG).show();
+        }
+    };
 
 
 }

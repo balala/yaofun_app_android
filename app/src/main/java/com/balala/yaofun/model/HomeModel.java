@@ -57,11 +57,7 @@ public class HomeModel extends BaseModel {
                     public void onNext(DayBeans dayBean) {
                         if (dayBean != null) {
                             Log.i(TAG, "onNext: " + dayBean.toString());
-                            try {
-                                resultCallBack.onSuccess(dayBean);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            resultCallBack.onSuccess(dayBean);
                         }
                     }
                 });
@@ -102,11 +98,7 @@ public class HomeModel extends BaseModel {
                     @Override
                     public void onNext(HomeAllBean homeAllBean) {
                         if (homeAllBean != null) {
-                            try {
-                                resultCallBack.onSuccess(homeAllBean);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            resultCallBack.onSuccess(homeAllBean);
 
                         } else {
                             Log.e("首页homeBean", "解析失败");
@@ -142,12 +134,7 @@ public class HomeModel extends BaseModel {
 
                     @Override
                     public void onNext(HomeBannerDean responseBody) {
-                        try {
-                            resultCallBack.onSuccess(responseBody);
-                            Log.i("首页banner解析", "成功" + responseBody.toString());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        resultCallBack.onSuccess(responseBody);
                     }
                 });
 

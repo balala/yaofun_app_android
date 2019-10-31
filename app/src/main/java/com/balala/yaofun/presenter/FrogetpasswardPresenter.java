@@ -32,7 +32,7 @@ public class FrogetpasswardPresenter extends BasePresenter<FrogetpasswardView> {
     public void getSendData(String phone) {
         frogetpasswardModel.GetData(phone, new ResultCallBack<VerificationResult>() {
             @Override
-            public void onSuccess(VerificationResult bean) throws IOException {
+            public void onSuccess(VerificationResult bean) {
 
                 if (bean != null) {
                     mView.onSuccessFrogetpasswardfly(bean);
@@ -53,7 +53,7 @@ public class FrogetpasswardPresenter extends BasePresenter<FrogetpasswardView> {
     public void getVerificationData(String phone, String code, String key) {
         frogetpasswardModel.GetData2(phone, code, key, new ResultCallBack<VerificationCode>() {
             @Override
-            public void onSuccess(VerificationCode bean) throws IOException {
+            public void onSuccess(VerificationCode bean) {
 
                 if (bean != null) {
                     mView.onSuccessVerificationpassward(bean);
@@ -76,7 +76,7 @@ public class FrogetpasswardPresenter extends BasePresenter<FrogetpasswardView> {
 
         frogetpasswardModel.ChangepasswordData(phone, code, password, key, new ResultCallBack<ResponseBody>() {
             @Override
-            public void onSuccess(ResponseBody bean) throws IOException {
+            public void onSuccess(ResponseBody bean) {
                 if (bean != null) {
                     mView.onSuccessAlterpassward(bean.toString());
                     ToastUtil.showLong("更改成功");

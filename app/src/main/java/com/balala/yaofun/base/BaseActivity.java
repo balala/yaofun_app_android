@@ -10,6 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.balala.yaofun.bean.VerificationResult;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity<p extends BasePresenter, v extends BaseView> extends AppCompatActivity implements BaseView {
@@ -34,6 +38,23 @@ public abstract class BaseActivity<p extends BasePresenter, v extends BaseView> 
         initView();
         initData();
         initData2();
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(Object myEvent){
+
     }
 
     protected abstract void initView();

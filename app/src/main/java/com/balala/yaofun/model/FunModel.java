@@ -43,11 +43,7 @@ public class FunModel extends BaseModel {
 
                     @Override
                     public void onNext(FunhomeData funhomeData) {
-                        if ( funhomeData.getData() != null) try {
-                            resultCallBack.onSuccess(funhomeData);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        resultCallBack.onSuccess(funhomeData);
                     }
                 });
     }

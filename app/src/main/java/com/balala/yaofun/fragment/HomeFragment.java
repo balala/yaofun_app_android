@@ -268,7 +268,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     }
 
     @Override
-    public void onSuccessHomeall(HomeAllBean homeAllBean) throws IOException {
+    public void onSuccessHomeall(HomeAllBean homeAllBean) {
 
         Log.i("首页解析", "onSuccessHome: " + homeAllBean.toString());
         //热门
@@ -369,7 +369,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     }
 
     @Override
-    public void onSuccessBannerall(HomeBannerDean body) throws IOException {
+    public void onSuccessBannerall(HomeBannerDean body) {
         Log.i("首页解析banner", "onSuccessBannerall: " + body);
         first = body.getData().getFirst();
         second = body.getData().getSecond();

@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -29,7 +31,7 @@ public class BaseFragment<p extends BasePresenter, v extends BaseView> extends F
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         View inflate = inflater.inflate(getlayoutId(), null);
         unbinder = ButterKnife.bind(this, inflate);
-       // EventBus.getDefault().register(this);
+
         presenter = initGeekP();
         if (presenter != null) {
             presenter.bind(this);
@@ -38,6 +40,23 @@ public class BaseFragment<p extends BasePresenter, v extends BaseView> extends F
         initListener();
         initData();
         return inflate;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(Object myEvent){
+
     }
 
     protected void initData() {
@@ -64,7 +83,6 @@ public class BaseFragment<p extends BasePresenter, v extends BaseView> extends F
     public void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
-        EventBus.getDefault().unregister(this);
         // 这么
         presenter = null;
     }

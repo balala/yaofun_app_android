@@ -20,7 +20,7 @@ public class FunPresenter extends BasePresenter<FunView> implements ResultCallBa
     }
 
     @Override
-    public void onSuccess(FunhomeData bean) throws IOException {
+    public void onSuccess(FunhomeData bean) {
             mView.onSuccessFun(bean);
     }
 

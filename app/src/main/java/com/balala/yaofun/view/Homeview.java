@@ -14,12 +14,12 @@ public interface Homeview extends BaseView {
     void onFailHome(String msg);
 
     //首页数据解析
-    void onSuccessHomeall(HomeAllBean homeAllBean) throws IOException;
+    void onSuccessHomeall(HomeAllBean homeAllBean);
 
     void onFailHomeall(String msg);
 
     //首页banner图
-    void onSuccessBannerall(HomeBannerDean body) throws IOException;
+    void onSuccessBannerall(HomeBannerDean body);
 
     void onFailBannerall(String msg);
 }
