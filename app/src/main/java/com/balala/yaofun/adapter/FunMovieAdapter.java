@@ -20,14 +20,14 @@ import java.util.ArrayList;
 
 public class FunMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private ArrayList<FunhomeData.DataBean> list;
+    private ArrayList<FunhomeData.FilmBean> list;
 
-    public FunMovieAdapter(Context context, ArrayList<FunhomeData.DataBean> list) {
+    public FunMovieAdapter(Context context, ArrayList<FunhomeData.FilmBean> list) {
         this.context = context;
         this.list = list;
     }
 
-    public void setList(ArrayList<FunhomeData.DataBean> list) {
+    public void setList(ArrayList<FunhomeData.FilmBean> list) {
         this.list = list;
     }
 
@@ -48,19 +48,19 @@ public class FunMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        FunhomeData.DataBean dataBean = list.get(position);
+        FunhomeData.FilmBean dataBean = list.get(position);
 
         if (holder instanceof ViewHolderA) {
             ViewHolderA viewHolderA = (ViewHolderA) holder;
-            Glide.with(context).load(dataBean.get影视().get(position).getUser_images()).into(viewHolderA.img_a);
-            viewHolderA.tv_a1.setText(dataBean.get影视().get(position).getGroup_name());
-            viewHolderA.tv_a2.setText(dataBean.get影视().get(position).getAutograph());
+            Glide.with(context).load(dataBean.getUser_images()).into(viewHolderA.img_a);
+            viewHolderA.tv_a1.setText(dataBean.getGroup_name());
+            viewHolderA.tv_a2.setText(dataBean.getAutograph());
 
         } else if (holder instanceof ViewHolderB) {
             ViewHolderB viewHolderB = (ViewHolderB) holder;
-            Glide.with(context).load(dataBean.get影视().get(position).getUser_images()).into(viewHolderB.img_b);
-            viewHolderB.tv_b1.setText(dataBean.get影视().get(position).getGroup_name());
-            viewHolderB.tv_b2.setText(dataBean.get影视().get(position).getAutograph());
+            Glide.with(context).load(dataBean.getUser_images()).into(viewHolderB.img_b);
+            viewHolderB.tv_b1.setText(dataBean.getGroup_name());
+            viewHolderB.tv_b2.setText(dataBean.getAutograph());
         }
 
     }

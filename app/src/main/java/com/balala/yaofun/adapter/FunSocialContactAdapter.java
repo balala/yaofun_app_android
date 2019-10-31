@@ -18,15 +18,16 @@ import java.util.ArrayList;
 
 public class FunSocialContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private ArrayList<FunhomeData.DataBean> list;
+    private ArrayList<FunhomeData.SocialBean> sociallist;
 
-    public FunSocialContactAdapter(Context context, ArrayList<FunhomeData.DataBean> list) {
+
+    public FunSocialContactAdapter(Context context, ArrayList<FunhomeData.SocialBean> sociallist) {
         this.context = context;
-        this.list = list;
+        this.sociallist = sociallist;
     }
 
-    public void setList(ArrayList<FunhomeData.DataBean> list) {
-        this.list = list;
+    public void setList(ArrayList<FunhomeData.SocialBean> sociallist) {
+        this.sociallist = sociallist;
     }
 
     @NonNull
@@ -46,31 +47,30 @@ public class FunSocialContactAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        FunhomeData.DataBean dataBean = list.get(position);
-
         if (holder instanceof FunSocialContactAdapter.ViewHolderA) {
             FunSocialContactAdapter.ViewHolderA viewHolderA = (FunSocialContactAdapter.ViewHolderA) holder;
-            Glide.with(context).load(dataBean.get社交().get(position).getUser_images()).into(viewHolderA.img_a);
-            viewHolderA.tv_a1.setText(dataBean.get社交().get(position).getGroup_name());
-            viewHolderA.tv_a2.setText(dataBean.get社交().get(position).getAutograph());
+//            FunhomeData.SocialBean funhomeData = list.get(position);
+            Glide.with(context).load(sociallist.get(position).getUser_images()).into(viewHolderA.img_a);
+            viewHolderA.tv_a1.setText(sociallist.get(position).getGroup_name());
+            viewHolderA.tv_a2.setText(sociallist.get(position).getAutograph());
 
         } else if (holder instanceof FunSocialContactAdapter.ViewHolderB) {
             FunSocialContactAdapter.ViewHolderB viewHolderB = (FunSocialContactAdapter.ViewHolderB) holder;
-            Glide.with(context).load(dataBean.get社交().get(position).getUser_images()).into(viewHolderB.img_b);
-            viewHolderB.tv_b1.setText(dataBean.get社交().get(position).getGroup_name());
-            viewHolderB.tv_b2.setText(dataBean.get社交().get(position).getAutograph());
+            Glide.with(context).load(sociallist.get(position).getUser_images()).into(viewHolderB.img_b);
+            viewHolderB.tv_b1.setText(sociallist.get(position).getGroup_name());
+            viewHolderB.tv_b2.setText(sociallist.get(position).getAutograph());
         }
 
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return sociallist.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position  == 0) {
+        if (position == 0) {
             return 1;
         } else {
             return 2;

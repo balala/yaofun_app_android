@@ -18,9 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.view.menu.MenuPopupHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.balala.yaofun.R;
+import com.balala.yaofun.adapter.DetailsactivityAdapter;
 import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.bean.result.HomedetailsBean;
 import com.balala.yaofun.fragment.HomeFragment;
@@ -54,22 +56,22 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
 //    Toolbar mHomedetailsToolbar;
     @BindView(R.id.homedetails_title)
     TextView mHomedetailsTitle;
-    //    @BindView(R.id.appbar)
-//    AppBarLayout appbar;
     @BindView(R.id.homedetails_xiahua)
     ImageView mHomedetailsXiahua;
     @BindView(R.id.homedetails_peoplename)
     TextView mHomedetailsPeoplename;
     @BindView(R.id.homedetails_label1)
     TextView mHomedetailsLabel1;
-    @BindView(R.id.homedetails_label2)
-    TextView mHomedetailsLabel2;
+    //    @BindView(R.id.homedetails_label2)
+//    TextView mHomedetailsLabel2;
     @BindView(R.id.homedetails_signature)
     TextView mHomedetailsSignature;
     @BindView(R.id.homedetails_peoplecount)
     TextView mHomedetailsPeoplecount;
     @BindView(R.id.homedetails_peoplerv)
     RecyclerView mHomedetailsPeoplerv;
+    @BindView(R.id.allrv)
+    RecyclerView allrv;
     @BindView(R.id.homedetails_peopleback)
     ImageView mHomedetailsPeopleback;
     @BindView(R.id.homedetails_time)
@@ -80,28 +82,6 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
     ImageView mHomedetailsNavigation;
     @BindView(R.id.homedetails_ticket)
     TextView mHomedetailsTicket;
-    //    @BindView(R.id.homedetails_img1)
-//    ImageView mHomedetailsImg1;
-//    @BindView(R.id.homedetails_text1)
-//    TextView mHomedetailsText1;
-//    @BindView(R.id.homedetails_img2)
-//    ImageView mHomedetailsImg2;
-//    @BindView(R.id.homedetails_text2)
-//    TextView mHomedetailsText2;
-//    @BindView(R.id.homedetails_img3)
-//    ImageView mHomedetailsImg3;
-//    @BindView(R.id.homedetails_text3)
-//    TextView mHomedetailsText3;
-//    @BindView(R.id.homedetails_img4)
-//    ImageView mHomedetailsImg4;
-//    @BindView(R.id.homedetails_text4)
-//    TextView mHomedetailsText4;
-//    @BindView(R.id.homedetails_textback)
-//    ImageView mHomedetailsTextback;
-//    @BindView(R.id.homedetails_img5)
-//    ImageView mHomedetailsImg5;
-//    @BindView(R.id.homedetails_text5)
-//    TextView mHomedetailsText5;
     @BindView(R.id.homedetails_img6)
     ImageView mHomedetailsImg6;
     @BindView(R.id.homedetails_funtitle)
@@ -150,6 +130,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         basePresenter.getHomedetailsdata(id);
+
         // TYPE判断条件
 //        List<String> strings = Arrays.asList(str);
 //        if(strings.contains("文本")&&!strings.contains("图片")){
@@ -177,8 +158,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
         return new HomedetailsPersenter();
     }
 
-    //    R.id.homedetails_toolbar, , R.id.homedetails_fab  , R.id.homedetails_img1, R.id.homedetails_text1, R.id.homedetails_img2, R.id.homedetails_text2, R.id.homedetails_img3, R.id.homedetails_text3, R.id.homedetails_img4, R.id.homedetails_text4, R.id.homedetails_textback, R.id.homedetails_img5, R.id.homedetails_text5,
-    @OnClick({R.id.homedetailsimg, R.id.homedetails_back, R.id.homedetails_menu, R.id.homedetails_title, R.id.homedetails_xiahua, R.id.homedetails_peoplename, R.id.homedetails_label1, R.id.homedetails_label2, R.id.homedetails_signature, R.id.homedetails_peoplecount, R.id.homedetails_peoplerv, R.id.homedetails_peopleback, R.id.homedetails_time, R.id.homedetails_site, R.id.homedetails_navigation, R.id.homedetails_ticket, R.id.homedetails_img6, R.id.homedetails_funtitle, R.id.homedetails_funimg, R.id.homedetails_funmessage, R.id.homedetails_wirte, R.id.homedetails_rv2, R.id.homedetails_message, R.id.homedetailsgo, R.id.llt, R.id.homedetails_people})
+    //    R.id.homedetails_fab   , R.id.homedetails_label2
+    @OnClick({R.id.homedetailsimg, R.id.homedetails_back, R.id.homedetails_menu, R.id.homedetails_title, R.id.homedetails_xiahua, R.id.homedetails_peoplename, R.id.homedetails_label1, R.id.homedetails_signature, R.id.homedetails_peoplecount, R.id.homedetails_peoplerv, R.id.homedetails_peopleback, R.id.homedetails_time, R.id.homedetails_site, R.id.homedetails_navigation, R.id.homedetails_ticket, R.id.homedetails_img6, R.id.homedetails_funtitle, R.id.homedetails_funimg, R.id.homedetails_funmessage, R.id.homedetails_wirte, R.id.homedetails_rv2, R.id.homedetails_message, R.id.homedetailsgo, R.id.llt, R.id.homedetails_people})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -206,8 +187,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
                 break;
             case R.id.homedetails_label1:
                 break;
-            case R.id.homedetails_label2:
-                break;
+//            case R.id.homedetails_label2:
+//                break;
             case R.id.homedetails_signature:
                 break;
             case R.id.homedetails_peoplecount:
@@ -224,28 +205,6 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
                 break;
             case R.id.homedetails_ticket:
                 break;
-//            case R.id.homedetails_img1:
-//                break;
-//            case R.id.homedetails_text1:
-//                break;
-//            case R.id.homedetails_img2:
-//                break;
-//            case R.id.homedetails_text2:
-//                break;
-//            case R.id.homedetails_img3:
-//                break;
-//            case R.id.homedetails_text3:
-//                break;
-//            case R.id.homedetails_img4:
-//                break;
-//            case R.id.homedetails_text4:
-//                break;
-//            case R.id.homedetails_textback:
-//                break;
-//            case R.id.homedetails_img5:
-//                break;
-//            case R.id.homedetails_text5:
-//                break;
             case R.id.homedetails_img6:
                 break;
             case R.id.homedetails_funtitle:
@@ -278,42 +237,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
         PopupWindow popupWindow = new PopupWindow(mPopView);
         popupWindow.setOutsideTouchable(true);
         popupWindow.showAsDropDown(mHomedetailsMenu);
-//        popupWindow.setFocusable(true);
 
-//        popitem1 = mPopView.findViewById(R.id.popitem1);
-//        popitem2 = mPopView.findViewById(R.id.popitem2);
-//        popitem3 = mPopView.findViewById(R.id.popitem3);
-//        popitem4 = mPopView.findViewById(R.id.popitem4);
-
-//        //分享
-//        popitem1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//        //修改
-//        popitem2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//            }
-//        });
-//        //删除
-//        popitem3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//        //举报
-//        popitem4.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
     }
 
     @Override
@@ -321,23 +245,34 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
         homedetailsicon.setVisibility(View.GONE);
         sll.setVisibility(View.VISIBLE);
         HomedetailsBean.DataBean data = funhomeData.getData();
+//        /        DetailsactivityAdapter    allrv
+
+        // 标签的个数
+        ArrayList<HomedetailsBean.DataBean> dataBeanslist = new ArrayList<>();
+        DetailsactivityAdapter adapter = new DetailsactivityAdapter(this, dataBeanslist);
+//        LinearLayout linearLayout = new LinearLayout(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        allrv.setLayoutManager(linearLayoutManager);
+        allrv.setAdapter(adapter);
 
         Log.i("首页详情解析", "onSuccessHomedetails: " + funhomeData);
         Glide.with(this).load(data.getCover()).into(mHomedetailsimg);
-        mHomedetailsFuntitle.setText(data.getTitle());
+        mHomedetailsTitle.setText(data.getTitle());
+        List<String> user_label = data.getUser_label();
+        for (int i = 0; i < user_label.size(); i++) {
+            mHomedetailsLabel1.setText(data.getUser_label().get(i));
+        }
+//        mHomedetailsLabel2.setText(data.getUser_label().get(size));
         mHomedetailsPeoplename.setText(data.getUser_nick_name());
         mHomedetailsTime.setText(data.getStart_end_time());
+        mHomedetailsPeoplecount.setText(data.getLimit_number());
         mHomedetailsSite.setText(data.getPlace_text().getAddress());
         mHomedetailsFuntitle.setText(data.getLocation_name());
         Glide.with(this).load(data.getUser_images()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mHomedetailsPeople);
         homedetails_personcount.setText(data.getMy_status());
-        if (data.getErrollment_number().isEmpty()) {
-            mHomedetailsTicket.setText(data.getErrollment_number());
-        } else {
-            mHomedetailsTicket.setText("free");
-            tvv.setVisibility(View.GONE);
-        }
+        mHomedetailsTicket.setText(data.getCost());
         Log.i("My_status", "onSuccessHomedetails: " + data.getMy_status() + data.getCost());
+
     }
 
     @Override

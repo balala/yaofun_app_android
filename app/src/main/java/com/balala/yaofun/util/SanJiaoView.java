@@ -26,7 +26,7 @@ public class SanJiaoView extends View {
     /**
      * 三角的颜色
      */
-    private int color = 0xFF000000;
+    private int color = 0xff181818;
 
     /**
      * 三角的宽度

@@ -7,13 +7,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -26,6 +29,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -50,6 +54,7 @@ import com.balala.yaofun.bean.result.DayBeans;
 import com.balala.yaofun.bean.result.HomeAllBean;
 import com.balala.yaofun.bean.result.HomeBannerDean;
 import com.balala.yaofun.presenter.HomePresenter;
+import com.balala.yaofun.util.MyScrollView;
 import com.balala.yaofun.view.Homeview;
 import com.balala.yaofun.util.ToastUtils;
 import com.balala.yaofun.zxing.activity.CaptureActivity;
@@ -78,7 +83,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  * A simple {@link Fragment} subclass.
  * extends BaseActivity<FrogetpasswardPresenter, FrogetpasswardView> implements FrogetpasswardView
  */
-public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implements Homeview {
+public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implements Homeview, MyScrollView.OnScrollListener {
 
     @BindView(R.id.home_background)
     ImageView homeBackground;
@@ -112,6 +117,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     ImageView homeAdd;
     @BindView(R.id.rl1)
     RelativeLayout rl1;
+    @BindView(R.id.llTitle)
+    RelativeLayout llTitle;
     @BindView(R.id.recycle_view1)
     RecyclerView recycleView1;
     @BindView(R.id.recycle_view2)
@@ -140,6 +147,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     TextView sitetext;
     @BindView(R.id.homeperchs)
     ImageView homeperchs;
+    @BindView(R.id.sv)
+    MyScrollView sv;
 
     private PopupWindow popupWindow;
     private int reclen = 3;
@@ -262,6 +271,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         }
     };
 
+
     @Override
     public void onFailHome(String msg) {
         Log.i("xzq", "onFailHome: " + msg);
@@ -359,7 +369,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             }
         });
 
-
     }
 
 
@@ -389,24 +398,46 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initData() {
+
+        // 滑动监听 toolbar隐藏
+        viewsAddListener();
+
+
         // 开启定位
         startLocaion();
         presenter.getHomeData();
         presenter.getHomeBannerData();
-        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //这里可以做一下下拉刷新的操作
-                //例如下面代码，在方法中发送一个handler模拟延时操作
-                mHandler.sendEmptyMessageDelayed(1, 2000);
-            }
-        });
+
     }
+
+    private void viewsAddListener() {
+        //当布局的状态或者控件的可见性发生改变回调的接口
+        llTitle.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                //这一步很重要，使得上面的购买布局和下面的购买布局重合
+                onScroll(sw.getScrollY());
+            }
+
+
+        });
+        sv.setOnScrollListener(this);
+
+    }
+
+    public void onScroll(int scrollY) {
+        int mBuyLayout2ParentTop = Math.max(scrollY, homeBackground.getTop());
+        sv.layout(0, mBuyLayout2ParentTop, sv.getWidth(), mBuyLayout2ParentTop + sv.getHeight());
+        homeperchs.setVisibility(View.GONE);
+
+    }
+
 
     @Override
     protected HomePresenter initGeekP() {
         return new HomePresenter();
     }
+
 
     @Override
     protected void initListener() {
@@ -434,6 +465,16 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 
             }
         });
+
+        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //这里可以做一下下拉刷新的操作
+                //例如下面代码，在方法中发送一个handler模拟延时操作
+                mHandler.sendEmptyMessageDelayed(1, 2000);
+            }
+        });
+
 
         homeSearch.setOnClickListener(new View.OnClickListener() {
             @Override

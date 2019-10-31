@@ -1,15 +1,9 @@
 package com.balala.yaofun.activity;
 
-import android.annotation.SuppressLint;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -33,7 +27,6 @@ import com.balala.yaofun.R;
 import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.UserBean;
-import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.event.LoginSuccessEvent;
 import com.balala.yaofun.fragment.HomeFragment;
 import com.balala.yaofun.httpUtils.ToastUtil;
@@ -44,13 +37,7 @@ import com.balala.yaofun.util.MyApp;
 import com.balala.yaofun.util.ToastUtils;
 import com.balala.yaofun.view.LandingView;
 import com.balala.yaofun.util.TextWatcherUtil;
-import com.tencent.mm.opensdk.constants.ConstantsAPI;
-import com.tencent.mm.opensdk.modelmsg.SendAuth;
-import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
-import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.opensdk.modelmsg.WXTextObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -111,7 +98,8 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         mEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                           finish();
+                //           finish();
+                startActivity(new Intent(LandingActivity.this, GeneralActivity.class));
             }
         });
 
@@ -166,14 +154,17 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
                 phone = mEt1.getText().toString().replaceAll(" ", "");
                 //重新拼接手机号
                 password = mEt2.getText().toString();
+                Log.e("xuzhiqi", "initData: " + password + "\n" + phone);
                 if (password.isEmpty() || phone.isEmpty()) {
                     Toast.makeText(LandingActivity.this, "请输入正确输入", Toast.LENGTH_SHORT).show();
                 } else {
                     Map<String,String> map=new HashMap<>();
-                    map.put("phone",phone.toString());
-                    map.put("password",password.toString());
+                    map.put("phone",phone);
+                    map.put("password",password);
                     basePresenter.phonePwdLogin(map);
                 }
+                // 提示用户登陆成功
+//                startActivity(new Intent(LandingActivity.this, GeneralActivity.class));
 
             }
         });

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.balala.yaofun.R;
+import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.FunhomeData;
 import com.bumptech.glide.Glide;
 
@@ -18,14 +19,14 @@ import java.util.ArrayList;
 
 public class FunCateAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private ArrayList<FunhomeData.DataBean> list;
+    private ArrayList<FunhomeData.FoodBean> list;
 
-    public FunCateAdapter(Context context, ArrayList<FunhomeData.DataBean> list) {
+    public FunCateAdapter(Context context, ArrayList<FunhomeData.FoodBean> list) {
         this.context = context;
         this.list = list;
     }
 
-    public void setList(ArrayList<FunhomeData.DataBean> list) {
+    public void setList(ArrayList<FunhomeData.FoodBean> list) {
         this.list = list;
     }
 
@@ -46,22 +47,23 @@ public class FunCateAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        FunhomeData.DataBean dataBean = list.get(position);
-
+//        FunhomeData.FoodBean dataBean = list.get(position);
+        FunhomeData.FoodBean data = list.get(position);
         if (holder instanceof FunCateAdapter.ViewHolderA) {
             FunCateAdapter.ViewHolderA viewHolderA = (FunCateAdapter.ViewHolderA) holder;
-            Glide.with(context).load(dataBean.get美食().get(position).getUser_images()).into(viewHolderA.img_a);
-            viewHolderA.tv_a1.setText(dataBean.get美食().get(position).getGroup_name());
-            viewHolderA.tv_a2.setText(dataBean.get美食().get(position).getAutograph());
+            Glide.with(context).load(data.getUser_images()).into(viewHolderA.img_a);
+            viewHolderA.tv_a1.setText(data.getGroup_name());
+            viewHolderA.tv_a2.setText(data.getAutograph());
 
         } else if (holder instanceof FunCateAdapter.ViewHolderB) {
             FunCateAdapter.ViewHolderB viewHolderB = (FunCateAdapter.ViewHolderB) holder;
-            Glide.with(context).load(dataBean.get美食().get(position).getUser_images()).into(viewHolderB.img_b);
-            viewHolderB.tv_b1.setText(dataBean.get美食().get(position).getGroup_name());
-            viewHolderB.tv_b2.setText(dataBean.get美食().get(position).getAutograph());
+            Glide.with(context).load(data.getUser_images()).into(viewHolderB.img_b);
+            viewHolderB.tv_b1.setText(data.getGroup_name());
+            viewHolderB.tv_b2.setText(data.getAutograph());
         }
 
     }
+
     @Override
     public int getItemCount() {
         return list.size();
@@ -69,7 +71,7 @@ public class FunCateAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemViewType(int position) {
-        if (position  == 0) {
+        if (position == 0) {
             return 1;
         } else {
             return 2;

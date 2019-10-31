@@ -15,4 +15,5 @@ public interface MarkServer<T> {
     @POST("user/login")
     @FormUrlEncoded
     Observable<T> getLoginData(@FieldMap Map<String, Object> map);
+
 }

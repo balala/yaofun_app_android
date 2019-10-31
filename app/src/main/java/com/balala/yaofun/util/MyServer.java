@@ -32,8 +32,8 @@ public interface MyServer {
 
     //   String url = "https://192.168.0.164:8088/api/";
     // String url = "http://192.168.110.144:5001/api/";
-//    String url = "https://test.yaofun.vip/api/";
-    String url = "http://192.168.110.131:5001/api/";
+    String url = "https://test.yaofun.vip/api/";
+//    String url = "http://192.168.110.131:5001/api/";
 //    String url = "https://api.yaofun.vip/api";
 
     // http://test.yaofun.vip/api/verification_code/send
@@ -99,11 +99,16 @@ public interface MyServer {
     // fun团首页列表
     // http://test.yaofun.vip/api/user_group/recommend_1_8
     @GET("user_group/recommend_1_8")
-    Observable<FunhomeData> getFunhomeData(@QueryMap HashMap<String, Object> map);
+    Observable<BaseBean<FunhomeData>> getFunhomeData(@QueryMap Map<String, Object> map);
 
     @GET("activity/detail/{id}")
     Observable<HomedetailsBean> getHomedetailsData(@Path("id") String id, @QueryMap HashMap<String, Object> map);
 
     //  /activity/detail/5ce368ffe6b187cf63e4289a
+
+    //  https://test.yaofun.vip/api/activity/upload/image 上传图片
+    @POST("activity/upload/image")
+    @FormUrlEncoded
+    Observable<ResponseBody> getActivitDataimg(@FieldMap Map<String, Object> map);
 
 }

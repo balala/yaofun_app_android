@@ -9,18 +9,18 @@
     tools:context=".activity.HomedetailsActivity">
 
     <ImageView
-        android:id="@+id/homedetailsicon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@mipmap/homedetails"
-        android:visibility="visible" />
+    android:id="@+id/homedetailsicon"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scaleType="fitXY"
+    android:src="@mipmap/homedetails"
+    android:visibility="visible" />
 
     <RelativeLayout
         android:id="@+id/sll"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                     <ImageView
                         android:id="@+id/homedetails_xiahua"
                         android:layout_width="@dimen/dp_39"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp_2"
                         android:layout_marginLeft="@dimen/dp_21"
                         android:layout_marginTop="@dimen/dp_32"
                         android:src="@drawable/xiahua" />
@@ -86,31 +86,32 @@
                     </LinearLayout>
 
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/dp_20"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <TextView
+                        android:id="@+id/homedetails_label1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_20"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="@dimen/dp_29"
+                        android:text="#我不需要标签"
+                        android:textColor="@color/colorwhite"
+                        android:textSize="@dimen/sp_15" />
 
-                        <TextView
-                            android:id="@+id/homedetails_label1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_29"
-                            android:text="#我不需要标签"
-                            android:textColor="@color/colorwhite"
-                            android:textSize="@dimen/sp_15" />
-
-                        <TextView
-                            android:id="@+id/homedetails_label2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dp_19"
-                            android:layout_marginTop="@dimen/dp_29"
-                            android:text="#我不是Jack波"
-                            android:textColor="@color/colorwhite"
-                            android:textSize="@dimen/sp_15" />
-                    </LinearLayout>
+                    <!--<TextView-->
+                    <!--android:id="@+id/homedetails_label2"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/dp_19"-->
+                    <!--android:layout_marginTop="@dimen/dp_29"-->
+                    <!--android:text="#我不是Jack波"-->
+                    <!--android:textColor="@color/colorwhite"-->
+                    <!--android:textSize="@dimen/sp_15" />-->
+                    <!--</LinearLayout>-->
 
                     <TextView
                         android:id="@+id/homedetails_signature"
@@ -122,7 +123,10 @@
                         android:textColor="@color/colorwhite"
                         android:textSize="@dimen/sp_12" />
 
-                    <include layout="@layout/homedetails_item1" />
+                    <include
+                        android:id="@+id/in1"
+                        layout="@layout/homedetails_item1"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -196,7 +200,7 @@
                             android:layout_width="@dimen/dp_211"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dp_17"
-                            android:text=""
+                            android:text="FREE"
                             android:textColor="@color/colorwhite"
                             android:textSize="@dimen/sp_15" />
 
@@ -235,118 +239,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/dp_60" />
-                    <!--<ImageView-->
-                    <!--android:id="@+id/homedetails_img1"-->
-                    <!--android:layout_width="@dimen/dp_334"-->
-                    <!--android:layout_height="@dimen/dp_200"-->
-                    <!--android:layout_marginLeft="@dimen/dp_20"-->
-                    <!--android:layout_marginTop="@dimen/dp_60"-->
-                    <!--android:layout_marginRight="@dimen/dp_21"-->
-                    <!--android:scaleType="fitXY" />-->
-
-                    <!--<TextView-->
-                    <!--android:id="@+id/homedetails_text1"-->
-                    <!--android:layout_width="@dimen/dp_332"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="@dimen/dp_21"-->
-                    <!--android:layout_marginTop="@dimen/dp_41"-->
-                    <!--android:layout_marginRight="@dimen/dp_24"-->
-                    <!--android:text="无非是借着梦的名义做自己罢如果说戏剧是所有难以启齿的梦想的保护色此刻，到底是戏如人生还是人生如戏？白日悠长，不免梦多2019北京国际花植设计节意图收集所有白日绵长的时间与炙热的梦想送给每一个敢于做梦的你"-->
-                    <!--android:textColor="@color/colorwhite"-->
-                    <!--android:textSize="@dimen/sp_15" />-->
-
-                    <!--<ImageView-->
-                    <!--android:id="@+id/homedetails_img2"-->
-                    <!--android:layout_width="@dimen/dp_332"-->
-                    <!--android:layout_height="@dimen/dp_200"-->
-                    <!--android:layout_marginLeft="@dimen/dp_20"-->
-                    <!--android:layout_marginTop="@dimen/dp_70"-->
-                    <!--android:layout_marginRight="@dimen/dp_21"-->
-                    <!--android:scaleType="fitXY" />-->
-
-                    <!--<TextView-->
-                    <!--android:id="@+id/homedetails_text2"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="@dimen/dp_21"-->
-                    <!--android:layout_marginTop="@dimen/dp_33"-->
-                    <!--android:layout_marginRight="@dimen/dp_24"-->
-                    <!--android:text="【展览周期】 2019年9月6日-9月15日【展览时间】花植创作艺术展：2019年9月6日-9月15日，10:30-19:00（周一闭馆）花植时装秀：2019年9月13日，15:00-16:00花植节沙龙：2019年9月7、8日，10:00-17:20【主会场展览和沙龙场地】 繁星戏剧村【分会场花植时装秀场地】龙湖北京大兴天街"-->
-                    <!--android:textColor="@color/colorwhite"-->
-                    <!--android:textSize="@dimen/sp_15" />-->
-
-                    <!--<ImageView-->
-                    <!--android:id="@+id/homedetails_img3"-->
-                    <!--android:layout_width="@dimen/dp_332"-->
-                    <!--android:layout_height="@dimen/dp_200"-->
-                    <!--android:layout_marginLeft="@dimen/dp_20"-->
-                    <!--android:layout_marginTop="@dimen/dp_70"-->
-                    <!--android:layout_marginRight="@dimen/dp_21"-->
-                    <!--android:scaleType="fitXY" />-->
-
-                    <!--<TextView-->
-                    <!--android:id="@+id/homedetails_text3"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="@dimen/dp_21"-->
-                    <!--android:layout_marginTop="@dimen/dp_41"-->
-                    <!--android:layout_marginRight="@dimen/dp_24"-->
-                    <!--android:text="2019花植节跨界联合戏剧将主题定义为“白日梦”，以戏剧文学的力量模糊梦与现实的界限，为所有心怀“白日梦”的人提供一个舞台。花植节邀请到的每一位花艺设计师都拥有一个共同的身份标签“追梦人”，花承载着艺术与梦想，以一种柔软的充满香气的方式向这个世界宣告梦想的主权。"-->
-                    <!--android:textColor="@color/colorwhite"-->
-                    <!--android:textSize="@dimen/sp_15" />-->
-
-                    <!--<ImageView-->
-                    <!--android:id="@+id/homedetails_img4"-->
-                    <!--android:layout_width="@dimen/dp_332"-->
-                    <!--android:layout_height="@dimen/dp_200"-->
-                    <!--android:layout_marginLeft="@dimen/dp_20"-->
-                    <!--android:layout_marginTop="@dimen/dp_70"-->
-                    <!--android:layout_marginRight="@dimen/dp_21"-->
-                    <!--android:scaleType="fitXY" />-->
-
-                    <!--<TextView-->
-                    <!--android:id="@+id/homedetails_text4"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="@dimen/dp_21"-->
-                    <!--android:layout_marginTop="@dimen/dp_40"-->
-                    <!--android:layout_marginRight="@dimen/dp_24"-->
-                    <!--android:text="每个人都经历过梦境，梦境是能够实现欲望的一种原始的内在表达方式，它存在于每个人最隐秘的内心剧场。如果将梦仔细划分，你会发现有这么一群人，他们的梦不仅只存在于夜晚，更存在于每个灿烂的白昼，让心先身体一步晒上太阳。-->
-                    <!--花植节特邀14位不同身份不同领域的“追梦人”讲述自己的人生，为你的梦想给予点滴灵感。"-->
-                    <!--android:textColor="@color/colorwhite"-->
-                    <!--android:textSize="@dimen/sp_15" />-->
-
-                    <!--<ImageView-->
-                    <!--android:id="@+id/homedetails_textback"-->
-                    <!--android:layout_width="@dimen/dp_6"-->
-                    <!--android:layout_height="@dimen/dp_12"-->
-                    <!--android:layout_marginLeft="@dimen/dp_353"-->
-                    <!--android:layout_marginTop="@dimen/dp_5"-->
-                    <!--android:src="@drawable/homedetails_back" />-->
-
-                    <!--<ImageView-->
-                    <!--android:id="@+id/homedetails_img5"-->
-                    <!--android:layout_width="@dimen/dp_335"-->
-                    <!--android:layout_height="@dimen/dp_478"-->
-                    <!--android:layout_marginLeft="@dimen/dp_20"-->
-                    <!--android:layout_marginTop="@dimen/dp_70"-->
-                    <!--android:layout_marginRight="@dimen/dp_20"-->
-                    <!--android:scaleType="fitXY" />-->
-
-                    <!--<TextView-->
-                    <!--android:id="@+id/homedetails_text5"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="@dimen/dp_22"-->
-                    <!--android:layout_marginTop="@dimen/dp_40"-->
-                    <!--android:text="喜欢“做梦”的小伙伴速度约起来吧"-->
-                    <!--android:textColor="@color/colordeepgray"-->
-                    <!--android:textSize="@dimen/sp_15" />-->
 
                     <ImageView
                         android:id="@+id/homedetails_img6"
-                        android:layout_width="@dimen/dp_30"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/dp_39"
+                        android:layout_height="@dimen/dp_2"
                         android:layout_marginLeft="@dimen/dp_21"
                         android:layout_marginTop="@dimen/dp_30"
                         android:layout_marginRight="@dimen/dp_315"
@@ -387,13 +284,20 @@
                         android:layout_marginTop="@dimen/dp_43"
                         android:layout_marginRight="@dimen/dp_18" />
 
-                    <View
-                        android:layout_width="@dimen/dp_375"
-                        android:layout_height="@dimen/dp_1"
-                        android:layout_marginLeft="@dimen/dp_20"
-                        android:layout_marginTop="@dimen/dp_56"
-                        android:layout_marginRight="@dimen/dp_20"
-                        android:background="@color/colordeepgray" />
+                    <!--<View-->
+                    <!--android:layout_width="@dimen/dp_375"-->
+                    <!--android:layout_height="@dimen/dp_1"-->
+                    <!--android:layout_marginLeft="@dimen/dp_20"-->
+                    <!--android:layout_marginTop="@dimen/dp_56"-->
+                    <!--android:layout_marginRight="@dimen/dp_20"-->
+                    <!--android:background="@drawable/xiahua" />-->
+                    <!--<ImageView-->
+                        <!--android:layout_width="@dimen/dp_375"-->
+                        <!--android:layout_height="@dimen/dp_1"-->
+                        <!--android:layout_marginLeft="@dimen/dp_20"-->
+                        <!--android:layout_marginTop="@dimen/dp_56"-->
+                        <!--android:layout_marginRight="@dimen/dp_20"-->
+                        <!--android:background="@drawable/xiahua" />-->
 
                     <TextView
                         android:layout_width="wrap_content"

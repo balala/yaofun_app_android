@@ -19,11 +19,14 @@ import com.balala.yaofun.adapter.FunCateAdapter;
 import com.balala.yaofun.adapter.FunMovieAdapter;
 import com.balala.yaofun.adapter.FunSocialContactAdapter;
 import com.balala.yaofun.base.BaseFragment;
+import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.FunhomeData;
 import com.balala.yaofun.presenter.FunPresenter;
 import com.balala.yaofun.view.FunView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -72,7 +75,10 @@ public class FunFragment extends BaseFragment<FunPresenter, FunView> implements 
 //    @BindView(R.id.funperch)
 //    ImageView mFunperch;
 
-    private ArrayList<FunhomeData.DataBean> list;
+    private ArrayList<FunhomeData.ArtBean> artlist;
+    private ArrayList<FunhomeData.FilmBean> filmlist;
+    private ArrayList<FunhomeData.SocialBean> socialist;
+    private ArrayList<FunhomeData.FoodBean> foodlist;
     private FunMovieAdapter movieAdapter;
     private FunArtAdapter artAdapter;
     private FunCateAdapter cateAdapter;
@@ -94,9 +100,51 @@ public class FunFragment extends BaseFragment<FunPresenter, FunView> implements 
     @Override
     protected void initView() {
         super.initView();
-        list = new ArrayList<>();
+
+    }
+
+
+    @Override
+    protected void initData() {
+        super.initData();
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", "-1");
+        map.put("version", "-1");
+        map.put("current_device", "安卓");
+        map.put("unique_identifier", "");
+        map.put("download_channel", "");
+        map.put("user_defined_name", "");
+        map.put("phone_version", "");
+        map.put("wx_unionid", "");
+        map.put("phone_model", "");
+        presenter.funhomeData(map);
+    }
+
+
+//    @Override
+//    public void onFailFun(String msg) {
+//        Log.e(TAG, "onFailFun --- Error: " + msg);
+//    }
+//
+//    @Override
+//    public void onSuccessFun(BaseBean<FunhomeData> bean) {
+////        list.add(funhomeData.getData());
+//
+//
+//    }
+
+    @Override
+    public void homefunSuccess(BaseBean<FunhomeData> bean) {
+//        movieAdapter.setList(filmlist);
+//        cateAdapter.setList(foodlist);
+//        artAdapter.setList(artlist);
+//        socialContactAdapter.setList(socialist);
+
+        artlist = new ArrayList<>();
+        filmlist = new ArrayList<>();
+        socialist = new ArrayList<>();
         //影视
-        movieAdapter = new FunMovieAdapter(getActivity(), list);
+        movieAdapter = new FunMovieAdapter(getActivity(), filmlist);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         funRv2.setLayoutManager(linearLayoutManager);
@@ -105,7 +153,7 @@ public class FunFragment extends BaseFragment<FunPresenter, FunView> implements 
         funRv3.setAdapter(movieAdapter);
 
         //艺术
-        artAdapter = new FunArtAdapter(getActivity(), list);
+        artAdapter = new FunArtAdapter(getActivity(), artlist);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         funRv4.setLayoutManager(linearLayoutManager);
@@ -115,7 +163,7 @@ public class FunFragment extends BaseFragment<FunPresenter, FunView> implements 
 
 
         //社交
-        socialContactAdapter = new FunSocialContactAdapter(getActivity(), list);
+        socialContactAdapter = new FunSocialContactAdapter(getActivity(), socialist);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         funRv6.setLayoutManager(linearLayoutManager);
@@ -124,32 +172,13 @@ public class FunFragment extends BaseFragment<FunPresenter, FunView> implements 
         funRv7.setAdapter(socialContactAdapter);
 
         //美食
-        cateAdapter = new FunCateAdapter(getActivity(), list);
+        cateAdapter = new FunCateAdapter(getActivity(), foodlist);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         funRv8.setLayoutManager(linearLayoutManager);
         funRv8.setAdapter(cateAdapter);
         funRv9.setLayoutManager(new LinearLayoutManager(getActivity()));
         funRv9.setAdapter(cateAdapter);
-
-    }
-
-
-    @Override
-    protected void initData() {
-        super.initData();
-        presenter.getFunData();
-
-    }
-
-    @Override
-    public void onSuccessFun(FunhomeData funhomeData) {
-
-        list.add(funhomeData.getData());
-        movieAdapter.setList(list);
-        cateAdapter.setList(list);
-        artAdapter.setList(list);
-        socialContactAdapter.setList(list);
 
         movieAdapter.notifyDataSetChanged();
         cateAdapter.notifyDataSetChanged();
@@ -160,7 +189,7 @@ public class FunFragment extends BaseFragment<FunPresenter, FunView> implements 
     }
 
     @Override
-    public void onFailFun(String msg) {
+    public void homefunFail(String msg) {
         Log.e(TAG, "onFailFun --- Error: " + msg);
     }
 }

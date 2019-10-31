@@ -95,7 +95,8 @@ dependencies {
 
     implementation('com.github.bumptech.glide:glide:4.8.0') {
         exclude group: "com.android.support"
-    }                                                             //解析图片(圆形)
+    }
+    //解析图片(圆形)
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     //扫一扫
     implementation files('libs/zxing.jar')
