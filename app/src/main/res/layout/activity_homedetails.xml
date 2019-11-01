@@ -9,18 +9,18 @@
     tools:context=".activity.HomedetailsActivity">
 
     <ImageView
-    android:id="@+id/homedetailsicon"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scaleType="fitXY"
-    android:src="@mipmap/homedetails"
-    android:visibility="visible" />
+        android:id="@+id/homedetailsicon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@mipmap/homedetails"
+        android:visibility="visible" />
 
     <RelativeLayout
         android:id="@+id/sll"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -292,12 +292,12 @@
                     <!--android:layout_marginRight="@dimen/dp_20"-->
                     <!--android:background="@drawable/xiahua" />-->
                     <!--<ImageView-->
-                        <!--android:layout_width="@dimen/dp_375"-->
-                        <!--android:layout_height="@dimen/dp_1"-->
-                        <!--android:layout_marginLeft="@dimen/dp_20"-->
-                        <!--android:layout_marginTop="@dimen/dp_56"-->
-                        <!--android:layout_marginRight="@dimen/dp_20"-->
-                        <!--android:background="@drawable/xiahua" />-->
+                    <!--android:layout_width="@dimen/dp_375"-->
+                    <!--android:layout_height="@dimen/dp_1"-->
+                    <!--android:layout_marginLeft="@dimen/dp_20"-->
+                    <!--android:layout_marginTop="@dimen/dp_56"-->
+                    <!--android:layout_marginRight="@dimen/dp_20"-->
+                    <!--android:background="@drawable/xiahua" />-->
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -380,19 +380,19 @@
         </RelativeLayout>
 
         <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--android:id="@+id/homedetails_fab"-->
-        <!--android:layout_width="@dimen/dp_40"-->
-        <!--android:layout_height="@dimen/dp_41"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_margin="5dp"-->
-        <!--android:layout_marginRight="@dimen/dp_100"-->
-        <!--android:layout_marginBottom="@dimen/dp_100"-->
-        <!--android:backgroundTint="@color/colordeepgray"-->
-        <!--android:scaleType="fitXY"-->
-        <!--android:src="@drawable/icon_stick"-->
-        <!--app:borderWidth="@dimen/dp_0"-->
-        <!--app:elevation="8dp" />-->
+            <!--android:id="@+id/homedetails_fab"-->
+            <!--android:layout_width="@dimen/dp_60"-->
+            <!--android:layout_height="@dimen/dp_60"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_gravity="end|bottom"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:layout_marginRight="@dimen/dp_100"-->
+            <!--android:layout_marginBottom="@dimen/dp_100"-->
+            <!--android:backgroundTint="@mipmap/icon_stick"-->
+            <!--android:clickable="true"-->
+            <!--android:src="@mipmap/icon_stick"-->
+            <!--android:visibility="gone" />-->
     </RelativeLayout>
 
 </RelativeLayout>

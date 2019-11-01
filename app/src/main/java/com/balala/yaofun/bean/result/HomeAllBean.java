@@ -2,9 +2,10 @@ package com.balala.yaofun.bean.result;
 
 import com.balala.yaofun.bean.BaseBean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class HomeAllBean extends BaseBean {
+public class HomeAllBean implements Serializable {
 
 
     /**

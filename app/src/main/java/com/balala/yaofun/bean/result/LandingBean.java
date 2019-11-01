@@ -1,72 +1,11 @@
 package com.balala.yaofun.bean.result;
 
+import com.balala.yaofun.bean.BaseBean;
+
 import java.util.List;
 
-public class LandingBean {
+public class LandingBean extends BaseBean {
 
-    /**
-     * data : {"_id":"5db6f5aaa77870fcf9d9cb0b","autograph":["不秃头的小白说没有签名会变胖！"],"autograph_img":"","back_image":"","both_follow":false,"city":"","come_form":"安卓","country":"","create_time":"2019-10-28 22:05","current_balance":0,"email":"","fans_count":0,"first_in_ios":true,"follow_count":0,"friend":[],"has_follow":false,"identity_card":"","images":"https://img.yaofun.vip/2019/10/11/97e47172-ebd2-11e9-b241-0242ac130002.png","interest":[],"is_delete":false,"is_top":false,"key":"5db6ff66a77870fcf9d9cbb9","language":"","max_group":5,"medal":[],"nick_name":"Fun粒45461","openid":"","openid_ios":"","openid_public":"","openid_service":"","openid_web":"","operator_tags":{},"phone":"15648550590","province":"","rc_refresh_number":"","rc_token":"mb9GVLoUdAhU3lXAMQ8aYItDThrZbuv4tvKiHu/pQzVsegLaQ6JF2JVV2SlEJX1QUT/pvxNoXzF3SXM2tNL2+b17hRxNpsXZ0RduRjSie5QvGhZWNmIcyA==","real_name":"","real_name_authentication":false,"rule":"群众","selected_city":"北京","self_create_group_count":0,"setting_nick_name":false,"sex":"","tags_aggr":{},"user_label":[],"user_tags":{},"wx_unionid":""}
-     * msg : 请求成功
-     * page : 0
-     * pageSize : 0
-     * success : true
-     * total : 1
-     */
-
-    private DataBean data;
-    private String msg;
-    private String page;
-    private int pageSize;
-    private boolean success;
-    private int total;
-
-    public DataBean getData() {
-        return data;
-    }
-
-    public void setData(DataBean data) {
-        this.data = data;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public String getPage() {
-        return page;
-    }
-
-    public void setPage(String page) {
-        this.page = page;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
 
     public static class DataBean {
         /**

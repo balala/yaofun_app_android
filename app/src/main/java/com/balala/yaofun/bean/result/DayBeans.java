@@ -1,71 +1,9 @@
 package com.balala.yaofun.bean.result;
 
-public class DayBeans {
+import com.balala.yaofun.bean.BaseBean;
 
-    /**
-     * data : {"_id":"5d7a0cb8d12f4212e33cd309","content":"只有敢于冒险，才有机遇发现赚钱的机会","create_time":"2019-09-12 17:14","end_hour":24,"img":"https://img.yaofun.vip/2019/09/12/e0df93ee-d53d-11e9-b369-acde48001122.jpeg","lunar_time":"[辛巳 九月十三]","number_time":"11","prompt":"忌胆怯","solar_time":"2019年10月 星期五","start_hour":0,"title":"name,早上好","use_time":"all"}
-     * msg : 请求成功
-     * page : 0
-     * pageSize : 0
-     * success : true
-     * total : 1
-     */
-
-    private DataBean data;
-    private String msg;
-    private String page;
-    private int pageSize;
-    private boolean success;
-    private int total;
-
-    public DataBean getData() {
-        return data;
-    }
-
-    public void setData(DataBean data) {
-        this.data = data;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public String getPage() {
-        return page;
-    }
-
-    public void setPage(String page) {
-        this.page = page;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
+public class DayBeans extends BaseBean {
+    
     public static class DataBean {
         /**
          * _id : 5d7a0cb8d12f4212e33cd309

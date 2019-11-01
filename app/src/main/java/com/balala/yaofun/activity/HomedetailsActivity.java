@@ -2,49 +2,38 @@ package com.balala.yaofun.activity;
 
 import android.content.Intent;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.balala.yaofun.R;
 import com.balala.yaofun.adapter.DetailsactivityAdapter;
 import com.balala.yaofun.base.BaseActivity;
+import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.result.HomedetailsBean;
-import com.balala.yaofun.fragment.HomeFragment;
-import com.balala.yaofun.model.HomedetailsModel;
+import com.balala.yaofun.model.ApiModel;
 import com.balala.yaofun.presenter.HomedetailsPersenter;
 import com.balala.yaofun.view.HomedetailsView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, HomedetailsModel> implements HomedetailsView {
+public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiModel> implements HomedetailsView {
 
     @BindView(R.id.homedetailsimg)
     ImageView mHomedetailsimg;
@@ -117,7 +106,6 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
     private LinearLayout popitem2;
     private LinearLayout popitem3;
     private LinearLayout popitem4;
-//    private String[] str = new String[]{""};
 
 
     @Override
@@ -129,17 +117,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
     protected void initData() {
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
-        basePresenter.getHomedetailsdata(id);
-
-        // TYPE判断条件
-//        List<String> strings = Arrays.asList(str);
-//        if(strings.contains("文本")&&!strings.contains("图片")){
-//
-//        }else if(!strings.contains("文本")&&strings.contains("图片")){
-//
-//        }else if(strings.contains("文本")&&strings.contains("图片")){
-//
-//        }
+        HashMap<String, String> map = new HashMap<>();
+        basePresenter.getHomedetailsdata(id, map);
     }
 
     @Override
@@ -241,15 +220,12 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
     }
 
     @Override
-    public void onSuccessHomedetails(HomedetailsBean funhomeData) {
+    public void onSuccessHomedetails(BaseBean<HomedetailsBean.DataBean> funhomeData) {
         homedetailsicon.setVisibility(View.GONE);
         sll.setVisibility(View.VISIBLE);
         HomedetailsBean.DataBean data = funhomeData.getData();
-//        /        DetailsactivityAdapter    allrv
-
         // 标签的个数
         DetailsactivityAdapter adapter = new DetailsactivityAdapter(this, data);
-//        LinearLayout linearLayout = new LinearLayout(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         allrv.setLayoutManager(linearLayoutManager);
         allrv.setAdapter(adapter);
@@ -260,7 +236,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, Home
 
 //        List<String> user_label = data.getUser_label();
 //        for (int i = 0; i < user_label.size(); i++) {
-//            mHomedetailsLabel1.setText(data.getUser_label().get(i));
+//            mHomedetailsLabel1.setText(data.getUser_label());
 //        }
 //        mHomedetailsLabel2.setText(data.getUser_label().get(size));
         mHomedetailsPeoplename.setText(data.getUser_nick_name());

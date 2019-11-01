@@ -50,6 +50,7 @@ import com.balala.yaofun.adapter.HomeAdapter;
 import com.balala.yaofun.adapter.HomeAroundAdapter;
 import com.balala.yaofun.adapter.HomeRecommendAdapter;
 import com.balala.yaofun.base.BaseFragment;
+import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.result.DayBeans;
 import com.balala.yaofun.bean.result.HomeAllBean;
 import com.balala.yaofun.bean.result.HomeBannerDean;
@@ -71,7 +72,10 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Timer;
 
 import butterknife.BindView;
@@ -82,8 +86,9 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 /**
  * A simple {@link Fragment} subclass.
  * extends BaseActivity<FrogetpasswardPresenter, FrogetpasswardView> implements FrogetpasswardView
+ * , MyScrollView.OnScrollListener
  */
-public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implements Homeview, MyScrollView.OnScrollListener {
+public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implements Homeview {
 
     @BindView(R.id.home_background)
     ImageView homeBackground;
@@ -212,38 +217,11 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public void onSuccessHome(DayBeans dayBean) {
-
-        // 在这收值
-        Log.i("每日一句话解析", "onSuccessHome: " + dayBean.toString());
-        preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-        boolean aBoolean = preferences.getBoolean("flag", false);
-        if (aBoolean) {
-//            getDatas();
-            preferences1 = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-            String nick_name = preferences1.getString("nick_name", "");
-            String images = preferences1.getString("images", "");
-            Glide.with(this).load(images).into(peopleIcon);
-            people_name.setText(nick_name);
-            Log.i("登陆返回的值", "getDatas: " + "" + images + "" + nick_name);
-            codetext.setText(dayBean.getData().getNumber_time());
-            daytext.setText(dayBean.getData().getSolar_time());
-            monthtext.setText(dayBean.getData().getLunar_time());
-            tabootext.setText(dayBean.getData().getPrompt());
-            Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
-        } else {
-            codetext.setText(dayBean.getData().getNumber_time());
-            daytext.setText(dayBean.getData().getSolar_time());
-            monthtext.setText(dayBean.getData().getLunar_time());
-            tabootext.setText(dayBean.getData().getPrompt());
-//            people_name.setText(dayBean.getData().getUse_time());
-            Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
-            peopleTitle.setText(dayBean.getData().getTitle());
-            peopleContent.setText(dayBean.getData().getContent());
-        }
-
-    }
+//    @Override
+//    public void onSuccessHome(DayBeans dayBean) {
+//
+//
+//    }
 
 
     //声明定位回调监听器
@@ -264,7 +242,10 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             double abs = Math.abs(longitude);
             y = String.valueOf(latitude);
             x = String.valueOf(abs);
-            presenter.getHomeallData(x, y);
+            Map<String, String> map = new HashMap<>();
+            map.put("x", x);
+            map.put("y", y);
+            presenter.getHomeallData(map);
             Log.i("经纬度homeFragment", "纬度 ----------------" + " " + x);//获取纬度
             Log.i("经纬度homeFragment", "经度-----------------" + " " + y);//获取经度
 
@@ -273,16 +254,48 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 
 
     @Override
+    public void onSuccessHome(BaseBean<DayBeans.DataBean> dayBean) {
+
+        // 在这收值
+        Log.i("每日一句话解析", "onSuccessHome: " + dayBean.toString());
+        preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        boolean aBoolean = preferences.getBoolean("flag", false);
+        if (aBoolean) {
+//            getDatas();
+            preferences1 = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+            String nick_name = preferences1.getString("nick_name", "");
+            String images = preferences1.getString("images", "");
+            Glide.with(this).load(images).into(peopleIcon);
+            people_name.setText(nick_name);
+            Log.i("登陆返回的值", "getDatas: " + "" + images + "" + nick_name);
+            codetext.setText(dayBean.getData().getNumber_time());
+            daytext.setText(dayBean.getData().getSolar_time());
+            monthtext.setText(dayBean.getData().getLunar_time());
+            tabootext.setText(dayBean.getData().getPrompt());
+            Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
+
+        } else {
+            codetext.setText(dayBean.getData().getNumber_time());
+            daytext.setText(dayBean.getData().getSolar_time());
+            monthtext.setText(dayBean.getData().getLunar_time());
+            tabootext.setText(dayBean.getData().getPrompt());
+//            people_name.setText(dayBean.getData().getUse_time());
+            Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
+            peopleTitle.setText(dayBean.getData().getTitle());
+            peopleContent.setText(dayBean.getData().getContent());
+        }
+    }
+
+    @Override
     public void onFailHome(String msg) {
         Log.i("xzq", "onFailHome: " + msg);
     }
 
     @Override
-    public void onSuccessHomeall(HomeAllBean homeAllBean) {
-
-        Log.i("首页解析", "onSuccessHome: " + homeAllBean.toString());
+    public void onSuccessHomeall(BaseBean<HomeAllBean.DataBean> homeAllBean) {
         //热门
         List<HomeAllBean.DataBean.HotBean> hot = homeAllBean.getData().getHot();
+//        HomeAllBean data = homeAllBean.getData();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recycleView1.setLayoutManager(linearLayoutManager);
         Log.e(TAG, "onSuccessHomeall: " + first);
@@ -378,12 +391,13 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     }
 
     @Override
-    public void onSuccessBannerall(HomeBannerDean body) {
-        Log.i("首页解析banner", "onSuccessBannerall: " + body);
+    public void onSuccessBannerall(BaseBean<HomeBannerDean.DataBean> body) {
+        Log.i("首页解析", "onSuccessHome: " + body.toString());
         first = body.getData().getFirst();
         second = body.getData().getSecond();
-    }
 
+
+    }
 
     @Override
     public void onFailBannerall(String msg) {
@@ -400,37 +414,20 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     protected void initData() {
 
         // 滑动监听 toolbar隐藏
-        viewsAddListener();
-
-
+//        viewsAddListener();
         // 开启定位
         startLocaion();
-        presenter.getHomeData();
-        presenter.getHomeBannerData();
+        Map<String, String> daymap = new HashMap<>();
+//        daymap.put("","");
+        presenter.getHomeData(daymap);
+
+        Map<String, String> map = new HashMap<>();
+        map.put("page","0");
+        map.put("pageSize","10");
+        presenter.getHomeBannerData(map);
 
     }
 
-    private void viewsAddListener() {
-        //当布局的状态或者控件的可见性发生改变回调的接口
-        llTitle.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                //这一步很重要，使得上面的购买布局和下面的购买布局重合
-                onScroll(sw.getScrollY());
-            }
-
-
-        });
-        sv.setOnScrollListener(this);
-
-    }
-
-    public void onScroll(int scrollY) {
-        int mBuyLayout2ParentTop = Math.max(scrollY, homeBackground.getTop());
-        sv.layout(0, mBuyLayout2ParentTop, sv.getWidth(), mBuyLayout2ParentTop + sv.getHeight());
-        homeperchs.setVisibility(View.GONE);
-
-    }
 
 
     @Override
@@ -534,6 +531,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     }
 
     // 集成地图接口
+    @SuppressLint("NewApi")
     public void startLocaion() {
 
         // 集成地图接口

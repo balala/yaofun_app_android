@@ -39,7 +39,7 @@ public interface MyServer {
     // http://test.yaofun.vip/api/verification_code/send
     // 发送验证码的接口 verification code
     @GET("verification_code/send")
-    Observable<VerificationResult> getVerificationCode(@QueryMap HashMap<String, Object> map);
+    Observable<VerificationResult> getVerificationCode(@QueryMap Map<String, Object> map);
 
 
     //    http://test.yaofun.vip/verification_code/verification
@@ -47,7 +47,7 @@ public interface MyServer {
 
     @POST("verification_code/verification")
     @FormUrlEncoded
-    Observable<VerificationCode> getVerificationCodes(@FieldMap HashMap<String, Object> map2);
+    Observable<VerificationCode> getVerificationCodes(@FieldMap Map<String, Object> map2);
 
     // 注册接口
     @POST("user/regist")
@@ -75,20 +75,20 @@ public interface MyServer {
     // https://test.yaofun.vip/api/mood/one
 
     @GET("mood/one")
-    Observable<DayBeans> getDayData(@QueryMap HashMap<String, Object> map);
+    Observable<BaseBean<DayBeans.DataBean>> getDayData(@QueryMap Map<String, Object> map);
 
 
     // 首页banner
 //    http://test.yaofun.vip/api/rotary_planting_map/all
     @GET("rotary_planting_map/all")
-    Observable<HomeBannerDean> getbannerData(@QueryMap HashMap<String, Object> map);
+    Observable<BaseBean<HomeBannerDean.DataBean>> getbannerData(@QueryMap Map<String, Object> map);
 
 
     //首页接口
     //http://test.yaofun.vip/api/activity/good_choice/all
 
     @GET("activity/good_choice/all")
-    Observable<BaseBean<HomeAllBean>> getDoodchoice(@QueryMap Map<String, Object> map);
+    Observable<BaseBean<HomeAllBean.DataBean>> getDoodchoice(@QueryMap Map<String, Object> map);
 
     //发布活动
     //http://test.yaofun.vip/api/activity/upload
@@ -102,7 +102,7 @@ public interface MyServer {
     Observable<BaseBean<FunhomeData>> getFunhomeData(@QueryMap Map<String, Object> map);
 
     @GET("activity/detail/{id}")
-    Observable<HomedetailsBean> getHomedetailsData(@Path("id") String id, @QueryMap HashMap<String, Object> map);
+    Observable<BaseBean<HomedetailsBean.DataBean>> getHomedetailsData(@Path("id") String id, @QueryMap Map<String, Object> map);
 
     //  /activity/detail/5ce368ffe6b187cf63e4289a
 
