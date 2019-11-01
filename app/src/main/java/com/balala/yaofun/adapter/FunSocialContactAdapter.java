@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.balala.yaofun.R;
+import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.FunhomeData;
 import com.bumptech.glide.Glide;
 
@@ -18,15 +19,15 @@ import java.util.ArrayList;
 
 public class FunSocialContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private ArrayList<FunhomeData.SocialBean> sociallist;
+    private ArrayList<BaseBean<FunhomeData.DataBean.SocialBean>> sociallist;
 
 
-    public FunSocialContactAdapter(Context context, ArrayList<FunhomeData.SocialBean> sociallist) {
+    public FunSocialContactAdapter(Context context, ArrayList<BaseBean<FunhomeData.DataBean.SocialBean>> sociallist) {
         this.context = context;
         this.sociallist = sociallist;
     }
 
-    public void setList(ArrayList<FunhomeData.SocialBean> sociallist) {
+    public void setList(ArrayList<BaseBean<FunhomeData.DataBean.SocialBean>> sociallist) {
         this.sociallist = sociallist;
     }
 
@@ -50,15 +51,15 @@ public class FunSocialContactAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (holder instanceof FunSocialContactAdapter.ViewHolderA) {
             FunSocialContactAdapter.ViewHolderA viewHolderA = (FunSocialContactAdapter.ViewHolderA) holder;
 //            FunhomeData.SocialBean funhomeData = list.get(position);
-            Glide.with(context).load(sociallist.get(position).getUser_images()).into(viewHolderA.img_a);
-            viewHolderA.tv_a1.setText(sociallist.get(position).getGroup_name());
-            viewHolderA.tv_a2.setText(sociallist.get(position).getAutograph());
+            Glide.with(context).load(sociallist.get(position).getData().getUser_images()).into(viewHolderA.img_a);
+            viewHolderA.tv_a1.setText(sociallist.get(position).getData().getGroup_name());
+            viewHolderA.tv_a2.setText(sociallist.get(position).getData().getAutograph());
 
         } else if (holder instanceof FunSocialContactAdapter.ViewHolderB) {
             FunSocialContactAdapter.ViewHolderB viewHolderB = (FunSocialContactAdapter.ViewHolderB) holder;
-            Glide.with(context).load(sociallist.get(position).getUser_images()).into(viewHolderB.img_b);
-            viewHolderB.tv_b1.setText(sociallist.get(position).getGroup_name());
-            viewHolderB.tv_b2.setText(sociallist.get(position).getAutograph());
+            Glide.with(context).load(sociallist.get(position).getData().getUser_images()).into(viewHolderB.img_b);
+            viewHolderB.tv_b1.setText(sociallist.get(position).getData().getGroup_name());
+            viewHolderB.tv_b2.setText(sociallist.get(position).getData().getAutograph());
         }
 
     }

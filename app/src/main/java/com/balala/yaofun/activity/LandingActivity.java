@@ -95,8 +95,8 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         mEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //           finish();
-                startActivity(new Intent(LandingActivity.this, GeneralActivity.class));
+                           finish();
+//                startActivity(new Intent(LandingActivity.this, GeneralActivity.class));
             }
         });
 

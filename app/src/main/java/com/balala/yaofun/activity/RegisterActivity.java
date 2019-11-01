@@ -47,8 +47,6 @@ import java.util.Map;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 
-import static com.balala.yaofun.httpUtils.MyApp.goLogin;
-
 //
 public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterView> implements RegisterView {
 
@@ -76,7 +74,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
     private TimeCount time;
     private View mClear;
     private String password;
-    private CodeBean codeBean;
 
     @Override
     protected int getlayout() {
@@ -200,7 +197,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RegisterActivity.this, LandingActivity.class));
-                finish();
+
             }
         });
 
@@ -209,7 +206,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
         mFrogetEdits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
             }
         });
 
@@ -224,44 +221,15 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
         // 点击立即注册以后进行判断验证码正确
         mFrogetYes.setOnClickListener(new View.OnClickListener() {
 
+
             @Override
             public void onClick(View v) {
+//                ToastUtil.showLong("开始验证验证码");
+                Log.i(TAG, "开始验证验证码");
                 // 验证验证码
                 code = mEtIdentifiing.getText().toString().trim();
-                password = mEtPassword.getText().toString().trim();
-                if(codeBean==null){
-                    ToastUtil.showShort("请先获取验证码");
-                    return;
-                }
-                if(TextUtils.isEmpty(code)){
-                    ToastUtil.showShort("请输入验证码");
-                    return;
-                }
-                if(TextUtils.isEmpty(password)){
-                    ToastUtil.showShort("请输入验证码");
-                    return;
-                }
-                if(password.length()<6){
-                    ToastUtil.showShort("密码至少6位");
-                    return;
-                }
-
-                // 获取手机号码 返回后台进行解析
-                Map<String,String> map=new HashMap<>();
-                map.put("phone",phone);
-                map.put("code",code);
-                //注册、找回密码、绑定手机号、实名认证、提现
-                map.put("purpose","注册");
-                //请求时间
-                String time=Utils.getNowDate();
-                map.put("request_start_time",time);
-                //sign2=md5(请求时间+手机号+IOS密钥)
-                map.put("sign2",Utils.md5(time + phone+ Utils.Signs));
-                map.put("password",password);
-                map.put("key",codeBean.getKey());
-                basePresenter.goRegist(map);
-
-
+                Log.e("xuzhiqi", "initData3: " + code + "\n" + phone + "\n" + key);
+                initData2();
             }
         });
         // 验证手机号码
@@ -312,18 +280,13 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
         phone = split[0] + split[1] + split[2];
         // 判断输入的手机号 是否符合手机号规范
         if (phone.matches("^13[0-9]{1}[0-9]{8}$|15[0125689]{1}[0-9]{8}$|18[0-3,5-9]{1}[0-9]{8}$|17[0-3,5-9]{1}[0-9]{8}$|19[0-3,5-9]{1}[0-9]{8}$|16[0-3,5-9]{1}[0-9]{8}$")) {
-
+            Toast.makeText(RegisterActivity.this, "获取验证码", Toast.LENGTH_SHORT).show();
+            // 开始执行倒计时的方法
+            time.start();
+            mRedSpeak.setVisibility(View.GONE);
             // 获取手机号码 返回后台进行解析
-            Map<String,String> map=new HashMap<>();
-            map.put("phone",phone);
-            //注册、找回密码、绑定手机号、实名认证、提现
-            map.put("purpose","注册");
-            //请求时间
-            String time=Utils.getNowDate();
-            map.put("request_start_time",time);
-            //sign2=md5(请求时间+手机号+IOS密钥)
-            map.put("sign2",Utils.md5(time + phone+ Utils.Signs));
-            basePresenter.getVerificationCode(map);
+            initData();
+            // 如果手机号码不符合规则 提示用户正确输入手机号 红色文字显示 字体变成"请输入正确的手机号码"
         } else {
 //            ToastUtil.showLong("请输入正确的手机号码");
 
@@ -336,10 +299,29 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
     }
 
     @Override
-    protected void initData() {}
+    protected void initData() {
+        Map<String, String> map = new HashMap<>();
+        map.put("phone", phone);
+        //注册、找回密码、绑定手机号、实名认证、提现
+        map.put("purpose", "注册");
+        //请求时间
+        String time = Utils.getNowDate();
+        map.put("request_start_time", time);
+        //sign2=md5(请求时间+手机号+IOS密钥)
+        map.put("sign2", Utils.md5(time + phone + Utils.Signs));
+        basePresenter.getVerificationCode(map);
+    }
 
     @Override
-    protected void initData2() {}
+    protected void initData2() {
+        code = mEtIdentifiing.getText().toString().trim();
+        Log.e("验证验证码", "initData3: " + code + "\n" + phone + "\n" + key);
+
+        if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(code) && !TextUtils.isEmpty(key)) {
+//            basePresenter.getData2(phone, code, key);
+        }
+
+    }
 
 
     @Override
@@ -349,27 +331,22 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
 
     @Override
     public void getVerificationCodesSuccess(BaseBean<CodeBean> bean) {
-        // 开始执行倒计时的方法
-        time.start();
-        mRedSpeak.setVisibility(View.GONE);
-        codeBean=bean.getData();
-        ToastUtil.showShort("验证码已发送");
+
     }
 
     @Override
     public void getVerificationCodesFail(String msg) {
-        ToastUtil.showShort(msg);
+
     }
 
     @Override
     public void goRegistSuccess(BaseBean<UserBean> bean) {
-        goLogin(bean);
-        this.finish();
+
     }
 
     @Override
     public void goRegistFail(String msg) {
-        ToastUtil.showShort(msg);
+
     }
 
 //    @Override

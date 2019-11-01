@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.balala.yaofun.R;
+import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.FunhomeData;
 import com.bumptech.glide.Glide;
 
@@ -20,14 +21,14 @@ import java.util.ArrayList;
 
 public class FunMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private ArrayList<FunhomeData.FilmBean> list;
+    private ArrayList<BaseBean<FunhomeData.DataBean.FilmBean>> list;
 
-    public FunMovieAdapter(Context context, ArrayList<FunhomeData.FilmBean> list) {
+    public FunMovieAdapter(Context context, ArrayList<BaseBean<FunhomeData.DataBean.FilmBean>> list) {
         this.context = context;
         this.list = list;
     }
 
-    public void setList(ArrayList<FunhomeData.FilmBean> list) {
+    public void setList(ArrayList<BaseBean<FunhomeData.DataBean.FilmBean>> list) {
         this.list = list;
     }
 
@@ -48,19 +49,19 @@ public class FunMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        FunhomeData.FilmBean dataBean = list.get(position);
+        BaseBean<FunhomeData.DataBean.FilmBean> dataBean = list.get(position);
 
         if (holder instanceof ViewHolderA) {
             ViewHolderA viewHolderA = (ViewHolderA) holder;
-            Glide.with(context).load(dataBean.getUser_images()).into(viewHolderA.img_a);
-            viewHolderA.tv_a1.setText(dataBean.getGroup_name());
-            viewHolderA.tv_a2.setText(dataBean.getAutograph());
+            Glide.with(context).load(dataBean.getData().getUser_images()).into(viewHolderA.img_a);
+            viewHolderA.tv_a1.setText(dataBean.getData().getGroup_name());
+            viewHolderA.tv_a2.setText(dataBean.getData().getAutograph());
 
         } else if (holder instanceof ViewHolderB) {
             ViewHolderB viewHolderB = (ViewHolderB) holder;
-            Glide.with(context).load(dataBean.getUser_images()).into(viewHolderB.img_b);
-            viewHolderB.tv_b1.setText(dataBean.getGroup_name());
-            viewHolderB.tv_b2.setText(dataBean.getAutograph());
+            Glide.with(context).load(dataBean.getData().getUser_images()).into(viewHolderB.img_b);
+            viewHolderB.tv_b1.setText(dataBean.getData().getGroup_name());
+            viewHolderB.tv_b2.setText(dataBean.getData().getAutograph());
         }
 
     }

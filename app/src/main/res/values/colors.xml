@@ -19,6 +19,8 @@
     <color name="colorblacks">#80000000</color>
     <color name="skyblue">#87CEEB</color><!--天蓝色 -->
     <color name="funback">#ff222222</color>
+    <color name="mapblack">#333333</color>
+    <color name="mapgray">#666666</color>
     <color name="fungray">#ff9b9b9b</color>
     <color name="homeblack">#000000</color>
 </resources>

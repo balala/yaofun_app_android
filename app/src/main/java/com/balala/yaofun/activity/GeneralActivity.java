@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.balala.yaofun.R;
 //import com.balala.yaofun.fragment.FunFragment;
+import com.balala.yaofun.fragment.FunFragment;
 import com.balala.yaofun.fragment.HomeFragment;
 import com.balala.yaofun.fragment.MeFragment;
 import com.balala.yaofun.fragment.MessageFragment;
@@ -71,7 +72,7 @@ public class GeneralActivity extends AppCompatActivity {
 //        mFragments = mFragments;
         mFragments = new ArrayList<Fragment>();
         mFragments.add(new HomeFragment());
-//        mFragments.add(new FunFragment());
+        mFragments.add(new FunFragment());
         mFragments.add(new MessageFragment());
         mFragments.add(new MeFragment());
         ShowFragmentone();

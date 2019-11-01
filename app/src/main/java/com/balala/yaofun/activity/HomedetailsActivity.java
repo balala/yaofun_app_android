@@ -181,6 +181,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
             case R.id.homedetails_site:
                 break;
             case R.id.homedetails_navigation:
+                startActivity(new Intent(HomedetailsActivity.this,AmapRouteActivity.class));
                 break;
             case R.id.homedetails_ticket:
                 break;

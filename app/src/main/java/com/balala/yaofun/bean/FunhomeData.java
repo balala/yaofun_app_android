@@ -13,481 +13,427 @@ public class FunhomeData implements Serializable {
      * total : 0
      */
 
-//    private DataBean data;
-//    private String msg;
-//    private String page;
-//    private int pageSize;
-//    private boolean success;
-//    private int total;
-//
-//    public DataBean getData() {
-//        return data;
-//    }
-//
-//    public void setData(DataBean data) {
-//        this.data = data;
-//    }
-//
-//    public String getMsg() {
-//        return msg;
-//    }
-//
-//    public void setMsg(String msg) {
-//        this.msg = msg;
-//    }
-//
-//    public String getPage() {
-//        return page;
-//    }
-//
-//    public void setPage(String page) {
-//        this.page = page;
-//    }
-//
-//    public int getPageSize() {
-//        return pageSize;
-//    }
-//
-//    public void setPageSize(int pageSize) {
-//        this.pageSize = pageSize;
-//    }
-//
-//    public boolean isSuccess() {
-//        return success;
-//    }
-//
-//    public void setSuccess(boolean success) {
-//        this.success = success;
-//    }
-//
-//    public int getTotal() {
-//        return total;
-//    }
-//
-//    public void setTotal(int total) {
-//        this.total = total;
-//    }
-//
-//    public static class DataBean {
-//        private List<影视Bean> 影视;
-//        private List<社交Bean> 社交;
-//        private List<美食Bean> 美食;
-//        private List<艺术Bean> 艺术;
-//
-//        public List<影视Bean> get影视() {
-//            return 影视;
-//        }
-//
-//        public void set影视(List<影视Bean> 影视) {
-//            this.影视 = 影视;
-//        }
-//
-//        public List<社交Bean> get社交() {
-//            return 社交;
-//        }
-//
-//        public void set社交(List<社交Bean> 社交) {
-//            this.社交 = 社交;
-//        }
-//
-//        public List<美食Bean> get美食() {
-//            return 美食;
-//        }
-//
-//        public void set美食(List<美食Bean> 美食) {
-//            this.美食 = 美食;
-//        }
-//
-//        public List<艺术Bean> get艺术() {
-//            return 艺术;
-//        }
-//
-//        public void set艺术(List<艺术Bean> 艺术) {
-//            this.艺术 = 艺术;
-//        }
-
-    public static class FilmBean {
-        /**
-         * _id : 5da0337c7e155feafa8965a6
-         * already_join_number : 1
-         * autograph :
-         * group_name : 名哦是一起
-         * group_owner : 5d9f1f8d7e155feafa895b55
-         * images2 : ["https://img.yaofun.vip/2019/10/11/3da0384e-ebfb-11e9-abc2-0242ac13000c.png"]
-         * interest : ["影视","音乐"]
-         * introduction :
-         * user_images : https://img.yaofun.vip/2019/04/30/93f33528-6af2-11e9-8406-acde48001122.png
-         */
-
-        private String _id;
-        private int already_join_number;
-        private String autograph;
-        private String group_name;
-        private String group_owner;
-        private String introduction;
-        private String user_images;
-        private List<String> images2;
-        private List<String> interest;
-
-        public String get_id() {
-            return _id;
-        }
-
-        public void set_id(String _id) {
-            this._id = _id;
-        }
-
-        public int getAlready_join_number() {
-            return already_join_number;
-        }
-
-        public void setAlready_join_number(int already_join_number) {
-            this.already_join_number = already_join_number;
-        }
-
-        public String getAutograph() {
-            return autograph;
-        }
-
-        public void setAutograph(String autograph) {
-            this.autograph = autograph;
-        }
-
-        public String getGroup_name() {
-            return group_name;
-        }
-
-        public void setGroup_name(String group_name) {
-            this.group_name = group_name;
-        }
-
-        public String getGroup_owner() {
-            return group_owner;
-        }
-
-        public void setGroup_owner(String group_owner) {
-            this.group_owner = group_owner;
-        }
-
-        public String getIntroduction() {
-            return introduction;
-        }
-
-        public void setIntroduction(String introduction) {
-            this.introduction = introduction;
-        }
-
-        public String getUser_images() {
-            return user_images;
-        }
-
-        public void setUser_images(String user_images) {
-            this.user_images = user_images;
-        }
-
-        public List<String> getImages2() {
-            return images2;
-        }
-
-        public void setImages2(List<String> images2) {
-            this.images2 = images2;
-        }
-
-        public List<String> getInterest() {
-            return interest;
-        }
-
-        public void setInterest(List<String> interest) {
-            this.interest = interest;
-        }
-    }
-
-    public static class SocialBean {
-        /**
-         * _id : 5d3ab5f52a9a10f188318c8e
-         * already_join_number : 10
-         * autograph :
-         * group_name : Mr 模式
-         * group_owner : 5d3ab2012a9a10f188318c7b
-         * images2 : ["https://img.yaofun.vip/2019/07/26/192689e2-af7d-11e9-8073-0242ac130012.png"]
-         * interest : ["社交","文化"]
-         * introduction :
-         * user_images : https://thirdwx.qlogo.cn/mmopen/vi_32/IIWY0BbpgUfCkCib7fy8u9gfhBma6sJr6h0gwTG6dDyn90sbGibicSMhicgLpRVp2haRibuZZV4qKPzzlicvSdjEpXrw/132
-         */
-
-        private String _id;
-        private int already_join_number;
-        private String autograph;
-        private String group_name;
-        private String group_owner;
-        private String introduction;
-        private String user_images;
-        private List<String> images2;
-        private List<String> interest;
-
-        public String get_id() {
-            return _id;
-        }
-
-        public void set_id(String _id) {
-            this._id = _id;
-        }
-
-        public int getAlready_join_number() {
-            return already_join_number;
-        }
-
-        public void setAlready_join_number(int already_join_number) {
-            this.already_join_number = already_join_number;
-        }
-
-        public String getAutograph() {
-            return autograph;
-        }
-
-        public void setAutograph(String autograph) {
-            this.autograph = autograph;
-        }
-
-        public String getGroup_name() {
-            return group_name;
-        }
-
-        public void setGroup_name(String group_name) {
-            this.group_name = group_name;
-        }
-
-        public String getGroup_owner() {
-            return group_owner;
-        }
-
-        public void setGroup_owner(String group_owner) {
-            this.group_owner = group_owner;
-        }
-
-        public String getIntroduction() {
-            return introduction;
-        }
-
-        public void setIntroduction(String introduction) {
-            this.introduction = introduction;
-        }
-
-        public String getUser_images() {
-            return user_images;
-        }
-
-        public void setUser_images(String user_images) {
-            this.user_images = user_images;
-        }
-
-        public List<String> getImages2() {
-            return images2;
-        }
-
-        public void setImages2(List<String> images2) {
-            this.images2 = images2;
-        }
-
-        public List<String> getInterest() {
-            return interest;
-        }
-
-        public void setInterest(List<String> interest) {
-            this.interest = interest;
-        }
-    }
-
-    public static class FoodBean {
-        /**
-         * _id : 5d383154573238417c4fbfdf
-         * already_join_number : 5
-         * autograph :
-         * group_name : 狗狗你莫
-         * group_owner : 5d383000573238417c4fbf81
-         * images2 : ["https://img.yaofun.vip/2019/07/24/d8fdd89c-adfc-11e9-9e95-0242ac130012.png"]
-         * interest : ["运动","社交","美食"]
-         * introduction :
-         * user_images : https://img.yaofun.vip/2019/04/30/93f33528-6af2-11e9-8406-acde48001122.png
-         */
-
-        private String _id;
-        private int already_join_number;
-        private String autograph;
-        private String group_name;
-        private String group_owner;
-        private String introduction;
-        private String user_images;
-        private List<String> images2;
-        private List<String> interest;
-
-        public String get_id() {
-            return _id;
-        }
-
-        public void set_id(String _id) {
-            this._id = _id;
-        }
-
-        public int getAlready_join_number() {
-            return already_join_number;
-        }
-
-        public void setAlready_join_number(int already_join_number) {
-            this.already_join_number = already_join_number;
-        }
-
-        public String getAutograph() {
-            return autograph;
-        }
-
-        public void setAutograph(String autograph) {
-            this.autograph = autograph;
-        }
-
-        public String getGroup_name() {
-            return group_name;
-        }
-
-        public void setGroup_name(String group_name) {
-            this.group_name = group_name;
-        }
-
-        public String getGroup_owner() {
-            return group_owner;
-        }
-
-        public void setGroup_owner(String group_owner) {
-            this.group_owner = group_owner;
-        }
-
-        public String getIntroduction() {
-            return introduction;
-        }
-
-        public void setIntroduction(String introduction) {
-            this.introduction = introduction;
-        }
-
-        public String getUser_images() {
-            return user_images;
-        }
-
-        public void setUser_images(String user_images) {
-            this.user_images = user_images;
-        }
 
-        public List<String> getImages2() {
-            return images2;
-        }
+    public static class DataBean {
+        private List<FilmBean> film;
+        private List<SocialBean> social;
+        private List<FoodBean> food;
+        private List<ArtBean> art;
 
-        public void setImages2(List<String> images2) {
-            this.images2 = images2;
+        public List<FilmBean> getFilm() {
+            return film;
         }
 
-        public List<String> getInterest() {
-            return interest;
+        public void setFilm(List<FilmBean> film) {
+            this.film = film;
         }
 
-        public void setInterest(List<String> interest) {
-            this.interest = interest;
-        }
-    }
-
-    public static class ArtBean {
-        /**
-         * _id : 5db25e6f99322d02505cf48f
-         * already_join_number : 1
-         * autograph : ，
-         * group_name : ，
-         * group_owner : 5da6930b124a00e767de94c4
-         * images2 : ["https://img.yaofun.vip/2019/10/25/7bc50666-f6cf-11e9-a1aa-0242ac13000c.png"]
-         * interest : ["艺术"]
-         * introduction : ，
-         * user_images : https://img.yaofun.vip/2019/10/16/d3790be6-efc7-11e9-b731-acde48001122.png
-         */
-
-        private String _id;
-        private int already_join_number;
-        private String autograph;
-        private String group_name;
-        private String group_owner;
-        private String introduction;
-        private String user_images;
-        private List<String> images2;
-        private List<String> interest;
-
-        public String get_id() {
-            return _id;
+        public List<SocialBean> getSocial() {
+            return social;
         }
 
-        public void set_id(String _id) {
-            this._id = _id;
+        public void set社交(List<SocialBean> social) {
+            this.social = social;
         }
 
-        public int getAlready_join_number() {
-            return already_join_number;
+        public List<FoodBean> getFood() {
+            return food;
         }
 
-        public void setAlready_join_number(int already_join_number) {
-            this.already_join_number = already_join_number;
+        public void set美食(List<FoodBean> 美食) {
+            this.food = food;
         }
 
-        public String getAutograph() {
-            return autograph;
+        public List<ArtBean> getArt() {
+            return art;
         }
 
-        public void setAutograph(String autograph) {
-            this.autograph = autograph;
+        public void setArt(List<ArtBean> art) {
+            this.art = art;
         }
 
-        public String getGroup_name() {
-            return group_name;
-        }
+        public static class FilmBean {
+            /**
+             * _id : 5da0337c7e155feafa8965a6
+             * already_join_number : 1
+             * autograph :
+             * group_name : 名哦是一起
+             * group_owner : 5d9f1f8d7e155feafa895b55
+             * images2 : ["https://img.yaofun.vip/2019/10/11/3da0384e-ebfb-11e9-abc2-0242ac13000c.png"]
+             * interest : ["影视","音乐"]
+             * introduction :
+             * user_images : https://img.yaofun.vip/2019/04/30/93f33528-6af2-11e9-8406-acde48001122.png
+             */
 
-        public void setGroup_name(String group_name) {
-            this.group_name = group_name;
-        }
+            private String _id;
+            private int already_join_number;
+            private String autograph;
+            private String group_name;
+            private String group_owner;
+            private String introduction;
+            private String user_images;
+            private List<String> images2;
+            private List<String> interest;
 
-        public String getGroup_owner() {
-            return group_owner;
-        }
+            public String get_id() {
+                return _id;
+            }
 
-        public void setGroup_owner(String group_owner) {
-            this.group_owner = group_owner;
-        }
+            public void set_id(String _id) {
+                this._id = _id;
+            }
 
-        public String getIntroduction() {
-            return introduction;
-        }
+            public int getAlready_join_number() {
+                return already_join_number;
+            }
 
-        public void setIntroduction(String introduction) {
-            this.introduction = introduction;
-        }
+            public void setAlready_join_number(int already_join_number) {
+                this.already_join_number = already_join_number;
+            }
 
-        public String getUser_images() {
-            return user_images;
-        }
+            public String getAutograph() {
+                return autograph;
+            }
 
-        public void setUser_images(String user_images) {
-            this.user_images = user_images;
-        }
+            public void setAutograph(String autograph) {
+                this.autograph = autograph;
+            }
 
-        public List<String> getImages2() {
-            return images2;
-        }
+            public String getGroup_name() {
+                return group_name;
+            }
 
-        public void setImages2(List<String> images2) {
-            this.images2 = images2;
-        }
+            public void setGroup_name(String group_name) {
+                this.group_name = group_name;
+            }
 
-        public List<String> getInterest() {
-            return interest;
-        }
+            public String getGroup_owner() {
+                return group_owner;
+            }
 
-        public void setInterest(List<String> interest) {
-            this.interest = interest;
+            public void setGroup_owner(String group_owner) {
+                this.group_owner = group_owner;
+            }
+
+            public String getIntroduction() {
+                return introduction;
+            }
+
+            public void setIntroduction(String introduction) {
+                this.introduction = introduction;
+            }
+
+            public String getUser_images() {
+                return user_images;
+            }
+
+            public void setUser_images(String user_images) {
+                this.user_images = user_images;
+            }
+
+            public List<String> getImages2() {
+                return images2;
+            }
+
+            public void setImages2(List<String> images2) {
+                this.images2 = images2;
+            }
+
+            public List<String> getInterest() {
+                return interest;
+            }
+
+            public void setInterest(List<String> interest) {
+                this.interest = interest;
+            }
+        }
+
+        public static class SocialBean {
+            /**
+             * _id : 5d3ab5f52a9a10f188318c8e
+             * already_join_number : 10
+             * autograph :
+             * group_name : Mr 模式
+             * group_owner : 5d3ab2012a9a10f188318c7b
+             * images2 : ["https://img.yaofun.vip/2019/07/26/192689e2-af7d-11e9-8073-0242ac130012.png"]
+             * interest : ["社交","文化"]
+             * introduction :
+             * user_images : https://thirdwx.qlogo.cn/mmopen/vi_32/IIWY0BbpgUfCkCib7fy8u9gfhBma6sJr6h0gwTG6dDyn90sbGibicSMhicgLpRVp2haRibuZZV4qKPzzlicvSdjEpXrw/132
+             */
+
+            private String _id;
+            private int already_join_number;
+            private String autograph;
+            private String group_name;
+            private String group_owner;
+            private String introduction;
+            private String user_images;
+            private List<String> images2;
+            private List<String> interest;
+
+            public String get_id() {
+                return _id;
+            }
+
+            public void set_id(String _id) {
+                this._id = _id;
+            }
+
+            public int getAlready_join_number() {
+                return already_join_number;
+            }
+
+            public void setAlready_join_number(int already_join_number) {
+                this.already_join_number = already_join_number;
+            }
+
+            public String getAutograph() {
+                return autograph;
+            }
+
+            public void setAutograph(String autograph) {
+                this.autograph = autograph;
+            }
+
+            public String getGroup_name() {
+                return group_name;
+            }
+
+            public void setGroup_name(String group_name) {
+                this.group_name = group_name;
+            }
+
+            public String getGroup_owner() {
+                return group_owner;
+            }
+
+            public void setGroup_owner(String group_owner) {
+                this.group_owner = group_owner;
+            }
+
+            public String getIntroduction() {
+                return introduction;
+            }
+
+            public void setIntroduction(String introduction) {
+                this.introduction = introduction;
+            }
+
+            public String getUser_images() {
+                return user_images;
+            }
+
+            public void setUser_images(String user_images) {
+                this.user_images = user_images;
+            }
+
+            public List<String> getImages2() {
+                return images2;
+            }
+
+            public void setImages2(List<String> images2) {
+                this.images2 = images2;
+            }
+
+            public List<String> getInterest() {
+                return interest;
+            }
+
+            public void setInterest(List<String> interest) {
+                this.interest = interest;
+            }
+        }
+
+        public static class FoodBean {
+            /**
+             * _id : 5d383154573238417c4fbfdf
+             * already_join_number : 5
+             * autograph :
+             * group_name : 狗狗你莫
+             * group_owner : 5d383000573238417c4fbf81
+             * images2 : ["https://img.yaofun.vip/2019/07/24/d8fdd89c-adfc-11e9-9e95-0242ac130012.png"]
+             * interest : ["运动","社交","美食"]
+             * introduction :
+             * user_images : https://img.yaofun.vip/2019/04/30/93f33528-6af2-11e9-8406-acde48001122.png
+             */
+
+            private String _id;
+            private int already_join_number;
+            private String autograph;
+            private String group_name;
+            private String group_owner;
+            private String introduction;
+            private String user_images;
+            private List<String> images2;
+            private List<String> interest;
+
+            public String get_id() {
+                return _id;
+            }
+
+            public void set_id(String _id) {
+                this._id = _id;
+            }
+
+            public int getAlready_join_number() {
+                return already_join_number;
+            }
+
+            public void setAlready_join_number(int already_join_number) {
+                this.already_join_number = already_join_number;
+            }
+
+            public String getAutograph() {
+                return autograph;
+            }
+
+            public void setAutograph(String autograph) {
+                this.autograph = autograph;
+            }
+
+            public String getGroup_name() {
+                return group_name;
+            }
+
+            public void setGroup_name(String group_name) {
+                this.group_name = group_name;
+            }
+
+            public String getGroup_owner() {
+                return group_owner;
+            }
+
+            public void setGroup_owner(String group_owner) {
+                this.group_owner = group_owner;
+            }
+
+            public String getIntroduction() {
+                return introduction;
+            }
+
+            public void setIntroduction(String introduction) {
+                this.introduction = introduction;
+            }
+
+            public String getUser_images() {
+                return user_images;
+            }
+
+            public void setUser_images(String user_images) {
+                this.user_images = user_images;
+            }
+
+            public List<String> getImages2() {
+                return images2;
+            }
+
+            public void setImages2(List<String> images2) {
+                this.images2 = images2;
+            }
+
+            public List<String> getInterest() {
+                return interest;
+            }
+
+            public void setInterest(List<String> interest) {
+                this.interest = interest;
+            }
+        }
+
+        public static class ArtBean {
+            /**
+             * _id : 5db25e6f99322d02505cf48f
+             * already_join_number : 1
+             * autograph : ，
+             * group_name : ，
+             * group_owner : 5da6930b124a00e767de94c4
+             * images2 : ["https://img.yaofun.vip/2019/10/25/7bc50666-f6cf-11e9-a1aa-0242ac13000c.png"]
+             * interest : ["艺术"]
+             * introduction : ，
+             * user_images : https://img.yaofun.vip/2019/10/16/d3790be6-efc7-11e9-b731-acde48001122.png
+             */
+
+            private String _id;
+            private int already_join_number;
+            private String autograph;
+            private String group_name;
+            private String group_owner;
+            private String introduction;
+            private String user_images;
+            private List<String> images2;
+            private List<String> interest;
+
+            public String get_id() {
+                return _id;
+            }
+
+            public void set_id(String _id) {
+                this._id = _id;
+            }
+
+            public int getAlready_join_number() {
+                return already_join_number;
+            }
+
+            public void setAlready_join_number(int already_join_number) {
+                this.already_join_number = already_join_number;
+            }
+
+            public String getAutograph() {
+                return autograph;
+            }
+
+            public void setAutograph(String autograph) {
+                this.autograph = autograph;
+            }
+
+            public String getGroup_name() {
+                return group_name;
+            }
+
+            public void setGroup_name(String group_name) {
+                this.group_name = group_name;
+            }
+
+            public String getGroup_owner() {
+                return group_owner;
+            }
+
+            public void setGroup_owner(String group_owner) {
+                this.group_owner = group_owner;
+            }
+
+            public String getIntroduction() {
+                return introduction;
+            }
+
+            public void setIntroduction(String introduction) {
+                this.introduction = introduction;
+            }
+
+            public String getUser_images() {
+                return user_images;
+            }
+
+            public void setUser_images(String user_images) {
+                this.user_images = user_images;
+            }
+
+            public List<String> getImages2() {
+                return images2;
+            }
+
+            public void setImages2(List<String> images2) {
+                this.images2 = images2;
+            }
+
+            public List<String> getInterest() {
+                return interest;
+            }
+
+            public void setInterest(List<String> interest) {
+                this.interest = interest;
+            }
         }
-//        }
     }
 }

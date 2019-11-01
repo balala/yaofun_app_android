@@ -33,14 +33,11 @@ import com.balala.yaofun.bean.result.VerificationCode;
 import com.balala.yaofun.httpUtils.ToastUtil;
 import com.balala.yaofun.presenter.FrogetpasswardPresenter;
 import com.balala.yaofun.util.ToastUtils;
-import com.balala.yaofun.util.Utils;
 import com.balala.yaofun.view.FrogetpasswardView;
 import com.balala.yaofun.util.TextWatcherUtil;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.balala.yaofun.httpUtils.MyApp.goLogin;
 
 
 public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter, FrogetpasswardView> implements FrogetpasswardView {
@@ -63,7 +60,6 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
     private ImageView mFrogetclear;
     private ImageView froget_clear2;
     private int code1;
-    private CodeBean codeBean;
 
 
     @Override
@@ -172,6 +168,7 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
 
             @Override
             public void onClick(View v) {
+                ToastUtil.showLong("获取验证码");
                 //比较手机号是否符合规则 符合规则弹出"获取验证码"并且验证码开始倒计时，红色文字隐藏
                 phoneNum = mEphone.getText().toString().trim();
                 // 判断手机号为空或者小于11位时 也可以点击
@@ -180,23 +177,8 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
                     ToastUtil.showLong("请输入正确的手机号码");
 
                 } else {
-
-                    //切割字符串将空格清除
-                    String[] split = phoneNum.split(" ");
-                    //重新拼接手机号
-                    phone = split[0] + split[1] + split[2];
-                    // 获取手机号码 返回后台进行解析
-                    // 获取手机号码 返回后台进行解析
-                    Map<String,String> map=new HashMap<>();
-                    map.put("phone",phone);
-                    //注册、找回密码、绑定手机号、实名认证、提现
-                    map.put("purpose","找回密码");
-                    //请求时间
-                    String time= Utils.getNowDate();
-                    map.put("request_start_time",time);
-                    //sign2=md5(请求时间+手机号+IOS密钥)
-                    map.put("sign2",Utils.md5(time + phone+ Utils.Signs));
-                    basePresenter.getVerificationCode(map);
+                    // 这个方法是用来判断手机验证码相关的
+                    initCode();
 
                 }
             }
@@ -207,45 +189,16 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
         mFrogetYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phoneNum = mEphone.getText().toString();
-                //切割字符串将空格清除
-                String[] split = phoneNum.split(" ");
-                //重新拼接手机号
-                phone = split[0] + split[1] + split[2];
-                // 验证验证码
-                code = mECode.getText().toString().trim();
-                password = mEtpassword.getText().toString().trim();
-                if(codeBean==null){
-                    ToastUtil.showShort("请先获取验证码");
-                    return;
-                }
-                if(TextUtils.isEmpty(code)){
-                    ToastUtil.showShort("请输入验证码");
-                    return;
-                }
-                if(TextUtils.isEmpty(password)){
-                    ToastUtil.showShort("请输入验证码");
-                    return;
-                }
-                if(password.length()<6){
-                    ToastUtil.showShort("密码至少6位");
-                    return;
-                }
+                Log.i(TAG, "开始更改密码 ");
+                phone = mEphone.getText().toString();
+                code = mECode.getText().toString();
+                password = mEtpassword.getText().toString();
+                if (phone.isEmpty() || code.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(FrogetpasswardActivity.this, "不能为空", Toast.LENGTH_SHORT).show();
 
-                // 获取手机号码 返回后台进行解析
-                Map<String,String> map=new HashMap<>();
-                map.put("phone",phone);
-                map.put("code",code);
-                //注册、找回密码、绑定手机号、实名认证、提现
-                map.put("purpose","找回密码");
-                //请求时间
-                String time=Utils.getNowDate();
-                map.put("request_start_time",time);
-                //sign2=md5(请求时间+手机号+IOS密钥)
-                map.put("sign2",Utils.md5(time + phone+ Utils.Signs));
-                map.put("password",password);
-                map.put("key",codeBean.getKey());
-                basePresenter.goChangePassword(map);
+                } else {
+                    initData3();
+                }
 
 
             }
@@ -284,44 +237,116 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
 
     }
 
+    private void initCode() {
+
+        //切割字符串将空格清除
+        String[] split = phoneNum.split(" ");
+        //重新拼接手机号
+        phone = split[0] + split[1] + split[2];
+        Log.e("手机号码：", phone);
+        // 判断输入的手机号 是否符合手机号规范
+        if (phone.matches("^13[0-9]{1}[0-9]{8}$|15[0125689]{1}[0-9]{8}$|18[0-3,5-9]{1}[0-9]{8}$|17[0-3,5-9]{1}[0-9]{8}$|19[0-3,5-9]{1}[0-9]{8}$")) {
+            Toast.makeText(FrogetpasswardActivity.this, "获取验证码", Toast.LENGTH_SHORT).show();
+            // 开始执行倒计时的方法
+            time.start();
+//            mRedSpeak.setVisibility(View.GONE);
+            Log.i(TAG, "手机号码 " + phone);
+            // 获取手机号码 返回后台进行解析
+            initData();
+            // 如果手机号码不符合规则 提示用户正确输入手机号 红色文字显示 字体变成"请输入正确的手机号码"
+        } else {
+//            Toast.makeText(FrogetpasswardActivity.this, " 请输入正确的手机号码", Toast.LENGTH_SHORT).show();
+            ToastUtil.showLong("请输入正确的手机号码");
+//
+//            mRedSpeak.setVisibility(View.VISIBLE);
+//            mRedSpeak.setText("请输入正确的手机号码");
+        }
+    }
+
     @Override
-    protected void initData() { }
+    protected void initData() {
+        Map<String, String> map = new HashMap<>();
+        map.put("phone", phone);
+        basePresenter.getVerificationCode(map);
+        Log.i(TAG, "initData: " + phone);
+
+    }
 
     @Override
     protected void initData2() {
-
+        Log.e("xuzhiqi", "initData3: " + code);
+        Log.e("xuzhiqi", "initData3: " + phone);
+        Log.e("xuzhiqi", "initData3: " + key);
+        if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(code) && !TextUtils.isEmpty(key)) {
+            Map<String, String> map = new HashMap<>();
+            map.put("phone", phone);
+            map.put("code", code);
+            map.put("key", key);
+//            basePresenter.getVerificationData(phone, code, key);
+            basePresenter.getVerificationCode(map);
+        }
     }
 
-    @Override
-    public void getVerificationCodesSuccess(BaseBean<CodeBean> bean) {
-        // 开始执行倒计时的方法
-        time.start();
-        codeBean=bean.getData();
-        ToastUtil.showShort("验证码已发送");
-    }
+    private void initData3() {
 
-    @Override
-    public void getVerificationCodesFail(String msg) {
-        ToastUtil.showShort(msg);
-    }
+        Log.i("确定更改密码点击事件", "onSuccessAlterpassward: " + phone + "\n" + code + "\n" + password + "\n" + key + "\n");
+        Map<String, String> map = new HashMap<>();
+        map.put("phone", phone);
+        map.put("code", code);
+        map.put("key", key);
+        map.put("password", password);
+        basePresenter.goChangePassword(map);
 
-    @Override
-    public void goChangePasswordSuccess(BaseBean<UserBean> bean) {
-        goLogin(bean);
-        this.finish();
     }
-
-    @Override
-    public void goChangePasswordFail(String msg) {
-            ToastUtil.showShort(msg);
-    }
-
 
     @Override
     protected FrogetpasswardPresenter initPresenter() {
         return new FrogetpasswardPresenter();
     }
 
+//    @Override
+//    public void onSuccessFrogetpasswardfly(VerificationResult verificationResult) {
+//        Log.i(TAG, "onSuccessFrogetpassward: " + verificationResult.toString());
+//        key = verificationResult.getData().getKey();
+//        code1 = verificationResult.getData().getCode();
+//        Log.i("Frogetpasswardfly", "onClick: " + phone + "\n" + this.code1 + "\n" + key);
+//
+//    }
+//
+//    @Override
+//    public void onFailFrogetpassward(String msg) {
+//        Log.i("Frogetpassward(", "onFail: " + msg);
+//    }
+//
+//    @Override
+//    public void onSuccessVerificationpassward(VerificationCode verificationBean) {
+//        Log.e("onSuccessyanzheng", "onSuccessyanzheng: " + verificationBean.toString());
+////        ToastUtil.showLong(verificationBean.toString());
+//        startActivity(new Intent(FrogetpasswardActivity.this, GeneralActivity.class));
+//    }
+
+
+    @Override
+    public void getVerificationCodesSuccess(BaseBean<CodeBean> bean) {
+
+    }
+
+    @Override
+    public void getVerificationCodesFail(String msg) {
+        Log.i(TAG, "onFail: " + msg);
+    }
+
+    @Override
+    public void goChangePasswordSuccess(BaseBean<UserBean> bean) {
+        ToastUtil.showLong("更改密码成功");
+//        startActivity(new Intent(FrogetpasswardActivity.this, GeneralActivity.class));
+        finish();
+    }
+
+    @Override
+    public void goChangePasswordFail(String msg) {
+        Log.i(TAG, "onFail: " + msg);
+    }
 
 
     // 倒计时 验证码

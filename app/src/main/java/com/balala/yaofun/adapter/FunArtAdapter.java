@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.balala.yaofun.R;
+import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.FunhomeData;
 import com.bumptech.glide.Glide;
 
@@ -18,14 +19,14 @@ import java.util.ArrayList;
 
 public class FunArtAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private ArrayList<FunhomeData.ArtBean> list;
+    private ArrayList<BaseBean<FunhomeData.DataBean.ArtBean>> list;
 
-    public FunArtAdapter(Context context, ArrayList<FunhomeData.ArtBean> list) {
+    public FunArtAdapter(Context context, ArrayList<BaseBean<FunhomeData.DataBean.ArtBean>> list) {
         this.context = context;
         this.list = list;
     }
 
-    public void setList(ArrayList<FunhomeData.ArtBean> list) {
+    public void setList(ArrayList<BaseBean<FunhomeData.DataBean.ArtBean>> list) {
         this.list = list;
     }
 
@@ -46,19 +47,19 @@ public class FunArtAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        FunhomeData.ArtBean dataBean = list.get(position);
+        BaseBean<FunhomeData.DataBean.ArtBean> dataBean = list.get(position);
 
         if (holder instanceof FunArtAdapter.ViewHolderA) {
             FunArtAdapter.ViewHolderA viewHolderA = (FunArtAdapter.ViewHolderA) holder;
-            Glide.with(context).load(dataBean.getUser_images()).into(viewHolderA.img_a);
-            viewHolderA.tv_a1.setText(dataBean.getGroup_name());
-            viewHolderA.tv_a2.setText(dataBean.getAutograph());
+            Glide.with(context).load(dataBean.getData().getUser_images()).into(viewHolderA.img_a);
+            viewHolderA.tv_a1.setText(dataBean.getData().getGroup_name());
+            viewHolderA.tv_a2.setText(dataBean.getData().getAutograph());
 
         } else if (holder instanceof FunArtAdapter.ViewHolderB) {
             FunArtAdapter.ViewHolderB viewHolderB = (FunArtAdapter.ViewHolderB) holder;
-            Glide.with(context).load(dataBean.getUser_images()).into(viewHolderB.img_b);
-            viewHolderB.tv_b1.setText(dataBean.getGroup_name());
-            viewHolderB.tv_b2.setText(dataBean.getAutograph());
+            Glide.with(context).load(dataBean.getData().getUser_images()).into(viewHolderB.img_b);
+            viewHolderB.tv_b1.setText(dataBean.getData().getGroup_name());
+            viewHolderB.tv_b2.setText(dataBean.getData().getAutograph());
         }
 
 

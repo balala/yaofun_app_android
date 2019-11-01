@@ -54,7 +54,7 @@
             android:layout_marginTop="@dimen/dp_10">
 
             <ImageView
-                android:id="@+id/openfunimg"
+                android:id="@+id/openfunimgs"
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="@dimen/dp_100"
                 android:layout_centerHorizontal="true"
@@ -63,6 +63,15 @@
                 android:background="@drawable/home_time" />
 
             <ImageView
+                android:id="@+id/openfunimg"
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="@dimen/dp_100"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+               />
+
+            <ImageView
+                android:id="@+id/openfunphoto"
                 android:layout_width="@dimen/dp_25"
                 android:layout_height="@dimen/dp_21"
                 android:layout_centerHorizontal="true"

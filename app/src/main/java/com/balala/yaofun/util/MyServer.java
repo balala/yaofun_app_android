@@ -4,6 +4,7 @@ package com.balala.yaofun.util;
 import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.CodeBean;
 import com.balala.yaofun.bean.FunhomeData;
+import com.balala.yaofun.bean.UploadPickBean;
 import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.DayBeans;
@@ -17,11 +18,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
@@ -105,9 +110,10 @@ public interface MyServer {
 
     //  /activity/detail/5ce368ffe6b187cf63e4289a
 
-    //  https://test.yaofun.vip/api/activity/upload/image 上传图片
+    //上传图片
+    //  https://test.yaofun.vip/api/activity/upload/image
+    @Multipart
     @POST("activity/upload/image")
-    @FormUrlEncoded
-    Observable<ResponseBody> getActivitDataimg(@FieldMap Map<String, Object> map);
+    Observable<UploadPickBean> getActivitDataimg(@Part("images")RequestBody body, @Part MultipartBody.Part file);
 
 }

@@ -112,27 +112,26 @@
 
 
             <LinearLayout
-                android:layout_width="@dimen/dp_221"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_75">
 
                 <TextView
                     android:id="@+id/people_name"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_3"
-                    android:layout_weight="1"
                     android:text="尼采"
                     android:textColor="@color/colorwhite"
                     android:textSize="@dimen/sp_14" />
 
                 <TextView
                     android:id="@+id/people_title"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_alignRight="@id/people_name"
+                    android:layout_marginLeft="@dimen/dp_5"
                     android:layout_marginBottom="@dimen/dp_3"
-                    android:layout_weight="1"
                     android:text="早上好"
                     android:textColor="@color/colorwhite"
                     android:textSize="@dimen/sp_14" />
