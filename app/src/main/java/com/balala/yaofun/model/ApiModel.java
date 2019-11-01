@@ -1,23 +1,16 @@
 package com.balala.yaofun.model;
 
-import android.util.Log;
-
 import com.balala.yaofun.base.BaseModel;
 import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.FunhomeData;
 import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.bean.result.HomeAllBean;
-import com.balala.yaofun.bean.result.HomedetailsBean;
-import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.httpUtils.HttpUtils;
 import com.balala.yaofun.httpUtils.ResultCallBack;
-import com.balala.yaofun.httpUtils.ToastUtil;
+import com.balala.yaofun.httpUtils.ResultException;
 import com.balala.yaofun.util.ForLog;
 import com.balala.yaofun.util.MyServer;
-
-import java.io.IOException;
 import java.util.Map;
-
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -68,6 +61,13 @@ public class ApiModel extends BaseModel {
                     public void onError(Throwable e) {
                         ForLog.e("请求数据失败" + e.getMessage());
                         resultCallBack.onFail(e.getMessage());
+                        if (e instanceof ResultException) {
+                            ForLog.e("这里说明没有登陆成功"+e);
+                            resultCallBack.onFail(((ResultException) e).getMsg());
+                        } else {
+                            ForLog.e("这里说明请求失败，或者解析失败"+e);
+                            resultCallBack.onFail("网络连接超时，请稍后再试...");
+                        }
 
                     }
 
