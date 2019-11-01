@@ -138,6 +138,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LandingActivity.this, RegisterActivity.class));
+                finish();
 
             }
         });
@@ -171,6 +172,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LandingActivity.this, FrogetpasswardActivity.class));
+                finish();
             }
         });
 

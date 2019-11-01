@@ -1,96 +1,47 @@
 package com.balala.yaofun.presenter;
 
 
-import android.util.Log;
-
 import com.balala.yaofun.base.BasePresenter;
-import com.balala.yaofun.bean.VerificationResult;
-import com.balala.yaofun.bean.result.VerificationCode;
+import com.balala.yaofun.bean.BaseBean;
+import com.balala.yaofun.bean.CodeBean;
+import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.httpUtils.ResultCallBack;
-import com.balala.yaofun.httpUtils.ToastUtil;
-import com.balala.yaofun.model.FrogetpasswardModel;
+import com.balala.yaofun.model.ApiModel;
+import com.balala.yaofun.util.ForLog;
 import com.balala.yaofun.view.FrogetpasswardView;
 
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
-
-import static org.greenrobot.eventbus.EventBus.TAG;
+import java.util.Map;
 
 public class FrogetpasswardPresenter extends BasePresenter<FrogetpasswardView> {
 
-//    private FrogetpasswardModel frogetpasswardModel;
-//
-//    @Override
-//    protected void initModel() {
-//
-//        frogetpasswardModel = new FrogetpasswardModel();
-//    }
 
+    public void getVerificationCode(Map<String, ? extends Object> map) {
+        ApiModel.getVerificationCode(map, new ResultCallBack<BaseBean<CodeBean>>() {
+            @Override
+            public void onSuccess(BaseBean<CodeBean> bean) {
+                ForLog.e("请求成功" + bean);
+                mView.getVerificationCodesSuccess(bean);
+            }
 
-    // 发送验证码
-    public void getSendData(String phone) {
-//        frogetpasswardModel.GetData(phone, new ResultCallBack<VerificationResult>() {
-//            @Override
-//            public void onSuccess(VerificationResult bean) {
-//
-//                if (bean != null) {
-//                    mView.onSuccessFrogetpasswardfly(bean);
-//                }
-//            }
-//
-//            @Override
-//            public void onFail(String msg) {
-////                ToastUtil.showLong(msg);
-//                Log.d(TAG, "onFail: " + msg);
-//            }
-//        });
+            @Override
+            public void onFail(String msg) {
+                mView.getVerificationCodesFail(msg);
+            }
+        });
     }
 
+    public void goChangePassword(Map<String, ? extends Object> map) {
+        ApiModel.goChangePassword(map, new ResultCallBack<BaseBean<UserBean>>() {
+            @Override
+            public void onSuccess(BaseBean<UserBean> bean) {
+                ForLog.e("请求成功" + bean);
+                mView.goChangePasswordSuccess(bean);
+            }
 
-    // 验证验证码
-//  phone, code, key, password
-    public void getVerificationData(String phone, String code, String key) {
-//        frogetpasswardModel.GetData2(phone, code, key, new ResultCallBack<VerificationCode>() {
-//            @Override
-//            public void onSuccess(VerificationCode bean) {
-//
-//                if (bean != null) {
-//                    mView.onSuccessVerificationpassward(bean);
-//                }
-//            }
-//
-//            @Override
-//            public void onFail(String msg) {
-////                ToastUtil.showLong(msg);
-//
-//                Log.d(TAG, "onFail: " + msg);
-//
-//            }
-//        });
-    }
-
-
-    // 修改密码
-    public void getAlterData(String phone, String code, String password, String key) {
-
-//        frogetpasswardModel.ChangepasswordData(phone, code, password, key, new ResultCallBack<ResponseBody>() {
-//            @Override
-//            public void onSuccess(ResponseBody bean) {
-//                if (bean != null) {
-//                    mView.onSuccessAlterpassward(bean.toString());
-//                    ToastUtil.showLong("更改成功");
-////                    Toast.makeText(MyApp.getInstance(), "更改成功", Toast.LENGTH_SHORT).show();
-//                    Log.i(TAG, "更改成功");
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFail(String msg) {
-////                ToastUtil.showLong("更改失败");
-//                Log.d("更改密码", "onFail: " + msg);
-//            }
-//        });
+            @Override
+            public void onFail(String msg) {
+                mView.goChangePasswordFail(msg);
+            }
+        });
     }
 }

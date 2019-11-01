@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.event.LoginSuccessEvent;
+import com.balala.yaofun.event.SignOutSuccessEvent;
 import com.balala.yaofun.util.ACache;
 import com.balala.yaofun.util.ForLog;
 import com.balala.yaofun.util.Utils;
@@ -47,10 +48,12 @@ public class MyApp extends Application {
         myApp = this;
         //读取缓存登陆信息
         ACache aCache=ACache.get(this);
-        UserBean user= (UserBean) aCache.getAsObject("user");
+        user= (UserBean) aCache.getAsObject("user");
         ForLog.e("本地读取数据"+user);
-        user=user;
         getPhoneInformation();
+        //mark备注：为了方便测试登录注册模块，默认直接退出登录
+        signOut();
+
     }
 
     public static MyApp getInstance() {
@@ -95,6 +98,15 @@ public class MyApp extends Application {
         }
     }
 
+    //退出登录
+    public static void signOut(){
+        //登陆成功通用处理
+        ACache aCache=ACache.get(myApp);
+        aCache.remove("user");
+        user=null;
+        EventBus.getDefault().post(new SignOutSuccessEvent());
+    }
+
     public static void goLogin(BaseBean<UserBean> bean){
         //登陆成功通用处理
         ACache aCache=ACache.get(myApp);
@@ -102,6 +114,8 @@ public class MyApp extends Application {
         user=bean.getData();
         EventBus.getDefault().post(new LoginSuccessEvent());
     }
+
+
 
     public static void getPhoneInformation(){
         // Android获得屏幕分辨率补充，

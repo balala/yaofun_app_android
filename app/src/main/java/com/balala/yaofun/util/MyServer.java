@@ -40,7 +40,7 @@ public interface MyServer {
     // http://test.yaofun.vip/api/verification_code/send
     // 发送验证码的接口 verification code
     @GET("verification_code/send")
-    Observable<VerificationResult> getVerificationCode(@QueryMap Map<String, Object> map);
+    Observable<BaseBean<CodeBean>> getVerificationCode(@QueryMap Map<String, Object> map);
 
 
     //    http://test.yaofun.vip/verification_code/verification
@@ -53,7 +53,7 @@ public interface MyServer {
     // 注册接口
     @POST("user/regist")
     @FormUrlEncoded
-    Observable<RegisterBean> getRegistData(@FieldMap Map<String, Object> map);
+    Observable<BaseBean<UserBean>> goRegist(@FieldMap Map<String, Object> map);
 
     // 登陆接口
     @POST("user/login")
@@ -66,11 +66,9 @@ public interface MyServer {
     Observable<BaseBean<UserBean>> wxLoginOrRegist(@FieldMap Map<String, Object> map);
 
     //更改密码接口
-    //  http://192.168.0.164:8088/api/user/change/password?
-    //api/user/change/password?
     @POST("user/change/password")
     @FormUrlEncoded
-    Observable<ResponseBody> getChangePasswardData(@FieldMap Map<String, Object> map);
+    Observable<BaseBean<UserBean>> goChangePassword(@FieldMap Map<String, Object> map);
 
     //顶部每日一句
     // https://test.yaofun.vip/api/mood/one

@@ -46,8 +46,20 @@ public class ApiModel extends BaseModel implements BaseView {
     }
 
     //注册获取验证码
-    public static void getVerificationCodes(Map<String, ? extends Object> map, ResultCallBack<BaseBean<CodeBean>> resultCallBack) {
-        setSubscribe(movieService.getVerificationCodes(getBaseMap(map)), resultCallBack);
+    public static void getVerificationCode(Map<String, ? extends Object> map, ResultCallBack<BaseBean<CodeBean>> resultCallBack) {
+        setSubscribe(movieService.getVerificationCode(getBaseMap(map)), resultCallBack);
+    }
+
+
+
+    //注册
+    public static void goRegist(Map<String, ? extends Object> map, ResultCallBack<BaseBean<UserBean>> resultCallBack) {
+        setSubscribe(movieService.goRegist(getBaseMap(map)), resultCallBack);
+    }
+
+    //找回密码
+    public static void goChangePassword(Map<String, ? extends Object> map, ResultCallBack<BaseBean<UserBean>> resultCallBack) {
+        setSubscribe(movieService.goChangePassword(getBaseMap(map)), resultCallBack);
     }
 
     public static void funhomedata(Map<String, ? extends Object> map, ResultCallBack<BaseBean<FunhomeData>> resultCallBack) {
