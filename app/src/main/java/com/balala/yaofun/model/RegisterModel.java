@@ -108,69 +108,69 @@ public class RegisterModel extends BaseModel {
 
     // 验证验证码解析
     public void GetData2(String phone, String code, String key, final ResultCallBack<VerificationCode> verificationBeanResultCallBack) {
-        MyServer apiserver = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
-        verificationBean = new VerificationBean();
-        verificationBean.setUser_id("-1");
-        verificationBean.setVersion("-1");
-        verificationBean.setCurrent_device("安卓");
-        Log.e("xuzhiqi", "initData: " + Utils.getNowDate());
-        verificationBean.setRequest_start_time(Utils.getNowDate());
-        verificationBean.setPhone(phone);
-        verificationBean.setCode(code);
-        verificationBean.setKey(key);
-        verificationBean.setPhone(phone);
-        Log.e("xuzhiqi", "initData: " + verificationBean.getPhone());
-        verificationBean.setPurpose("注册");
-        verificationBean.setSign2(Utils.md5(verificationBean.getRequest_start_time() + verificationBean.getPhone() + Utils.Signs));
-        //设置签名
-//        verificationBean.setSign2(identifying.getSign2());
-
-        Log.e("xuzhiqi2", "GetData: " + identifying.getSign2());
-        // 创建一个集合 来存储数据
-        final HashMap<String, Object> map2 = new HashMap<>();
-        // map.put("key",key); key
-        map2.put("user_id", verificationBean.getUser_id());
-        map2.put("version", verificationBean.getVersion());
-        map2.put("current_device", verificationBean.getCurrent_device());
-        map2.put("unique_identifier", "");
-        map2.put("user_defined_name", "");
-        map2.put("download_channel", "");
-        map2.put("phone_version", "");
-        map2.put("phone_model", "");
-        map2.put("wx_unionid", "");
-        map2.put("request_start_time", verificationBean.getRequest_start_time());
-        map2.put("phone", verificationBean.getPhone());
-        map2.put("purpose", verificationBean.getPurpose());
-        map2.put("sign2", verificationBean.getSign2());
-        map2.put("key", verificationBean.getKey());
-        map2.put("code", verificationBean.getCode());
-
-        Observable<VerificationCode> data = apiserver.getVerificationCodes(map2);
-        data.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<VerificationCode>() {
-
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        compositeDisposable.add(d);
-                    }
-
-                    @Override
-                    public void onNext(VerificationCode verificationBean) {
-                        verificationBeanResultCallBack.onSuccess(verificationBean);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("xuzhiqi", "onError: " + e.getMessage());
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+//        MyServer apiserver = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
+//        verificationBean = new VerificationBean();
+//        verificationBean.setUser_id("-1");
+//        verificationBean.setVersion("-1");
+//        verificationBean.setCurrent_device("安卓");
+//        Log.e("xuzhiqi", "initData: " + Utils.getNowDate());
+//        verificationBean.setRequest_start_time(Utils.getNowDate());
+//        verificationBean.setPhone(phone);
+//        verificationBean.setCode(code);
+//        verificationBean.setKey(key);
+//        verificationBean.setPhone(phone);
+//        Log.e("xuzhiqi", "initData: " + verificationBean.getPhone());
+//        verificationBean.setPurpose("注册");
+//        verificationBean.setSign2(Utils.md5(verificationBean.getRequest_start_time() + verificationBean.getPhone() + Utils.Signs));
+//        //设置签名
+////        verificationBean.setSign2(identifying.getSign2());
+//
+//        Log.e("xuzhiqi2", "GetData: " + identifying.getSign2());
+//        // 创建一个集合 来存储数据
+//        final HashMap<String, Object> map2 = new HashMap<>();
+//        // map.put("key",key); key
+//        map2.put("user_id", verificationBean.getUser_id());
+//        map2.put("version", verificationBean.getVersion());
+//        map2.put("current_device", verificationBean.getCurrent_device());
+//        map2.put("unique_identifier", "");
+//        map2.put("user_defined_name", "");
+//        map2.put("download_channel", "");
+//        map2.put("phone_version", "");
+//        map2.put("phone_model", "");
+//        map2.put("wx_unionid", "");
+//        map2.put("request_start_time", verificationBean.getRequest_start_time());
+//        map2.put("phone", verificationBean.getPhone());
+//        map2.put("purpose", verificationBean.getPurpose());
+//        map2.put("sign2", verificationBean.getSign2());
+//        map2.put("key", verificationBean.getKey());
+//        map2.put("code", verificationBean.getCode());
+//
+//        Observable<VerificationCode> data = apiserver.getVerificationCodes(map2);
+//        data.subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<VerificationCode>() {
+//
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//                        compositeDisposable.add(d);
+//                    }
+//
+//                    @Override
+//                    public void onNext(VerificationCode verificationBean) {
+//                        verificationBeanResultCallBack.onSuccess(verificationBean);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Log.e("xuzhiqi", "onError: " + e.getMessage());
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
 
     }
 

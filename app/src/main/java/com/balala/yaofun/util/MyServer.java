@@ -2,6 +2,7 @@ package com.balala.yaofun.util;
 
 
 import com.balala.yaofun.bean.BaseBean;
+import com.balala.yaofun.bean.CodeBean;
 import com.balala.yaofun.bean.FunhomeData;
 import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.bean.VerificationResult;
@@ -32,8 +33,8 @@ public interface MyServer {
 
     //   String url = "https://192.168.0.164:8088/api/";
     // String url = "http://192.168.110.144:5001/api/";
-    String url = "https://test.yaofun.vip/api/";
-//    String url = "http://192.168.110.131:5001/api/";
+//    String url = "https://test.yaofun.vip/api/";
+    String url = "http://192.168.110.131:5001/api/";
 //    String url = "https://api.yaofun.vip/api";
 
     // http://test.yaofun.vip/api/verification_code/send
@@ -47,7 +48,7 @@ public interface MyServer {
 
     @POST("verification_code/verification")
     @FormUrlEncoded
-    Observable<VerificationCode> getVerificationCodes(@FieldMap Map<String, Object> map2);
+    Observable<BaseBean<CodeBean>> getVerificationCodes(@FieldMap Map<String, Object> map2);
 
     // 注册接口
     @POST("user/regist")

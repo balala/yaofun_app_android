@@ -2,6 +2,8 @@ package com.balala.yaofun.util;
 
 import android.widget.Toast;
 
+import com.balala.yaofun.httpUtils.MyApp;
+
 
 /**
  * Created by $lzj on 2019/3/25.
@@ -9,10 +11,10 @@ import android.widget.Toast;
 public class ToastUtils {
 
     public static void showShort(String msg){
-        Toast.makeText(MyApp.getMyApp(),msg.toString(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(MyApp.getInstance(),msg.toString(),Toast.LENGTH_SHORT).show();
     }
 
     public static void showLong(String msg){
-        Toast.makeText(MyApp.getMyApp(),msg.toString(),Toast.LENGTH_LONG).show();
+        Toast.makeText(MyApp.getInstance(),msg.toString(),Toast.LENGTH_LONG).show();
     }
 }

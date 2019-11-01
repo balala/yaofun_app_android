@@ -27,13 +27,10 @@ import com.balala.yaofun.R;
 import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.UserBean;
-import com.balala.yaofun.event.LoginSuccessEvent;
 import com.balala.yaofun.fragment.HomeFragment;
 import com.balala.yaofun.httpUtils.ToastUtil;
 import com.balala.yaofun.presenter.LandingPresenter;
-import com.balala.yaofun.util.ACache;
 import com.balala.yaofun.util.ForLog;
-import com.balala.yaofun.util.MyApp;
 import com.balala.yaofun.util.ToastUtils;
 import com.balala.yaofun.view.LandingView;
 import com.balala.yaofun.util.TextWatcherUtil;
@@ -42,10 +39,10 @@ import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.balala.yaofun.httpUtils.MyApp.goLogin;
 
 
 public class LandingActivity extends BaseActivity<LandingPresenter, LandingView> implements LandingView {
@@ -255,20 +252,14 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         ToastUtil.showShort(msg);
     }
     private void loginSuccess(BaseBean<UserBean> bean){
-        //登陆成功通用处理
-        ACache aCache=ACache.get(this);
-        aCache.put("user",bean.getData());
-        MyApp.user=bean.getData();
-        EventBus.getDefault().post(new LoginSuccessEvent());
+        goLogin(bean);
         this.finish();
     }
 
     // baseActivity 里面的方法 用作解析传递
     @Override
     protected void initData() {
-
         Log.i(TAG, "initData: " + phone);
-
     }
 
     @Override

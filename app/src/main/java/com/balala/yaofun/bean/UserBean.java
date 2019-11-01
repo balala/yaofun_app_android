@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public  class UserBean implements Serializable {
+    //登录之后的key
+    private String key;
     private String _id;
     //真实姓名
     private String real_name;
@@ -445,10 +447,19 @@ public  class UserBean implements Serializable {
     }
 
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     @Override
     public String toString() {
         return "UserBean{" +
-                "_id='" + _id + '\'' +
+                "key='" + key + '\'' +
+                ", _id='" + _id + '\'' +
                 ", real_name='" + real_name + '\'' +
                 ", nick_name='" + nick_name + '\'' +
                 ", phone='" + phone + '\'' +
@@ -458,7 +469,7 @@ public  class UserBean implements Serializable {
                 ", birthday_day='" + birthday_day + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", images='" + images + '\'' +
-                ", autograph=" + autograph +
+                ", autograph='" + autograph + '\'' +
                 ", sex='" + sex + '\'' +
                 ", wx_unionid='" + wx_unionid + '\'' +
                 ", openid_public='" + openid_public + '\'' +

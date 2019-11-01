@@ -5,6 +5,7 @@ import android.util.Log;
 import com.balala.yaofun.base.BaseModel;
 import com.balala.yaofun.base.BaseView;
 import com.balala.yaofun.bean.BaseBean;
+import com.balala.yaofun.bean.CodeBean;
 import com.balala.yaofun.bean.FunhomeData;
 import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.bean.result.DayBeans;
@@ -28,18 +29,25 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.balala.yaofun.util.MyApp.getBaseMap;
+import static com.balala.yaofun.httpUtils.MyApp.getBaseMap;
+
 
 public class ApiModel extends BaseModel implements BaseView {
     private static MyServer movieService = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
 
-
+    //微信登录或者注册
     public static void wxLoginOrRegist(Map<String, ? extends Object> map, ResultCallBack<BaseBean<UserBean>> resultCallBack) {
         setSubscribe(movieService.wxLoginOrRegist(getBaseMap(map)), resultCallBack);
     }
 
+    //手机号密码登录
     public static void phonePwdLogin(Map<String, ? extends Object> map, ResultCallBack<BaseBean<UserBean>> resultCallBack) {
         setSubscribe(movieService.phonePwdLogin(getBaseMap(map)), resultCallBack);
+    }
+
+    //注册获取验证码
+    public static void getVerificationCodes(Map<String, ? extends Object> map, ResultCallBack<BaseBean<CodeBean>> resultCallBack) {
+        setSubscribe(movieService.getVerificationCodes(getBaseMap(map)), resultCallBack);
     }
 
     public static void funhomedata(Map<String, ? extends Object> map, ResultCallBack<BaseBean<FunhomeData>> resultCallBack) {

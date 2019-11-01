@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 import com.balala.yaofun.R;
 import com.balala.yaofun.base.BaseActivity;
+import com.balala.yaofun.bean.BaseBean;
+import com.balala.yaofun.bean.CodeBean;
 import com.balala.yaofun.bean.VerificationBean;
 import com.balala.yaofun.bean.VerificationResult;
 import com.balala.yaofun.bean.result.RegisterBean;
@@ -34,9 +36,13 @@ import com.balala.yaofun.bean.result.VerificationCode;
 import com.balala.yaofun.fragment.HomeFragment;
 import com.balala.yaofun.httpUtils.ToastUtil;
 import com.balala.yaofun.presenter.RegisterPresenter;
+import com.balala.yaofun.util.Utils;
 import com.balala.yaofun.view.RegisterView;
 import com.balala.yaofun.util.TextWatcherUtil;
 import com.balala.yaofun.webview.AboutyaofunActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -271,16 +277,13 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
         String[] split = phoneNum.split(" ");
         //重新拼接手机号
         phone = split[0] + split[1] + split[2];
-        Log.e("手机号码：", phone);
         // 判断输入的手机号 是否符合手机号规范
         if (phone.matches("^13[0-9]{1}[0-9]{8}$|15[0125689]{1}[0-9]{8}$|18[0-3,5-9]{1}[0-9]{8}$|17[0-3,5-9]{1}[0-9]{8}$|19[0-3,5-9]{1}[0-9]{8}$|16[0-3,5-9]{1}[0-9]{8}$")) {
             Toast.makeText(RegisterActivity.this, "获取验证码", Toast.LENGTH_SHORT).show();
             // 开始执行倒计时的方法
             time.start();
             mRedSpeak.setVisibility(View.GONE);
-            Log.i(TAG, "手机号码 " + phone);
             // 获取手机号码 返回后台进行解析
-
             initData();
             // 如果手机号码不符合规则 提示用户正确输入手机号 红色文字显示 字体变成"请输入正确的手机号码"
         } else {
@@ -296,8 +299,16 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
 
     @Override
     protected void initData() {
-        Log.i(TAG, "initData: " + phone);
-//        basePresenter.getData(phone);
+        Map<String,String> map=new HashMap<>();
+        map.put("phone",phone);
+        //注册、找回密码、绑定手机号、实名认证、提现
+        map.put("purpose","注册");
+        //请求时间
+        String time=Utils.getNowDate();
+        map.put("request_start_time",time);
+        //sign2=md5(请求时间+手机号+IOS密钥)
+        map.put("sign2",Utils.md5(time + phone+ Utils.Signs));
+        basePresenter.getVerificationCodes(map);
     }
 
     @Override
@@ -318,62 +329,72 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
     }
 
     @Override
-    public void onSS(VerificationResult verificationResult) {
-        key = verificationResult.getData().getKey();
-        Log.e("发送验证码的成功方法", "onSS: " + verificationResult.toString() + "\n" + "\n" + key);
+    public void getVerificationCodesSuccess(BaseBean<CodeBean> bean) {
 
     }
 
     @Override
-    public void onFail(String msg) {
-        Log.i(TAG, "onFail: " + msg);
-    }
-
-    @Override
-    public void onSuccessyanzheng(VerificationCode verificationBean) {
-        Log.e("xuzhiqi4", "onSuccessyanzheng: " + verificationBean.getMsg());
-        mRedSpeak.setText(verificationBean.getMsg());
-        mRedSpeak.setVisibility(View.VISIBLE);
-        code = mEtIdentifiing.getText().toString().trim();
-        password = mEtPassword.getText().toString().trim();
-        if (verificationBean.isSuccess() & !TextUtils.isEmpty(code) & !TextUtils.isEmpty(password)) {
-//            basePresenter.getData3(phone, code, key, password);
-        }
-        Log.i(TAG, "验证码验证成功 ");
-//        ToastUtil.showLong("验证码验证成功");
-//        startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
-    }
-
-    @Override
-    public void onFails(String msg) {
-        Log.i(TAG, "onFails: " + msg);
-    }
-
-    @Override
-    public void onSuccessRegister(RegisterBean bean) {
-        String nick_name = bean.getData().getNick_name();
-        String images = bean.getData().getImages();
-        Log.e("xuzhiqiaa", "onSuccessRegister: " + bean.toString());
-//        ToastUtil.showLong(bean.getMsg());
-
-        //将数据保存至SharedPreferences:
-        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("flag", true);
-        editor.putString("nick_name", nick_name);
-        editor.putString("images", images);
-        Log.i("aBoolean", "onSuccessLanding: " + editor);
-        editor.commit();
-        startActivity(new Intent(RegisterActivity.this, HomeFragment.class));
-        Log.i("注册成功保存", "onSuccessRegister: " + "nick_name" + nick_name + "" + images);
-    }
-
-    @Override
-    public void onError(String error) {
-
-        ToastUtil.showLong("注册失败");
+    public void getVerificationCodesFail(String msg) {
 
     }
+
+//    @Override
+//    public void onSS(VerificationResult verificationResult) {
+//        key = verificationResult.getData().getKey();
+//        Log.e("发送验证码的成功方法", "onSS: " + verificationResult.toString() + "\n" + "\n" + key);
+//
+//    }
+//
+//    @Override
+//    public void onFail(String msg) {
+//        Log.i(TAG, "onFail: " + msg);
+//    }
+//
+//    @Override
+//    public void onSuccessyanzheng(VerificationCode verificationBean) {
+//        Log.e("xuzhiqi4", "onSuccessyanzheng: " + verificationBean.getMsg());
+//        mRedSpeak.setText(verificationBean.getMsg());
+//        mRedSpeak.setVisibility(View.VISIBLE);
+//        code = mEtIdentifiing.getText().toString().trim();
+//        password = mEtPassword.getText().toString().trim();
+//        if (verificationBean.isSuccess() & !TextUtils.isEmpty(code) & !TextUtils.isEmpty(password)) {
+////            basePresenter.getData3(phone, code, key, password);
+//        }
+//        Log.i(TAG, "验证码验证成功 ");
+////        ToastUtil.showLong("验证码验证成功");
+////        startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
+//    }
+//
+//    @Override
+//    public void onFails(String msg) {
+//        Log.i(TAG, "onFails: " + msg);
+//    }
+//
+//    @Override
+//    public void onSuccessRegister(RegisterBean bean) {
+//        String nick_name = bean.getData().getNick_name();
+//        String images = bean.getData().getImages();
+//        Log.e("xuzhiqiaa", "onSuccessRegister: " + bean.toString());
+////        ToastUtil.showLong(bean.getMsg());
+//
+//        //将数据保存至SharedPreferences:
+//        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putBoolean("flag", true);
+//        editor.putString("nick_name", nick_name);
+//        editor.putString("images", images);
+//        Log.i("aBoolean", "onSuccessLanding: " + editor);
+//        editor.commit();
+//        startActivity(new Intent(RegisterActivity.this, HomeFragment.class));
+//        Log.i("注册成功保存", "onSuccessRegister: " + "nick_name" + nick_name + "" + images);
+//    }
+//
+//    @Override
+//    public void onError(String error) {
+//
+//        ToastUtil.showLong("注册失败");
+//
+//    }
 
 
     // 倒计时 验证码
