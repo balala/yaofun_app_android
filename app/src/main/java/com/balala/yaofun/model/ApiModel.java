@@ -62,7 +62,7 @@ public class ApiModel extends BaseModel implements BaseView {
         setSubscribe(movieService.goChangePassword(getBaseMap(map)), resultCallBack);
     }
 
-    public static void funhomedata(Map<String, ? extends Object> map, ResultCallBack<BaseBean<FunhomeData>> resultCallBack) {
+    public static void funhomedata(Map<String, ? extends Object> map, ResultCallBack<BaseBean<FunhomeData.DataBean>> resultCallBack) {
         setSubscribe(movieService.getFunhomeData(getBaseMap(map)), resultCallBack);
     }
 

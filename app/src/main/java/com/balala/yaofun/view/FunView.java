@@ -5,7 +5,7 @@ import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.FunhomeData;
 
 public interface FunView extends BaseView {
-    void homefunSuccess(BaseBean<FunhomeData> bean);
+    void homefunSuccess(BaseBean<FunhomeData.DataBean> bean);
 
     void homefunFail(String msg);
 }

@@ -8,19 +8,19 @@
     android:orientation="vertical"
     tools:context=".activity.HomedetailsActivity">
 
-    <ImageView
-        android:id="@+id/homedetailsicon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@mipmap/homedetails"
-        android:visibility="visible" />
+    <!--<ImageView-->
+    <!--android:id="@+id/homedetailsicon"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:scaleType="fitXY"-->
+    <!--android:src="@mipmap/homedetails"-->
+    <!--android:visibility="visible" />-->
+    <!--android:visibility="gone"-->
 
     <RelativeLayout
         android:id="@+id/sll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -86,32 +86,41 @@
                     </LinearLayout>
 
 
-                    <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="@dimen/dp_20"-->
-                    <!--android:orientation="horizontal">-->
-
-                    <TextView
-                        android:id="@+id/homedetails_label1"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/labelll"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_20"
-                        android:layout_marginTop="@dimen/dp_29"
-                        android:text="#我不需要标签"
-                        android:textColor="@color/colorwhite"
-                        android:textSize="@dimen/sp_15" />
+                        android:orientation="horizontal">
 
-                    <!--<TextView-->
-                    <!--android:id="@+id/homedetails_label2"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="@dimen/dp_19"-->
-                    <!--android:layout_marginTop="@dimen/dp_29"-->
-                    <!--android:text="#我不是Jack波"-->
-                    <!--android:textColor="@color/colorwhite"-->
-                    <!--android:textSize="@dimen/sp_15" />-->
-                    <!--</LinearLayout>-->
+                        <TextView
+                            android:id="@+id/homedetails_label1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_20"
+                            android:layout_marginTop="@dimen/dp_29"
+                            android:text="#我不需要标签"
+                            android:textColor="@color/colorwhite"
+                            android:textSize="@dimen/sp_15" />
+
+                        <TextView
+                            android:id="@+id/homedetails_label2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_19"
+                            android:layout_marginTop="@dimen/dp_29"
+                            android:text="#我不是Jack波"
+                            android:textColor="@color/colorwhite"
+                            android:textSize="@dimen/sp_15" />
+                    </LinearLayout>
+
+                    <com.balala.yaofun.util.FlowLayout
+                        android:id="@+id/flow"
+                        android:layout_width="@dimen/dp_200"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:maxEms="2"
+                        android:maxLines="2"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/homedetails_signature"
@@ -119,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_20"
                         android:layout_marginTop="@dimen/dp_13"
-                        android:text="因为好奇，所以长生，因为好学，所以不老。因为爱所以爱。"
+                        android:text="不秃头的小白说没有签名会变胖！"
                         android:textColor="@color/colorwhite"
                         android:textSize="@dimen/sp_12" />
 
@@ -366,19 +375,19 @@
         </RelativeLayout>
 
         <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
-            <!--android:id="@+id/homedetails_fab"-->
-            <!--android:layout_width="@dimen/dp_60"-->
-            <!--android:layout_height="@dimen/dp_60"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_gravity="end|bottom"-->
-            <!--android:layout_margin="5dp"-->
-            <!--android:layout_marginRight="@dimen/dp_100"-->
-            <!--android:layout_marginBottom="@dimen/dp_100"-->
-            <!--android:backgroundTint="@mipmap/icon_stick"-->
-            <!--android:clickable="true"-->
-            <!--android:src="@mipmap/icon_stick"-->
-            <!--android:visibility="gone" />-->
+        <!--android:id="@+id/homedetails_fab"-->
+        <!--android:layout_width="@dimen/dp_60"-->
+        <!--android:layout_height="@dimen/dp_60"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_gravity="end|bottom"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:layout_marginRight="@dimen/dp_100"-->
+        <!--android:layout_marginBottom="@dimen/dp_100"-->
+        <!--android:backgroundTint="@mipmap/icon_stick"-->
+        <!--android:clickable="true"-->
+        <!--android:src="@mipmap/icon_stick"-->
+        <!--android:visibility="gone" />-->
     </RelativeLayout>
 
 </RelativeLayout>

@@ -304,27 +304,6 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
         return new FrogetpasswardPresenter();
     }
 
-//    @Override
-//    public void onSuccessFrogetpasswardfly(VerificationResult verificationResult) {
-//        Log.i(TAG, "onSuccessFrogetpassward: " + verificationResult.toString());
-//        key = verificationResult.getData().getKey();
-//        code1 = verificationResult.getData().getCode();
-//        Log.i("Frogetpasswardfly", "onClick: " + phone + "\n" + this.code1 + "\n" + key);
-//
-//    }
-//
-//    @Override
-//    public void onFailFrogetpassward(String msg) {
-//        Log.i("Frogetpassward(", "onFail: " + msg);
-//    }
-//
-//    @Override
-//    public void onSuccessVerificationpassward(VerificationCode verificationBean) {
-//        Log.e("onSuccessyanzheng", "onSuccessyanzheng: " + verificationBean.toString());
-////        ToastUtil.showLong(verificationBean.toString());
-//        startActivity(new Intent(FrogetpasswardActivity.this, GeneralActivity.class));
-//    }
-
 
     @Override
     public void getVerificationCodesSuccess(BaseBean<CodeBean> bean) {
@@ -339,8 +318,8 @@ public class FrogetpasswardActivity extends BaseActivity<FrogetpasswardPresenter
     @Override
     public void goChangePasswordSuccess(BaseBean<UserBean> bean) {
         ToastUtil.showLong("更改密码成功");
-//        startActivity(new Intent(FrogetpasswardActivity.this, GeneralActivity.class));
-        finish();
+        startActivity(new Intent(FrogetpasswardActivity.this, GeneralActivity.class));
+//        finish();
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.balala.yaofun.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,8 +28,6 @@ public class AmapRouteActivity extends AppCompatActivity {
     private TextView mMaptex2;
     private ImageView mMapgo;
 
-//    private MapView mMap;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +36,8 @@ public class AmapRouteActivity extends AppCompatActivity {
     }
 
     private void initView() {
-
+        // 渲染系统toolbar
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         mMap = (MapView) findViewById(R.id.map);
         mMap.onCreate(savedInstanceState);
         mMapll = (LinearLayout) findViewById(R.id.mapll);
@@ -45,15 +46,15 @@ public class AmapRouteActivity extends AppCompatActivity {
         mMaptext1 = (TextView) findViewById(R.id.maptext1);
         mMaptex2 = (TextView) findViewById(R.id.maptex2);
         mMapgo = (ImageView) findViewById(R.id.mapgo);
-
+        Bundle extras = getIntent().getExtras();
+        String address = extras.getString("address");
+        mMaptext1.setText(address);
         mMapback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
-
 
     }
 
@@ -75,6 +76,7 @@ public class AmapRouteActivity extends AppCompatActivity {
         super.onPause();
         //在activity执行onPause时执行mMapView.onPause ()，暂停地图的绘制
         mMap.onPause();
+
     }
 
     @Override

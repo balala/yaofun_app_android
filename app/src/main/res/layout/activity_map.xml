@@ -62,7 +62,7 @@
         android:layout_width="@dimen/dp_27"
         android:layout_height="@dimen/dp_27"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/dp_15"
-        android:layout_marginTop="@dimen/dp_25"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_40"
         android:src="@drawable/mapback" />
 </RelativeLayout>

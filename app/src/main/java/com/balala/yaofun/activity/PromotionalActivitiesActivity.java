@@ -114,7 +114,7 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
      */
     public final static int SELECT_IMAGE_RESULT_CODE = 200;
     //    @BindView(R.id.openfunimg)
-//    ImageView openfunlayout;
+   //    ImageView openfunlayout;
     private String picturePath;
     // 当前日期
     private int currYear;

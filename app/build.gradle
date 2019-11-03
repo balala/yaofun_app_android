@@ -10,13 +10,14 @@ android {
         }
 
     }
+
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
         }
     }
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.balala.yaofun"
         minSdkVersion 23
@@ -25,6 +26,10 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.config
+        ndk {
+            //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "arm64-v8a", "x86_64"
+        }
     }
     buildTypes {
         release {
@@ -106,7 +111,6 @@ dependencies {
     implementation files('libs/umeng-share-wechat-simplify-6.9.6.jar')
     implementation files('libs/umeng-shareboard-widget-6.9.6.jar')
     implementation files('libs/umeng-sharetool-6.9.6.jar')
-    implementation files('libs/utdid4all-1.1.5.3_proguard.jar')
 
 
     //SmartRefreshLayout上拉加载下拉刷新
@@ -117,8 +121,10 @@ dependencies {
     //Eventbus
     implementation 'org.greenrobot:eventbus:3.0.0'
 
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 
     implementation 'com.github.wildma:PictureSelector:1.0.0'
+
+
 
 }

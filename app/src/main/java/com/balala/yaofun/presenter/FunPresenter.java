@@ -13,9 +13,9 @@ import java.util.Map;
 public class FunPresenter extends BasePresenter<FunView>  {
 
     public void funhomeData(Map<String, ? extends Object> map) {
-        ApiModel.funhomedata(map, new ResultCallBack<BaseBean<FunhomeData>>() {
+        ApiModel.funhomedata(map, new ResultCallBack<BaseBean<FunhomeData.DataBean>>() {
             @Override
-            public void onSuccess(BaseBean<FunhomeData> bean) {
+            public void onSuccess(BaseBean<FunhomeData.DataBean> bean) {
                 ForLog.e("请求成功" + bean);
                 mView.homefunSuccess(bean);
             }

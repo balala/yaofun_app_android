@@ -1,6 +1,8 @@
 package com.balala.yaofun.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,12 +24,14 @@ import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.result.HomedetailsBean;
 import com.balala.yaofun.model.ApiModel;
 import com.balala.yaofun.presenter.HomedetailsPersenter;
+import com.balala.yaofun.util.FlowLayout;
 import com.balala.yaofun.view.HomedetailsView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -85,8 +89,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     TextView homedetails_personcount;
     @BindView(R.id.homedetails_wirte)
     ImageView mHomedetailsWirte;
-    @BindView(R.id.homedetailsicon)
-    ImageView homedetailsicon;
+    //    @BindView(R.id.homedetailsicon)
+//    ImageView homedetailsicon;
     @BindView(R.id.homedetails_rv2)
     RecyclerView mHomedetailsRv2;
     @BindView(R.id.homedetails_message)
@@ -95,8 +99,12 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     Button mHomedetailsgo;
     @BindView(R.id.llt)
     LinearLayout mLlt;
+    @BindView(R.id.labelll)
+    LinearLayout labelll;
     @BindView(R.id.homedetails_people)
     ImageView mHomedetailsPeople;
+    @BindView(R.id.flow)
+    FlowLayout flow;
     //    @BindView(R.id.homedetails_fab)
 //    FloatingActionButton mHomedetailsFab;
     @BindView(R.id.sll)
@@ -106,6 +114,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     private LinearLayout popitem2;
     private LinearLayout popitem3;
     private LinearLayout popitem4;
+    private String address;
 
 
     @Override
@@ -152,11 +161,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
                 break;
             case R.id.homedetails_menu:
                 // 在这弹出menu选项
-                //为按钮绑定上下文菜单（注意不是绑定监听器）
                 showPopupMenu();
-//                mMenu = new PopupMenu(this, mHomedetailsMenu);
-//                mMenu.getMenuInflater().inflate(R.menu.homedetailsmenu, mMenu.getMenu());
-//                mMenu.show();
                 break;
             case R.id.homedetails_title:
                 break;
@@ -181,7 +186,10 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
             case R.id.homedetails_site:
                 break;
             case R.id.homedetails_navigation:
-                startActivity(new Intent(HomedetailsActivity.this,AmapRouteActivity.class));
+                Intent intent = new Intent(HomedetailsActivity.this, AmapRouteActivity.class);
+                intent.putExtra("address", address);
+                startActivity(intent);
+//                startActivity(new Intent(HomedetailsActivity.this, AmapRouteActivity.class));
                 break;
             case R.id.homedetails_ticket:
                 break;
@@ -211,20 +219,22 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     }
 
     private void showPopupMenu() {
-        Toast.makeText(this, "点击弹出", Toast.LENGTH_SHORT).show();
-//        popupWindow.showAtLocation(mHomedetailsMenu, Gravity.BOTTOM, 0, 0);
         View mPopView = getLayoutInflater().inflate(R.layout.popitem, null);
-        PopupWindow popupWindow = new PopupWindow(mPopView);
-        popupWindow.setOutsideTouchable(true);
+        PopupWindow popupWindow = new PopupWindow();
+        popupWindow.setContentView(mPopView);
+        popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
         popupWindow.showAsDropDown(mHomedetailsMenu);
-
+        popupWindow.setOutsideTouchable(true);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onSuccessHomedetails(BaseBean<HomedetailsBean.DataBean> funhomeData) {
-        homedetailsicon.setVisibility(View.GONE);
+//        homedetailsicon.setVisibility(View.GONE);
         sll.setVisibility(View.VISIBLE);
         HomedetailsBean.DataBean data = funhomeData.getData();
+        address = data.getPlace_text().getAddress();
         // 标签的个数
         DetailsactivityAdapter adapter = new DetailsactivityAdapter(this, data);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -234,17 +244,27 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         Log.i("首页详情解析", "onSuccessHomedetails: " + funhomeData);
         Glide.with(this).load(data.getCover()).into(mHomedetailsimg);
         mHomedetailsTitle.setText(data.getTitle());
-
-//        List<String> user_label = data.getUser_label();
-//        for (int i = 0; i < user_label.size(); i++) {
-//            mHomedetailsLabel1.setText(data.getUser_label());
-//        }
-//        mHomedetailsLabel2.setText(data.getUser_label().get(size));
+        List<String> user_label = data.getUser_label();
+        if (user_label.isEmpty()) {
+            flow.setVisibility(View.GONE);
+            labelll.setVisibility(View.VISIBLE);
+        } else {
+            flow.setVisibility(View.VISIBLE);
+            labelll.setVisibility(View.GONE);
+            for (int i = 0; i < user_label.size(); i++) {
+                TextView textView = new TextView(this);
+                textView.setText("#" + user_label.get(i));
+                textView.setTextColor(Color.WHITE);
+                textView.setTextSize(15);
+                flow.addView(textView);
+            }
+        }
         mHomedetailsPeoplename.setText(data.getUser_nick_name());
         mHomedetailsTime.setText(data.getStart_end_time());
         mHomedetailsPeoplecount.setText(data.getLimit_number());
         mHomedetailsSite.setText(data.getPlace_text().getAddress());
         mHomedetailsFuntitle.setText(data.getLocation_name());
+//        mHomedetailsFunmessage.setText(data); 副标题
         Glide.with(this).load(data.getUser_images()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mHomedetailsPeople);
         homedetails_personcount.setText(data.getMy_status());
         mHomedetailsTicket.setText(data.getCost());

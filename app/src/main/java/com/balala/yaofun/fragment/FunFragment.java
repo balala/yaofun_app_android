@@ -122,17 +122,15 @@ public class FunFragment extends BaseFragment<FunPresenter, FunView> implements 
         presenter.funhomeData(map);
     }
 
-
     @Override
-    public void homefunSuccess(BaseBean<FunhomeData> bean) {
-//        movieAdapter.setList(filmlist);
-//        cateAdapter.setList(foodlist);
-//        artAdapter.setList(artlist);
-//        socialContactAdapter.setList(socialist);
+    public void homefunSuccess(BaseBean<FunhomeData.DataBean> bean) {
 
+        funperch.setVisibility(View.GONE);
+        funsw.setVisibility(View.VISIBLE);
         artlist = new ArrayList<>();
         filmlist = new ArrayList<>();
         socialist = new ArrayList<>();
+        foodlist = new ArrayList<>();
         //影视
         movieAdapter = new FunMovieAdapter(getActivity(), filmlist);
         linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -162,20 +160,19 @@ public class FunFragment extends BaseFragment<FunPresenter, FunView> implements 
         funRv7.setAdapter(socialContactAdapter);
 
         //美食
-//        cateAdapter = new FunCateAdapter(getActivity(), foodlist);
-//        linearLayoutManager = new LinearLayoutManager(getActivity());
-//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        funRv8.setLayoutManager(linearLayoutManager);
-//        funRv8.setAdapter(cateAdapter);
-//        funRv9.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        funRv9.setAdapter(cateAdapter);
+        cateAdapter = new FunCateAdapter(getActivity(), foodlist);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        funRv8.setLayoutManager(linearLayoutManager);
+        funRv8.setAdapter(cateAdapter);
+        funRv9.setLayoutManager(new LinearLayoutManager(getActivity()));
+        funRv9.setAdapter(cateAdapter);
 
         movieAdapter.notifyDataSetChanged();
-//        cateAdapter.notifyDataSetChanged();
+        cateAdapter.notifyDataSetChanged();
         artAdapter.notifyDataSetChanged();
         socialContactAdapter.notifyDataSetChanged();
-        funperch.setVisibility(View.GONE);
-        funsw.setVisibility(View.VISIBLE);
+
     }
 
     @Override

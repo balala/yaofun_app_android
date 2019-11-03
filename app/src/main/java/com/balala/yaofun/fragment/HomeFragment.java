@@ -151,8 +151,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     RelativeLayout sw;
     @BindView(R.id.sitetext)
     TextView sitetext;
-    @BindView(R.id.homeperchs)
-    ImageView homeperchs;
+//    @BindView(R.id.homeperchs)
+//    ImageView homeperchs;
     @BindView(R.id.sv)
     MyScrollView sv;
 
@@ -217,20 +217,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     private SharedPreferences preferences1;
 
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-//    @Override
-//    public void onSuccessHome(DayBeans dayBean) {
-//
-//
-//    }
-
-
     //声明定位回调监听器
     public AMapLocationListener mLocationListener = new AMapLocationListener() {
-
-        private String longitudex;
-        private String latitudey;
-        private String allStringMoney;
 
         @Override
         public void onLocationChanged(AMapLocation aMapLocation) {
@@ -240,9 +228,9 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             aMapLocationClient.setLocationListener(mLocationListener);
             latitude = aMapLocation.getLatitude();
             longitude = aMapLocation.getLongitude();
-            double abs = Math.abs(longitude);
+//            double abs = Math.abs(longitude);
             y = String.valueOf(latitude);
-            x = String.valueOf(abs);
+            x = String.valueOf(longitude);
             Map<String, String> map = new HashMap<>();
             map.put("x", x);
             map.put("y", y);
@@ -256,7 +244,9 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 
     @Override
     public void onSuccessHome(BaseBean<DayBeans.DataBean> dayBean) {
-
+        // 解析成功显示布局
+        sw.setVisibility(View.VISIBLE);
+//        homeperchs.setVisibility(View.GONE);
         // 在这收值
         Log.i("每日一句话解析", "onSuccessHome: " + dayBean.toString());
         preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -296,7 +286,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     public void onSuccessHomeall(BaseBean<HomeAllBean.DataBean> homeAllBean) {
         //热门
         List<HomeAllBean.DataBean.HotBean> hot = homeAllBean.getData().getHot();
-//        HomeAllBean data = homeAllBean.getData();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recycleView1.setLayoutManager(linearLayoutManager);
         Log.e(TAG, "onSuccessHomeall: " + first);
@@ -305,8 +294,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         //展示全部的recycleView
         recycleView1.setNestedScrollingEnabled(false);
         homeAdapter.notifyDataSetChanged();
-        // 解析成功显示布局
-        sw.setVisibility(View.VISIBLE);
 
         //附近
         List<HomeAllBean.DataBean.AroundBean> around = homeAllBean.getData().getAround();
@@ -419,9 +406,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         // 开启定位
         startLocaion();
         Map<String, String> daymap = new HashMap<>();
-//        daymap.put("","");
         presenter.getHomeData(daymap);
-
         Map<String, String> map = new HashMap<>();
         map.put("page","0");
         map.put("pageSize","10");

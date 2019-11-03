@@ -1,6 +1,7 @@
 package com.balala.yaofun.activity;
 
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,6 +58,7 @@ public class SearchActivity extends AppCompatActivity {
         initNet();
     }
 
+    @SuppressLint("WrongViewCast")
     private void initView() {
         // 渲染系统toolbar  community_search_cancle
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -165,6 +167,4 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }
