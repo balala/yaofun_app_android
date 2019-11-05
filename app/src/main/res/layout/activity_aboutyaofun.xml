@@ -12,12 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/colorwhite">
-
-        <ImageView
+        <LinearLayout
             android:id="@+id/about_back"
-            android:layout_width="9dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/fanhui" />
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/fanhui" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"

@@ -89,8 +89,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     TextView homedetails_personcount;
     @BindView(R.id.homedetails_wirte)
     ImageView mHomedetailsWirte;
-    //    @BindView(R.id.homedetailsicon)
-//    ImageView homedetailsicon;
+    @BindView(R.id.homedetailsicon)
+    ImageView homedetailsicon;
     @BindView(R.id.homedetails_rv2)
     RecyclerView mHomedetailsRv2;
     @BindView(R.id.homedetails_message)
@@ -115,6 +115,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     private LinearLayout popitem3;
     private LinearLayout popitem4;
     private String address;
+    private HomedetailsBean.DataBean data;
 
 
     @Override
@@ -128,6 +129,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         String id = intent.getStringExtra("id");
         HashMap<String, String> map = new HashMap<>();
         basePresenter.getHomedetailsdata(id, map);
+
     }
 
     @Override
@@ -152,9 +154,19 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         switch (v.getId()) {
             default:
                 break;
-//
-            case R.id.homedetailsimg:
 
+            case R.id.homedetailsimg:
+                sll.setVisibility(View.GONE);
+                Toast.makeText(this, "电来", Toast.LENGTH_SHORT).show();
+                View mPopView = getLayoutInflater().inflate(R.layout.homedetailspop, null);
+                ImageView img = mPopView.findViewById(R.id.homedetailsimgpop);
+                Glide.with(this).load(data.getCover()).into(img);
+                PopupWindow popupWindow = new PopupWindow();
+                popupWindow.setContentView(mPopView);
+                popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+                popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.showAsDropDown(mHomedetailsBack);
                 break;
             case R.id.homedetails_back:
                 finish();
@@ -224,16 +236,17 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         popupWindow.setContentView(mPopView);
         popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
         popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
-        popupWindow.showAsDropDown(mHomedetailsMenu);
         popupWindow.setOutsideTouchable(true);
+        popupWindow.showAsDropDown(mHomedetailsMenu);
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
     public void onSuccessHomedetails(BaseBean<HomedetailsBean.DataBean> funhomeData) {
-//        homedetailsicon.setVisibility(View.GONE);
+        homedetailsicon.setVisibility(View.GONE);
         sll.setVisibility(View.VISIBLE);
-        HomedetailsBean.DataBean data = funhomeData.getData();
+
+        data = funhomeData.getData();
         address = data.getPlace_text().getAddress();
         // 标签的个数
         DetailsactivityAdapter adapter = new DetailsactivityAdapter(this, data);
@@ -242,7 +255,14 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         allrv.setAdapter(adapter);
 
         Log.i("首页详情解析", "onSuccessHomedetails: " + funhomeData);
+        //详情页图片 放大缩小
+//        DisplayMetrics dm = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(dm);
+//        mHomedetailsimg.initImageView(dm.widthPixels, dm.heightPixels - 80);
+        //加载详情页图片
         Glide.with(this).load(data.getCover()).into(mHomedetailsimg);
+
+
         mHomedetailsTitle.setText(data.getTitle());
         List<String> user_label = data.getUser_label();
         if (user_label.isEmpty()) {
@@ -266,6 +286,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         mHomedetailsFuntitle.setText(data.getLocation_name());
 //        mHomedetailsFunmessage.setText(data); 副标题
         Glide.with(this).load(data.getUser_images()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mHomedetailsPeople);
+
         homedetails_personcount.setText(data.getMy_status());
         mHomedetailsTicket.setText(data.getCost());
         Log.i("My_status", "onSuccessHomedetails: " + data.getMy_status() + data.getCost());
@@ -276,4 +297,6 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     public void onFailHomedetails(String msg) {
         Log.i("首页详情解析", "onFailHomedetails: " + msg);
     }
+
+
 }

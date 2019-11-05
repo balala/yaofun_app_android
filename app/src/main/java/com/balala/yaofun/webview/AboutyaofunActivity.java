@@ -5,6 +5,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,7 +15,7 @@ import com.balala.yaofun.R;
 
 public class AboutyaofunActivity extends AppCompatActivity {
 
-    private ImageView mAboutBack;
+    private LinearLayout mAboutBack;
     private Toolbar mToolbarAbout;
     private WebView mWeb;
 

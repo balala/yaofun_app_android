@@ -131,10 +131,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     RecyclerView recycleView2;
     @BindView(R.id.recycle_view3)
     RecyclerView recycleView3;
-    @BindView(R.id.rl2)
-    RelativeLayout rl2;
-    @BindView(R.id.rl3)
-    RelativeLayout rl3;
     @BindView(R.id.swipe_ly)
     SwipeRefreshLayout mSwipeLayout;
     //    @BindView(R.id.home_search2)
@@ -151,8 +147,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     RelativeLayout sw;
     @BindView(R.id.sitetext)
     TextView sitetext;
-//    @BindView(R.id.homeperchs)
-//    ImageView homeperchs;
+    @BindView(R.id.homeperchs)
+    ImageView homeperchs;
     @BindView(R.id.sv)
     MyScrollView sv;
 
@@ -228,7 +224,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             aMapLocationClient.setLocationListener(mLocationListener);
             latitude = aMapLocation.getLatitude();
             longitude = aMapLocation.getLongitude();
-//            double abs = Math.abs(longitude);
             y = String.valueOf(latitude);
             x = String.valueOf(longitude);
             Map<String, String> map = new HashMap<>();
@@ -246,13 +241,12 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     public void onSuccessHome(BaseBean<DayBeans.DataBean> dayBean) {
         // 解析成功显示布局
         sw.setVisibility(View.VISIBLE);
-//        homeperchs.setVisibility(View.GONE);
+        homeperchs.setVisibility(View.GONE);
         // 在这收值
         Log.i("每日一句话解析", "onSuccessHome: " + dayBean.toString());
         preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         boolean aBoolean = preferences.getBoolean("flag", false);
         if (aBoolean) {
-//            getDatas();
             preferences1 = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
             String nick_name = preferences1.getString("nick_name", "");
             String images = preferences1.getString("images", "");
@@ -323,7 +317,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
                 Intent intent = new Intent(getContext(), HomedetailsActivity.class);
                 intent.putExtra("id", id);
                 startActivity(intent);
-//                startActivity(new Intent(getContext(), HomedetailsActivity.class));
             }
         });
         homeAdapter.setOnClickListenerBanner(new HomeAdapter.OnClickListenerBanner() {
@@ -334,7 +327,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
                 Intent intent = new Intent(getContext(), HomedetailsActivity.class);
                 intent.putExtra("id", id);
                 startActivity(intent);
-//                startActivity(new Intent(getContext(), HomebannerdetailsActivity.class));
             }
         });
 
@@ -408,13 +400,11 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         Map<String, String> daymap = new HashMap<>();
         presenter.getHomeData(daymap);
         Map<String, String> map = new HashMap<>();
-        map.put("page","0");
-        map.put("pageSize","10");
+        map.put("page", "0");
+        map.put("pageSize", "10");
         presenter.getHomeBannerData(map);
 
     }
-
-
 
     @Override
     protected HomePresenter initGeekP() {
@@ -430,7 +420,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
                 //倒计时 方法三
                 Message message = handler.obtainMessage(1);
                 handler.sendMessageDelayed(message, 1000);
-                View mPopView = getLayoutInflater().inflate(R.layout.popwindow_calender, null);
+                View mPopView = getActivity().getLayoutInflater().inflate(R.layout.popwindow_calender, null);
                 popupWindow = new PopupWindow(mPopView, ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
                 popupWindow.showAtLocation(homeSearch, Gravity.BOTTOM, 0, 0);
@@ -551,7 +541,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     }
 
 
-    // for SmartRefreshLayout
     static {
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {

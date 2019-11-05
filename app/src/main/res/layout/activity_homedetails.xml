@@ -8,17 +8,17 @@
     android:orientation="vertical"
     tools:context=".activity.HomedetailsActivity">
 
-    <!--<ImageView-->
-    <!--android:id="@+id/homedetailsicon"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:scaleType="fitXY"-->
-    <!--android:src="@mipmap/homedetails"-->
-    <!--android:visibility="visible" />-->
-    <!--android:visibility="gone"-->
+    <ImageView
+    android:id="@+id/homedetailsicon"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scaleType="fitXY"
+    android:src="@mipmap/homedetails"
+    android:visibility="visible" />
 
     <RelativeLayout
         android:id="@+id/sll"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -35,7 +35,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_494"
                     android:scaleType="fitXY" />
-
 
                 <LinearLayout
                     android:id="@+id/llt"
@@ -124,7 +123,7 @@
 
                     <TextView
                         android:id="@+id/homedetails_signature"
-                        android:layout_width="@dimen/dp_175"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_20"
                         android:layout_marginTop="@dimen/dp_13"
@@ -245,6 +244,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/allrv"
+                        android:nestedScrollingEnabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/dp_60" />
@@ -288,6 +288,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/homedetails_rv2"
                         android:layout_width="match_parent"
+                        android:nestedScrollingEnabled="false"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_20"
                         android:layout_marginTop="@dimen/dp_43"

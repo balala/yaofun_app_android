@@ -91,7 +91,12 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 holder1.item1title.setText(homeAllBeans.get(position).getTitle());
                 double costs = homeAllBeans.get(position).getCost();
                 String cost = String.valueOf(costs);
-                holder1.item1price.setText(cost);
+                if (cost.isEmpty() || cost.equals("0.0")) {
+                    holder1.item1price.setText("FREE");
+                } else {
+                    holder1.item1priceyuan.setVisibility(View.VISIBLE);
+                    holder1.item1price.setText(cost);
+                }
                 holder1.item1site.setText(homeAllBeans.get(position).getLocation_name());
                 Glide.with(context).load(homeAllBeans.get(position).getCover()).apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).into(holder1.iconcard1);
             }
@@ -122,9 +127,9 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if(position == 3){
+        if (position == 3) {
             return 0;
-        }else {
+        } else {
             return 1;
         }
     }
@@ -145,6 +150,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         private final TextView item1time;
         private final TextView item1site;
         private final TextView item1price;
+        private final TextView item1priceyuan;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -153,6 +159,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
             item1time = itemView.findViewById(R.id.item1time);
             item1site = itemView.findViewById(R.id.item1site);
             item1price = itemView.findViewById(R.id.item1price);
+            item1priceyuan = itemView.findViewById(R.id.item1priceyuan);
 
         }
     }

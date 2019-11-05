@@ -76,13 +76,19 @@
                 android:textSize="9sp" />
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
             android:layout_width="@dimen/dp_46"
             android:layout_height="@dimen/dp_118"
             android:layout_marginLeft="@dimen/dp_143"
             android:layout_marginTop="@dimen/dp_98"
             android:alpha="0.3"
-            android:background="@drawable/home_time">
+            android:background="@drawable/home_time" />
+
+        <LinearLayout
+            android:layout_width="@dimen/dp_46"
+            android:layout_height="@dimen/dp_118"
+            android:layout_marginLeft="@dimen/dp_143"
+            android:layout_marginTop="@dimen/dp_98">
 
             <TextView
                 android:id="@+id/tabootext"

@@ -1,6 +1,7 @@
 package com.balala.yaofun.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,9 +44,22 @@ public class HomeAroundAdapter extends RecyclerView.Adapter<HomeAroundAdapter.Vi
         holder.homeitem2_title.setText(aroundBeans.get(position).getTitle());
         holder.homeitem2_time.setText(aroundBeans.get(position).getStart_end_time());
         holder.homeitem2_site.setText(aroundBeans.get(position).getLocation_name());
+        holder.homeitem2_distance.setText(aroundBeans.get(position).getLocation());
+        String location = aroundBeans.get(position).getLocation();
+        // 位置多少米
+        Log.i("xuzhiqilocation", "onBindViewHolder: " + location);
         double costs = aroundBeans.get(position).getCost();
         String cost = String.valueOf(costs);
-        holder.homeitem2_price.setText(cost);
+        if (cost.equals("0.0") || cost.isEmpty()) {
+            holder.homeitem2_price.setText("FREE");
+        } else {
+            holder.homeitem2_priceyuan.setVisibility(View.VISIBLE);
+            holder.homeitem2_price.setText(cost);
+        }
+
+        if (location.equals("")) {
+            holder.homeitem2_distance.setText("无距离");
+        }
         Glide.with(context).load(aroundBeans.get(position).getCover()).apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).into(holder.homeitem2_img);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +84,7 @@ public class HomeAroundAdapter extends RecyclerView.Adapter<HomeAroundAdapter.Vi
         private final TextView homeitem2_price;
         private final TextView homeitem2_site;
         private final TextView homeitem2_distance;
+        private final TextView homeitem2_priceyuan;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +93,7 @@ public class HomeAroundAdapter extends RecyclerView.Adapter<HomeAroundAdapter.Vi
             homeitem2_time = itemView.findViewById(R.id.homeitem2_time);
             homeitem2_site = itemView.findViewById(R.id.homeitem2_site);
             homeitem2_price = itemView.findViewById(R.id.homeitem2_price);
+            homeitem2_priceyuan = itemView.findViewById(R.id.homeitem2_priceyuan);
             homeitem2_distance = itemView.findViewById(R.id.homeitem2_distance);
 
         }

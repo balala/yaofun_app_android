@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/dp_160"
+    android:layout_width="@dimen/dp_165"
     android:layout_height="wrap_content"
+    android:alpha="0.9"
     android:orientation="vertical"
     android:paddingLeft="@dimen/dp_16"
     android:paddingRight="@dimen/dp_16">
@@ -32,15 +33,16 @@
             <ImageView
                 android:layout_width="@dimen/dp_19"
                 android:layout_height="@dimen/dp_20"
-                android:layout_marginLeft="@dimen/dp_29"
-                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginLeft="@dimen/dp_25"
+                android:layout_marginTop="@dimen/dp_15"
                 android:src="@drawable/homedetails_share" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginRight="@dimen/dp_25"
                 android:text="@string/homedetails_share"
                 android:textColor="@color/colorwhite"
                 android:textSize="@dimen/sp_17" />
@@ -60,15 +62,16 @@
             <ImageView
                 android:layout_width="@dimen/dp_19"
                 android:layout_height="@dimen/dp_20"
-                android:layout_marginLeft="@dimen/dp_29"
-                android:layout_marginTop="@dimen/dp_25"
+                android:layout_marginLeft="@dimen/dp_25"
+                android:layout_marginTop="@dimen/dp_15"
                 android:src="@drawable/homedetails_alter" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginTop="@dimen/dp_25"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginRight="@dimen/dp_25"
                 android:text="@string/homedetails_alter"
                 android:textColor="@color/colorwhite"
                 android:textSize="@dimen/sp_17" />
@@ -88,15 +91,16 @@
             <ImageView
                 android:layout_width="@dimen/dp_19"
                 android:layout_height="@dimen/dp_20"
-                android:layout_marginLeft="@dimen/dp_29"
-                android:layout_marginTop="@dimen/dp_25"
+                android:layout_marginLeft="@dimen/dp_25"
+                android:layout_marginTop="@dimen/dp_15"
                 android:src="@drawable/homedetails_delete" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginTop="@dimen/dp_25"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginRight="@dimen/dp_25"
                 android:text="@string/homedetails_delete"
                 android:textColor="@color/colorwhite"
                 android:textSize="@dimen/sp_17" />
@@ -117,15 +121,16 @@
             <ImageView
                 android:layout_width="@dimen/dp_19"
                 android:layout_height="@dimen/dp_20"
-                android:layout_marginLeft="@dimen/dp_29"
-                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginLeft="@dimen/dp_25"
+                android:layout_marginTop="@dimen/dp_15"
                 android:src="@drawable/homedetails_report" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginRight="@dimen/dp_25"
                 android:text="@string/homedetails_inform"
                 android:textColor="@color/colorwhite"
                 android:textSize="@dimen/sp_17" />

@@ -36,7 +36,7 @@ public class SanJiaoView extends View {
     /**
      * 三角的高度
      */
-    private int height = 50;
+    private int height = 30;
 
     /**
      * 三角的方向

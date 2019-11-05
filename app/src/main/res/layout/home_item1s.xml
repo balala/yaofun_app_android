@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_170"
+    android:layout_height="wrap_content"
     android:background="@color/colorblack"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/iconcard1"
         android:layout_width="@dimen/dp_130"
-        android:layout_height="@dimen/dp_140"
-        android:layout_marginTop="@dimen/dp_21"
+        android:layout_height="@dimen/dp_150"
+        android:layout_marginTop="@dimen/dp_10"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher_round" />
 
@@ -50,15 +50,27 @@
         android:textColor="@color/colordeepgray"
         android:textSize="@dimen/sp_12" />
 
-    <TextView
-        android:id="@+id/item1price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/dp_140"
+        android:layout_marginLeft="@dimen/dp_135"
         android:layout_marginTop="@dimen/dp_110"
         android:layout_marginBottom="@dimen/dp_5"
-        android:text="FREE"
-        android:textColor="@color/colordeepgray" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/item1priceyuan"
+            android:text="￥"
+            android:visibility="gone"
+            android:textColor="@color/colordeepgray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/item1price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colordeepgray" />
+    </LinearLayout>
+
 
 </RelativeLayout>
