@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -157,16 +158,24 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
 
             case R.id.homedetailsimg:
                 sll.setVisibility(View.GONE);
-                Toast.makeText(this, "电来", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "电来", Toast.LENGTH_SHORT).show();
                 View mPopView = getLayoutInflater().inflate(R.layout.homedetailspop, null);
                 ImageView img = mPopView.findViewById(R.id.homedetailsimgpop);
                 Glide.with(this).load(data.getCover()).into(img);
-                PopupWindow popupWindow = new PopupWindow();
-                popupWindow.setContentView(mPopView);
-                popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-                popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
-                popupWindow.setOutsideTouchable(true);
-                popupWindow.showAsDropDown(mHomedetailsBack);
+                PopupWindow popup = new PopupWindow();
+                popup.setContentView(mPopView);
+                popup.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+                popup.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+                popup.setOutsideTouchable(true);
+                popup.showAsDropDown(mHomedetailsBack);
+                popup.setTouchInterceptor(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popup.dismiss();
+                        sll.setVisibility(View.VISIBLE);
+                        return false;
+                    }
+                });
                 break;
             case R.id.homedetails_back:
                 finish();
