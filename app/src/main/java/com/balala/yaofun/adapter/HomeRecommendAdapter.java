@@ -68,7 +68,7 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int itemViewType = getItemViewType(position);
-        if (itemViewType == 0) {
+        if (itemViewType == 0 && beanArrayList!=null) {
             BannerHolder banq = (BannerHolder) holder;
             banq.banner_item.setImages(beanArrayList);
             banq.banner_item.setImageLoader(new MyLoder());

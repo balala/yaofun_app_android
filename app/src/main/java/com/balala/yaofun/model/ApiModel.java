@@ -62,6 +62,14 @@ public class ApiModel extends BaseModel implements BaseView {
         setSubscribe(movieService.goChangePassword(getBaseMap(map)), resultCallBack);
     }
 
+    //获取token
+    public static void getRCToken(Map<String, ? extends Object> map, ResultCallBack<BaseBean<String>> resultCallBack) {
+        setSubscribe(movieService.getRCToken(getBaseMap(map)), resultCallBack);
+    }
+
+
+
+//    public static void funhomedata(Map<String, ? extends Object> map, ResultCallBack<BaseBean<FunhomeData>> resultCallBack) {
     public static void funhomedata(Map<String, ? extends Object> map, ResultCallBack<BaseBean<FunhomeData.DataBean>> resultCallBack) {
         setSubscribe(movieService.getFunhomeData(getBaseMap(map)), resultCallBack);
     }

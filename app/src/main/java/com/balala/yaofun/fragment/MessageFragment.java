@@ -1,6 +1,7 @@
 package com.balala.yaofun.fragment;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,9 @@ import com.balala.yaofun.adapter.ViewpagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+
+import io.rong.imkit.fragment.ConversationListFragment;
+import io.rong.imlib.model.Conversation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,15 +47,20 @@ public class MessageFragment extends Fragment {
 
     protected void initData() {
         // 取出第一次登陆的
-//        Serializable userid = SharedPrefrenceUtils.getObject(getContext(), "userid");
-//        if (userid.equals(false)) {
-//            Toast.makeText(getContext(), "第二次登陆完了", Toast.LENGTH_SHORT).show();
-//        } else {
-//            startActivity(new Intent(getContext(), LandingActivity.class));
-//        }
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new AuditFragment());
-        fragments.add(new MessageFragment2());
+//        fragments.add(new MessageFragment2());
+        ConversationListFragment mConversationListFragment=new ConversationListFragment();
+        Uri uri = Uri.parse("rong://com.balala.yaofun").buildUpon()
+                .appendPath("conversationlist")
+                .appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "false")
+                .appendQueryParameter(Conversation.ConversationType.GROUP.getName(), "false")
+                .appendQueryParameter(Conversation.ConversationType.PUBLIC_SERVICE.getName(), "false")
+                .appendQueryParameter(Conversation.ConversationType.APP_PUBLIC_SERVICE.getName(), "false")
+                .appendQueryParameter(Conversation.ConversationType.SYSTEM.getName(), "true")
+                .build();
+        mConversationListFragment.setUri(uri);
+        fragments.add(mConversationListFragment);
 
 
         mMessageTab.addTab(mMessageTab.newTab().setText("审核"));

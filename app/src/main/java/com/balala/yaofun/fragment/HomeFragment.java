@@ -7,35 +7,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -44,7 +36,6 @@ import com.amap.api.location.AMapLocationListener;
 import com.balala.yaofun.R;
 import com.balala.yaofun.activity.CreateFunActivity;
 import com.balala.yaofun.activity.HomedetailsActivity;
-import com.balala.yaofun.activity.LandingActivity;
 import com.balala.yaofun.activity.PromotionalActivitiesActivity;
 import com.balala.yaofun.activity.SearchActivity;
 import com.balala.yaofun.adapter.HomeAdapter;
@@ -57,8 +48,8 @@ import com.balala.yaofun.bean.result.HomeAllBean;
 import com.balala.yaofun.bean.result.HomeBannerDean;
 import com.balala.yaofun.presenter.HomePresenter;
 import com.balala.yaofun.util.MyScrollView;
-import com.balala.yaofun.view.Homeview;
 import com.balala.yaofun.util.ToastUtils;
+import com.balala.yaofun.view.Homeview;
 import com.balala.yaofun.zxing.activity.CaptureActivity;
 import com.bumptech.glide.Glide;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -70,13 +61,10 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Timer;
 
 import butterknife.BindView;
@@ -186,7 +174,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 1:
-//                    Toast.makeText(getContext(), "开始刷新", Toast.LENGTH_SHORT).show();
                     homeAdapter.notifyDataSetChanged();
                     homeAroundAdapter.notifyDataSetChanged();
                     adapter.notifyDataSetChanged();
@@ -211,6 +198,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     private HomeRecommendAdapter adapter;
     private SharedPreferences preferences;
     private SharedPreferences preferences1;
+
+
 
 
     //声明定位回调监听器
@@ -389,6 +378,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         return R.layout.fragment_home;
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initData() {
@@ -397,6 +387,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 //        viewsAddListener();
         // 开启定位
         startLocaion();
+        presenter.getHomeData(null);
+
         Map<String, String> daymap = new HashMap<>();
         presenter.getHomeData(daymap);
         Map<String, String> map = new HashMap<>();
@@ -484,7 +476,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         super.initListener();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     private void initCreame() {
         // 获取相机权限
         //在执行扫描二维码之前检查是否具有打开照相机的权限

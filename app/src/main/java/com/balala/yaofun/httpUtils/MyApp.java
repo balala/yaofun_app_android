@@ -11,6 +11,7 @@ import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.event.LoginSuccessEvent;
 import com.balala.yaofun.event.SignOutSuccessEvent;
+import com.balala.yaofun.model.ApiModel;
 import com.balala.yaofun.util.ACache;
 import com.balala.yaofun.util.ForLog;
 import com.balala.yaofun.util.Utils;
@@ -21,6 +22,9 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 
 import static com.balala.yaofun.util.Utils.getNowDate;
 
@@ -39,20 +43,28 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        myApp = this;
+        //mark备注：为了方便测试登录注册模块，默认直接退出登录
+//        signOut();
+
+        RongIM.init(this,"25wehl3u2ggfw",true);
+
         UMConfigure.init(this,"5d3fbba33fc19519fb000296"
                 ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"");
         //微信平台
         PlatformConfig.setWeixin("wx24009bcc9adc6318", "aa1643259ceb30e64ccef3a4ce63459b");
-        myApp=this;
 
-        myApp = this;
         //读取缓存登陆信息
         ACache aCache=ACache.get(this);
         user= (UserBean) aCache.getAsObject("user");
+        if(user!=null){
+            goLogin(user);
+        }else{
+            signOut();
+        }
         ForLog.e("本地读取数据"+user);
         getPhoneInformation();
-        //mark备注：为了方便测试登录注册模块，默认直接退出登录
-        signOut();
+
 
     }
 
@@ -73,11 +85,11 @@ public class MyApp extends Application {
         map.put("phone_model", phone_model);
         //请求时间
         map.put("request_start_time",getNowDate());
-
-        for(Map.Entry<String,? extends Object> entry:maps.entrySet()){
-            map.put(entry.getKey(),entry.getValue());
+        if(maps!=null){
+            for(Map.Entry<String,? extends Object> entry:maps.entrySet()){
+                map.put(entry.getKey(),entry.getValue());
+            }
         }
-
         if(hasLogin()){
             map.put("user_id", user.get_id());
             //sign=md5(request_start_time+用户id+key_ios+每次登陆返回的key)
@@ -107,15 +119,52 @@ public class MyApp extends Application {
         EventBus.getDefault().post(new SignOutSuccessEvent());
     }
 
-    public static void goLogin(BaseBean<UserBean> bean){
+    public static void goLogin(UserBean bean){
         //登陆成功通用处理
         ACache aCache=ACache.get(myApp);
-        aCache.put("user",bean.getData());
-        user=bean.getData();
+        aCache.put("user",bean);
+        user=bean;
         EventBus.getDefault().post(new LoginSuccessEvent());
+        connectRongIM(user.getRc_token());
     }
 
+    public static void connectRongIM(String token){
+        ForLog.e("RongIM---token:"+token);
+        token="pfvUiiCvjroEqa0usyOe2otDThrZbuv4tvKiHu/pQzVsegLaQ6JF2BwaRlEoj2Zaa/AQa+Gf9Tvejgc1rGk+pJ/HYc+h8E/j70dew6njt0bNJpgEfnLcZA==";
+        RongIM.connect(token, new RongIMClient.ConnectCallback() {
+            @Override
+            public void onTokenIncorrect() {
+                ForLog.e("RongIM---Token 错误");
+//                ApiModel.getRCToken(null, new ResultCallBack<BaseBean<String>>() {
+//                    @Override
+//                    public void onSuccess(BaseBean<String> bean) {
+//                        ForLog.e("请求成功" + bean);
+//                        connectRongIM(bean.getData());
+//                    }
+//
+//                    @Override
+//                    public void onFail(String msg) {
+//                        ForLog.e("RongIM---请求获取token失败:"+msg);
+//                    }
+//                });
+            }
+            @Override
+            public void onSuccess(String userid) {
+                ForLog.e("RongIM---onSuccess:"+userid);
 
+            }
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+                ForLog.e("RongIM---onError:"+errorCode);
+            }
+        });
+    }
+
+    @Override
+
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+    }
 
     public static void getPhoneInformation(){
         // Android获得屏幕分辨率补充，

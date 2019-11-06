@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.balala.yaofun.httpUtils.MyApp.hasLogin;
+
 public class GeneralActivity extends AppCompatActivity {
 
 
@@ -93,26 +95,18 @@ public class GeneralActivity extends AppCompatActivity {
                         switchFragment(TYPE_KONWLOGE);
                         break;
                     case R.id.bottom_message:
-                        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-                        boolean aBoolean = preferences.getBoolean("flag", false);
-                        if (aBoolean) {
-                            Log.i("onCheckedChanged", "第二次登陆完了");
-                        } else {
-                            startActivity(new Intent(GeneralActivity.this, LandingActivity.class));
+                        if(hasLogin()){
+                            switchFragment(TYPE_WX);
+                        }else{
+                        startActivity(new Intent(GeneralActivity.this, LandingActivity.class));
                         }
-                        Log.i("aBoolean", "onCheckedChanged: " + aBoolean);
-
-                        switchFragment(TYPE_WX);
                         break;
                     case R.id.bottom_me:
-                        SharedPreferences pre = getSharedPreferences("user", Context.MODE_PRIVATE);
-                        boolean booleans = pre.getBoolean("flag", false);
-                        if (booleans) {
-                            Log.i("onCheckedChanged", "第二次登陆完了");
-                        } else {
+                        if(hasLogin()){
+                            switchFragment(TYPE_NOTACTION);
+                        }else{
                             startActivity(new Intent(GeneralActivity.this, LandingActivity.class));
                         }
-                        switchFragment(TYPE_NOTACTION);
                         break;
                     default:
                         break;

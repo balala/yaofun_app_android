@@ -34,7 +34,6 @@ import com.balala.yaofun.util.ForLog;
 import com.balala.yaofun.util.ToastUtils;
 import com.balala.yaofun.view.LandingView;
 import com.balala.yaofun.util.TextWatcherUtil;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -50,8 +49,6 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
 
     private static final String TAG = "xzq";
 
-    // IWXAPI 是第三方app和微信通信的openApi接口
-    private IWXAPI api;
     private LinearLayout mEdit;
     private RelativeLayout mRegister;
     private com.balala.yaofun.util.CustomEditText mEt1;
@@ -254,7 +251,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         ToastUtil.showShort(msg);
     }
     private void loginSuccess(BaseBean<UserBean> bean){
-        goLogin(bean);
+        goLogin(bean.getData());
         this.finish();
     }
 
@@ -348,11 +345,6 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
             ForLog.e(data.toString());
             basePresenter.wxLoginOrRegist(data);
-            //此处获取了用户信息，完成授权登录
-
-
-//            Toast.makeText(mContext, "成功了", Toast.LENGTH_LONG).show();
-
         }
 
         /**
@@ -365,7 +357,6 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         public void onError(SHARE_MEDIA platform, int action, Throwable t) {
             ForLog.e(t.getMessage());
             ToastUtil.showShort("授权失败，请重试");
-//            Toast.makeText(mContext, "失败：" + t.getMessage(),                                     Toast.LENGTH_LONG).show();
         }
 
         /**
@@ -377,7 +368,6 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         public void onCancel(SHARE_MEDIA platform, int action) {
             ForLog.e(action+"");
             ToastUtils.showShort("取消了授权");
-//            Toast.makeText(mContext, "取消了", Toast.LENGTH_LONG).show();
         }
     };
 
