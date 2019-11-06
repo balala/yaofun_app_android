@@ -3,6 +3,7 @@ package com.balala.yaofun.httpUtils;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -26,6 +27,7 @@ import java.util.Map;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 
+import static com.amap.api.maps.model.BitmapDescriptorFactory.getContext;
 import static com.balala.yaofun.util.Utils.getNowDate;
 
 public class MyApp extends Application {
@@ -39,6 +41,7 @@ public class MyApp extends Application {
     private static String phone_model;
     //手机版本
     private static String phone_version;
+    private static SharedPreferences preferences1;
 
     @Override
     public void onCreate() {
@@ -74,7 +77,8 @@ public class MyApp extends Application {
 
     public static Map<String, Object> getBaseMap(Map<String,? extends Object> maps){
         Map<String, Object> map=new HashMap<>();
-
+//        preferences1 = getContext().getSharedPreferences("users", Context.MODE_PRIVATE);
+//        String id = preferences1.getString("id", "");
         map.put("version", '1');
         map.put("current_device", "android");
         map.put("unique_identifier", unique_identifier);

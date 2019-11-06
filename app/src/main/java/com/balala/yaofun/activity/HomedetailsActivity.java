@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +28,9 @@ import com.balala.yaofun.bean.result.HomedetailsBean;
 import com.balala.yaofun.model.ApiModel;
 import com.balala.yaofun.presenter.HomedetailsPersenter;
 import com.balala.yaofun.util.FlowLayout;
+import com.balala.yaofun.util.SwZoomDragImageView;
 import com.balala.yaofun.view.HomedetailsView;
+import com.bm.library.PhotoView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
@@ -117,6 +121,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     private LinearLayout popitem4;
     private String address;
     private HomedetailsBean.DataBean data;
+    private SwZoomDragImageView img;
 
 
     @Override
@@ -143,7 +148,6 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         return R.layout.activity_homedetails;
     }
 
-
     @Override
     protected HomedetailsPersenter initPresenter() {
         return new HomedetailsPersenter();
@@ -157,25 +161,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
                 break;
 
             case R.id.homedetailsimg:
-                sll.setVisibility(View.GONE);
-//                Toast.makeText(this, "电来", Toast.LENGTH_SHORT).show();
-                View mPopView = getLayoutInflater().inflate(R.layout.homedetailspop, null);
-                ImageView img = mPopView.findViewById(R.id.homedetailsimgpop);
-                Glide.with(this).load(data.getCover()).into(img);
-                PopupWindow popup = new PopupWindow();
-                popup.setContentView(mPopView);
-                popup.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-                popup.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
-                popup.setOutsideTouchable(true);
-                popup.showAsDropDown(mHomedetailsBack);
-                popup.setTouchInterceptor(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        popup.dismiss();
-                        sll.setVisibility(View.VISIBLE);
-                        return false;
-                    }
-                });
+                initDialogData();
+
                 break;
             case R.id.homedetails_back:
                 finish();
@@ -210,7 +197,6 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
                 Intent intent = new Intent(HomedetailsActivity.this, AmapRouteActivity.class);
                 intent.putExtra("address", address);
                 startActivity(intent);
-//                startActivity(new Intent(HomedetailsActivity.this, AmapRouteActivity.class));
                 break;
             case R.id.homedetails_ticket:
                 break;
@@ -233,10 +219,44 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
             case R.id.llt:
                 break;
             case R.id.homedetails_people:
+
                 break;
 //            case R.id.homedetails_fab:
 //                break;
         }
+    }
+
+    private void initDialogData() {
+        sll.setVisibility(View.GONE);
+//        Toast.makeText(this, "alalla", Toast.LENGTH_SHORT).show();
+//        View mPopView = getLayoutInflater().inflate(R.layout.homedetailspop, null);
+//        img = mPopView.findViewById(R.id.homedetailsimgpop);
+//        Glide.with(this).load(data.getCover()).into(img);
+//        img.enable();
+        PopupWindow popup = new PopupWindow();
+        View mPopView = getLayoutInflater().inflate(R.layout.homedetailspop, null);
+        img = mPopView.findViewById(R.id.homedetailsimgpop);
+        Glide.with(this).load(data.getCover()).into(img);
+        popup.setContentView(mPopView);
+        popup.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        popup.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+        popup.setOutsideTouchable(true);
+        popup.showAsDropDown(mHomedetailsBack);
+
+        popup.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popup.dismiss();
+                sll.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+        // 点击大图关闭dialog
+//        imgEntryView.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View paramView) {
+//                dialog.cancel();
+//            }
+//        });
     }
 
     private void showPopupMenu() {

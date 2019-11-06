@@ -23,4 +23,5 @@
     <color name="mapgray">#666666</color>
     <color name="fungray">#ff9b9b9b</color>
     <color name="homeblack">#000000</color>
+    <color name="homedetailsgray">#CBCBCB</color>
 </resources>

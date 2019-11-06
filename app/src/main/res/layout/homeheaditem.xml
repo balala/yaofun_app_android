@@ -31,7 +31,7 @@
             android:layout_height="@dimen/dp_118"
             android:layout_marginLeft="@dimen/dp_22"
             android:layout_marginTop="@dimen/dp_98"
-            android:alpha="0.3"
+            android:alpha="0.4"
             android:background="@drawable/home_time" />
 
         <LinearLayout
@@ -81,7 +81,7 @@
             android:layout_height="@dimen/dp_118"
             android:layout_marginLeft="@dimen/dp_143"
             android:layout_marginTop="@dimen/dp_98"
-            android:alpha="0.3"
+            android:alpha="0.4"
             android:background="@drawable/home_time" />
 
         <LinearLayout
@@ -103,24 +103,26 @@
         <RelativeLayout
             android:id="@+id/rl"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_51"
+            android:layout_height="@dimen/dp_63"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/dp_15"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/people_icon"
-                android:layout_width="@dimen/dp_41"
-                android:layout_height="@dimen/dp_41"
+                android:layout_width="@dimen/dp_43"
+                android:layout_height="@dimen/dp_43"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="@dimen/dp_17"
-                android:background="@drawable/home_people" />
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginBottom="@dimen/dp_7"
+                android:background="@drawable/home_people"
+                />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_75">
+                android:layout_marginLeft="@dimen/dp_65">
 
                 <TextView
                     android:id="@+id/people_name"
@@ -147,7 +149,7 @@
                 android:id="@+id/people_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_75"
+                android:layout_marginLeft="@dimen/dp_65"
                 android:layout_marginTop="@dimen/dp_20"
                 android:text="只有敢于冒险，才有机遇发现赚钱的机会"
                 android:textColor="@color/colorwhite"

@@ -3,6 +3,7 @@ package com.balala.yaofun.activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -153,9 +154,9 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
                 if (password.isEmpty() || phone.isEmpty()) {
                     Toast.makeText(LandingActivity.this, "请输入正确输入", Toast.LENGTH_SHORT).show();
                 } else {
-                    Map<String,String> map=new HashMap<>();
-                    map.put("phone",phone);
-                    map.put("password",password);
+                    Map<String, String> map = new HashMap<>();
+                    map.put("phone", phone);
+                    map.put("password", password);
                     basePresenter.phonePwdLogin(map);
                 }
                 // 提示用户登陆成功
@@ -229,14 +230,26 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
 
     @Override
     public void phonePwdLoginSuccess(BaseBean<UserBean> bean) {
+        String nick_name = bean.getData().getNick_name();
+        String images = bean.getData().getImages();
+        String id = bean.getData().get_id();
+
+        SharedPreferences userSettings = getSharedPreferences("users", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = userSettings.edit();
+        editor.putString("nick_name", nick_name);
+        editor.putString("images", images);
+        editor.putString("id",id);
+        editor.commit();
+        Log.i("登陆传值", "phonePwdLoginSuccess: " + nick_name + "" + images);
         //账户秘密登陆成功
         loginSuccess(bean);
-        ForLog.e("手机号秘密登陆成功"+bean);
+
+        ForLog.e("手机号秘密登陆成功" + bean);
     }
 
     @Override
     public void phonePwdLoginFail(String msg) {
-        ForLog.e("打印错误信息："+msg);
+        ForLog.e("打印错误信息：" + msg);
         ToastUtil.showShort(msg);
     }
 
@@ -250,7 +263,8 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
     public void wxLoginOrRegistFail(String msg) {
         ToastUtil.showShort(msg);
     }
-    private void loginSuccess(BaseBean<UserBean> bean){
+
+    private void loginSuccess(BaseBean<UserBean> bean) {
         goLogin(bean.getData());
         this.finish();
     }
@@ -321,10 +335,11 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
         return false;
     }
 
-    private void wechatLogin(){
+    private void wechatLogin() {
         UMShareAPI.get(this).getPlatformInfo(LandingActivity.this,
                 SHARE_MEDIA.WEIXIN, umAuthListener);
     }
+
     UMAuthListener umAuthListener = new UMAuthListener() {
         /**
          * @desc 授权开始的回调
@@ -366,7 +381,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
          */
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
-            ForLog.e(action+"");
+            ForLog.e(action + "");
             ToastUtils.showShort("取消了授权");
         }
     };

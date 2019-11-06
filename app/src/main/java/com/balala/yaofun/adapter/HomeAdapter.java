@@ -140,7 +140,6 @@ public class HomeAdapter extends RecyclerView.Adapter {
         public BannerHolder(View itemView) {
             super(itemView);
             banner_item = itemView.findViewById(R.id.banners_item);
-
         }
     }
 

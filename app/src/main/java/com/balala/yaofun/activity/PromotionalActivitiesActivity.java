@@ -151,15 +151,6 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
 //            case R.id.openfunrv:
 //                break;
             case R.id.openfunimg:
-               /* // 激活系统图库，选择一张图片
-                Intent intent1 = new Intent(Intent.ACTION_PICK);
-
-                intent1.setType("image/*");
-                // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_GALLERY
-                startActivityForResult(intent1, PHOTO_REQUEST_GALLERY);
-
-                // new File()
-                // uploadPick(pates);*/
                 openAlbum();
 
                 break;

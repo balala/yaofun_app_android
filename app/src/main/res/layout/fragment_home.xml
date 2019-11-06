@@ -18,7 +18,8 @@
     <RelativeLayout
         android:id="@+id/sw"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_ly"
@@ -51,7 +52,7 @@
                             android:layout_marginLeft="@dimen/dp_20"
                             android:layout_marginTop="@dimen/dp_25"
                             android:layout_marginRight="@dimen/dp_20"
-                            android:background="@mipmap/search" />
+                            android:background="@drawable/search" />
 
                     </RelativeLayout>
 
@@ -87,8 +88,9 @@
 
                         <ImageView
                             android:id="@+id/home_outparty"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_100"
+                            android:layout_width="@dimen/dp_335"
+                            android:layout_height="@dimen/dp_137"
+                            android:layout_gravity="center"
                             android:layout_margin="@dimen/dp_20"
                             android:layout_marginTop="@dimen/dp_10"
                             android:scaleType="centerCrop"
@@ -96,8 +98,9 @@
 
                         <ImageView
                             android:id="@+id/home_createparty"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_100"
+                            android:layout_width="@dimen/dp_335"
+                            android:layout_height="@dimen/dp_137"
+                            android:layout_gravity="center"
                             android:layout_margin="@dimen/dp_20"
                             android:scaleType="centerCrop"
                             android:src="@drawable/createparty" />
@@ -114,7 +117,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_margin="@dimen/dp_10"
-                            android:text="到底啦~"
+                            android:text="我是有底线的！"
                             android:textColor="@color/colordeepgray" />
 
                     </LinearLayout>

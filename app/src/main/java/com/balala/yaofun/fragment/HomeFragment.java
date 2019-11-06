@@ -34,6 +34,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.balala.yaofun.R;
+import com.balala.yaofun.activity.AuthenticationActivity;
 import com.balala.yaofun.activity.CreateFunActivity;
 import com.balala.yaofun.activity.HomedetailsActivity;
 import com.balala.yaofun.activity.PromotionalActivitiesActivity;
@@ -52,6 +53,9 @@ import com.balala.yaofun.util.ToastUtils;
 import com.balala.yaofun.view.Homeview;
 import com.balala.yaofun.zxing.activity.CaptureActivity;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
@@ -70,6 +74,7 @@ import java.util.Timer;
 import butterknife.BindView;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static com.balala.yaofun.httpUtils.MyApp.hasLogin;
 
 
 /**
@@ -200,8 +205,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     private SharedPreferences preferences1;
 
 
-
-
     //声明定位回调监听器
     public AMapLocationListener mLocationListener = new AMapLocationListener() {
 
@@ -233,21 +236,21 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         homeperchs.setVisibility(View.GONE);
         // 在这收值
         Log.i("每日一句话解析", "onSuccessHome: " + dayBean.toString());
-        preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-        boolean aBoolean = preferences.getBoolean("flag", false);
-        if (aBoolean) {
-            preferences1 = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+
+        if (hasLogin()) {
+            preferences1 = getContext().getSharedPreferences("users", Context.MODE_PRIVATE);
             String nick_name = preferences1.getString("nick_name", "");
             String images = preferences1.getString("images", "");
-            Glide.with(this).load(images).into(peopleIcon);
-            people_name.setText(nick_name);
+            Glide.with(this).load(images)
+                    .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                    .into(peopleIcon);
             Log.i("登陆返回的值", "getDatas: " + "" + images + "" + nick_name);
             codetext.setText(dayBean.getData().getNumber_time());
+            people_name.setText(nick_name);
             daytext.setText(dayBean.getData().getSolar_time());
             monthtext.setText(dayBean.getData().getLunar_time());
             tabootext.setText(dayBean.getData().getPrompt());
             Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
-
         } else {
             codetext.setText(dayBean.getData().getNumber_time());
             daytext.setText(dayBean.getData().getSolar_time());
@@ -255,8 +258,13 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             tabootext.setText(dayBean.getData().getPrompt());
 //            people_name.setText(dayBean.getData().getUse_time());
             Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
-            peopleTitle.setText(dayBean.getData().getTitle());
+            if (dayBean.getData().getTitle().equals("")) {
+                people_name.setText("尼采");
+            } else {
+                people_name.setText(dayBean.getData().getTitle());
+            }
             peopleContent.setText(dayBean.getData().getContent());
+
         }
     }
 
@@ -275,7 +283,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         homeAdapter = new HomeAdapter(getContext(), (ArrayList<HomeAllBean.DataBean.HotBean>) hot, (ArrayList<HomeBannerDean.DataBean.FirstBean>) first);
         recycleView1.setAdapter(homeAdapter);
         //展示全部的recycleView
-        recycleView1.setNestedScrollingEnabled(false);
+//        recycleView1.setNestedScrollingEnabled(false);
         homeAdapter.notifyDataSetChanged();
 
         //附近
@@ -287,7 +295,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         recycleView2.setAdapter(homeAroundAdapter);
         homeAroundAdapter.notifyDataSetChanged();
         //展示全部的recycleView
-        recycleView2.setNestedScrollingEnabled(false);
+//        recycleView2.setNestedScrollingEnabled(false);
 
         //推荐
         List<HomeAllBean.DataBean.RecommendBean> recommend = homeAllBean.getData().getRecommend();
@@ -364,8 +372,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         Log.i("首页解析", "onSuccessHome: " + body.toString());
         first = body.getData().getFirst();
         second = body.getData().getSecond();
-
-
     }
 
     @Override
@@ -454,8 +460,10 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         homeAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 跳入
-                startActivity(new Intent(getContext(), PromotionalActivitiesActivity.class));
+                //进入实名认证页面
+                startActivity(new Intent(getContext(), AuthenticationActivity.class));
+                // 跳入发布活动的页面
+//                startActivity(new Intent(getContext(), PromotionalActivitiesActivity.class));
             }
         });
 

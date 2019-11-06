@@ -349,64 +349,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
 
     }
 
-//    @Override
-//    public void onSS(VerificationResult verificationResult) {
-//        key = verificationResult.getData().getKey();
-//        Log.e("发送验证码的成功方法", "onSS: " + verificationResult.toString() + "\n" + "\n" + key);
-//
-//    }
-//
-//    @Override
-//    public void onFail(String msg) {
-//        Log.i(TAG, "onFail: " + msg);
-//    }
-//
-//    @Override
-//    public void onSuccessyanzheng(VerificationCode verificationBean) {
-//        Log.e("xuzhiqi4", "onSuccessyanzheng: " + verificationBean.getMsg());
-//        mRedSpeak.setText(verificationBean.getMsg());
-//        mRedSpeak.setVisibility(View.VISIBLE);
-//        code = mEtIdentifiing.getText().toString().trim();
-//        password = mEtPassword.getText().toString().trim();
-//        if (verificationBean.isSuccess() & !TextUtils.isEmpty(code) & !TextUtils.isEmpty(password)) {
-////            basePresenter.getData3(phone, code, key, password);
-//        }
-//        Log.i(TAG, "验证码验证成功 ");
-////        ToastUtil.showLong("验证码验证成功");
-////        startActivity(new Intent(RegisterActivity.this, GeneralActivity.class));
-//    }
-//
-//    @Override
-//    public void onFails(String msg) {
-//        Log.i(TAG, "onFails: " + msg);
-//    }
-//
-//    @Override
-//    public void onSuccessRegister(RegisterBean bean) {
-//        String nick_name = bean.getData().getNick_name();
-//        String images = bean.getData().getImages();
-//        Log.e("xuzhiqiaa", "onSuccessRegister: " + bean.toString());
-////        ToastUtil.showLong(bean.getMsg());
-//
-//        //将数据保存至SharedPreferences:
-//        SharedPreferences preferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = preferences.edit();
-//        editor.putBoolean("flag", true);
-//        editor.putString("nick_name", nick_name);
-//        editor.putString("images", images);
-//        Log.i("aBoolean", "onSuccessLanding: " + editor);
-//        editor.commit();
-//        startActivity(new Intent(RegisterActivity.this, HomeFragment.class));
-//        Log.i("注册成功保存", "onSuccessRegister: " + "nick_name" + nick_name + "" + images);
-//    }
-//
-//    @Override
-//    public void onError(String error) {
-//
-//        ToastUtil.showLong("注册失败");
-//
-//    }
-
 
     // 倒计时 验证码
 

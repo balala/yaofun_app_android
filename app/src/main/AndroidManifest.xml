@@ -39,9 +39,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
+        <activity android:name=".activity.AuthenticationActivity"></activity>
         <activity android:name=".activity.ConversationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data
@@ -53,7 +55,9 @@
         <activity android:name=".activity.MinehomeActivity" />
         <activity android:name=".activity.PromotionalActivitiesActivity" />
         <activity android:name=".activity.CreateFunActivity" />
-        <activity android:name=".activity.HomedetailsActivity" />
+        <activity
+            android:name=".activity.HomedetailsActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".activity.AmapRouteActivity" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.GeneralActivity">

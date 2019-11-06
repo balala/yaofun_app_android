@@ -67,7 +67,7 @@ public class SearchActivity extends AppCompatActivity {
         mCommunitySearchCancle = findViewById(R.id.community_search_cancle);
         mCommunitySearchTvHistroysearch = findViewById(R.id.community_search_tv_histroysearch);
         search_fl = findViewById(R.id.search_fl);
-        mCommunitySearchFiste = findViewById(R.id.community_search_fiste);
+//        mCommunitySearchFiste = findViewById(R.id.community_search_fiste);
         mCommunitySearchTab = findViewById(R.id.community_search_tab);
         mCommunitySearchVp = findViewById(R.id.community_search_vp);
         mCommentSearchLast = findViewById(R.id.comment_search_last);
@@ -117,7 +117,7 @@ public class SearchActivity extends AppCompatActivity {
                 Log.d("wenjunlian", "Keyword: " + Keyword);
                 mCommunitySearchEt.setText("");
                 if (Keyword.length() > 0) {
-                    mCommunitySearchFiste.setVisibility(View.GONE);
+//                    mCommunitySearchFiste.setVisibility(View.GONE);
                     mCommentSearchLast.setVisibility(View.VISIBLE);
                     SharedPreferences.Editor edit = sp.edit();
                     mSearchHistroyList.clear();
@@ -134,7 +134,7 @@ public class SearchActivity extends AppCompatActivity {
         mCommunitySearchCancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCommunitySearchFiste.setVisibility(View.VISIBLE);
+//                mCommunitySearchFiste.setVisibility(View.VISIBLE);
                 mCommentSearchLast.setVisibility(View.GONE);
                 search_fl.setVisibility(View.VISIBLE);
                 finish();
