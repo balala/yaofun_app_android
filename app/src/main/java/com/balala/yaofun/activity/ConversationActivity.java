@@ -38,7 +38,9 @@ public class ConversationActivity extends BaseActivity<ConversationPresenter, Co
 
     @Override
     protected void initView() {
-//        Toolbar
+        findViewById(R.id.back).setOnClickListener(v->{
+            finish();
+        });
         // 没有intent 的则直接返回
         Intent intent = getIntent();
         if (intent == null || intent.getData() == null) {

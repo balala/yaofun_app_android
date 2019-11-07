@@ -1,6 +1,7 @@
 package com.balala.yaofun.fragment;
 
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.balala.yaofun.R;
+import com.balala.yaofun.activity.MailListActivity;
 import com.balala.yaofun.adapter.ViewpagerAdapter;
+import com.balala.yaofun.base.BaseFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -22,7 +25,7 @@ import io.rong.imlib.model.Conversation;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MessageFragment extends Fragment {
+public class MessageFragment extends BaseFragment {
 
 
     private ViewpagerAdapter viewpagerAdapters;
@@ -43,6 +46,9 @@ public class MessageFragment extends Fragment {
     private void initView(View inflate) {
         mMessageTab = inflate.findViewById(R.id.message_tab);
         mMessageVp = inflate.findViewById(R.id.message_vp);
+        inflate.findViewById(R.id.maillist).setOnClickListener(v->{
+            startActivity(new Intent(this.getActivity(), MailListActivity.class));
+        });
     }
 
     protected void initData() {

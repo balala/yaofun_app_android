@@ -2,7 +2,6 @@ package com.balala.yaofun.presenter;
 
 import com.balala.yaofun.base.BasePresenter;
 import com.balala.yaofun.bean.BaseBean;
-import com.balala.yaofun.bean.FunhomeData;
 import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.httpUtils.ResultCallBack;
 import com.balala.yaofun.model.ApiModel;

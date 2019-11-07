@@ -7,6 +7,7 @@ import com.balala.yaofun.base.BaseView;
 import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.CodeBean;
 import com.balala.yaofun.bean.FunhomeData;
+import com.balala.yaofun.bean.MailListBean;
 import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.bean.result.DayBeans;
 import com.balala.yaofun.bean.result.HomeAllBean;
@@ -21,6 +22,7 @@ import com.balala.yaofun.util.ForLog;
 import com.balala.yaofun.util.MyServer;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -34,6 +36,11 @@ import static com.balala.yaofun.httpUtils.MyApp.getBaseMap;
 
 public class ApiModel extends BaseModel implements BaseView {
     private static MyServer movieService = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
+
+    //通讯录：只包含好友
+    public static void mail_list_user(Map<String, ? extends Object> map, ResultCallBack<BaseBean<List<MailListBean>>> resultCallBack) {
+        setSubscribe(movieService.mail_list_user(getBaseMap(map)), resultCallBack);
+    }
 
     //微信登录或者注册
     public static void wxLoginOrRegist(Map<String, ? extends Object> map, ResultCallBack<BaseBean<UserBean>> resultCallBack) {

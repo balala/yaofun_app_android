@@ -63,6 +63,7 @@
     <string name="homedetails_inform">举报</string>
     <string name="homedetails_alter">修改</string>
     <string name="homedetails_delete">删除</string>
+    <string name="maillist">通讯录</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

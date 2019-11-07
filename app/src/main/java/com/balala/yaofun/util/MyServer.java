@@ -4,6 +4,7 @@ package com.balala.yaofun.util;
 import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.CodeBean;
 import com.balala.yaofun.bean.FunhomeData;
+import com.balala.yaofun.bean.MailListBean;
 import com.balala.yaofun.bean.UploadPickBean;
 import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.bean.VerificationResult;
@@ -15,6 +16,7 @@ import com.balala.yaofun.bean.result.RegisterBean;
 import com.balala.yaofun.bean.result.VerificationCode;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -40,6 +42,9 @@ public interface MyServer {
     // String url = "http://192.168.110.144:5001/api/";
     String url = "https://test.yaofun.vip/api/";
 //    String url = "http://192.168.110.131:5001/api/";
+//    String url = "https://api.yaofun.vip/api/";
+//    String url = "https://test.yaofun.vip/api/";
+   // String url = "http://192.168.110.131:5001/api/";
 //    String url = "https://api.yaofun.vip/api/";
 
     // http://test.yaofun.vip/api/verification_code/send
@@ -91,6 +96,9 @@ public interface MyServer {
     @GET("rotary_planting_map/all")
     Observable<BaseBean<HomeBannerDean.DataBean>> getbannerData(@QueryMap Map<String, Object> map);
 
+    // 通讯录：只包含好友
+    @GET("user/mail_list_user")
+    Observable<BaseBean<List<MailListBean>>> mail_list_user(@QueryMap Map<String, Object> map);
 
     //首页接口
     //http://test.yaofun.vip/api/activity/good_choice/all

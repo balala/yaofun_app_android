@@ -11,6 +11,7 @@ public  class UserBean implements Serializable {
     private String real_name;
     //昵称
     private String nick_name;
+    private String sortLetters;//显示数据拼音的首字母
     //手机号
     private String phone;
     //密码
@@ -455,6 +456,14 @@ public  class UserBean implements Serializable {
         this.key = key;
     }
 
+    public String getSortLetters() {
+        return sortLetters;
+    }
+
+    public void setSortLetters(String sortLetters) {
+        this.sortLetters = sortLetters;
+    }
+
     @Override
     public String toString() {
         return "UserBean{" +
@@ -462,6 +471,7 @@ public  class UserBean implements Serializable {
                 ", _id='" + _id + '\'' +
                 ", real_name='" + real_name + '\'' +
                 ", nick_name='" + nick_name + '\'' +
+                ", sortLetters='" + sortLetters + '\'' +
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +
                 ", birthday_year=" + birthday_year +

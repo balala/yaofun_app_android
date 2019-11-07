@@ -98,6 +98,7 @@ public class GeneralActivity extends AppCompatActivity {
                         if(hasLogin()){
                             switchFragment(TYPE_WX);
                         }else{
+                            ShowFragmentone();
                         startActivity(new Intent(GeneralActivity.this, LandingActivity.class));
                         }
                         break;
@@ -105,6 +106,7 @@ public class GeneralActivity extends AppCompatActivity {
                         if(hasLogin()){
                             switchFragment(TYPE_NOTACTION);
                         }else{
+                            ShowFragmentone();
                             startActivity(new Intent(GeneralActivity.this, LandingActivity.class));
                         }
                         break;
@@ -121,7 +123,6 @@ public class GeneralActivity extends AppCompatActivity {
         transaction.add(R.id.fl, mFragments.get(0));
         transaction.commit();
         bottom_home.setChecked(true);
-
     }
 
     private void switchFragment(int type) {
@@ -135,7 +136,6 @@ public class GeneralActivity extends AppCompatActivity {
         transaction.show(fragment);
         transaction.commit();
         lastFragment = type;
-
     }
 
 

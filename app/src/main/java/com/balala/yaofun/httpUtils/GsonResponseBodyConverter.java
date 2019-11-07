@@ -25,6 +25,7 @@ final class GsonResponseBodyConverter < T > implements Converter<ResponseBody,
      */
     @Override public T convert(ResponseBody value) throws IOException {
         String response = value.string();
+        ForLog.i("网络请求数据"+response);
         try {
             // 这里的type实际类型是 LoginUserEntity<User>  User就是user字段的对象。
             BaseBean result = gson.fromJson(response, BaseBean.class);

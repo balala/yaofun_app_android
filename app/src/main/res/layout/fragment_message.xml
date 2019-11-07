@@ -20,6 +20,7 @@
         app:tabTextColor="@color/colordeepgray" />
 
     <ImageView
+        android:id="@+id/maillist"
         android:layout_width="@dimen/dp_22"
         android:layout_height="@dimen/dp_21"
         android:layout_alignParentRight="true"

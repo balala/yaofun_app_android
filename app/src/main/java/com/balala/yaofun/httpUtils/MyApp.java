@@ -3,7 +3,6 @@ package com.balala.yaofun.httpUtils;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -28,6 +27,8 @@ import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 
 import static com.amap.api.maps.model.BitmapDescriptorFactory.getContext;
+import static com.balala.yaofun.httpUtils.IMManager.IMLogout;
+import static com.balala.yaofun.httpUtils.IMManager.initConnectStateChangeListener;
 import static com.balala.yaofun.util.Utils.getNowDate;
 
 public class MyApp extends Application {
@@ -41,17 +42,16 @@ public class MyApp extends Application {
     private static String phone_model;
     //手机版本
     private static String phone_version;
-    private static SharedPreferences preferences1;
-
+    public static boolean isTestApp=true;
+    //服务通知
+    public static String SERVICE_ASSISTANT=isTestApp?"5cc7074aac38216e6a1382bb":"5da0397f769bd3da6591af01";
+    //互动提醒助手
+    public static String INTERACTIVE_ASSISTANT=isTestApp?"5cd502a2fc6c04002c22c228":"5da03988769bd3da6591af03";
     @Override
     public void onCreate() {
         super.onCreate();
         myApp = this;
-        //mark备注：为了方便测试登录注册模块，默认直接退出登录
-//        signOut();
-
         RongIM.init(this,"25wehl3u2ggfw",true);
-
         UMConfigure.init(this,"5d3fbba33fc19519fb000296"
                 ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"");
         //微信平台
@@ -68,6 +68,9 @@ public class MyApp extends Application {
         ForLog.e("本地读取数据"+user);
         getPhoneInformation();
 
+        //mark备注：为了方便测试登录注册模块，默认直接退出登录
+//        signOut();
+
 
     }
 
@@ -77,8 +80,7 @@ public class MyApp extends Application {
 
     public static Map<String, Object> getBaseMap(Map<String,? extends Object> maps){
         Map<String, Object> map=new HashMap<>();
-//        preferences1 = getContext().getSharedPreferences("users", Context.MODE_PRIVATE);
-//        String id = preferences1.getString("id", "");
+
         map.put("version", '1');
         map.put("current_device", "android");
         map.put("unique_identifier", unique_identifier);
@@ -120,6 +122,7 @@ public class MyApp extends Application {
         ACache aCache=ACache.get(myApp);
         aCache.remove("user");
         user=null;
+        IMLogout();
         EventBus.getDefault().post(new SignOutSuccessEvent());
     }
 
@@ -155,7 +158,8 @@ public class MyApp extends Application {
             @Override
             public void onSuccess(String userid) {
                 ForLog.e("RongIM---onSuccess:"+userid);
-
+                //融云链接成功之后，监听状态
+                initConnectStateChangeListener();
             }
             @Override
             public void onError(RongIMClient.ErrorCode errorCode) {

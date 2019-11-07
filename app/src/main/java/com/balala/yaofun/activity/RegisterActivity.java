@@ -130,12 +130,9 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
         });
 
         // 清除的点击事件
-        mClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEtPhone.setText("");
-                mClear.setVisibility(View.GONE);
-            }
+        mClear.setOnClickListener(v -> {
+            mEtPhone.setText("");
+            mClear.setVisibility(View.GONE);
         });
         //输入的点击事件
         mEtPassword.addTextChangedListener(new TextWatcher() {
