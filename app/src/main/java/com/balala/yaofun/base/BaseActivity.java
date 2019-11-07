@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.balala.yaofun.bean.VerificationResult;
-import com.gyf.immersionbar.ImmersionBar;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,7 +27,7 @@ public abstract class BaseActivity<p extends BasePresenter, v extends BaseView> 
         //获取顶层视图
 //        decorView = getWindow().getDecorView();
         // 渲染系统toolbar
-//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 //        hideBottomUIMenu();
         setContentView(getlayout());
         ButterKnife.bind(this);

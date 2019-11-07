@@ -21,7 +21,6 @@ import com.balala.yaofun.view.ContactSortModel;
 import com.balala.yaofun.view.EditTextWithDel;
 import com.balala.yaofun.view.MailListView;
 import com.balala.yaofun.view.SideBar;
-import com.gyf.immersionbar.ImmersionBar;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,11 +37,11 @@ public class MailListActivity extends BaseActivity<MailListPresenter, MailListVi
     private List<MailListUserBean> SourceDateList=new ArrayList<>();
     @Override
     protected void initView() {
-        ImmersionBar.with(this)
-                .statusBarColor(R.color.black) //导航栏背景色
+//        ImmersionBar.with(this)
+//                .statusBarColor(R.color.black) //导航栏背景色
 //                .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
-                .flymeOSStatusBarFontColor(R.color.colorAccent)
-                .init();
+//                .flymeOSStatusBarFontColor(R.color.colorAccent)
+//                .init();
 
         findViewById(R.id.back).setOnClickListener(v->{
             finish();

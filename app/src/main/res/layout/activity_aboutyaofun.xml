@@ -5,16 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorwhite"
     tools:context=".webview.AboutyaofunActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_about"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/dp_100"
         android:background="@color/colorwhite">
         <LinearLayout
             android:id="@+id/about_back"
             android:layout_width="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_10"
             android:layout_height="@dimen/dp_50">
             <ImageView
                 android:layout_gravity="center"
@@ -35,5 +38,5 @@
     <WebView
         android:id="@+id/web"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 </LinearLayout>

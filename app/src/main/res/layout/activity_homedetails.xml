@@ -20,8 +20,7 @@
         android:id="@+id/sll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -139,36 +138,34 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                       >
+                        android:layout_height="match_parent">
 
                         <ImageView
                             android:layout_width="@dimen/dp_14"
                             android:layout_height="@dimen/dp_16"
-                            android:layout_marginTop="@dimen/dp_40"
                             android:layout_marginLeft="@dimen/dp_20"
+                            android:layout_marginTop="@dimen/dp_40"
                             android:src="@drawable/homedetails_time" />
 
                         <TextView
                             android:id="@+id/homedetails_time"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_36"
                             android:layout_marginLeft="@dimen/dp_12"
+                            android:layout_marginTop="@dimen/dp_36"
                             android:textColor="@color/colorwhite"
                             android:textSize="@dimen/sp_15" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                       >
+                        android:layout_height="match_parent">
 
                         <ImageView
                             android:layout_width="@dimen/dp_14"
                             android:layout_height="@dimen/dp_16"
-                            android:layout_marginTop="@dimen/dp_11"
                             android:layout_marginLeft="@dimen/dp_20"
+                            android:layout_marginTop="@dimen/dp_11"
                             android:src="@drawable/homedetails_site" />
 
                         <TextView
@@ -203,10 +200,10 @@
 
                         <TextView
                             android:id="@+id/tvv"
-                            android:layout_marginTop="@dimen/dp_6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dp_14"
+                            android:layout_marginTop="@dimen/dp_6"
                             android:text="¥"
                             android:textColor="@color/colorwhite" />
 
@@ -215,8 +212,8 @@
                             android:layout_width="@dimen/dp_211"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dp_7"
-                            android:text="FREE"
                             android:layout_marginTop="@dimen/dp_7"
+                            android:text="FREE"
                             android:textColor="@color/colorwhite"
                             android:textSize="@dimen/sp_15" />
 
@@ -229,25 +226,25 @@
 
                         <ImageView
                             android:layout_width="@dimen/dp_14"
-                            android:layout_marginTop="@dimen/dp_11"
                             android:layout_height="@dimen/dp_16"
                             android:layout_marginLeft="@dimen/dp_20"
+                            android:layout_marginTop="@dimen/dp_11"
                             android:src="@drawable/peopleconut" />
 
                         <TextView
                             android:id="@+id/homedetails_personcount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_7"
                             android:layout_marginLeft="@dimen/dp_14"
+                            android:layout_marginTop="@dimen/dp_7"
                             android:textColor="@color/colorwhite"
                             android:textSize="@dimen/sp_15" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/dp_100"
                             android:layout_marginTop="@dimen/dp_7"
+                            android:layout_marginRight="@dimen/dp_100"
                             android:text="人"
                             android:textColor="@color/colorwhite" />
 
@@ -258,9 +255,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_20"
                         android:layout_marginTop="@dimen/dp_60"
                         android:text="聚会详情"
-                        android:layout_marginLeft="@dimen/dp_20"
                         android:textColor="@color/colorwhite"
                         android:textSize="@dimen/sp_15" />
 
@@ -280,7 +277,9 @@
                         android:layout_marginRight="@dimen/dp_315"
                         android:src="@drawable/xiahua" />
 
-                    <include layout="@layout/homedetails_item2" />
+                    <include
+                        layout="@layout/homedetails_item2"
+                        android:visibility="gone" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"

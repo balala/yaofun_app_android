@@ -114,8 +114,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     TextView tv1;
     @BindView(R.id.home_add)
     ImageView homeAdd;
-    @BindView(R.id.rl1)
-    RelativeLayout rl1;
+    //    @BindView(R.id.rl1)
+//    RelativeLayout rl1;
     @BindView(R.id.llTitle)
     RelativeLayout llTitle;
     @BindView(R.id.recycle_view1)

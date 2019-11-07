@@ -56,7 +56,6 @@ public class HomeAdapter extends RecyclerView.Adapter {
         }
     }
 
-    @SuppressLint("NewApi")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int itemViewType = getItemViewType(position);
@@ -73,7 +72,6 @@ public class HomeAdapter extends RecyclerView.Adapter {
                     }
                 }
             });
-//            Log.i("banner", "onBindViewHolder: "+banner);
             banq.banner_item.setOutlineProvider(new ViewOutlineProvider() {
                 @Override
                 public void getOutline(View view, Outline outline) {

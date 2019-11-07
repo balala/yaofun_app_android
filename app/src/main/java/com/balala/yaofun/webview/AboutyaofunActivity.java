@@ -2,6 +2,7 @@ package com.balala.yaofun.webview;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -23,6 +24,8 @@ public class AboutyaofunActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aboutyaofun);
+        // 渲染系统toolbar
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         mAboutBack = findViewById(R.id.about_back);
         mToolbarAbout = findViewById(R.id.toolbar_about);
         mWeb = findViewById(R.id.web);

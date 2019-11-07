@@ -122,6 +122,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     private String address;
     private HomedetailsBean.DataBean data;
     private SwZoomDragImageView img;
+    private String latitude;
+    private String longitude;
 
 
     @Override
@@ -196,6 +198,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
             case R.id.homedetails_navigation:
                 Intent intent = new Intent(HomedetailsActivity.this, AmapRouteActivity.class);
                 intent.putExtra("address", address);
+                intent.putExtra("latitude", latitude);
+                intent.putExtra("longitude", longitude);
                 startActivity(intent);
                 break;
             case R.id.homedetails_ticket:
@@ -228,11 +232,6 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
 
     private void initDialogData() {
         sll.setVisibility(View.GONE);
-//        Toast.makeText(this, "alalla", Toast.LENGTH_SHORT).show();
-//        View mPopView = getLayoutInflater().inflate(R.layout.homedetailspop, null);
-//        img = mPopView.findViewById(R.id.homedetailsimgpop);
-//        Glide.with(this).load(data.getCover()).into(img);
-//        img.enable();
         PopupWindow popup = new PopupWindow();
         View mPopView = getLayoutInflater().inflate(R.layout.homedetailspop, null);
         img = mPopView.findViewById(R.id.homedetailsimgpop);
@@ -251,12 +250,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
                 return false;
             }
         });
-        // 点击大图关闭dialog
-//        imgEntryView.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View paramView) {
-//                dialog.cancel();
-//            }
-//        });
+
     }
 
     private void showPopupMenu() {
@@ -277,6 +271,10 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
 
         data = funhomeData.getData();
         address = data.getPlace_text().getAddress();
+        // 纬度
+        latitude = data.getPlace_text().getLocation().getLatitude();
+        //经度
+        longitude = data.getPlace_text().getLocation().getLongitude();
         // 标签的个数
         DetailsactivityAdapter adapter = new DetailsactivityAdapter(this, data);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -284,11 +282,6 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         allrv.setAdapter(adapter);
 
         Log.i("首页详情解析", "onSuccessHomedetails: " + funhomeData);
-        //详情页图片 放大缩小
-//        DisplayMetrics dm = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(dm);
-//        mHomedetailsimg.initImageView(dm.widthPixels, dm.heightPixels - 80);
-        //加载详情页图片
         Glide.with(this).load(data.getCover()).into(mHomedetailsimg);
 
 
@@ -315,7 +308,6 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         mHomedetailsFuntitle.setText(data.getLocation_name());
 //        mHomedetailsFunmessage.setText(data); 副标题
         Glide.with(this).load(data.getUser_images()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mHomedetailsPeople);
-
         homedetails_personcount.setText(data.getMy_status());
         mHomedetailsTicket.setText(data.getCost());
         Log.i("My_status", "onSuccessHomedetails: " + data.getMy_status() + data.getCost());

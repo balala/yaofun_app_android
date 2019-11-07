@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +37,6 @@ public class SearchActivity extends AppCompatActivity {
     private TextView mCommunitySearchCancle;
     private TextView mCommunitySearchTvHistroysearch;
     private RecyclerView mCommunitySearchRlv;
-    private ConstraintLayout mCommunitySearchFiste;
     private ViewPager mCommunitySearchVp;
     private LinearLayout mCommentSearchLast;
     private TabLayout mCommunitySearchTab;
@@ -47,6 +47,8 @@ public class SearchActivity extends AppCompatActivity {
     private List<String> mSearchHistroyList = new ArrayList<>();
     private ImageView mTvClear;
     private FlowLayout search_fl;
+    private RelativeLayout mCommunitySearchFiste;
+    private ImageView community_search_delete;
 
 
     @Override
@@ -67,11 +69,12 @@ public class SearchActivity extends AppCompatActivity {
         mCommunitySearchCancle = findViewById(R.id.community_search_cancle);
         mCommunitySearchTvHistroysearch = findViewById(R.id.community_search_tv_histroysearch);
         search_fl = findViewById(R.id.search_fl);
-//        mCommunitySearchFiste = findViewById(R.id.community_search_fiste);
+        mCommunitySearchFiste = findViewById(R.id.community_search_fiste);
         mCommunitySearchTab = findViewById(R.id.community_search_tab);
         mCommunitySearchVp = findViewById(R.id.community_search_vp);
         mCommentSearchLast = findViewById(R.id.comment_search_last);
         mTvClear = findViewById(R.id.tv_clear);
+        community_search_delete = findViewById(R.id.community_search_delete);
         search_fl.setVisibility(View.VISIBLE);
     }
 
@@ -82,9 +85,9 @@ public class SearchActivity extends AppCompatActivity {
         fragments.add(new OneFragment());
 
         titles = new ArrayList<>();
-        titles.add("一");
-        titles.add("二");
-        titles.add("三");
+        titles.add("聚会");
+        titles.add("FUN团");
+        titles.add("用户");
 
         viewPageAdapter = new ViewPageAdapter(getSupportFragmentManager(), fragments, titles);
         mCommunitySearchVp.setAdapter(viewPageAdapter);
@@ -164,6 +167,12 @@ public class SearchActivity extends AppCompatActivity {
                 search_fl.setVisibility(View.GONE);
                 search_fl.clearAll();
                 sp.getAll().clear();
+            }
+        });
+        community_search_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCommunitySearchEt.setText("");
             }
         });
     }

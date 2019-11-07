@@ -1,29 +1,42 @@
 package com.balala.yaofun.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.balala.yaofun.R;
+import com.balala.yaofun.base.BaseActivity;
+import com.balala.yaofun.bean.BaseBean;
+import com.balala.yaofun.bean.CodeBean;
+import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.httpUtils.ToastUtil;
+import com.balala.yaofun.presenter.RegisterPresenter;
 import com.balala.yaofun.util.CustomEditText;
 import com.balala.yaofun.util.TextWatcherUtil;
+import com.balala.yaofun.util.Utils;
+import com.balala.yaofun.view.RegisterView;
+import com.balala.yaofun.webview.AboutyaofunActivity;
 
-public class AuthenticationActivity extends AppCompatActivity implements View.OnClickListener {
+import java.util.HashMap;
+import java.util.Map;
+
+public class AuthenticationActivity extends BaseActivity<RegisterPresenter, RegisterView> implements RegisterView {
 
     private RelativeLayout mAuthenticationback;
     private CustomEditText mPhoneEt;
@@ -42,25 +55,30 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     private Button mUp;
 
     private String phoneNum;
-    private String phone;
     private TimeCount time;
+    private String code;
+    private String phone;
+    private CheckBox mBox;
+    private TextView mSpeak;
+    /**
+     * 《要FUN用户协议》
+     */
+    private TextView mAbout;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_authentication);
-        initView();
-    }
 
-    private void initView() {
+    protected void initView() {
+        // 渲染系统toolbar
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         mAuthenticationback = (RelativeLayout) findViewById(R.id.authenticationback);
         mPhoneEt = (CustomEditText) findViewById(R.id.phone_et);
         mCoodeEt = (EditText) findViewById(R.id.coode_et);
         mAuthenticationClear = (ImageView) findViewById(R.id.authentication_clear);
         mGiveCode = (TextView) findViewById(R.id.give_code);
         mUp = (Button) findViewById(R.id.up);
+        mBox = (CheckBox) findViewById(R.id.box);
+        mSpeak = (TextView) findViewById(R.id.speak);
+        mAbout = (TextView) findViewById(R.id.about);
         time = new TimeCount(60000, 1000);
-        mUp.setOnClickListener(this);
         mAuthenticationback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,17 +121,14 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         //点击 获取验证码 进行以下操作
         mGiveCode.setOnClickListener(new View.OnClickListener() {
 
-
             @Override
             public void onClick(View v) {
                 //比较手机号是否符合规则 符合规则弹出"获取验证码"并且验证码开始倒计时，红色文字隐藏
                 phoneNum = mPhoneEt.getText().toString().trim();
                 // 判断手机号为空或者小于11位时 也可以点击
                 if (phoneNum.length() <= 0 || phoneNum.length() <= 11) {
-
-//                    Toast.makeText(RegisterActivity.this, "请输入正确的手机号码", Toast.LENGTH_SHORT).show();
-                    ToastUtil.showLong("请输入正确的手机号码");
-//                    mRedSpeak.setVisibility(View.VISIBLE);
+                    mSpeak.setVisibility(View.VISIBLE);
+                    mSpeak.setText("请输入正确的手机号码");
                 } else {
                     // 这个方法是用来判断手机验证码相关的
                     initCode();
@@ -121,50 +136,132 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             }
 
         });
+        mUp.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onClick(View v) {
+                code = mCoodeEt.getText().toString().trim();
+                Log.e("验证验证码", "initData3: " + code + "\n" + phone);
+                if (mCoodeEt.getText().toString() == code) {
+                    mUp.setBackgroundColor(R.color.colorred);
+
+                } else {
+//                    Toast.makeText(AuthenticationActivity.this, "错误", Toast.LENGTH_SHORT).show();
+                    mSpeak.setText("验证码错误");
+                    mSpeak.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         // 把手机号码用空格隔开
         TextWatcherUtil.addPhoneNumberTextWatcher(mPhoneEt, new TextWatcherUtil.Callback() {
             @Override
             public void callback() {
                 //todo edittext changed后回调
-
-
+            }
+        });
+        mAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AuthenticationActivity.this, AboutyaofunActivity.class));
             }
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            default:
-                break;
-            case R.id.up:
-                break;
-        }
-    }
-
     private void initCode() {
+        phoneNum = mPhoneEt.getText().toString().trim();
         //切割字符串将空格清除
         String[] split = phoneNum.split(" ");
         //重新拼接手机号
         phone = split[0] + split[1] + split[2];
+        Log.i("验证验证码", "initCode: " + phone);
         // 判断输入的手机号 是否符合手机号规范
         if (phone.matches("^13[0-9]{1}[0-9]{8}$|15[0125689]{1}[0-9]{8}$|18[0-3,5-9]{1}[0-9]{8}$|17[0-3,5-9]{1}[0-9]{8}$|19[0-3,5-9]{1}[0-9]{8}$|16[0-3,5-9]{1}[0-9]{8}$")) {
-            Toast.makeText(AuthenticationActivity.this, "获取验证码", Toast.LENGTH_SHORT).show();
             // 开始执行倒计时的方法
             time.start();
-//            mRedSpeak.setVisibility(View.GONE);
-            // 获取手机号码 返回后台进行解析
-//            initData();
-            // 如果手机号码不符合规则 提示用户正确输入手机号 红色文字显示 字体变成"请输入正确的手机号码"
+            Map<String, String> map = new HashMap<>();
+            map.put("phone", phone);
+            //注册、找回密码、绑定手机号、实名认证、提现
+            map.put("purpose", "实名认证");
+            //请求时间
+            String time = Utils.getNowDate();
+            map.put("request_start_time", time);
+            //sign2=md5(请求时间+手机号+IOS密钥)
+            map.put("sign2", Utils.md5(time + phone + Utils.Signs));
+            basePresenter.getVerificationCode(map);
+            Log.i("验证验证码", "initData: " + map.toString());
         } else {
-            ToastUtil.showLong("请输入正确的手机号码");
 
-//            mRedSpeak.setVisibility(View.VISIBLE);
-//
-//            mRedSpeak.setText("请输入正确的手机号码");
+            // 如果手机号码不符合规则 提示用户正确输入手机号 红色文字显示 字体变成"请输入正确的手机号码"
+            mSpeak.setVisibility(View.VISIBLE);
+            mSpeak.setText("请输入正确的手机号码");
 
         }
+    }
 
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initData2() {
+
+
+    }
+
+    @Override
+    protected int getlayout() {
+        return R.layout.activity_authentication;
+    }
+
+    @Override
+    protected RegisterPresenter initPresenter() {
+        return new RegisterPresenter();
+    }
+
+
+    @SuppressLint("ResourceAsColor")
+    @Override
+    public void getVerificationCodesSuccess(BaseBean<CodeBean> bean) {
+        String code = bean.getData().getCode();
+        Log.i("验证验证码", "getVerificationCodesSuccess: " + code);
+        Map<String, String> map = new HashMap<>();
+        map.put("phone", phone);
+        //注册、找回密码、绑定手机号、实名认证、提现
+        map.put("purpose", "实名认证");
+        //请求时间
+        String time = Utils.getNowDate();
+        map.put("request_start_time", time);
+        //sign2=md5(请求时间+手机号+IOS密钥)
+        map.put("sign2", Utils.md5(time + phone + Utils.Signs));
+        map.put("code", code);
+        basePresenter.goRegist(map);
+    }
+
+    @Override
+    public void getVerificationCodesFail(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        Log.i("实名验证", "getVerificationCodesFail: " + msg);
+    }
+
+    @Override
+    public void goRegistSuccess(BaseBean<UserBean> bean) {
+        //跳转页面
+        startActivity(new Intent(AuthenticationActivity.this, CreateFunActivity.class));
+        Log.i("实名认证", "goRegistSuccess: " + bean.toString());
+    }
+
+    @Override
+    public void goRegistFail(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO:OnCreate Method has been created, run FindViewById again to generate code
+        setContentView(R.layout.activity_authentication);
+        initView();
     }
     // 倒计时 验证码
 
@@ -176,15 +273,17 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
         @Override
         public void onTick(long millisUntilFinished) {
-//            mGetCode.setBackgroundColor(Color.parseColor("#ffffff"));
             mGiveCode.setClickable(false);
-            mGiveCode.setText( millisUntilFinished / 1000 + "s" );
+            mGiveCode.setText(millisUntilFinished / 1000 + "s");
         }
 
         @Override
         public void onFinish() {
             mGiveCode.setText("重新发送");
             mGiveCode.setClickable(true);
+            if (mGiveCode.equals("重新发送")) {
+                mAuthenticationClear.setVisibility(View.GONE);
+            }
         }
     }
 

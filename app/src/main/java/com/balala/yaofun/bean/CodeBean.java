@@ -3,16 +3,16 @@ package com.balala.yaofun.bean;
 import java.io.Serializable;
 
 public class CodeBean implements Serializable {
-    private int code;
+    private String code;
     private String key;
     private String purpose;
 
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 

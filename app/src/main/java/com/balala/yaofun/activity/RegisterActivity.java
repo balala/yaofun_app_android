@@ -314,10 +314,10 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterVi
         code = mEtIdentifiing.getText().toString().trim();
         Log.e("验证验证码", "initData3: " + code + "\n" + phone + "\n" + key);
 
-        if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(code) && !TextUtils.isEmpty(key)) {
+//        if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(code) && !TextUtils.isEmpty(key)) {
 //            basePresenter.getData2(phone, code, key);
-        }
-
+//        }
+//
     }
 
 

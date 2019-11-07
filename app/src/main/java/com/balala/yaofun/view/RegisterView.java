@@ -18,21 +18,4 @@ public interface RegisterView extends BaseView {
     void goRegistSuccess(BaseBean<UserBean> bean);
     void goRegistFail(String msg);
 
-//    void onSS(VerificationResult verificationResult);
-//
-//    void onFail(String msg);
-//
-//    void onSuccessyanzheng(VerificationCode verificationBean);
-//
-//    void onFails(String msg);
-//
-//
-//    void onSuccessRegister(RegisterBean bean);
-//
-//    void onError(String error);
-
-//    void onSuccessRegisterss(String sucess);
-//
-//    void onErrors(String msg);
-
 }

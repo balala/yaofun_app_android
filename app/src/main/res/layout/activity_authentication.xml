@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -39,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_18"
-        android:layout_marginTop="@dimen/dp_134"
+        android:layout_marginTop="@dimen/dp_154"
         android:text="手机号"
         android:textColor="#ff333333"
         android:textSize="16sp" />
@@ -49,8 +50,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_18"
-        android:layout_marginTop="@dimen/dp_155"
+        android:layout_marginTop="@dimen/dp_185"
         android:layout_marginRight="@dimen/dp_18"
+        android:hint="请输入你的手机号"
         android:inputType="phone"
         android:maxLength="13"
         android:maxLines="1"
@@ -61,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_18"
-        android:layout_marginTop="@dimen/dp_223"
+        android:layout_marginTop="@dimen/dp_253"
         android:text="验证码"
         android:textColor="@color/colorblack"
         android:textSize="16sp" />
@@ -71,36 +73,84 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_18"
-        android:layout_marginTop="@dimen/dp_259"
+        android:layout_marginTop="@dimen/dp_289"
         android:layout_marginRight="@dimen/dp_18"
         android:hint="请输入你的验证码"
         android:inputType="phone"
         android:maxLength="5"
         android:maxLines="1"
-        android:textColor="@color/colordeepgray"
+        android:textColor="@color/colorblack"
         android:textSize="@dimen/sp_15" />
 
-    <ImageView
-        android:id="@+id/authentication_clear"
-        android:layout_width="@dimen/dp_12"
-        android:layout_height="@dimen/dp_12"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/dp_270"
-        android:layout_marginRight="@dimen/dp_55"
-        android:src="@mipmap/delete"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/give_code"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/dp_268"
+        android:layout_marginTop="@dimen/dp_300"
+        android:layout_marginRight="@dimen/dp_10">
 
-        android:layout_marginRight="@dimen/dp_30"
-        android:text="获取验证码"
-        android:textColor="@color/colorblack"
-        android:textSize="14sp" />
+        <ImageView
+            android:id="@+id/authentication_clear"
+            android:layout_width="@dimen/dp_12"
+            android:layout_height="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_5"
+            android:src="@mipmap/delete" />
+
+        <TextView
+            android:id="@+id/give_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取验证码"
+            android:textColor="@color/colorblack"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/box"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_20"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginTop="@dimen/dp_330"
+        android:layout_marginBottom="@dimen/dp_261"
+        android:checked="true" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/box"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_333"
+        android:layout_marginBottom="@dimen/dp_270"
+        android:text="我已阅读"
+        android:textColor="@color/colordeepgrays"
+        android:textSize="@dimen/sp_12" />
+
+    <TextView
+        android:id="@+id/about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/box"
+        android:layout_marginLeft="@dimen/dp_75"
+        android:layout_marginTop="@dimen/dp_333"
+        android:layout_marginBottom="@dimen/dp_270"
+        android:text="《要FUN用户协议》"
+        android:textColor="#FF3232CD"
+        android:textSize="@dimen/sp_12" />
+
+    <TextView
+        android:id="@+id/speak"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_20"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_355"
+        android:layout_marginBottom="@dimen/dp_261"
+        android:textColor="@color/colorred"
+        android:textSize="@dimen/sp_12"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/up"
@@ -110,6 +160,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/dp_194"
         android:background="@drawable/yuangarys"
-        android:text="提交"
+        android:text="下一步"
         android:textColor="#BCBBC1" />
 </RelativeLayout>

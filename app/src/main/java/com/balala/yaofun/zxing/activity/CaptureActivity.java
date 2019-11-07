@@ -94,9 +94,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        // 渲染系统toolbar
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_capture);
 
         scanPreview = (SurfaceView) findViewById(R.id.capture_preview);
@@ -124,35 +123,35 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         });
 
 // 打开相册
-        photos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        photos.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
                 // 打开相册
 //                ToastUtils.showLong("打开相册");
                 // 通过激活系统图库，选择一张图片
-                Intent innerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                Intent wrapperIntent = Intent.createChooser(innerIntent, "选择二维码图片");
-                startActivityForResult(wrapperIntent, IMAGE_CODE);
-                initCameraData();
-            }
-        });
-    }
+//                Intent innerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                Intent wrapperIntent = Intent.createChooser(innerIntent, "选择二维码图片");
+//                startActivityForResult(wrapperIntent, IMAGE_CODE);
+//                initCameraData();
+//            }
+//        });
+//    }
 
-    private void initCameraData() {
-        PackageManager pm = getPackageManager();
-        boolean permission = (PackageManager.PERMISSION_GRANTED == pm.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, getPackageName()));
-        //判断有没有android.permission.WRITE_EXTERNAL_STORAGE权限
-        if (permission) {
-            //如果有权限则激活系统相册
-            // 激活系统图库，选择一张图片
-            Intent innerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            Intent wrapperIntent = Intent.createChooser(innerIntent, "选择二维码图片");
-            startActivityForResult(wrapperIntent, IMAGE_CODE);
-            return;
-        } else {
-            //请求存储权限
-            displayFrameworkBugMessageAndExit();
-        }
+//    private void initCameraData() {
+//        PackageManager pm = getPackageManager();
+//        boolean permission = (PackageManager.PERMISSION_GRANTED == pm.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, getPackageName()));
+//        //判断有没有android.permission.WRITE_EXTERNAL_STORAGE权限
+//        if (permission) {
+//            //如果有权限则激活系统相册
+//            // 激活系统图库，选择一张图片
+//            Intent innerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//            Intent wrapperIntent = Intent.createChooser(innerIntent, "选择二维码图片");
+//            startActivityForResult(wrapperIntent, IMAGE_CODE);
+//            return;
+//        } else {
+//            //请求存储权限
+//            displayFrameworkBugMessageAndExit();
+//        }
     }
 
     @Override
