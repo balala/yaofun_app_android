@@ -16,6 +16,7 @@
             android:id="@+id/community_search_et"
             android:layout_width="@dimen/dp_300"
             android:layout_height="@dimen/dp_36"
+            android:imeOptions="actionSearch"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_70"
             android:background="@drawable/layout_release_asplaza_line"

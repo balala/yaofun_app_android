@@ -12,24 +12,24 @@
         android:layout_height="match_parent" />
 
     <!--<com.mancj.materialsearchbar.MaterialSearchBar-->
-        <!--android:id="@+id/searchBar"-->
-        <!--style="@style/MaterialSearchBarLight"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--app:mt_hint="输入目的地"-->
-        <!--app:mt_speechMode="true" />-->
+    <!--android:id="@+id/searchBar"-->
+    <!--style="@style/MaterialSearchBarLight"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="10dp"-->
+    <!--android:layout_marginRight="10dp"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--app:mt_hint="输入目的地"-->
+    <!--app:mt_speechMode="true" />-->
+    <!--android:layout_below="@+id/searchBar"-->
 
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/searchBar"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
         android:background="#ffffff" />
 
 </RelativeLayout>
