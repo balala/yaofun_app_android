@@ -3,6 +3,7 @@ package com.balala.yaofun.httpUtils;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -23,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.rong.imkit.RongIM;
+import io.rong.imlib.model.UserInfo;
 
 import static com.balala.yaofun.httpUtils.IMManager.IMLogout;
 import static com.balala.yaofun.httpUtils.IMManager.connectRongIM;
@@ -131,6 +133,9 @@ public class MyApp extends Application {
         user=bean;
         EventBus.getDefault().post(new LoginSuccessEvent());
         connectRongIM(user.getRc_token());
+        RongIM.getInstance().setCurrentUserInfo(new UserInfo(user.get_id(),
+                user.getNick_name(),
+                Uri.parse(user.getImages())));
     }
 
 

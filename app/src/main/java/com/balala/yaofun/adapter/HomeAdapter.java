@@ -62,7 +62,6 @@ public class HomeAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int itemViewType = getItemViewType(position);
-        Log.d("po", homeAllBeans.size() + "");
         if (itemViewType == 0) {
             BannerHolder banq = (BannerHolder) holder;
             banq.banner_item.setImages(first);

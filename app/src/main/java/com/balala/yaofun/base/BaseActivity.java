@@ -27,7 +27,7 @@ public abstract class BaseActivity<p extends BasePresenter, v extends BaseView> 
         //获取顶层视图
 //        decorView = getWindow().getDecorView();
         // 渲染系统toolbar
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 //        hideBottomUIMenu();
         setContentView(getlayout());
         ButterKnife.bind(this);

@@ -8,12 +8,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.balala.yaofun.R;
 import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.base.BasePresenter;
 import com.balala.yaofun.presenter.ConversationPresenter;
 import com.balala.yaofun.view.ConversationView;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.Locale;
 
@@ -38,6 +40,12 @@ public class ConversationActivity extends BaseActivity<ConversationPresenter, Co
 
     @Override
     protected void initView() {
+        ImmersionBar.with(this)
+                .statusBarColor(R.color.black) //导航栏背景色
+//                .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
+//                .flymeOSStatusBarFontColor(R.color.colorAccent)
+                .init();
+
         findViewById(R.id.back).setOnClickListener(v->{
             finish();
         });
@@ -59,6 +67,8 @@ public class ConversationActivity extends BaseActivity<ConversationPresenter, Co
                 .appendQueryParameter("targetId", targetId).build();
 
         fragement.setUri(uri);
+        ((TextView)findViewById(R.id.title)).setText(title);
+
     }
 
     @Override

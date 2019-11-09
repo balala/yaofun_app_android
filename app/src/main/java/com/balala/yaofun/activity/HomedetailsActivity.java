@@ -40,6 +40,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.util.Util;
+import com.gyf.immersionbar.ImmersionBar;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMMin;
@@ -147,6 +148,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
 
     @Override
     protected void initView() {
+        ImmersionBar.with(this).fullScreen(true).init();
         ButterKnife.bind(this);
     }
 

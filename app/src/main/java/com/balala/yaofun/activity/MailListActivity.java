@@ -44,6 +44,7 @@ public class MailListActivity extends BaseActivity<MailListPresenter, MailListVi
     protected void initView() {
         ImmersionBar.with(this)
                 .statusBarColor(R.color.black) //导航栏背景色
+//                .fitsSystemWindows(true)
 //                .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
 //                .flymeOSStatusBarFontColor(R.color.colorAccent)
                 .init();
@@ -82,7 +83,10 @@ public class MailListActivity extends BaseActivity<MailListPresenter, MailListVi
         }
         // 根据a-z进行排序
 //        Collections.sort(mSortList, new PinyinComparator());
-        adapter.updateListView(mSortList);
+        if(adapter!=null){
+            //遇到过一次异常情况，app闪退，提示adapter为空
+            adapter.updateListView(mSortList);
+        }
     }
 
 
