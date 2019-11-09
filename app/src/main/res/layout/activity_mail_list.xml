@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.balala.yaofun.view.EditTextWithDel
+        <com.balala.yaofun.util.EditTextWithDel
             android:id="@+id/et_search"
             android:hint="搜索"
             android:drawablePadding="10dp"
@@ -61,7 +61,7 @@
                 android:visibility="gone"
                 tools:visibility="visible" />
 
-            <com.balala.yaofun.view.SideBar
+            <com.balala.yaofun.util.SideBar
                 android:id="@+id/sidrbar"
                 android:layout_width="24dp"
                 android:layout_height="match_parent"

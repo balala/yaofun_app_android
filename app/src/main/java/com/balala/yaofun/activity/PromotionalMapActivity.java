@@ -1,96 +1,136 @@
 package com.balala.yaofun.activity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
-import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
+import com.amap.api.maps.model.CameraPosition;
 import com.balala.yaofun.R;
+import com.balala.yaofun.util.ALocationClientFactory;
 
-public class PromotionalMapActivity extends AppCompatActivity implements LocationSource, AMapLocationListener {
+public class PromotionalMapActivity extends AppCompatActivity implements View.OnClickListener, AMap.OnCameraChangeListener, TextWatcher, AdapterView.OnItemClickListener, AMapLocationListener {
 
-    private MapView mMap;
-    //    private MaterialSearchBar mSearchBar;
-    private ListView mList;
+
+    private ImageView mIvBack;
+    private RelativeLayout mLayBack;
+    /**
+     * 搜索地点
+     */
+    private AutoCompleteTextView mEtSearch;
+    private MapView mMapView;
+    /**
+     *
+     */
+    private TextView mAddress;
+    private TextView mAddressDesc;
+    /**
+     * 确定
+     */
+    private Button mBtnEnsure;
+    private ListView mLvData;
+    private LinearLayout mLlPoi;
+    private AMapLocationClient locationClient;
     private AMap aMap;
-    private AMapLocationClient mLocationClient;
-    private AMapLocationClientOption mLocationOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promotionalmap);
         initView();
+//        showLoadingDialog();
+        //定位初始化
+        locationClient = ALocationClientFactory.createLocationClient(this, ALocationClientFactory.createDefaultOption(), this);
+        //开启定位
+        locationClient.startLocation();
     }
 
     private void initView() {
-        mMap = (MapView) findViewById(R.id.map);
-//        mSearchBar = (MaterialSearchBar) findViewById(R.id.searchBar);
-        mList = (ListView) findViewById(R.id.list);
-//在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
-//        mMap.onCreate(savedInstanceState);
+        mIvBack = (ImageView) findViewById(R.id.iv_back);
+        mLayBack = (RelativeLayout) findViewById(R.id.lay_back);
+        mEtSearch = (AutoCompleteTextView) findViewById(R.id.et_search);
+        mEtSearch.addTextChangedListener(this);
+        mEtSearch.setOnItemClickListener(this);
+        mMapView = (MapView) findViewById(R.id.mapView);
+        mMapView.setOnClickListener(this);
+//        mMapView.onCreate(savedInstanceState); // 此方法必须重写
+        aMap = mMapView.getMap();
+        UiSettings uiSettings = aMap.getUiSettings();
+        uiSettings.setZoomControlsEnabled(false);  //隐藏缩放按钮
+        aMap.setOnCameraChangeListener(this); // 添加移动地图事件监听器
+        mAddress = (TextView) findViewById(R.id.address);
+        mAddressDesc = (TextView) findViewById(R.id.addressDesc);
+        mBtnEnsure = (Button) findViewById(R.id.btn_ensure);
+        mBtnEnsure.setOnClickListener(this);
+        mLvData = (ListView) findViewById(R.id.lv_data);
+        mLlPoi = (LinearLayout) findViewById(R.id.ll_poi);
+//        poiAdapter = new PoiAdapter(this);
+        mLvData.setOnItemClickListener(this);
+//        mLvData.setAdapter(poiAdapter);
 
-        //初始化地图控制器对象
-        if (aMap == null) {
-            aMap = mMap.getMap();
-            UiSettings settings = aMap.getUiSettings();
-            aMap.setLocationSource(this);//设置了定位的监听
-            // 是否显示定位按钮
-            settings.setMyLocationButtonEnabled(true);
-            aMap.setMyLocationEnabled(true);//显示定位层并且可以触发定位,默认是flase
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.mapView:
+                break;
+            case R.id.btn_ensure:
+                break;
         }
-
-    }
-
-    private void location() {
-        //初始化定位
-        mLocationClient = new AMapLocationClient(getApplicationContext());
-        //设置定位回调监听
-        mLocationClient.setLocationListener(this);
-        //初始化定位参数
-        mLocationOption = new AMapLocationClientOption();
-        //设置定位模式为Hight_Accuracy高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        //设置是否强制刷新WIFI，默认为强制刷新
-        mLocationOption.setWifiActiveScan(true);
-        //设置定位间隔 默认采用连续定位模式，时间间隔为2000ms 可以自定义
-        mLocationOption.setInterval(2000);
-        //设置是否返回地址信息，默认返回
-        mLocationOption.setNeedAddress(true);
-        //设置是否允许模拟软件Mock位置结果，多为模拟GPS定位结果，默认为true，允许模拟位置
-        mLocationOption.setMockEnable(true);
-        //设置定位请求超时时间，默认为30秒
-        mLocationOption.setHttpTimeOut(20000);
-        //设置是否开启定位缓存机制 默认开启
-        mLocationOption.setLocationCacheEnable(false);
-
-        //给定位客户端对象设置定位参数
-        mLocationClient.setLocationOption(mLocationOption);
-        //启动定位
-        mLocationClient.startLocation();
     }
 
 
     @Override
-    public void activate(OnLocationChangedListener onLocationChangedListener) {
+    public void onCameraChange(CameraPosition cameraPosition) {
 
     }
 
     @Override
-    public void deactivate() {
+    public void onCameraChangeFinish(CameraPosition cameraPosition) {
+
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
 
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
-        location();
+
     }
 }

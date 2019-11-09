@@ -1,4 +1,4 @@
-package com.balala.yaofun.view;
+package com.balala.yaofun.model;
 
 public class ContactSortModel {
 

@@ -52,6 +52,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.balala.yaofun.httpUtils.MyApp.hasLogin;
+
 public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiModel> implements HomedetailsView {
 
     @BindView(R.id.homedetailsimg)
@@ -242,6 +244,14 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
 //            case R.id.homedetails_message:
 //                break;
             case R.id.homedetailsgo:
+                //报名成功支付和报名二维码生成
+                //判断是否登陆和实名认证（在用户登陆成功的bean类里）
+                if(hasLogin()){
+//                    if ()
+
+                }else{
+                    startActivity(new Intent(HomedetailsActivity.this, LandingActivity.class));
+                }
                 break;
             case R.id.llt:
                 break;

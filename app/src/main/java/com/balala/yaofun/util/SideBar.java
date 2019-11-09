@@ -1,4 +1,4 @@
-package com.balala.yaofun.view;
+package com.balala.yaofun.util;
 
 import android.content.Context;
 import android.graphics.Canvas;

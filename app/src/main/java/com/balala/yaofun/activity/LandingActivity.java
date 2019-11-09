@@ -265,6 +265,7 @@ public class LandingActivity extends BaseActivity<LandingPresenter, LandingView>
     }
 
     private void loginSuccess(BaseBean<UserBean> bean) {
+        //登陆成功的方法
         goLogin(bean.getData());
         this.finish();
     }

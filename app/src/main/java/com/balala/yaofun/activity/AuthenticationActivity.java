@@ -26,17 +26,19 @@ import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.CodeBean;
 import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.httpUtils.ToastUtil;
+import com.balala.yaofun.presenter.AuthenticationPresenter;
 import com.balala.yaofun.presenter.RegisterPresenter;
 import com.balala.yaofun.util.CustomEditText;
 import com.balala.yaofun.util.TextWatcherUtil;
 import com.balala.yaofun.util.Utils;
+import com.balala.yaofun.view.AuthenticationView;
 import com.balala.yaofun.view.RegisterView;
 import com.balala.yaofun.webview.AboutyaofunActivity;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class AuthenticationActivity extends BaseActivity<RegisterPresenter, RegisterView> implements RegisterView {
+public class AuthenticationActivity extends BaseActivity<AuthenticationPresenter, AuthenticationView> implements AuthenticationView {
 
     private RelativeLayout mAuthenticationback;
     private CustomEditText mPhoneEt;
@@ -56,7 +58,6 @@ public class AuthenticationActivity extends BaseActivity<RegisterPresenter, Regi
 
     private String phoneNum;
     private TimeCount time;
-    private String code;
     private String phone;
     private CheckBox mBox;
     private TextView mSpeak;
@@ -64,6 +65,10 @@ public class AuthenticationActivity extends BaseActivity<RegisterPresenter, Regi
      * 《要FUN用户协议》
      */
     private TextView mAbout;
+    private String code1;
+    private String code;
+    private String key;
+    private String verificationCodes;
 
 
     protected void initView() {
@@ -79,6 +84,10 @@ public class AuthenticationActivity extends BaseActivity<RegisterPresenter, Regi
         mSpeak = (TextView) findViewById(R.id.speak);
         mAbout = (TextView) findViewById(R.id.about);
         time = new TimeCount(60000, 1000);
+
+        //文本框输入的手机号和验证码
+        phoneNum = mPhoneEt.getText().toString().trim();
+        code = mCoodeEt.getText().toString();
         mAuthenticationback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,10 +149,9 @@ public class AuthenticationActivity extends BaseActivity<RegisterPresenter, Regi
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
-                code = mCoodeEt.getText().toString().trim();
-                Log.e("验证验证码", "initData3: " + code + "\n" + phone);
-                if (mCoodeEt.getText().toString() == code) {
-                    mUp.setBackgroundColor(R.color.colorred);
+                if (mCoodeEt.getText().toString().matches(verificationCodes)) {
+//                    mUp.setBackgroundColor(R.color.colorred);
+                    mSpeak.setText("验证码正确");
 
                 } else {
 //                    Toast.makeText(AuthenticationActivity.this, "错误", Toast.LENGTH_SHORT).show();
@@ -168,7 +176,7 @@ public class AuthenticationActivity extends BaseActivity<RegisterPresenter, Regi
     }
 
     private void initCode() {
-        phoneNum = mPhoneEt.getText().toString().trim();
+
         //切割字符串将空格清除
         String[] split = phoneNum.split(" ");
         //重新拼接手机号
@@ -180,6 +188,8 @@ public class AuthenticationActivity extends BaseActivity<RegisterPresenter, Regi
             time.start();
             Map<String, String> map = new HashMap<>();
             map.put("phone", phone);
+            map.put("code", code);
+//            map.put("key", key);
             //注册、找回密码、绑定手机号、实名认证、提现
             map.put("purpose", "实名认证");
             //请求时间
@@ -200,7 +210,16 @@ public class AuthenticationActivity extends BaseActivity<RegisterPresenter, Regi
 
     @Override
     protected void initData() {
-
+        Map<String, String> map = new HashMap<>();
+        map.put("phone", phone);
+        //注册、找回密码、绑定手机号、实名认证、提现
+        map.put("purpose", "实名认证");
+        //请求时间
+        String time = Utils.getNowDate();
+        map.put("request_start_time", time);
+        //sign2=md5(请求时间+手机号+IOS密钥)
+        map.put("sign2", Utils.md5(time + phone + Utils.Signs));
+        basePresenter.getVerifyCode(map);
     }
 
     @Override
@@ -215,46 +234,45 @@ public class AuthenticationActivity extends BaseActivity<RegisterPresenter, Regi
     }
 
     @Override
-    protected RegisterPresenter initPresenter() {
-        return new RegisterPresenter();
+    protected AuthenticationPresenter initPresenter() {
+        return new AuthenticationPresenter();
     }
 
 
     @SuppressLint("ResourceAsColor")
     @Override
     public void getVerificationCodesSuccess(BaseBean<CodeBean> bean) {
-        String code = bean.getData().getCode();
-        Log.i("验证验证码", "getVerificationCodesSuccess: " + code);
-        Map<String, String> map = new HashMap<>();
-        map.put("phone", phone);
-        //注册、找回密码、绑定手机号、实名认证、提现
-        map.put("purpose", "实名认证");
-        //请求时间
-        String time = Utils.getNowDate();
-        map.put("request_start_time", time);
-        //sign2=md5(请求时间+手机号+IOS密钥)
-        map.put("sign2", Utils.md5(time + phone + Utils.Signs));
-        map.put("code", code);
-        basePresenter.goRegist(map);
+        verificationCodes = bean.getData().getCode();
+        key = bean.getData().getKey();
+        Log.e("验证验证码", "initData3: " + code1 + "\n" + phone + "\n" + key);
+        Log.i("实名验证验证码", "getVerificationCodesFail: " + bean.getData().toString());
+
     }
 
     @Override
     public void getVerificationCodesFail(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         Log.i("实名验证", "getVerificationCodesFail: " + msg);
+        mSpeak.setVisibility(View.VISIBLE);
+        mSpeak.setText(msg);
+
     }
 
     @Override
-    public void goRegistSuccess(BaseBean<UserBean> bean) {
-        //跳转页面
-        startActivity(new Intent(AuthenticationActivity.this, CreateFunActivity.class));
-        Log.i("实名认证", "goRegistSuccess: " + bean.toString());
+    public void goVerifySuccess(BaseBean<CodeBean> bean) {
+        // 验证验证码成功方法 成功后跳入实名身份证页面
+        CodeBean data = bean.getData();
+        Log.i("实名认证验证", "goVerifyFail: " + data.toString());
+        Toast.makeText(this, "验证成功 ", Toast.LENGTH_SHORT).show();
+        //跳转到实名验证页面
+        startActivity(new Intent(AuthenticationActivity.this, AutonymActivity.class));
     }
 
     @Override
-    public void goRegistFail(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    public void goVerifyFail(String msg) {
+        Log.i("实名认证验证", "goVerifyFail: " + msg);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

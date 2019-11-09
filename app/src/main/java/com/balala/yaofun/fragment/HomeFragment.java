@@ -38,6 +38,7 @@ import com.balala.yaofun.R;
 import com.balala.yaofun.activity.AuthenticationActivity;
 import com.balala.yaofun.activity.CreateFunActivity;
 import com.balala.yaofun.activity.HomedetailsActivity;
+import com.balala.yaofun.activity.LandingActivity;
 import com.balala.yaofun.activity.PromotionalActivitiesActivity;
 import com.balala.yaofun.activity.SearchActivity;
 import com.balala.yaofun.adapter.HomeAdapter;
@@ -176,27 +177,27 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             super.handleMessage(msg);
         }
     };
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
-            switch (msg.what) {
-                case 1:
-                    homeAdapter.notifyDataSetChanged();
-                    homeAroundAdapter.notifyDataSetChanged();
-                    adapter.notifyDataSetChanged();
-                    //为了保险起见可以先判断当前是否在刷新中（旋转的小圈圈在旋转）....
-                    if (mSwipeLayout.isRefreshing()) {
-                        //关闭刷新动画
-                        mSwipeLayout.setRefreshing(false);
-                    }
-
-                    break;
-
-            }
-        }
-
-        ;
-    };
+//    @SuppressLint("HandlerLeak")
+//    private Handler mHandler = new Handler() {
+//        public void handleMessage(android.os.Message msg) {
+//            switch (msg.what) {
+//                case 1:
+////                    homeAdapter.notifyDataSetChanged();
+//                    homeAroundAdapter.notifyDataSetChanged();
+//                    adapter.notifyDataSetChanged();
+//                    //为了保险起见可以先判断当前是否在刷新中（旋转的小圈圈在旋转）....
+//                    if (mSwipeLayout.isRefreshing()) {
+//                        //关闭刷新动画
+//                        mSwipeLayout.setRefreshing(false);
+//                    }
+//
+//                    break;
+//
+//            }
+//        }
+//
+//        ;
+//    };
 
     private List<HomeBannerDean.DataBean.FirstBean> first;
     private List<HomeBannerDean.DataBean.SecondBean> second;
@@ -283,7 +284,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         List<HomeAllBean.DataBean.HotBean> hot = homeAllBean.getData().getHot();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recycleView1.setLayoutManager(linearLayoutManager);
-        Log.e(TAG, "onSuccessHomeall: " + first);
+        Log.e("hot", "onSuccessHomeall: " + first);
         homeAdapter = new HomeAdapter(getContext(), hot, first);
         recycleView1.setAdapter(homeAdapter);
         //展示全部的recycleView
@@ -445,7 +446,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             public void onRefresh() {
                 //这里可以做一下下拉刷新的操作
                 //例如下面代码，在方法中发送一个handler模拟延时操作
-                mHandler.sendEmptyMessageDelayed(1, 2000);
+//                mHandler.sendEmptyMessageDelayed(1, 2000);
             }
         });
 
@@ -463,13 +464,15 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         homeAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (hasLogin()) {
-                //进入实名认证页面
-                startActivity(new Intent(getContext(), AuthenticationActivity.class));
-//                }
+                if (hasLogin()) {
+                    //进入实名认证页面
+                    startActivity(new Intent(getContext(), AuthenticationActivity.class));
+                } else {
+                    // 跳入发布活动的页面
+                    startActivity(new Intent(getContext(), LandingActivity.class));
+                }
 
-                // 跳入发布活动的页面
-//                startActivity(new Intent(getContext(), PromotionalActivitiesActivity.class));
+
             }
         });
 
@@ -477,14 +480,30 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         homeCreateparty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), CreateFunActivity.class));
+                if (hasLogin()) {
+                    //进入实名认证页面
+                    startActivity(new Intent(getContext(), AuthenticationActivity.class));
+                } else {
+                    // 跳入创建fun团活动的页面
+//                    startActivity(new Intent(getContext(), LandingActivity.class));
+                    startActivity(new Intent(getContext(), CreateFunActivity.class));
+
+                }
             }
         });
         // 立即组局页面
         homeOutparty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), PromotionalActivitiesActivity.class));
+                if (hasLogin()) {
+                    //进入实名认证页面
+                    startActivity(new Intent(getContext(), AuthenticationActivity.class));
+                } else {
+                    // 跳入发布活动的页面
+//                    startActivity(new Intent(getContext(), LandingActivity.class));
+                    startActivity(new Intent(getContext(), PromotionalActivitiesActivity.class));
+                }
+
             }
         });
         super.initListener();

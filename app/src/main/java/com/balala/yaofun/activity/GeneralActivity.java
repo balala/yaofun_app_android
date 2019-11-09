@@ -64,7 +64,7 @@ public class GeneralActivity extends AppCompatActivity {
         mFragments.add(new MeFragment());
         ShowFragmentone();
         // 隐藏下方虚拟键
-//        hideBottomUIMenu();
+        hideBottomUIMenu();
     }
 
     public void initListener() {

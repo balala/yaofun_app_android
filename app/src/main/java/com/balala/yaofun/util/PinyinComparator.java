@@ -1,4 +1,4 @@
-package com.balala.yaofun.view;
+package com.balala.yaofun.util;
 
 import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.util.ForLog;

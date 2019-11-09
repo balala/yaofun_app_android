@@ -39,8 +39,8 @@ public class ApiModel extends BaseModel implements BaseView {
 
 
     //获取用户详情
-    public static void getUserDetail(String user_id,Map<String, ? extends Object> map, ResultCallBack<BaseBean<UserBean>> resultCallBack) {
-        setSubscribe(movieService.getUserDetail(user_id,getBaseMap(map)), resultCallBack);
+    public static void getUserDetail(String user_id, Map<String, ? extends Object> map, ResultCallBack<BaseBean<UserBean>> resultCallBack) {
+        setSubscribe(movieService.getUserDetail(user_id, getBaseMap(map)), resultCallBack);
     }
 
     //通讯录：只包含好友
@@ -63,6 +63,10 @@ public class ApiModel extends BaseModel implements BaseView {
         setSubscribe(movieService.getVerificationCode(getBaseMap(map)), resultCallBack);
     }
 
+    //注册获取验证码
+    public static void getVerifyCode(Map<String, ? extends Object> map, ResultCallBack<BaseBean<CodeBean>> resultCallBack) {
+        setSubscribe(movieService.getVerificationCodes(getBaseMap(map)), resultCallBack);
+    }
 
 
     //注册
@@ -81,26 +85,29 @@ public class ApiModel extends BaseModel implements BaseView {
     }
 
 
-
-//    public static void funhomedata(Map<String, ? extends Object> map, ResultCallBack<BaseBean<FunhomeData>> resultCallBack) {
+    //fun团页数据
     public static void funhomedata(Map<String, ? extends Object> map, ResultCallBack<BaseBean<FunhomeData.DataBean>> resultCallBack) {
         setSubscribe(movieService.getFunhomeData(getBaseMap(map)), resultCallBack);
     }
 
+    //首页banner
     public static void homebannerdata(Map<String, ? extends Object> map, ResultCallBack<BaseBean<HomeBannerDean.DataBean>> resultCallBack) {
         setSubscribe(movieService.getbannerData(getBaseMap(map)), resultCallBack);
     }
 
+    //首页每日一句
     public static void homedaydata(Map<String, ? extends Object> map, ResultCallBack<BaseBean<DayBeans.DataBean>> resultCallBack) {
         setSubscribe(movieService.getDayData(getBaseMap(map)), resultCallBack);
     }
 
+    //首页数据
     public static void homealldata(Map<String, ? extends Object> map, ResultCallBack<BaseBean<HomeAllBean.DataBean>> resultCallBack) {
         setSubscribe(movieService.getDoodchoice(getBaseMap(map)), resultCallBack);
     }
 
-    public static void homedetailsdata(String id,Map<String, ? extends Object> map, ResultCallBack<BaseBean<HomedetailsBean.DataBean>> resultCallBack){
-        setSubscribe(movieService.getHomedetailsData(id, (Map<String, Object>) map),resultCallBack);
+    //首页详情数据
+    public static void homedetailsdata(String id, Map<String, ? extends Object> map, ResultCallBack<BaseBean<HomedetailsBean.DataBean>> resultCallBack) {
+        setSubscribe(movieService.getHomedetailsData(id, (Map<String, Object>) map), resultCallBack);
     }
 
     private static <T> void setSubscribe(Observable<T> observable, ResultCallBack<T> resultCallBack) {

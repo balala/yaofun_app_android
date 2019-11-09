@@ -7,24 +7,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.balala.yaofun.R;
 import com.balala.yaofun.adapter.SortAdapter;
 import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.MailListBean;
 import com.balala.yaofun.bean.MailListUserBean;
-import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.presenter.MailListPresenter;
 import com.balala.yaofun.util.ForLog;
 import com.balala.yaofun.util.PinyinUtils;
-import com.balala.yaofun.view.ContactSortModel;
-import com.balala.yaofun.view.EditTextWithDel;
+import com.balala.yaofun.util.EditTextWithDel;
 import com.balala.yaofun.view.MailListView;
-import com.balala.yaofun.view.SideBar;
+import com.balala.yaofun.util.SideBar;
 import com.gyf.immersionbar.ImmersionBar;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import io.rong.imkit.RongIM;
