@@ -42,13 +42,7 @@ public class MailListActivity extends BaseActivity<MailListPresenter, MailListVi
     private List<MailListUserBean> SourceDateList=new ArrayList<>();
     @Override
     protected void initView() {
-        ImmersionBar.with(this)
-                .statusBarColor(R.color.black) //导航栏背景色
-//                .fitsSystemWindows(true)
-//                .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
-//                .flymeOSStatusBarFontColor(R.color.colorAccent)
-                .init();
-
+        ImmersionBar.with(this).statusBarColor(R.color.black).init();
         findViewById(R.id.back).setOnClickListener(v->{
             finish();
         });

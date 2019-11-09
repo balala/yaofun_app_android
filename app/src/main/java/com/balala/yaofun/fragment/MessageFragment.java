@@ -52,7 +52,6 @@ public class MessageFragment extends BaseFragment {
     }
 
     protected void initData() {
-        // 取出第一次登陆的
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new AuditFragment());
 //        fragments.add(new MessageFragment2());
@@ -79,7 +78,6 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mMessageVp.setCurrentItem(tab.getPosition());
-//                mHomeTab.setClickable(true);
 
             }
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/c181818"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:background="@color/black"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/dp_40">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/back"
+            android:layout_width="31dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/back1"
+            />
+
+    </RelativeLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        style="@style/TabLayoutStyle"
+        android:id="@+id/tab"
+        app:tabIndicatorFullWidth="false"
+        android:layout_width="174dp"
+        android:layout_height="26.5dp"
+        app:tabIndicatorHeight="0dp"
+        app:tabSelectedTextColor="@color/c181818"
+        app:tabTextColor="@color/color_white" >
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="@dimen/dp_87"
+            android:layout_height="match_parent"
+            android:text="个人相册"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="87dp"
+            android:layout_height="match_parent"
+            android:text="FUN团相册"/>
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/message_tab" />
+
+</LinearLayout>

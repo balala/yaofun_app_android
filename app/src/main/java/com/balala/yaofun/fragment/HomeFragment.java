@@ -57,6 +57,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
@@ -229,15 +230,17 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         }
     };
 
+    @Override
+    public void initImmersionBar() {
+        ImmersionBar.with(this).fullScreen(true).init();
+    }
+
 
     @Override
     public void onSuccessHome(BaseBean<DayBeans.DataBean> dayBean) {
         // 解析成功显示布局
         sw.setVisibility(View.VISIBLE);
         homeperchs.setVisibility(View.GONE);
-        // 在这收值
-        Log.i("每日一句话解析", "onSuccessHome: " + dayBean.toString());
-
         if (hasLogin()) {
             preferences1 = getContext().getSharedPreferences("users", Context.MODE_PRIVATE);
             String nick_name = preferences1.getString("nick_name", "");
@@ -389,7 +392,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initData() {
-
         // 滑动监听 toolbar隐藏
 //        viewsAddListener();
         // 开启定位

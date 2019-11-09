@@ -1,31 +1,23 @@
 package com.balala.yaofun.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.balala.yaofun.R;
-//import com.balala.yaofun.fragment.FunFragment;
 import com.balala.yaofun.fragment.FunFragment;
 import com.balala.yaofun.fragment.HomeFragment;
 import com.balala.yaofun.fragment.MeFragment;
 import com.balala.yaofun.fragment.MessageFragment;
-
 import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -46,7 +38,6 @@ public class GeneralActivity extends AppCompatActivity {
     RadioButton bottom_me;
     @BindView(R.id.rg)
     RadioGroup rg;
-    private View decorView;
     private ArrayList<Fragment> mFragments;
     private FragmentManager mFragmentManager;
     private int lastFragment;
@@ -55,23 +46,17 @@ public class GeneralActivity extends AppCompatActivity {
     private static final int TYPE_KONWLOGE = 1;
     private static final int TYPE_WX = 2;
     private static final int TYPE_NOTACTION = 3;
-    Boolean up = false;//默认false不刷新
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general);
         ButterKnife.bind(this);
-
         initFragments();
         initListener();
     }
 
     public void initFragments() {
-
-        // 渲染系统toolbar
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-//        mFragments = mFragments;
         mFragments = new ArrayList<Fragment>();
         mFragments.add(new HomeFragment());
         mFragments.add(new FunFragment());
@@ -79,7 +64,7 @@ public class GeneralActivity extends AppCompatActivity {
         mFragments.add(new MeFragment());
         ShowFragmentone();
         // 隐藏下方虚拟键
-        hideBottomUIMenu();
+//        hideBottomUIMenu();
     }
 
     public void initListener() {

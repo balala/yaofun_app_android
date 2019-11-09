@@ -15,4 +15,8 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="TabLayoutStyle" parent="android:Widget">
+        <item name="tabBackground">@drawable/my_album_tab</item>
+    </style>
+
 </resources>

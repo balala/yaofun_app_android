@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.gyf.immersionbar.components.ImmersionFragment;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -17,7 +19,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class BaseFragment<p extends BasePresenter, v extends BaseView> extends Fragment implements BaseView {
+public class BaseFragment<p extends BasePresenter, v extends BaseView> extends ImmersionFragment implements BaseView {
     protected p presenter;
     private Unbinder unbinder;
     private View decorView;
@@ -25,10 +27,6 @@ public class BaseFragment<p extends BasePresenter, v extends BaseView> extends F
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        //获取顶层视图
-//        decorView = Objects.requireNonNull(getActivity()).getWindow().getDecorView();
-        // 渲染系统toolbar
-        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         View inflate = inflater.inflate(getlayoutId(), null);
         unbinder = ButterKnife.bind(this, inflate);
 
@@ -85,5 +83,10 @@ public class BaseFragment<p extends BasePresenter, v extends BaseView> extends F
         unbinder.unbind();
         // 这么
         presenter = null;
+    }
+
+    @Override
+    public void initImmersionBar() {
+
     }
 }

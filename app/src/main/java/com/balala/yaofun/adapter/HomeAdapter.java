@@ -61,6 +61,9 @@ public class HomeAdapter extends RecyclerView.Adapter {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if(first==null){
+            return;
+        }
         int itemViewType = getItemViewType(position);
         if (itemViewType == 0) {
             BannerHolder banq = (BannerHolder) holder;
