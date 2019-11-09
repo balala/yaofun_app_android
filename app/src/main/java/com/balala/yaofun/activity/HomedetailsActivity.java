@@ -2,12 +2,17 @@ package com.balala.yaofun.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -34,6 +39,10 @@ import com.bm.library.PhotoView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.util.Util;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMMin;
 
 import java.util.HashMap;
 import java.util.List;
@@ -98,8 +107,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     ImageView homedetailsicon;
     @BindView(R.id.homedetails_rv2)
     RecyclerView mHomedetailsRv2;
-    @BindView(R.id.homedetails_message)
-    ImageView mHomedetailsMessage;
+//    @BindView(R.id.homedetails_message)
+//    ImageView mHomedetailsMessage;
     @BindView(R.id.homedetailsgo)
     Button mHomedetailsgo;
     @BindView(R.id.llt)
@@ -125,6 +134,16 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     private String latitude;
     private String longitude;
 
+    private LinearLayout pengyouquan;
+    private LinearLayout qq;
+    private LinearLayout wechat;
+    private LinearLayout tongxunlu;
+    private TextView cancel;
+    private View sharepop;
+    private View shareweixin;
+    private View mPopView;
+    private PopupWindow popup;
+    private String name;
 
     @Override
     protected void initView() {
@@ -155,8 +174,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         return new HomedetailsPersenter();
     }
 
-    //    R.id.homedetails_fab   , R.id.homedetails_label2
-    @OnClick({R.id.homedetailsimg, R.id.homedetails_back, R.id.homedetails_menu, R.id.homedetails_title, R.id.homedetails_xiahua, R.id.homedetails_peoplename, R.id.homedetails_label1, R.id.homedetails_signature, R.id.homedetails_peoplecount, R.id.homedetails_peoplerv, R.id.homedetails_peopleback, R.id.homedetails_time, R.id.homedetails_site, R.id.homedetails_navigation, R.id.homedetails_ticket, R.id.homedetails_img6, R.id.homedetails_funtitle, R.id.homedetails_funimg, R.id.homedetails_funmessage, R.id.homedetails_wirte, R.id.homedetails_rv2, R.id.homedetails_message, R.id.homedetailsgo, R.id.llt, R.id.homedetails_people})
+    //    R.id.homedetails_fab   , R.id.homedetails_label2   R.id.homedetails_message,
+    @OnClick({R.id.homedetailsimg, R.id.homedetails_back, R.id.homedetails_menu, R.id.homedetails_title, R.id.homedetails_xiahua, R.id.homedetails_peoplename, R.id.homedetails_label1, R.id.homedetails_signature, R.id.homedetails_peoplecount, R.id.homedetails_peoplerv, R.id.homedetails_peopleback, R.id.homedetails_time, R.id.homedetails_site, R.id.homedetails_navigation, R.id.homedetails_ticket, R.id.homedetails_img6, R.id.homedetails_funtitle, R.id.homedetails_funimg, R.id.homedetails_funmessage, R.id.homedetails_wirte, R.id.homedetails_rv2, R.id.homedetailsgo, R.id.llt, R.id.homedetails_people})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -198,9 +217,11 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
             case R.id.homedetails_navigation:
                 Intent intent = new Intent(HomedetailsActivity.this, AmapRouteActivity.class);
                 intent.putExtra("address", address);
+                intent.putExtra("name", name);
                 intent.putExtra("latitude", latitude);
                 intent.putExtra("longitude", longitude);
                 startActivity(intent);
+                Log.i("经纬度", "详情页传: "+latitude+"  "+"  "+longitude);
                 break;
             case R.id.homedetails_ticket:
                 break;
@@ -216,8 +237,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
                 break;
             case R.id.homedetails_rv2:
                 break;
-            case R.id.homedetails_message:
-                break;
+//            case R.id.homedetails_message:
+//                break;
             case R.id.homedetailsgo:
                 break;
             case R.id.llt:
@@ -232,8 +253,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
 
     private void initDialogData() {
         sll.setVisibility(View.GONE);
-        PopupWindow popup = new PopupWindow();
-        View mPopView = getLayoutInflater().inflate(R.layout.homedetailspop, null);
+        popup = new PopupWindow();
+        mPopView = getLayoutInflater().inflate(R.layout.homedetailspop, null);
         img = mPopView.findViewById(R.id.homedetailsimgpop);
         Glide.with(this).load(data.getCover()).into(img);
         popup.setContentView(mPopView);
@@ -261,6 +282,78 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
         popupWindow.setOutsideTouchable(true);
         popupWindow.showAsDropDown(mHomedetailsMenu);
+        LinearLayout share = mPopView.findViewById(R.id.share);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initsharepop();
+            }
+
+        });
+
+    }
+
+    private void initsharepop() {
+        sharepop = getLayoutInflater().inflate(R.layout.sharepopuitem, null);
+        PopupWindow window = new PopupWindow();
+        window.setContentView(sharepop);
+        window.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        window.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        window.setOutsideTouchable(true);
+        window.showAtLocation(sll, Gravity.BOTTOM, 0, 0);
+        tongxunlu = sharepop.findViewById(R.id.tongxunlu);
+        shareweixin = sharepop.findViewById(R.id.shareweixin);
+        qq = sharepop.findViewById(R.id.qq);
+        pengyouquan = sharepop.findViewById(R.id.pengyouquan);
+        cancel = sharepop.findViewById(R.id.cancel);
+        initshareData();
+
+    }
+
+    private void initshareData() {
+        shareweixin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initwechatData();
+            }
+
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        pengyouquan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private void initwechatData() {
+
+        Toast.makeText(HomedetailsActivity.this, "微信分享", Toast.LENGTH_SHORT).show();
+        UMMin umMin = new UMMin(data.getUM_wxFriends_url());
+        Log.i("wmkd", "initwechatData: " + data.getUM_wxFriends_url());
+//兼容低版本的网页链接
+//        umMin.setThumb(data.getUM_wxFriends_url());
+// 小程序消息封面图片
+//        umMin.setTitle(Defaultcontent.title);
+// 小程序消息title
+//        umMin.setDescription(Defaultcontent.text);
+// 小程序消息描述
+//        umMin.setPath("pages/page10007/xxxxxx");
+//小程序页面路径
+//        umMin.setUserName("gh_xxxxxxxxxxxx");
+// 小程序原始id,在微信平台查询
+        new ShareAction(HomedetailsActivity.this)
+                .withMedia(umMin).share();
+//                .setPlatform(share_media)
+//                .setCallback(shareListener).share();
     }
 
     @SuppressLint("ResourceAsColor")
@@ -271,10 +364,12 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
 
         data = funhomeData.getData();
         address = data.getPlace_text().getAddress();
+        name = data.getPlace_text().getName();
         // 纬度
         latitude = data.getPlace_text().getLocation().getLatitude();
         //经度
         longitude = data.getPlace_text().getLocation().getLongitude();
+        Log.i("经纬度", "首页详情解析: " + "经度"+latitude+"纬度");
         // 标签的个数
         DetailsactivityAdapter adapter = new DetailsactivityAdapter(this, data);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -304,7 +399,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         mHomedetailsPeoplename.setText(data.getUser_nick_name());
         mHomedetailsTime.setText(data.getStart_end_time());
         mHomedetailsPeoplecount.setText(data.getLimit_number());
-        mHomedetailsSite.setText(data.getPlace_text().getAddress());
+        mHomedetailsSite.setText(data.getPlace_text().getName());
+
         mHomedetailsFuntitle.setText(data.getLocation_name());
 //        mHomedetailsFunmessage.setText(data); 副标题
         Glide.with(this).load(data.getUser_images()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mHomedetailsPeople);

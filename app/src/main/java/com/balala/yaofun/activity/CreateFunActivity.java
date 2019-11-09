@@ -1,8 +1,14 @@
 package com.balala.yaofun.activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -49,7 +55,7 @@ public class CreateFunActivity extends AppCompatActivity {
     @BindView(R.id.createfun_interestback)
     ImageView mCreatefunInterestback;
     @BindView(R.id.createfun_choose)
-    ImageView mCreatefunChoose;
+    CheckBox mCreatefunChoose;
     @BindView(R.id.immediately)
     Button mImmediately;
 
@@ -58,6 +64,24 @@ public class CreateFunActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createfun);
         ButterKnife.bind(this);
+        // 点击眼睛查看或隐藏密码
+        mCreatefunChoose.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Drawable drawable = CreateFunActivity.this.getResources().getDrawable(R.drawable.createfunopenoff);
+//                    drawable.setBounds(0, 0, 10, 10);
+                    mCreatefunChoose.setButtonDrawable(drawable);
+//                    mEt2.setTransformationMethod(HideReturnsTransformationMethod.getInstance());//显示密码
+                } else {
+                    Drawable drawable = CreateFunActivity.this.getResources().getDrawable(R.drawable.createfunopencolse);
+//                    drawable.setBounds(0, 0, 10, 10);
+                    mCreatefunChoose.setButtonDrawable(drawable);
+//                    mEt2.setTransformationMethod(PasswordTransformationMethod.getInstance());//隐藏密码
+                }
+//                mEt2.setSelection(TextUtils.isEmpty(mEt2.getText()) ? 0 : mEt2.length());//光标挪到最后
+            }
+        });
     }
 
     @OnClick({R.id.createfunback, R.id.createfunwhy, R.id.createfunrv, R.id.createfunimg, R.id.createfuntext, R.id.createfunaddimg, R.id.createfun_name, R.id.createfun_resume, R.id.createfun_dotext, R.id.createfun_doback, R.id.createfun_jointext, R.id.createfuninterestback, R.id.createfun_interesttext, R.id.createfun_interestback, R.id.createfun_choose, R.id.immediately})
@@ -96,9 +120,14 @@ public class CreateFunActivity extends AppCompatActivity {
             case R.id.createfun_interestback:
                 break;
             case R.id.createfun_choose:
+
+                if (mCreatefunChoose.isClickable()) {
+                    mCreatefunChoose.setClickable(true);
+                }
                 break;
             case R.id.immediately:
                 break;
+
         }
     }
 

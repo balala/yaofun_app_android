@@ -67,8 +67,7 @@
                 android:layout_width="@dimen/dp_100"
                 android:layout_height="@dimen/dp_100"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-               />
+                android:layout_centerVertical="true" />
 
             <ImageView
                 android:id="@+id/openfunphoto"
@@ -98,6 +97,7 @@
             <com.balala.yaofun.util.CustomEditText
                 android:id="@+id/openfun_name"
                 android:layout_width="wrap_content"
+                android:maxLines="1"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_82"
                 android:layout_marginTop="@dimen/dp_20"
@@ -116,29 +116,36 @@
                 android:layout_marginTop="@dimen/dp_59"
                 android:background="@color/colordeepgrays" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_17"
-                android:layout_marginTop="@dimen/dp_82"
-                android:text="@string/openfun_funtuan"
-                android:textColor="@color/colorwhite"
-                android:textSize="@dimen/sp_14" />
 
-            <com.balala.yaofun.util.CustomEditText
-                android:id="@+id/openfun_resume"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/funrt"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_82"
-                android:layout_marginTop="@dimen/dp_82"
-                android:background="@color/funback"
-                android:hint="@string/openfun_choose"
-                android:textColor="@color/fungray"
-                android:textColorHint="@color/fungray"
-                android:textCursorDrawable="@drawable/editcolor"
-                android:textSize="@dimen/sp_14" />
+                android:layout_marginTop="@dimen/dp_82">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_17"
+                    android:text="@string/openfun_funtuan"
+                    android:textColor="@color/colorwhite"
+                    android:textSize="@dimen/sp_14" />
+
+                <com.balala.yaofun.util.CustomEditText
+                    android:id="@+id/openfun_resume"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_82"
+                    android:background="@color/funback"
+                    android:hint="@string/openfun_choose"
+                    android:textColor="@color/fungray"
+                    android:textColorHint="@color/fungray"
+                    android:textCursorDrawable="@drawable/editcolor"
+                    android:textSize="@dimen/sp_14" />
+            </RelativeLayout>
 
             <View
+                android:id="@+id/vw"
                 android:layout_width="@dimen/dp_320"
                 android:layout_height="@dimen/dp_1"
                 android:layout_alignParentRight="true"
@@ -146,37 +153,42 @@
                 android:layout_marginTop="@dimen/dp_118"
                 android:background="@color/colordeepgrays" />
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/where"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_17"
-                android:layout_marginTop="@dimen/dp_141"
-                android:text="@string/openfun_activity"
-                android:textColor="@color/colorwhite"
-                android:textSize="@dimen/sp_14" />
+                android:layout_below="@+id/vw"
+                android:layout_marginTop="@dimen/dp_25">
 
-            <com.balala.yaofun.util.CustomEditText
-                android:id="@+id/openfun_dotext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_85"
-                android:layout_marginTop="@dimen/dp_141"
-                android:background="@color/funback"
-                android:hint="@string/openfun_no"
-                android:textColor="@color/fungray"
-                android:textColorHint="@color/fungray"
-                android:textCursorDrawable="@drawable/editcolor"
-                android:textSize="@dimen/sp_14" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_17"
+                    android:text="@string/openfun_activity"
+                    android:textColor="@color/colorwhite"
+                    android:textSize="@dimen/sp_14" />
 
-            <ImageView
-                android:id="@+id/openfun_doback"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_12"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_142"
-                android:layout_marginRight="@dimen/dp_17"
-                android:src="@drawable/funbanck" />
+                <TextView
+                    android:id="@+id/openfun_dotext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_85"
+                    android:background="@color/funback"
+                    android:text="@string/openfun_no"
+                    android:textColor="@color/fungray"
+                    android:textColorHint="@color/fungray"
+                    android:textCursorDrawable="@drawable/editcolor"
+                    android:textSize="@dimen/sp_14" />
 
+                <ImageView
+                    android:id="@+id/openfun_doback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_12"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_17"
+                    android:src="@drawable/funbanck" />
+
+            </RelativeLayout>
 
             <View
                 android:layout_width="@dimen/dp_320"
@@ -202,6 +214,7 @@
                 android:layout_marginLeft="@dimen/dp_85"
                 android:layout_marginTop="@dimen/dp_201"
                 android:background="@color/funback"
+                android:maxLines="1"
                 android:hint="@string/openfun_such"
                 android:textColor="@color/fungray"
                 android:textColorHint="@color/fungray"
@@ -223,36 +236,39 @@
             android:layout_marginTop="@dimen/dp_10"
             android:background="@color/funback">
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/begintime"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_17"
-                android:layout_marginTop="@dimen/dp_23"
-                android:text="@string/openfun_starttime"
-                android:textColor="@color/colorwhite"
-                android:textSize="@dimen/sp_14" />
+                android:layout_height="wrap_content">
 
-            <com.balala.yaofun.util.CustomEditText
-                android:id="@+id/openfun_jointext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_85"
-                android:layout_marginTop="@dimen/dp_23"
-                android:background="@color/funback"
-                android:hint="@string/openfun_choosestarttime"
-                android:textColor="@color/fungray"
-                android:textColorHint="@color/fungray"
-                android:textCursorDrawable="@drawable/editcolor"
-                android:textSize="@dimen/sp_14" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_17"
+                    android:layout_marginTop="@dimen/dp_23"
+                    android:text="@string/openfun_starttime"
+                    android:textColor="@color/colorwhite"
+                    android:textSize="@dimen/sp_14" />
 
-            <ImageView
-                android:id="@+id/openfuninterestback"
-                android:layout_width="@dimen/dp_7"
-                android:layout_height="@dimen/dp_12"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_17"
-                android:layout_marginRight="@dimen/dp_17"
-                android:src="@drawable/funbanck" />
+                <TextView
+                    android:id="@+id/openfun_jointext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_85"
+                    android:layout_marginTop="@dimen/dp_23"
+                    android:text="@string/openfun_choosestarttime"
+                    android:textColor="@color/fungray"
+                    android:textSize="@dimen/sp_14" />
+
+                <ImageView
+                    android:id="@+id/openfuninterestback"
+                    android:layout_width="@dimen/dp_7"
+                    android:layout_height="@dimen/dp_12"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/dp_17"
+                    android:layout_marginRight="@dimen/dp_17"
+                    android:src="@drawable/funbanck" />
+            </RelativeLayout>
 
             <View
                 android:layout_width="@dimen/dp_320"
@@ -262,36 +278,38 @@
                 android:layout_marginTop="@dimen/dp_59"
                 android:background="@color/colordeepgrays" />
 
-            <TextView
+
+            <RelativeLayout
+                android:id="@+id/overtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_17"
-                android:layout_marginTop="@dimen/dp_82"
-                android:text="@string/openfun_finishtime"
-                android:textColor="@color/colorwhite"
-                android:textSize="@dimen/sp_14" />
+                android:layout_marginTop="@dimen/dp_82">
 
-            <com.balala.yaofun.util.CustomEditText
-                android:id="@+id/openfun_interesttext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_85"
-                android:layout_marginTop="@dimen/dp_82"
-                android:background="@color/funback"
-                android:hint="@string/openfun_choosefinishtime"
-                android:textColor="@color/fungray"
-                android:textColorHint="@color/fungray"
-                android:textCursorDrawable="@drawable/editcolor"
-                android:textSize="@dimen/sp_14" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_17"
+                    android:text="@string/openfun_finishtime"
+                    android:textColor="@color/colorwhite"
+                    android:textSize="@dimen/sp_14" />
 
-            <ImageView
-                android:id="@+id/openfun_interestback"
-                android:layout_width="@dimen/dp_7"
-                android:layout_height="@dimen/dp_12"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_83"
-                android:layout_marginRight="@dimen/dp_17"
-                android:src="@drawable/funbanck" />
+                <TextView
+                    android:id="@+id/openfun_interesttext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_85"
+                    android:text="@string/openfun_choosefinishtime"
+                    android:textColor="@color/fungray"
+                    android:textSize="@dimen/sp_14" />
+
+                <ImageView
+                    android:id="@+id/openfun_interestback"
+                    android:layout_width="@dimen/dp_7"
+                    android:layout_height="@dimen/dp_12"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_17"
+                    android:src="@drawable/funbanck" />
+            </RelativeLayout>
 
             <View
                 android:layout_width="@dimen/dp_320"
@@ -334,14 +352,19 @@
                 android:textColor="@color/colorwhite"
                 android:textSize="@dimen/sp_14" />
 
-            <ImageView
-                android:id="@+id/openfunapplyback"
-                android:layout_width="@dimen/dp_7"
-                android:layout_height="@dimen/dp_12"
-                android:layout_alignParentRight="true"
+            <EditText
+                android:id="@+id/openfun_applyedit"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/funback"
+                android:layout_marginLeft="@dimen/dp_91"
                 android:layout_marginTop="@dimen/dp_23"
-                android:layout_marginRight="@dimen/dp_17"
-                android:src="@drawable/funbanck" />
+                android:inputType="number"
+                android:textCursorDrawable="@drawable/editcolor"
+                android:textColor="@color/colorwhite"
+                android:textSize="@dimen/sp_14" />
+
 
             <View
                 android:layout_width="@dimen/dp_320"
@@ -360,7 +383,7 @@
                 android:textColor="@color/colorwhite"
                 android:textSize="@dimen/sp_14" />
 
-            <com.balala.yaofun.util.CustomEditText
+            <EditText
                 android:id="@+id/openfun_applypeoplecontent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -372,15 +395,6 @@
                 android:textColorHint="@color/fungray"
                 android:textCursorDrawable="@drawable/editcolor"
                 android:textSize="@dimen/sp_14" />
-
-            <ImageView
-                android:id="@+id/openfun_applypeopleback"
-                android:layout_width="@dimen/dp_7"
-                android:layout_height="@dimen/dp_12"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_83"
-                android:layout_marginRight="@dimen/dp_17"
-                android:src="@drawable/funbanck" />
 
             <View
                 android:layout_width="@dimen/dp_320"
@@ -453,25 +467,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_91"
                 android:layout_marginTop="@dimen/dp_38"
+                android:maxLines="1"
                 android:text="@string/openfun_interestspeople"
                 android:textColor="@color/fungray"
                 android:textSize="@dimen/sp_14" />
 
             <ImageView
+                android:id="@+id/openfun_interestadd"
                 android:layout_width="@dimen/dp_17"
                 android:layout_height="@dimen/dp_17"
-                android:layout_marginLeft="@dimen/dp_342"
-                android:layout_marginTop="@dimen/dp_17"
-                android:src="@drawable/interest_add" />
-
-            <ImageView
-                android:id="@+id/openfun_interestadd"
-                android:layout_width="@dimen/dp_7"
-                android:layout_height="@dimen/dp_12"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/dp_23"
-                android:layout_marginRight="@dimen/dp_17"
-                android:src="@drawable/funbanck" />
+                android:layout_marginTop="@dimen/dp_17"
+                android:layout_marginRight="@dimen/dp_10"
+                android:src="@drawable/interest_add" />
 
             <View
                 android:layout_width="@dimen/dp_320"

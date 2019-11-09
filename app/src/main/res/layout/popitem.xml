@@ -26,6 +26,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/share"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -55,6 +56,7 @@
             android:background="@drawable/popxiahua" />
 
         <LinearLayout
+            android:id="@+id/alter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -84,6 +86,7 @@
             android:background="@drawable/popxiahua" />
 
         <LinearLayout
+            android:id="@+id/delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -113,6 +116,7 @@
             android:background="@drawable/popxiahua" />
 
         <LinearLayout
+            android:id="@+id/report"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_7"

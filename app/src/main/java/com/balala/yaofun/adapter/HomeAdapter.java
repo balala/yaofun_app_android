@@ -25,18 +25,20 @@ import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter {
-    private final ArrayList<HomeBannerDean.DataBean.FirstBean> first;
+
+
+    private final List<HomeAllBean.DataBean.HotBean> homeAllBeans;
+    private final List<HomeBannerDean.DataBean.FirstBean> first;
     private Context context;
-    private ArrayList<HomeAllBean.DataBean.HotBean> homeAllBeans;
+
     private OnClickListener mListener;
     private OnClickListenerBanner mListenerBanner;
 
 
-    public HomeAdapter(Context context, ArrayList<HomeAllBean.DataBean.HotBean> homeAllBeans, ArrayList<HomeBannerDean.DataBean.FirstBean> first) {
+    public HomeAdapter(Context context, List<HomeAllBean.DataBean.HotBean> homeAllBeans, List<HomeBannerDean.DataBean.FirstBean> first) {
         this.context = context;
         this.homeAllBeans = homeAllBeans;
         this.first = first;
@@ -56,9 +58,11 @@ public class HomeAdapter extends RecyclerView.Adapter {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int itemViewType = getItemViewType(position);
+        Log.d("po", homeAllBeans.size() + "");
         if (itemViewType == 0) {
             BannerHolder banq = (BannerHolder) holder;
             banq.banner_item.setImages(first);
@@ -80,6 +84,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
             });
 
             banq.banner_item.setClipToOutline(true);
+//设置banner
+
         } else {
 
             if (homeAllBeans != null && !homeAllBeans.isEmpty()) {
@@ -119,17 +125,17 @@ public class HomeAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public int getItemCount() {
-        return homeAllBeans.size();
-    }
-
-    @Override
     public int getItemViewType(int position) {
         if (position == 3) {
             return 0;
         } else {
             return 1;
         }
+    }
+
+    @Override
+    public int getItemCount() {
+        return homeAllBeans.size();
     }
 
     public class BannerHolder extends RecyclerView.ViewHolder {

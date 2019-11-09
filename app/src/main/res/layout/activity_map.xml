@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/maprl"
     tools:context=".activity.AmapRouteActivity">
+
 
 
     <com.amap.api.maps.MapView
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/mapll"
-         />
+        android:layout_above="@+id/mapll" />
 
 
     <LinearLayout
@@ -25,10 +26,10 @@
 
         <TextView
             android:id="@+id/maptext1"
-            android:layout_marginTop="@dimen/dp_10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_18"
+            android:layout_marginTop="@dimen/dp_10"
             android:layout_marginBottom="@dimen/dp_8"
             android:text="亚运村图书大厦（北京市朝阳区）"
             android:textColor="@color/mapblack"
@@ -50,11 +51,10 @@
         android:id="@+id/mapgo"
         android:layout_width="@dimen/dp_44"
         android:layout_height="@dimen/dp_44"
-        android:layout_alignParentTop="@dimen/dp_5"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="@dimen/dp_18"
-        android:layout_marginBottom="@dimen/dp_19"
+        android:layout_marginBottom="@dimen/dp_25"
         android:src="@drawable/mapicon" />
 
     <ImageView

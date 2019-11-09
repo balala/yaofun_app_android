@@ -68,7 +68,7 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int itemViewType = getItemViewType(position);
-        if (itemViewType == 0 && beanArrayList!=null) {
+        if (itemViewType == 0 && beanArrayList != null) {
             BannerHolder banq = (BannerHolder) holder;
             banq.banner_item.setImages(beanArrayList);
             banq.banner_item.setImageLoader(new MyLoder());
@@ -139,14 +139,13 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-
+        Log.i("适配器长度", "getItemCount: " + recommendBeans.size());
         return recommendBeans.size();
     }
 
     class MyLoder extends ImageLoader {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
-
             HomeBannerDean.DataBean.SecondBean da = (HomeBannerDean.DataBean.SecondBean) path;
             String imagePath = da.getCover();
             Glide.with(context).load(imagePath).into(imageView);

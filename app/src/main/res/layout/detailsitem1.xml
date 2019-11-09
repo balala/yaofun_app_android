@@ -18,7 +18,6 @@
     android:layout_marginLeft="@dimen/dp_21"
     android:layout_marginTop="@dimen/dp_41"
     android:layout_marginRight="@dimen/dp_24"
-    android:text="无非是借着梦的名义做自己罢如果说戏剧是所有难以启齿的梦想的保护色此刻，到底是戏如人生还是人生如戏？白日悠长，不免梦多2019北京国际花植设计节意图收集所有白日绵长的时间与炙热的梦想送给每一个敢于做梦的你"
     android:textColor="@color/colorwhite"
     android:textSize="@dimen/sp_15" />
 </LinearLayout>

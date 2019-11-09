@@ -300,14 +300,15 @@
                 android:textColor="@color/colorwhite"
                 android:textSize="@dimen/sp_14" />
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/createfun_choose"
                 android:layout_width="@dimen/dp_50"
+                android:button="@null"
                 android:layout_height="@dimen/dp_30"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dp_17"
                 android:layout_marginRight="@dimen/dp_17"
-                android:src="@drawable/createfunopencolse" />
+                android:background="@drawable/createfunopencolse" />
 
             <TextView
                 android:layout_width="wrap_content"

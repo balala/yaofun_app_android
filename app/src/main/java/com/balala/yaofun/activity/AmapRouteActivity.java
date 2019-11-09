@@ -1,18 +1,41 @@
 package com.balala.yaofun.activity;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.hardware.camera2.params.BlackLevelPattern;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdate;
+import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.services.cloud.CloudItem;
@@ -22,10 +45,13 @@ import com.amap.api.services.cloud.CloudSearch;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.balala.yaofun.R;
+import com.balala.yaofun.util.MapUtil;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.balala.yaofun.R.color.black;
 
 //implements LocationSource, AMapLocationListener
 public class AmapRouteActivity extends AppCompatActivity {
@@ -57,6 +83,11 @@ public class AmapRouteActivity extends AppCompatActivity {
     private AMapLocationClientOption option;
     private int latitudes;
     private int longitudes;
+    private UiSettings mUiSettings;
+    private CameraUpdate mUpdata;
+    private String name;
+    private TextView mapbackground;
+    private RelativeLayout maprl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,21 +102,26 @@ public class AmapRouteActivity extends AppCompatActivity {
         mMap = (MapView) findViewById(R.id.map);
         mMap.onCreate(savedInstanceState);
         mMapll = (LinearLayout) findViewById(R.id.mapll);
+        maprl = (RelativeLayout) findViewById(R.id.maprl);
         mMapback = (ImageView) findViewById(R.id.mapback);
-
         mMaptext1 = (TextView) findViewById(R.id.maptext1);
         mMaptex2 = (TextView) findViewById(R.id.maptex2);
         mMapgo = (ImageView) findViewById(R.id.mapgo);
 
-        Bundle extras = getIntent().getExtras();
-        address = extras.getString("address");
-        latitude = extras.getString("latitude");
-        longitude = extras.getString("longitude");
+        Intent intent = getIntent();
+        address = intent.getStringExtra("address");
+        name = intent.getStringExtra("name");
+        latitude = intent.getStringExtra("latitude");
+        address = intent.getStringExtra("address");
+        longitude = intent.getStringExtra("longitude");
+
         //转换为Int类型
         latitudes = Double.valueOf(latitude).intValue();
         //转换为Int类型
         longitudes = Double.valueOf(longitude).intValue();
-        mMaptext1.setText(address);
+        mMaptext1.setText(name);
+        mMaptex2.setText(address);
+        Log.i("经纬度啦啦", "initView: " + "latitudes" + latitudes + "longitudes" + longitudes);
         //完成当前页面操作
         mMapback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,32 +133,99 @@ public class AmapRouteActivity extends AppCompatActivity {
         if (aMap == null) {
             aMap = mMap.getMap();
         }
-
-        MyLocationStyle myLocationStyle;
-        myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类myLocationStyle.myLocationType(MyLocatio=nStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
-        myLocationStyle.interval(2000); //设置连续定位模式下的定位间隔，只在连续定位模式下生效，单次定位模式下不会生效。单位为毫秒。
-        aMap.setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
         aMap.getUiSettings().setMyLocationButtonEnabled(true);//设置默认定位按钮是否显示，非必需设置。
         aMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
 
-        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）默认执行此种模式。
-        myLocationStyle.showMyLocation(true);
-        myLocationStyle.anchor(1, 1);
-        myLocationStyle.strokeColor(Color.BLUE);
-        myLocationStyle.strokeColor(Color.GREEN);
-        myLocationStyle.strokeWidth(1);
-        //        LatLng latLng = new LatLng(latitudes, longitudes);
-//        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19));
-//        //设置远小近大效果,设置刷新一次图片资源的周期。
-//        MarkerOptions markerOption = new MarkerOptions();
-//        markerOption.position(latLng);
-//        markerOption.title(address).snippet("纬度" + latitude + "经度" + longitude);
-//        markerOption.draggable(true);
-//        markerOption.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
-//        aMap.addMarker(markerOption);
+        init();
+        mMapgo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                maprl.setBackground();
+                View mPopView = getLayoutInflater().inflate(R.layout.mappopupitem, null);
+                PopupWindow popupWindow = new PopupWindow();
+                popupWindow.setContentView(mPopView);
+                popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+                popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.showAtLocation(mMap, Gravity.BOTTOM, 0, 0);
+                TextView gaode = mPopView.findViewById(R.id.gaode);
+                TextView baidu = mPopView.findViewById(R.id.baidu);
+                TextView tengxun = mPopView.findViewById(R.id.tengxun);
+                TextView mapcancel = mPopView.findViewById(R.id.mapcancel);
+                gaode.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (MapUtil.isGdMapInstalled()) {
+                            MapUtil.openGaoDeNavi(AmapRouteActivity.this, 0, 0, null, latitudes, longitudes, address);
+                        } else {
+                            //这里必须要写逻辑，不然如果手机没安装该应用，程序会闪退，这里可以实现下载安装该地图应用
+                            Toast.makeText(AmapRouteActivity.this, "尚未安装高德地图", Toast.LENGTH_SHORT).show();
+                        }
 
+                    }
+
+                });
+                baidu.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (MapUtil.isBaiduMapInstalled()) {
+                            MapUtil.openBaiDuNavi(AmapRouteActivity.this, 0, 0, null, latitudes, longitudes, address);
+                        } else {
+                            Toast.makeText(AmapRouteActivity.this, "尚未安装百度地图", Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }
+
+                });
+                tengxun.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (MapUtil.isTencentMapInstalled()) {
+                            MapUtil.openTencentMap(AmapRouteActivity.this, 0, 0, null, latitudes, longitudes, address);
+                        } else {
+                            Toast.makeText(AmapRouteActivity.this, "尚未安装腾讯地图", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                });
+                mapcancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+
+                });
+            }
+        });
     }
 
+    /**
+     *     * 初始化AMap对象
+     *    
+     */
+
+    private void init() {
+        if (aMap == null) {
+            aMap = mMap.getMap();
+            mUiSettings = aMap.getUiSettings();
+            mUiSettings.setZoomControlsEnabled(false);
+            mUiSettings.setCompassEnabled(true);
+            mUpdata = CameraUpdateFactory.newCameraPosition(
+                    //15是缩放比例，0是倾斜度，30显示比例
+                    new CameraPosition(new LatLng(latitudes, longitudes), 15, 0, 30));//这是地理位置，就是经纬度。
+            aMap.moveCamera(mUpdata);//定位的方法
+            drawMarkers();
+        }
+    }
+
+
+    public void drawMarkers() {
+        Marker marker = aMap.addMarker(new MarkerOptions().position(new LatLng(latitudes, longitudes))
+                .draggable(true));
+        marker.showInfoWindow();// 设置默认显示一个infowinfow
+    }
 
     @Override
     protected void onDestroy() {

@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -33,6 +34,7 @@ import com.balala.yaofun.bean.UploadPickBean;
 import com.balala.yaofun.util.CustomEditText;
 import com.balala.yaofun.util.MyServer;
 import com.balala.yaofun.util.ToastUtils;
+import com.bigkoo.pickerview.TimePickerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
@@ -43,7 +45,9 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,8 +77,6 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
     ImageView openfunphoto;
     @BindView(R.id.openfunaddimg)
     RelativeLayout mOpenfunaddimg;
-    @BindView(R.id.openfun_doback)
-    ImageView mOpenfunDoback;
     @BindView(R.id.openfunimgs)
     ImageView openfunimgs;
     @BindView(R.id.openfun_name)
@@ -82,31 +84,37 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
     @BindView(R.id.openfun_resume)
     CustomEditText mOpenfunResume;
     @BindView(R.id.openfun_dotext)
-    CustomEditText mOpenfunDotext;
+    TextView mOpenfunDotext;
     @BindView(R.id.openfun_activitytext)
     CustomEditText mOpenfunActivitytext;
     @BindView(R.id.openfun_jointext)
-    CustomEditText mOpenfunJointext;
+    TextView mOpenfunJointext;
     @BindView(R.id.openfun_interesttext)
-    CustomEditText mOpenfunInteresttext;
+    TextView mOpenfunInteresttext;
     @BindView(R.id.openfun_applypeoplecontent)
-    CustomEditText mOpenfunApplypeoplecontent;
+    EditText mOpenfunApplypeoplecontent;
     @BindView(R.id.openfuninterestback)
     ImageView mOpenfuninterestback;
     @BindView(R.id.openfun_interestback)
     ImageView mOpenfunInterestback;
     @BindView(R.id.openfun_applytext)
     TextView mOpenfunApplytext;
-    @BindView(R.id.openfunapplyback)
-    ImageView mOpenfunapplyback;
-    @BindView(R.id.openfun_applypeopleback)
-    ImageView mOpenfunApplypeopleback;
     @BindView(R.id.openfun_activitydetailsback)
     ImageView mOpenfunActivitydetailsback;
     @BindView(R.id.openfun_interestadd)
     ImageView mOpenfunInterestadd;
     @BindView(R.id.open_immediately)
     Button mOpenImmediately;
+    @BindView(R.id.where)
+    RelativeLayout where;
+    @BindView(R.id.funrt)
+    RelativeLayout funrt;
+    @BindView(R.id.begintime)
+    RelativeLayout begintime;
+    @BindView(R.id.overtime)
+    RelativeLayout overtime;
+    @BindView(R.id.openfun_applyedit)
+    EditText openfun_applyedit;
 
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
     /**
@@ -114,7 +122,7 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
      */
     public final static int SELECT_IMAGE_RESULT_CODE = 200;
     //    @BindView(R.id.openfunimg)
-   //    ImageView openfunlayout;
+    //    ImageView openfunlayout;
     private String picturePath;
     // 当前日期
     private int currYear;
@@ -140,7 +148,7 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.openfunback, R.id.openfunimg, R.id.openfunaddimg, R.id.openfun_name, R.id.openfun_resume, R.id.openfun_dotext, R.id.openfun_doback, R.id.openfun_activitytext, R.id.openfun_jointext, R.id.openfuninterestback, R.id.openfun_interesttext, R.id.openfun_interestback, R.id.openfun_applytext, R.id.openfunapplyback, R.id.openfun_applypeoplecontent, R.id.openfun_applypeopleback, R.id.openfun_activitydetailsback, R.id.openfun_interestadd, R.id.open_immediately})
+    @OnClick({R.id.openfunback, R.id.openfunimg, R.id.openfunaddimg, R.id.openfun_name, R.id.openfun_resume, R.id.openfun_dotext, R.id.openfun_activitytext, R.id.openfun_jointext, R.id.openfuninterestback, R.id.openfun_interesttext, R.id.openfun_interestback, R.id.openfun_applytext, R.id.openfun_applypeoplecontent, R.id.openfun_activitydetailsback, R.id.openfun_interestadd, R.id.open_immediately, R.id.where, R.id.funrt, R.id.begintime, R.id.overtime})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -148,8 +156,7 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
             case R.id.openfunback:
                 finish();
                 break;
-//            case R.id.openfunrv:
-//                break;
+
             case R.id.openfunimg:
                 openAlbum();
 
@@ -159,30 +166,29 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
             case R.id.openfun_name:
                 break;
             case R.id.openfun_resume:
+
                 break;
             case R.id.openfun_dotext:
                 break;
-            case R.id.openfun_doback:
-                break;
+
             case R.id.openfun_activitytext:
                 break;
             case R.id.openfun_jointext:
                 break;
             case R.id.openfuninterestback:
-                openTimeTicker(true);
+
                 break;
             case R.id.openfun_interesttext:
                 break;
             case R.id.openfun_interestback:
-                openTimeTicker(false);
+
                 break;
             case R.id.openfun_applytext:
+                mOpenfunApplytext.setVisibility(View.GONE);
+                openfun_applyedit.setVisibility(View.VISIBLE);
                 break;
-            case R.id.openfunapplyback:
-                break;
+
             case R.id.openfun_applypeoplecontent:
-                break;
-            case R.id.openfun_applypeopleback:
                 break;
             case R.id.openfun_activitydetailsback:
                 break;
@@ -190,29 +196,56 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
                 break;
             case R.id.open_immediately:
                 break;
+            case R.id.where:
+                startActivity(new Intent(PromotionalActivitiesActivity.this, PromotionalMapActivity.class));
+                break;
+            case R.id.begintime:
+                openTimeTicker1();
+                break;
+            case R.id.overtime:
+                openTimeTicker2();
+                break;
+            case R.id.funrt:
+                startActivity(new Intent(PromotionalActivitiesActivity.this, CreateFunActivity.class));
+                break;
+
         }
     }
 
-    //时间选择器
-    private void openTimeTicker(final boolean isStart) {
-        Calendar currentTime = Calendar.getInstance();
-        new TimePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, new TimePickerDialog.OnTimeSetListener() {
+    private void openTimeTicker1() {
+        //时间选择器
+        TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
-            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                if (isStart) {
-                    startHour = i;
-                    startMinute = i1;
-
-                    mOpenfunJointext.setText(startHour + ":" + startMinute + "");
-                } else {
-                    endHour = i;
-                    endMinute = i1;
-                    mOpenfunInteresttext.setText(endHour + ":" + endMinute + "");
-                }
+            public void onTimeSelect(Date date, View v) {//选中事件回调
+                mOpenfunJointext.setText(getTime(date));
             }
-        }, currentTime.get(Calendar.HOUR_OF_DAY), currentTime.get(Calendar.MINUTE), true).show();
+        }).build();
+        pvTime.setDate(Calendar.getInstance());
+        //注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
+        pvTime.show();
     }
+
+    private void openTimeTicker2() {
+        //时间选择器
+        TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onTimeSelect(Date date, View v) {//选中事件回调
+                mOpenfunInteresttext.setText(getTime(date));
+            }
+
+        }).build();
+        pvTime.setDate(Calendar.getInstance());
+        //注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
+        pvTime.show();
+    }
+
+    private String getTime(Date date) {//可根据需要自行截取数据显示
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return format.format(date);
+    }
+
 
     private void takePick() {//相册Sd卡权限
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -354,6 +387,7 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
                     mOpenfunJointext.clearFocus();
                     mOpenfunInteresttext.clearFocus();
                     mOpenfunApplypeoplecontent.clearFocus();
+                    openfun_applyedit.clearFocus();
                 }
             }
             return super.dispatchTouchEvent(ev);

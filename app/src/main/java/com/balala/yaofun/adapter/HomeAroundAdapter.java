@@ -73,7 +73,11 @@ public class HomeAroundAdapter extends RecyclerView.Adapter<HomeAroundAdapter.Vi
 
     @Override
     public int getItemCount() {
+        Log.i("适配器长度", "getItemCount: "+aroundBeans.size());
+
         return aroundBeans.size();
+
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

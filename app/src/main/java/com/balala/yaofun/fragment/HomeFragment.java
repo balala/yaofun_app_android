@@ -23,6 +23,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -143,7 +144,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     @BindView(R.id.homeperchs)
     ImageView homeperchs;
     @BindView(R.id.sv)
-    MyScrollView sv;
+    NestedScrollView sv;
 
     private PopupWindow popupWindow;
     private int reclen = 3;
@@ -280,7 +281,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recycleView1.setLayoutManager(linearLayoutManager);
         Log.e(TAG, "onSuccessHomeall: " + first);
-        homeAdapter = new HomeAdapter(getContext(), (ArrayList<HomeAllBean.DataBean.HotBean>) hot, (ArrayList<HomeBannerDean.DataBean.FirstBean>) first);
+        homeAdapter = new HomeAdapter(getContext(), hot, first);
         recycleView1.setAdapter(homeAdapter);
         //展示全部的recycleView
 //        recycleView1.setNestedScrollingEnabled(false);
@@ -460,8 +461,11 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         homeAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                if (hasLogin()) {
                 //进入实名认证页面
                 startActivity(new Intent(getContext(), AuthenticationActivity.class));
+//                }
+
                 // 跳入发布活动的页面
 //                startActivity(new Intent(getContext(), PromotionalActivitiesActivity.class));
             }
