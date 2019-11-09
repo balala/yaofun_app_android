@@ -10,9 +10,9 @@
         android:layout_marginLeft="@dimen/dp_20"
         android:layout_alignParentLeft="true"
         android:id="@+id/back"
-        android:layout_width="17.5dp"
+        android:layout_width="31dp"
         android:layout_height="15dp"
-        android:src="@drawable/back"
+        android:src="@mipmap/back1"
         />
     <TextView
         android:id="@+id/title"

@@ -37,6 +37,12 @@ import static com.balala.yaofun.httpUtils.MyApp.getBaseMap;
 public class ApiModel extends BaseModel implements BaseView {
     private static MyServer movieService = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
 
+
+    //获取用户详情
+    public static void getUserDetail(String user_id,Map<String, ? extends Object> map, ResultCallBack<BaseBean<UserBean>> resultCallBack) {
+        setSubscribe(movieService.getUserDetail(user_id,getBaseMap(map)), resultCallBack);
+    }
+
     //通讯录：只包含好友
     public static void mail_list_user(Map<String, ? extends Object> map, ResultCallBack<BaseBean<List<MailListBean>>> resultCallBack) {
         setSubscribe(movieService.mail_list_user(getBaseMap(map)), resultCallBack);

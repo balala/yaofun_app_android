@@ -21,9 +21,13 @@ import com.balala.yaofun.view.ContactSortModel;
 import com.balala.yaofun.view.EditTextWithDel;
 import com.balala.yaofun.view.MailListView;
 import com.balala.yaofun.view.SideBar;
+import com.gyf.immersionbar.ImmersionBar;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import io.rong.imkit.RongIM;
+
 import static com.balala.yaofun.httpUtils.MyApp.INTERACTIVE_ASSISTANT;
 import static com.balala.yaofun.httpUtils.MyApp.SERVICE_ASSISTANT;
 
@@ -37,11 +41,11 @@ public class MailListActivity extends BaseActivity<MailListPresenter, MailListVi
     private List<MailListUserBean> SourceDateList=new ArrayList<>();
     @Override
     protected void initView() {
-//        ImmersionBar.with(this)
-//                .statusBarColor(R.color.black) //导航栏背景色
+        ImmersionBar.with(this)
+                .statusBarColor(R.color.black) //导航栏背景色
 //                .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
 //                .flymeOSStatusBarFontColor(R.color.colorAccent)
-//                .init();
+                .init();
 
         findViewById(R.id.back).setOnClickListener(v->{
             finish();
@@ -62,22 +66,22 @@ public class MailListActivity extends BaseActivity<MailListPresenter, MailListVi
      * @param filterStr
      */
     private void filterData(String filterStr) {
-//        List<ContactSortModel> mSortList = new ArrayList<>();
-//        if (TextUtils.isEmpty(filterStr)) {
-//            mSortList = SourceDateList;
-//        } else {
-//            mSortList.clear();
-//            for (ContactSortModel sortModel : SourceDateList) {
-//                String name = sortModel.getName();
-//                if (name.toUpperCase().indexOf(filterStr.toString().toUpperCase()) != -1 ||
-//                        PinyinUtils.getPingYin(name).toUpperCase().startsWith(filterStr.toString().toUpperCase())) {
-//                    mSortList.add(sortModel);
-//                }
-//            }
-//        }
-//        // 根据a-z进行排序
+        List<MailListUserBean> mSortList = new ArrayList<>();
+        if (TextUtils.isEmpty(filterStr)) {
+            mSortList = SourceDateList;
+        } else {
+            mSortList.clear();
+            for (MailListUserBean sortModel : SourceDateList) {
+                String name = sortModel.getName();
+                if (name.toUpperCase().indexOf(filterStr.toString().toUpperCase()) != -1 ||
+                        PinyinUtils.getPingYin(name).toUpperCase().startsWith(filterStr.toString().toUpperCase())) {
+                    mSortList.add(sortModel);
+                }
+            }
+        }
+        // 根据a-z进行排序
 //        Collections.sort(mSortList, new PinyinComparator());
-//        adapter.updateListView(mSortList);
+        adapter.updateListView(mSortList);
     }
 
 
@@ -101,8 +105,9 @@ public class MailListActivity extends BaseActivity<MailListPresenter, MailListVi
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                mTvTitle.setText(((ContactSortModel) adapter.getItem(position - 1)).getName());
-                Toast.makeText(getApplication(), ((ContactSortModel) adapter.getItem(position)).getName(), Toast.LENGTH_SHORT).show();
+                RongIM.getInstance().startPrivateChat(MailListActivity.this,
+                        SourceDateList.get(position).getObject_id(),
+                        SourceDateList.get(position).getName());
             }
         });
 
@@ -171,25 +176,25 @@ public class MailListActivity extends BaseActivity<MailListPresenter, MailListVi
 
     }
 
-    private List<UserBean> filledData(List<UserBean> date) {
-        ArrayList<String> indexString = new ArrayList<>();
-
-        for (int i = 0; i < date.size(); i++) {
-//            ContactSortModel sortModel = new ContactSortModel();
-//            sortModel.setName(date[i]);
-            String pinyin = PinyinUtils.getPingYin(date.get(i).getNick_name());
-            String sortString = pinyin.substring(0, 1).toUpperCase();
-            if (sortString.matches("[A-Z]")) {
-                date.get(i).setSortLetters(sortString.toUpperCase());
-                if (!indexString.contains(sortString)) {
-                    indexString.add(sortString);
-                }
-            }
-        }
-        Collections.sort(indexString);
-        sideBar.setIndexText(indexString);
-        return date;
-    }
+//    private List<UserBean> filledData(List<UserBean> date) {
+//        ArrayList<String> indexString = new ArrayList<>();
+//
+//        for (int i = 0; i < date.size(); i++) {
+////            ContactSortModel sortModel = new ContactSortModel();
+////            sortModel.setName(date[i]);
+//            String pinyin = PinyinUtils.getPingYin(date.get(i).getNick_name());
+//            String sortString = pinyin.substring(0, 1).toUpperCase();
+//            if (sortString.matches("[A-Z]")) {
+//                date.get(i).setSortLetters(sortString.toUpperCase());
+//                if (!indexString.contains(sortString)) {
+//                    indexString.add(sortString);
+//                }
+//            }
+//        }
+//        Collections.sort(indexString);
+//        sideBar.setIndexText(indexString);
+//        return date;
+//    }
 
     @Override
     public void mail_list_userFail(String msg) {

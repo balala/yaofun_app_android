@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.balala.yaofun.R;
 import com.balala.yaofun.bean.MailListUserBean;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -50,7 +52,8 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
         if (view == null) {
             viewHolder = new ViewHolder();
             view = LayoutInflater.from(mContext).inflate(R.layout.item_contact, null);
-            viewHolder.tvTitle = (TextView) view.findViewById(R.id.tv_city_name);
+            viewHolder.tv_name = (TextView) view.findViewById(R.id.tv_name);
+            viewHolder.iv_img = (ImageView) view.findViewById(R.id.iv_img);
             view.setTag(viewHolder);
             viewHolder.tvLetter = (TextView) view.findViewById(R.id.tv_catagory);
         } else {
@@ -62,11 +65,12 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
         if (position == getPositionForSection(section)) {
             viewHolder.tvLetter.setVisibility(View.VISIBLE);
             viewHolder.tvLetter.setText(mContent.getZimu());
+            Glide.with(mContext).load(mContent.getImages()).into(viewHolder.iv_img);
         } else {
             viewHolder.tvLetter.setVisibility(View.GONE);
         }
 
-        viewHolder.tvTitle.setText(this.list.get(position).getName());
+        viewHolder.tv_name.setText(this.list.get(position).getName());
 
         return view;
 
@@ -75,7 +79,8 @@ public class SortAdapter extends BaseAdapter implements SectionIndexer {
 
     final static class ViewHolder {
         TextView tvLetter;
-        TextView tvTitle;
+        TextView tv_name;
+        ImageView iv_img;
     }
 
     public int getSectionForPosition(int position) {

@@ -39,10 +39,13 @@ import retrofit2.http.QueryMap;
 public interface MyServer {
 
     //   String url = "https://192.168.0.164:8088/api/";
+    // String url = "http://192.168.110.144:5001/api/";
     String url = "https://test.yaofun.vip/api/";
 //    String url = "http://192.168.110.131:5001/api/";
 //    String url = "https://api.yaofun.vip/api/";
-    // String url = "http://192.168.110.131:5001/api/";
+//    String url = "https://test.yaofun.vip/api/";
+   // String url = "http://192.168.110.131:5001/api/";
+//    String url = "https://api.yaofun.vip/api/";
 
     // http://test.yaofun.vip/api/verification_code/send
     // 发送验证码的接口 verification code
@@ -77,13 +80,15 @@ public interface MyServer {
     @FormUrlEncoded
     Observable<BaseBean<UserBean>> goChangePassword(@FieldMap Map<String, Object> map);
 
-    //胡融云token
+    //融云token
     @GET("rong_cloud/getToken")
     Observable<BaseBean<String>> getRCToken(@QueryMap Map<String, Object> map);
 
-    //顶部每日一句
-    // https://test.yaofun.vip/api/mood/one
+    //用户或者群组详情
+    @GET("user/detail/{user_id}")
+    Observable<BaseBean<UserBean>> getUserDetail(@Path("user_id") String user_id,@QueryMap Map<String, Object> map);
 
+    //顶部每日一句
     @GET("mood/one")
     Observable<BaseBean<DayBeans.DataBean>> getDayData(@QueryMap Map<String, Object> map);
 

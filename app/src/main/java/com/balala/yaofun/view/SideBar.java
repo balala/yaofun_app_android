@@ -20,7 +20,7 @@ import java.util.List;
  * ListView右侧的字母索引View
  */
 public class SideBar extends View {
-
+    public static String backgroundColor="#444444";
     public static String[] INDEX_STRING = {"A", "B", "C", "D", "E", "F", "G", "H", "I",
             "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
             "W", "X", "Y", "Z"};
@@ -45,7 +45,7 @@ public class SideBar extends View {
     }
 
     private void init() {
-        setBackgroundColor(Color.parseColor("#FFFFFF"));
+        setBackgroundColor(Color.parseColor(backgroundColor));
         letterList = Arrays.asList(INDEX_STRING);
     }
 
@@ -55,13 +55,13 @@ public class SideBar extends View {
         int width = getWidth();// 获取对应宽度
         int singleHeight = height / letterList.size();// 获取每一个字母的高度
         for (int i = 0; i < letterList.size(); i++) {
-            paint.setColor(Color.parseColor("#606060"));
+            paint.setColor(Color.parseColor("#ffffff"));
             paint.setTypeface(Typeface.DEFAULT_BOLD);
             paint.setAntiAlias(true);
             paint.setTextSize(20);
             // 选中的状态
             if (i == choose) {
-                paint.setColor(Color.parseColor("#4F41FD"));
+                paint.setColor(Color.parseColor("#666666"));
                 paint.setFakeBoldText(true);
             }
             // x坐标等于中间-字符串宽度的一半.
@@ -82,7 +82,7 @@ public class SideBar extends View {
 
         switch (action) {
             case MotionEvent.ACTION_UP:
-                setBackgroundColor(Color.parseColor("#FFFFFF"));
+                setBackgroundColor(Color.parseColor(backgroundColor));
                 choose = -1;
                 invalidate();
                 if (mTextDialog != null) {
@@ -90,7 +90,7 @@ public class SideBar extends View {
                 }
                 break;
             default:
-                setBackgroundResource(R.drawable.bg_sidebar);
+//                setBackgroundResource(R.drawable.bg_sidebar);
                 if (oldChoose != c) {
                     if (c >= 0 && c < letterList.size()) {
                         if (listener != null) {
