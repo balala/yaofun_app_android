@@ -7,11 +7,10 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import com.balala.yaofun.bean.BaseBean;
 import com.balala.yaofun.bean.UserBean;
 import com.balala.yaofun.event.LoginSuccessEvent;
 import com.balala.yaofun.event.SignOutSuccessEvent;
-import com.balala.yaofun.model.ApiModel;
+import com.balala.yaofun.provider.CustomPrivateConversationProvider;
 import com.balala.yaofun.util.ACache;
 import com.balala.yaofun.util.ForLog;
 import com.balala.yaofun.util.Utils;
@@ -24,11 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.rong.imkit.RongIM;
-import io.rong.imlib.RongIMClient;
 
-import static com.amap.api.maps.model.BitmapDescriptorFactory.getContext;
 import static com.balala.yaofun.httpUtils.IMManager.IMLogout;
-import static com.balala.yaofun.httpUtils.IMManager.initConnectStateChangeListener;
+import static com.balala.yaofun.httpUtils.IMManager.connectRongIM;
 import static com.balala.yaofun.util.Utils.getNowDate;
 
 public class MyApp extends Application {
@@ -56,17 +53,18 @@ public class MyApp extends Application {
                 ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"");
         //微信平台
         PlatformConfig.setWeixin("wx24009bcc9adc6318", "aa1643259ceb30e64ccef3a4ce63459b");
-
+        getPhoneInformation();
         //读取缓存登陆信息
         ACache aCache=ACache.get(this);
         user= (UserBean) aCache.getAsObject("user");
         if(user!=null){
+            ForLog.e("本地读取数据"+user);
             goLogin(user);
         }else{
             signOut();
         }
-        ForLog.e("本地读取数据"+user);
-        getPhoneInformation();
+        RongIM.getInstance().registerConversationTemplate(new CustomPrivateConversationProvider());
+
 
         //mark备注：为了方便测试登录注册模块，默认直接退出登录
 //        signOut();
@@ -135,38 +133,7 @@ public class MyApp extends Application {
         connectRongIM(user.getRc_token());
     }
 
-    public static void connectRongIM(String token){
-        ForLog.e("RongIM---token:"+token);
-        token="pfvUiiCvjroEqa0usyOe2otDThrZbuv4tvKiHu/pQzVsegLaQ6JF2BwaRlEoj2Zaa/AQa+Gf9Tvejgc1rGk+pJ/HYc+h8E/j70dew6njt0bNJpgEfnLcZA==";
-        RongIM.connect(token, new RongIMClient.ConnectCallback() {
-            @Override
-            public void onTokenIncorrect() {
-                ForLog.e("RongIM---Token 错误");
-//                ApiModel.getRCToken(null, new ResultCallBack<BaseBean<String>>() {
-//                    @Override
-//                    public void onSuccess(BaseBean<String> bean) {
-//                        ForLog.e("请求成功" + bean);
-//                        connectRongIM(bean.getData());
-//                    }
-//
-//                    @Override
-//                    public void onFail(String msg) {
-//                        ForLog.e("RongIM---请求获取token失败:"+msg);
-//                    }
-//                });
-            }
-            @Override
-            public void onSuccess(String userid) {
-                ForLog.e("RongIM---onSuccess:"+userid);
-                //融云链接成功之后，监听状态
-                initConnectStateChangeListener();
-            }
-            @Override
-            public void onError(RongIMClient.ErrorCode errorCode) {
-                ForLog.e("RongIM---onError:"+errorCode);
-            }
-        });
-    }
+
 
     @Override
 

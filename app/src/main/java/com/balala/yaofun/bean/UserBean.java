@@ -25,7 +25,7 @@ public  class UserBean implements Serializable {
     //头像
     private String images;
     //个人签名列表
-    private String autograph;
+    private String autograph_str;
     //性别
     private String sex;
     //微信UnionidID
@@ -173,14 +173,6 @@ public  class UserBean implements Serializable {
 
     public void setImages(String images) {
         this.images = images;
-    }
-
-    public String getAutograph() {
-        return autograph;
-    }
-
-    public void setAutograph(String autograph) {
-        this.autograph = autograph;
     }
 
     public String getSex() {
@@ -464,6 +456,14 @@ public  class UserBean implements Serializable {
         this.sortLetters = sortLetters;
     }
 
+    public String getAutograph_str() {
+        return autograph_str;
+    }
+
+    public void setAutograph_str(String autograph_str) {
+        this.autograph_str = autograph_str;
+    }
+
     @Override
     public String toString() {
         return "UserBean{" +
@@ -479,7 +479,7 @@ public  class UserBean implements Serializable {
                 ", birthday_day='" + birthday_day + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", images='" + images + '\'' +
-                ", autograph='" + autograph + '\'' +
+                ", autograph_str='" + autograph_str + '\'' +
                 ", sex='" + sex + '\'' +
                 ", wx_unionid='" + wx_unionid + '\'' +
                 ", openid_public='" + openid_public + '\'' +

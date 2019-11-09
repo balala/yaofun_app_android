@@ -129,9 +129,12 @@ dependencies {
 
     implementation 'com.github.wildma:PictureSelector:1.0.0'
 
-    api 'cn.rongcloud.sdk:im_kit:2.10.0'
+//    api 'cn.rongcloud.sdk:im_kit:2.10.0'
     //im_kit必须依赖im_lib，所以需要加入对应依赖
-    api 'cn.rongcloud.sdk:im_lib:2.10.0'
+//    api 'cn.rongcloud.sdk:im_lib:2.10.0'
+//    implementation project(':IMKit') // 添加依赖模块
+//    implementation project(':IMKLib') // 添加依赖模块
+    api project (':IMKit')
 
     implementation files('libs/pinyin4j-2.5.0.jar')
 
@@ -141,5 +144,6 @@ dependencies {
     implementation 'com.gyf.immersionbar:immersionbar-components:3.0.0'
 
     implementation 'com.bm.photoview:library:1.4.1'
+
 
 }

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorblack"
     tools:context=".fragment.MessageFragment2">
 
     <ImageView
@@ -23,11 +22,14 @@
         android:visibility="gone" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="#444444"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
         <fragment
+            android:background="#444444"
             android:id="@+id/conversationlist"
-            android:name="io.rong.imkit.fragment.ConversationListFragment"
+            android:name="com.balala.yaofun.fragment.SubConversationListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

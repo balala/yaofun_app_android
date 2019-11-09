@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/c181818"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <include
@@ -17,18 +18,25 @@
 
         <com.balala.yaofun.view.EditTextWithDel
             android:id="@+id/et_search"
-            android:hint="搜索118位联系人"
+            android:hint="搜索"
+            android:drawablePadding="10dp"
             android:singleLine="true"
             android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:textSize="14dp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
             android:background="@drawable/shape_border_grey"
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:textColorHint="@color/c666666"
+            android:textColor="@color/color_white"
+            />
 
         <FrameLayout
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
