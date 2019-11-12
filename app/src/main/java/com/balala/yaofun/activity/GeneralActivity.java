@@ -21,7 +21,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.balala.yaofun.MyApp.hasLogin;
+import static com.balala.yaofun.httpUtils.MyApp.hasLogin;
+
 
 public class GeneralActivity extends AppCompatActivity {
 

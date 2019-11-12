@@ -78,7 +78,7 @@ import butterknife.BindView;
 import io.rong.imkit.MainActivity;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
-import static com.balala.yaofun.MyApp.hasLogin;
+import static com.balala.yaofun.httpUtils.MyApp.hasLogin;
 
 
 /**

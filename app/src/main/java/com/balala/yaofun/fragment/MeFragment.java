@@ -21,7 +21,8 @@ import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.BindView;
 
-import static com.balala.yaofun.MyApp.user;
+import static com.balala.yaofun.httpUtils.MyApp.user;
+
 
 /**
  * A simple {@link Fragment} subclass.

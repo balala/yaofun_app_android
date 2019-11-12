@@ -14,7 +14,8 @@ import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.UserInfo;
 
-import static com.balala.yaofun.MyApp.signOut;
+import static com.balala.yaofun.httpUtils.MyApp.signOut;
+
 
 public class IMManager {
 

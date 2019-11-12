@@ -2,7 +2,7 @@ package com.balala.yaofun.util;
 
 import android.widget.Toast;
 
-import com.balala.yaofun.MyApp;
+import com.balala.yaofun.httpUtils.MyApp;
 
 
 /**

@@ -11,6 +11,8 @@ import com.flyco.animation.Attention.Swing;
 import com.flyco.dialog.utils.CornerUtils;
 import com.flyco.dialog.widget.base.BaseDialog;
 
+import static com.balala.yaofun.httpUtils.SystemUtil.dp2px;
+
 
 public class CustomBaseDialog extends BaseDialog<CustomBaseDialog> {
     private Button tv_cancel;

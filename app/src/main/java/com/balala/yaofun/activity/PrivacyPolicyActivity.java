@@ -14,8 +14,6 @@ import com.just.agentweb.AgentWeb;
 
 import butterknife.BindView;
 
-import static com.balala.yaofun.MyApp.AppVersion;
-import static com.balala.yaofun.MyApp.signOut;
 
 public class PrivacyPolicyActivity extends BaseActivity {
     @BindView(R.id.web)

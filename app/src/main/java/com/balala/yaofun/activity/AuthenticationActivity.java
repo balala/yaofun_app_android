@@ -173,6 +173,12 @@ public class AuthenticationActivity extends BaseActivity<AuthenticationPresenter
                 startActivity(new Intent(AuthenticationActivity.this, AboutyaofunActivity.class));
             }
         });
+        mBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AuthenticationActivity.this,AboutyaofunActivity.class));
+            }
+        });
     }
 
     private void initCode() {

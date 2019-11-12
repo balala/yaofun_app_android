@@ -3,7 +3,6 @@ package com.balala.yaofun.httpUtils;
 import android.graphics.Color;
 import android.os.Environment;
 
-import com.balala.yaofun.MyApp;
 
 import java.io.File;
 
@@ -23,7 +22,7 @@ public interface Constants {
     String FILE_PROVIDER_AUTHORITY="com.baidu.geek.fileprovider";
 
     //网络缓存的地址
-    String PATH_DATA = MyApp.getInstance().getCacheDir().getAbsolutePath() +
+    String PATH_DATA = com.balala.yaofun.httpUtils.MyApp.getInstance().getCacheDir().getAbsolutePath() +
             File.separator + "data";
 
     String PATH_CACHE = PATH_DATA + "/NetCache";
