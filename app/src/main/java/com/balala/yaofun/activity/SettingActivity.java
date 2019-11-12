@@ -15,7 +15,8 @@ import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.BindView;
 
-import static com.balala.yaofun.httpUtils.MyApp.signOut;
+import static com.balala.yaofun.MyApp.AppVersion;
+import static com.balala.yaofun.MyApp.signOut;
 import static com.balala.yaofun.util.DataCleanManager.getTotalCacheSize;
 
 public class SettingActivity  extends BaseActivity {

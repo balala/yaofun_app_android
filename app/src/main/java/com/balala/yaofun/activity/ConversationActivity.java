@@ -15,6 +15,7 @@ import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.base.BasePresenter;
 import com.balala.yaofun.presenter.ConversationPresenter;
 import com.balala.yaofun.view.ConversationView;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.Locale;
 

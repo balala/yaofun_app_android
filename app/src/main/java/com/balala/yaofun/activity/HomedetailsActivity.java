@@ -52,7 +52,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.balala.yaofun.httpUtils.MyApp.hasLogin;
+import static com.balala.yaofun.MyApp.hasLogin;
+
 
 public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiModel> implements HomedetailsView {
 

@@ -21,7 +21,7 @@ import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.BindView;
 
-import static com.balala.yaofun.httpUtils.MyApp.user;
+import static com.balala.yaofun.MyApp.user;
 
 
 /**

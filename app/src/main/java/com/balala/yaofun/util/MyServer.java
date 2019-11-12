@@ -125,7 +125,7 @@ public interface MyServer {
     //  https://test.yaofun.vip/api/activity/upload/image
     @Multipart
     @POST("activity/upload/image")
-    Observable<UploadPickBean> getActivitDataimg(@Part("images") RequestBody body, @Part MultipartBody.Part file);
+    Observable<UploadPickBean> uploadImg(@Part("images") RequestBody body, @Part MultipartBody.Part file);
 
 //    s://test.yaofun.vip/api/activity/upload/image
 

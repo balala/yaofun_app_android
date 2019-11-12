@@ -26,8 +26,8 @@ import java.util.List;
 
 import io.rong.imkit.RongIM;
 
-import static com.balala.yaofun.httpUtils.MyApp.INTERACTIVE_ASSISTANT;
-import static com.balala.yaofun.httpUtils.MyApp.SERVICE_ASSISTANT;
+import static com.balala.yaofun.MyApp.INTERACTIVE_ASSISTANT;
+import static com.balala.yaofun.MyApp.SERVICE_ASSISTANT;
 
 
 public class MailListActivity extends BaseActivity<MailListPresenter, MailListView> implements MailListView{

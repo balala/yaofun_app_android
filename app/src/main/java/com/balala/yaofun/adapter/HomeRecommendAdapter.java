@@ -26,8 +26,6 @@ import com.balala.yaofun.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
@@ -107,11 +105,11 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter implements View.O
                 ((ViewHolder1) holder).item1priceyuan.setVisibility(View.VISIBLE);
                 ((ViewHolder1) holder).item1price.setText(cost);
             }
-            Picasso.with(context).load(recommendBeans.get(position).getCover())
-                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+//            Glide.with(context).load(recommendBeans.get(position).getCover())
+//                    .memoryPolicy(MemoryPolicy.NO_CACHE)
 //                    .transform(new CircleTransform(mContext))
 //                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
-                    .into(holder1.iconcard1);
+//                    .into(holder1.iconcard1);
             holder1.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

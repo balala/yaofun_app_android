@@ -15,7 +15,6 @@ import com.balala.yaofun.bean.result.HomeBannerDean;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class HomeimgAdapter extends RecyclerView.Adapter<HomeimgAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull HomeimgAdapter.ViewHolder holder, int position) {
-        Picasso.with(context).load(first.get(position).getCover()).into(holder.banners_item);
+        Glide.with(context).load(first.get(position).getCover()).into(holder.banners_item);
 //        .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
         Log.i("dadada", "onBindViewHolder: " + first.get(position).getCover());
         holder.banners_item.setOnClickListener(new View.OnClickListener() {

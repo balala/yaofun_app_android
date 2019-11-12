@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.core.content.FileProvider;
 
 
+import com.balala.yaofun.MyApp;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,7 +37,7 @@ public class SystemUtil {
      * 检查WIFI是否连接
      */
     public static boolean isWifiConnected() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) com.balala.yaofun.httpUtils.MyApp.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) MyApp.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifiInfo = connectivityManager
                 .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         return wifiInfo != null;
@@ -44,7 +46,7 @@ public class SystemUtil {
      * 检查手机网络(4G/3G/2G)是否连接
      */
     public static boolean isMobileNetworkConnected() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) com.balala.yaofun.httpUtils.MyApp.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) MyApp.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo mobileNetworkInfo = connectivityManager
                 .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         return mobileNetworkInfo != null;
@@ -53,7 +55,7 @@ public class SystemUtil {
      * 检查是否有可用网络
      */
     public static boolean isNetworkConnected() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) com.balala.yaofun.httpUtils.MyApp.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) MyApp.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
         return connectivityManager.getActiveNetworkInfo() != null;
     }
 
@@ -127,7 +129,7 @@ public class SystemUtil {
     }
 
     public static int dp2px(float dpValue) {
-        final float scale = com.balala.yaofun.httpUtils.MyApp.getInstance().getResources().getDisplayMetrics().density;
+        final float scale = MyApp.getInstance().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
@@ -140,7 +142,7 @@ public class SystemUtil {
     }
 
     public static int px2dp(float pxValue) {
-        final float scale = com.balala.yaofun.httpUtils.MyApp.getInstance().getResources().getDisplayMetrics().density;
+        final float scale = MyApp.getInstance().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 

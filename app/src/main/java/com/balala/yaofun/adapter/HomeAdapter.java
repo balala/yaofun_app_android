@@ -21,7 +21,6 @@ import com.balala.yaofun.bean.result.HomeBannerDean;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
@@ -109,7 +108,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
                     holder1.item1price.setText(cost);
                 }
                 holder1.item1site.setText(homeAllBeans.get(position).getLocation_name());
-                Picasso.with(context).load(homeAllBeans.get(position).getCover())
+                Glide.with(context).load(homeAllBeans.get(position).getCover())
 //                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                         .into(holder1.iconcard1);
             }

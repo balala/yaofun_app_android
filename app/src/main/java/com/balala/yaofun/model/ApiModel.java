@@ -26,7 +26,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.balala.yaofun.httpUtils.MyApp.getBaseMap;
+import static com.balala.yaofun.MyApp.getBaseMap;
 
 
 public class ApiModel extends BaseModel implements BaseView {

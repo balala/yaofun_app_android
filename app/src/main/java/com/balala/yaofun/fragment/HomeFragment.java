@@ -66,7 +66,6 @@ import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,10 +74,9 @@ import java.util.Map;
 import java.util.Timer;
 
 import butterknife.BindView;
-import io.rong.imkit.MainActivity;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
-import static com.balala.yaofun.httpUtils.MyApp.hasLogin;
+import static com.balala.yaofun.MyApp.hasLogin;
 
 
 /**
@@ -148,8 +146,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     ImageView homeperchs;
     @BindView(R.id.sv)
     NestedScrollView sv;
-    @BindView(R.id.hotpopupwindow)
-    ImageView hotpopupwindow;
+//    @BindView(R.id.hotpopupwindow)
+//    ImageView hotpopupwindow;
 
     private PopupWindow popupWindow;
     private int reclen = 3;
@@ -259,7 +257,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             daytext.setText(dayBean.getData().getSolar_time());
             monthtext.setText(dayBean.getData().getLunar_time());
             tabootext.setText(dayBean.getData().getPrompt());
-            Picasso.with(getContext()).load(dayBean.getData().getImg()).into(homeBackground);
+            Glide.with(getContext()).load(dayBean.getData().getImg()).into(homeBackground);
         } else {
             codetext.setText(dayBean.getData().getNumber_time());
             daytext.setText(dayBean.getData().getSolar_time());
@@ -267,7 +265,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             tabootext.setText(dayBean.getData().getPrompt());
 //            people_name.setText(dayBean.getData().getUse_time());
 //            Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
-            Picasso.with(getContext()).load(dayBean.getData().getImg()).into(homeBackground);
+            Glide.with(getContext()).load(dayBean.getData().getImg()).into(homeBackground);
             if (dayBean.getData().getTitle().equals("")) {
                 people_name.setText("尼采");
             } else {
@@ -479,7 +477,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             @Override
             public void onClick(View v) {
                 //将提示隐藏
-                hotpopupwindow.setVisibility(View.GONE);
+//                hotpopupwindow.setVisibility(View.GONE);
                 if (hasLogin()) {
                     //如果登陆了 要弹出弹窗选择进入实名认证页面
                     startActivity(new Intent(getContext(), AuthenticationActivity.class));

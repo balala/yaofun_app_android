@@ -42,7 +42,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.balala.yaofun.httpUtils.MyApp.goLogin;
+import static com.balala.yaofun.MyApp.goLogin;
 
 
 public class LandingActivity extends BaseActivity<LandingPresenter, LandingView> implements LandingView {

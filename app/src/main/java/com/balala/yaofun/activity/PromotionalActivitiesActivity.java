@@ -31,8 +31,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.balala.yaofun.R;
+import com.balala.yaofun.base.BaseActivity;
+import com.balala.yaofun.base.BasePresenter;
 import com.balala.yaofun.bean.UploadPickBean;
 import com.balala.yaofun.util.CustomEditText;
+import com.balala.yaofun.util.ForLog;
 import com.balala.yaofun.util.MyServer;
 import com.balala.yaofun.util.ToastUtils;
 import com.bigkoo.pickerview.TimePickerView;
@@ -40,7 +43,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.squareup.picasso.Picasso;
+import com.gyf.immersionbar.ImmersionBar;
 import com.wildma.pictureselector.PictureSelector;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -68,10 +71,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 @GlideModule
-public class PromotionalActivitiesActivity extends AppCompatActivity {
+public class PromotionalActivitiesActivity extends BaseActivity {
+    private String img;
+    @BindView(R.id.et_title)
+    EditText et_title;
+    @BindView(R.id.tv_start_time)
+    TextView tv_start_time;
+    @BindView(R.id.tv_end_time)
+    TextView tv_end_time;
+    @BindView(R.id.tv_change_phone)
+    TextView tv_change_phone;
 
-    @BindView(R.id.openfunback)
-    LinearLayout mOpenfunback;
+
     @BindView(R.id.openfunimg)
     ImageView mOpenfunimg;
     @BindView(R.id.openfunphoto)
@@ -80,42 +91,10 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
     RelativeLayout mOpenfunaddimg;
     @BindView(R.id.openfunimgs)
     ImageView openfunimgs;
-    @BindView(R.id.openfun_name)
-    CustomEditText mOpenfunName;
-    @BindView(R.id.openfun_resume)
-    CustomEditText mOpenfunResume;
-    @BindView(R.id.openfun_dotext)
-    TextView mOpenfunDotext;
-    @BindView(R.id.openfun_activitytext)
-    CustomEditText mOpenfunActivitytext;
-    @BindView(R.id.openfun_jointext)
-    TextView mOpenfunJointext;
-    @BindView(R.id.openfun_interesttext)
-    TextView mOpenfunInteresttext;
-    @BindView(R.id.openfun_applypeoplecontent)
-    EditText mOpenfunApplypeoplecontent;
-    @BindView(R.id.openfuninterestback)
-    ImageView mOpenfuninterestback;
-    @BindView(R.id.openfun_interestback)
-    ImageView mOpenfunInterestback;
-    @BindView(R.id.openfun_applytext)
-    TextView mOpenfunApplytext;
-    @BindView(R.id.openfun_activitydetailsback)
-    ImageView mOpenfunActivitydetailsback;
+
     @BindView(R.id.openfun_interestadd)
     ImageView mOpenfunInterestadd;
-    @BindView(R.id.open_immediately)
-    Button mOpenImmediately;
-    @BindView(R.id.where)
-    RelativeLayout where;
-    @BindView(R.id.funrt)
-    RelativeLayout funrt;
-    @BindView(R.id.begintime)
-    RelativeLayout begintime;
-    @BindView(R.id.overtime)
-    RelativeLayout overtime;
-    @BindView(R.id.openfun_applyedit)
-    EditText openfun_applyedit;
+
 
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
     /**
@@ -136,80 +115,60 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
     private int endHour = -1;
     private int endMinute = -1;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_promotional_activities);
-        ButterKnife.bind(this);
-        initView();
+    protected void initView() {
+        ImmersionBar.with(this).statusBarColor(R.color.black).init();
+        findViewById(R.id.back).setOnClickListener(v->{
+            finish();
+        });
+        ((TextView)findViewById(R.id.title)).setText(R.string.fun_open);
+        findViewById(R.id.rl_map).setOnClickListener(v->
+                startActivity(new Intent(PromotionalActivitiesActivity.this, PromotionalMapActivity.class))
+        );
+        findViewById(R.id.rl_start_time).setOnClickListener(v->{
+            openTimeTicker1();
+        });
+        findViewById(R.id.rl_end_time).setOnClickListener(v->{
+            openTimeTicker2();
+        });
+        mOpenfunimg.setOnClickListener(v->{
+            openAlbum();
+        });
+        findViewById(R.id.bt_save).setOnClickListener(v->{
+            String title=et_title.getText().toString().trim();
+            ForLog.e("标题：",title);
+
+        });
+        tv_change_phone.setOnClickListener(v->{
+            openAlbum();
+        });
     }
 
-    private void initView() {
-
+    @Override
+    protected void initData() {
 
     }
 
-    @OnClick({R.id.openfunback, R.id.openfunimg, R.id.openfunaddimg, R.id.openfun_name, R.id.openfun_resume, R.id.openfun_dotext, R.id.openfun_activitytext, R.id.openfun_jointext, R.id.openfuninterestback, R.id.openfun_interesttext, R.id.openfun_interestback, R.id.openfun_applytext, R.id.openfun_applypeoplecontent, R.id.openfun_activitydetailsback, R.id.openfun_interestadd, R.id.open_immediately, R.id.where, R.id.funrt, R.id.begintime, R.id.overtime})
-    public void onClick(View v) {
-        switch (v.getId()) {
-            default:
-                break;
-            case R.id.openfunback:
-                finish();
-                break;
+    @Override
+    protected void initData2() {
 
-            case R.id.openfunimg:
-                openAlbum();
+    }
 
-                break;
-            case R.id.openfunaddimg:
-                break;
-            case R.id.openfun_name:
-                break;
-            case R.id.openfun_resume:
+    @Override
+    protected int getlayout() {
+        return R.layout.activity_promotional_activities;
+    }
 
-                break;
-            case R.id.openfun_dotext:
-                break;
-
-            case R.id.openfun_activitytext:
-                break;
-            case R.id.openfun_jointext:
-                break;
-            case R.id.openfuninterestback:
-
-                break;
-            case R.id.openfun_interesttext:
-                break;
-            case R.id.openfun_interestback:
-
-                break;
-            case R.id.openfun_applytext:
-                mOpenfunApplytext.setVisibility(View.GONE);
-                openfun_applyedit.setVisibility(View.VISIBLE);
-                break;
-
-            case R.id.openfun_applypeoplecontent:
-                break;
-            case R.id.openfun_activitydetailsback:
-                break;
-            case R.id.openfun_interestadd:
-                break;
-            case R.id.open_immediately:
-                break;
-            case R.id.where:
-                startActivity(new Intent(PromotionalActivitiesActivity.this, PromotionalMapActivity.class));
-                break;
-            case R.id.begintime:
-                openTimeTicker1();
-                break;
-            case R.id.overtime:
-                openTimeTicker2();
-                break;
-            case R.id.funrt:
-                startActivity(new Intent(PromotionalActivitiesActivity.this, CreateFunActivity.class));
-                break;
-
+    @Override
+    protected BasePresenter initPresenter() {
+        return null;
+    }
+    private void judgeImg(){
+        if(img.isEmpty()){
+            tv_change_phone.setVisibility(View.GONE);
+        }else{
+            tv_change_phone.setVisibility(View.VISIBLE);
         }
     }
 
@@ -219,7 +178,7 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
-                mOpenfunJointext.setText(getTime(date));
+                tv_start_time.setText(getTime(date));
             }
         }).build();
         pvTime.setDate(Calendar.getInstance());
@@ -233,7 +192,7 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onTimeSelect(Date date, View v) {//选中事件回调
-                mOpenfunInteresttext.setText(getTime(date));
+                tv_end_time.setText(getTime(date));
             }
 
         }).build();
@@ -263,9 +222,13 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
        /* Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
         startActivityForResult(intent, 1);*/
+        /**
+         * create方法参数一是上下文，在activity中传activity.this，在fragment中传fragment.this。参数二为请求码，用于结果回调onActivityResult中判断
+         * selectPicture方法参数分别为图片的裁剪宽、裁剪高、宽比例、高比例。默认不传则为宽200，高200，宽高比例为1：1。
+         */
         PictureSelector
                 .create(PromotionalActivitiesActivity.this, PictureSelector.SELECT_REQUEST_CODE)
-                .selectPicture(200, 200, 1, 1);
+                .selectPicture(200, 200, 3, 4);
     }
 
     @Override
@@ -337,36 +300,36 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
                 .baseUrl("")
                 .build();
         MyServer myServer = retrofit.create(MyServer.class);
-        Observable<UploadPickBean> activitDataimg = myServer.getActivitDataimg(body, part);
-        activitDataimg.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<UploadPickBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(UploadPickBean uploadPickBean) {
-                        if (uploadPickBean != null) {
-                            openfunimgs.setVisibility(View.GONE);
-                            openfunphoto.setVisibility(View.GONE);
-                            Picasso.with(PromotionalActivitiesActivity.this).load(uploadPickBean.getData())
-//                                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
-                                    .into(mOpenfunimg);
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+//        Observable<UploadPickBean> activitDataimg = myServer.getActivitDataimg(body, part);
+//        activitDataimg.subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<UploadPickBean>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(UploadPickBean uploadPickBean) {
+//                        if (uploadPickBean != null) {
+//                            openfunimgs.setVisibility(View.GONE);
+//                            openfunphoto.setVisibility(View.GONE);
+//                            Picasso.with(PromotionalActivitiesActivity.this).load(uploadPickBean.getData())
+////                                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+//                                    .into(mOpenfunimg);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
 
 
     }
@@ -383,14 +346,7 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
                 if (imm != null) {
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     //处理Editext的光标隐藏、显示逻辑
-                    mOpenfunName.clearFocus();
-                    mOpenfunResume.clearFocus();
-                    mOpenfunDotext.clearFocus();
-                    mOpenfunActivitytext.clearFocus();
-                    mOpenfunJointext.clearFocus();
-                    mOpenfunInteresttext.clearFocus();
-                    mOpenfunApplypeoplecontent.clearFocus();
-                    openfun_applyedit.clearFocus();
+                    et_title.clearFocus();
                 }
             }
             return super.dispatchTouchEvent(ev);
