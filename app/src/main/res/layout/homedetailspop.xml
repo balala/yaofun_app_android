@@ -8,6 +8,7 @@
     <com.balala.yaofun.util.SwZoomDragImageView
         android:id="@+id/homedetailsimgpop"
         android:layout_width="wrap_content"
+        android:scaleType="fitXY"
         android:layout_height="wrap_content"
         android:background="@color/colordeepgrays" />
 </LinearLayout>

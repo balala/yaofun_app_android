@@ -60,39 +60,8 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <RelativeLayout
-            android:id="@+id/createfunaddimg"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_200"
-            android:layout_marginTop="@dimen/dp_10">
+        <include layout="@layout/createitem1" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/createfunrv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@drawable/home_background" />
-
-            <ImageView
-                android:id="@+id/createfunimg"
-                android:layout_width="@dimen/dp_11"
-                android:layout_height="@dimen/dp_12"
-                android:layout_marginLeft="@dimen/dp_148"
-                android:layout_marginTop="@dimen/dp_95"
-                android:layout_marginRight="@dimen/dp_5"
-                android:src="@drawable/createfunuploading" />
-
-            <TextView
-                android:id="@+id/createfuntext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp_163"
-                android:layout_marginTop="@dimen/dp_30"
-                android:text="FUN团封面"
-                android:textColor="@color/colorwhite"
-                android:textSize="@dimen/sp_15" />
-        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -303,12 +272,12 @@
             <CheckBox
                 android:id="@+id/createfun_choose"
                 android:layout_width="@dimen/dp_50"
-                android:button="@null"
                 android:layout_height="@dimen/dp_30"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/dp_17"
                 android:layout_marginRight="@dimen/dp_17"
-                android:background="@drawable/createfunopencolse" />
+                android:background="@drawable/createfunopencolse"
+                android:button="@null" />
 
             <TextView
                 android:layout_width="wrap_content"

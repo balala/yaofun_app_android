@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.balala.yaofun.R;
@@ -20,6 +21,7 @@ import com.balala.yaofun.bean.result.HomeBannerDean;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
@@ -50,7 +52,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         if (viewType == 0) {
-            View banner = inflater.inflate(R.layout.banner_item, null);
+            View banner = inflater.inflate(R.layout.homeimgitem, null);
             return new BannerHolder(banner);
         } else {
             View inflate = inflater.inflate(R.layout.home_item1s, null);
@@ -61,32 +63,35 @@ public class HomeAdapter extends RecyclerView.Adapter {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(first==null){
+        if (first == null) {
             return;
         }
         int itemViewType = getItemViewType(position);
         if (itemViewType == 0) {
             BannerHolder banq = (BannerHolder) holder;
-            banq.banner_item.setImages(first);
-            banq.banner_item.setImageLoader(new MyLoder());
-            banq.banner_item.start();
-            Banner banner = ((BannerHolder) holder).banner_item.setOnBannerListener(new OnBannerListener() {
+            HomeimgAdapter homeimgAdapter = new HomeimgAdapter(context, first);
+            banq.recyclerview_item.setAdapter(homeimgAdapter);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            banq.recyclerview_item.setLayoutManager(linearLayoutManager);
+//
+//            homeimgAdapter.setOnClickListener(new OnClickListener() {
+//                @Override
+//                public void OnClick(int position) {
+//                   if (mListenerBanner!=null){
+//                       mListenerBanner.OnClick(position);
+//                   }
+//                }
+//            });
+            homeimgAdapter.setOnClickListenerBanner(new OnClickListenerBanner() {
                 @Override
-                public void OnBannerClick(int position) {
-                    if (mListenerBanner != null) {
+                public void OnClick(int position) {
+                    if (mListenerBanner!=null){
                         mListenerBanner.OnClick(position);
                     }
                 }
             });
-            banq.banner_item.setOutlineProvider(new ViewOutlineProvider() {
-                @Override
-                public void getOutline(View view, Outline outline) {
-                    outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), 10);
-                }
-            });
 
-            banq.banner_item.setClipToOutline(true);
-//设置banner
 
         } else {
 
@@ -104,7 +109,9 @@ public class HomeAdapter extends RecyclerView.Adapter {
                     holder1.item1price.setText(cost);
                 }
                 holder1.item1site.setText(homeAllBeans.get(position).getLocation_name());
-                Glide.with(context).load(homeAllBeans.get(position).getCover()).apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).into(holder1.iconcard1);
+                Picasso.with(context).load(homeAllBeans.get(position).getCover())
+//                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                        .into(holder1.iconcard1);
             }
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -141,11 +148,11 @@ public class HomeAdapter extends RecyclerView.Adapter {
     }
 
     public class BannerHolder extends RecyclerView.ViewHolder {
-        private final Banner banner_item;
+        private final RecyclerView recyclerview_item;
 
         public BannerHolder(View itemView) {
             super(itemView);
-            banner_item = itemView.findViewById(R.id.banners_item);
+            recyclerview_item = itemView.findViewById(R.id.recyclerview_item);
         }
     }
 

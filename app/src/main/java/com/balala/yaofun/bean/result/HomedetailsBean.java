@@ -678,6 +678,10 @@ public class HomedetailsBean  {
                 private String latitude;
                 private String longitude;
 
+                public LocationBean(double longitude, double latitude, String trim, String s) {
+
+                }
+
                 public String getLatitude() {
                     return latitude;
                 }

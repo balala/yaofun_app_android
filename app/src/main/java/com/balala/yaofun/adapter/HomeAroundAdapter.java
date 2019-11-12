@@ -16,6 +16,7 @@ import com.balala.yaofun.bean.result.HomeAllBean;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -60,7 +61,8 @@ public class HomeAroundAdapter extends RecyclerView.Adapter<HomeAroundAdapter.Vi
         if (location.equals("")) {
             holder.homeitem2_distance.setText("无距离");
         }
-        Glide.with(context).load(aroundBeans.get(position).getCover()).apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).into(holder.homeitem2_img);
+        Picasso.with(context).load(aroundBeans.get(position).getCover()).into(holder.homeitem2_img);
+//        apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,12 +114,12 @@ public class HomeAroundAdapter extends RecyclerView.Adapter<HomeAroundAdapter.Vi
         mListener = listener;
     }
 
-//    public interface OnClickListenerBanner {
-//        void OnClick(int position);
-//    }
-//
-//    public void setOnClickListenerBanner(HomeAdapter.OnClickListenerBanner listener) {
-//
-//        mListenerBanner = listener;
-//    }
+    public interface OnClickListenerBanner {
+        void OnClick(int position);
+    }
+
+    public void setOnClickListenerBanner(HomeAdapter.OnClickListenerBanner listener) {
+
+        mListenerBanner = listener;
+    }
 }

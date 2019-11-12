@@ -1,136 +1,64 @@
 package com.balala.yaofun.activity;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
-import com.amap.api.maps.UiSettings;
-import com.amap.api.maps.model.CameraPosition;
 import com.balala.yaofun.R;
-import com.balala.yaofun.util.ALocationClientFactory;
 
-public class PromotionalMapActivity extends AppCompatActivity implements View.OnClickListener, AMap.OnCameraChangeListener, TextWatcher, AdapterView.OnItemClickListener, AMapLocationListener {
+public class PromotionalMapActivity extends AppCompatActivity {
 
 
-    private ImageView mIvBack;
-    private RelativeLayout mLayBack;
-    /**
-     * 搜索地点
-     */
-    private AutoCompleteTextView mEtSearch;
+    private LinearLayout mOpenmapback;
+    private LinearLayout mMapok;
     private MapView mMapView;
-    /**
-     *
-     */
-    private TextView mAddress;
-    private TextView mAddressDesc;
-    /**
-     * 确定
-     */
-    private Button mBtnEnsure;
-    private ListView mLvData;
-    private LinearLayout mLlPoi;
-    private AMapLocationClient locationClient;
-    private AMap aMap;
+    private RecyclerView mMaprv;
+    private Bundle savedInstanceState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promotionalmap);
         initView();
-//        showLoadingDialog();
-        //定位初始化
-        locationClient = ALocationClientFactory.createLocationClient(this, ALocationClientFactory.createDefaultOption(), this);
-        //开启定位
-        locationClient.startLocation();
+
     }
+
 
     private void initView() {
-        mIvBack = (ImageView) findViewById(R.id.iv_back);
-        mLayBack = (RelativeLayout) findViewById(R.id.lay_back);
-        mEtSearch = (AutoCompleteTextView) findViewById(R.id.et_search);
-        mEtSearch.addTextChangedListener(this);
-        mEtSearch.setOnItemClickListener(this);
-        mMapView = (MapView) findViewById(R.id.mapView);
-        mMapView.setOnClickListener(this);
-//        mMapView.onCreate(savedInstanceState); // 此方法必须重写
-        aMap = mMapView.getMap();
-        UiSettings uiSettings = aMap.getUiSettings();
-        uiSettings.setZoomControlsEnabled(false);  //隐藏缩放按钮
-        aMap.setOnCameraChangeListener(this); // 添加移动地图事件监听器
-        mAddress = (TextView) findViewById(R.id.address);
-        mAddressDesc = (TextView) findViewById(R.id.addressDesc);
-        mBtnEnsure = (Button) findViewById(R.id.btn_ensure);
-        mBtnEnsure.setOnClickListener(this);
-        mLvData = (ListView) findViewById(R.id.lv_data);
-        mLlPoi = (LinearLayout) findViewById(R.id.ll_poi);
-//        poiAdapter = new PoiAdapter(this);
-        mLvData.setOnItemClickListener(this);
-//        mLvData.setAdapter(poiAdapter);
+        mOpenmapback = (LinearLayout) findViewById(R.id.openmapback);
+        mMapok = (LinearLayout) findViewById(R.id.mapok);
+        mMapView = (MapView) findViewById(R.id.mapmap);
+        mMaprv = (RecyclerView) findViewById(R.id.maprv);
+        //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
+        mMapView.onCreate(savedInstanceState);
 
     }
-
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            default:
-                break;
-            case R.id.mapView:
-                break;
-            case R.id.btn_ensure:
-                break;
-        }
+    protected void onDestroy() {
+        super.onDestroy();
+        //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
+        mMapView.onDestroy();
     }
-
-
     @Override
-    public void onCameraChange(CameraPosition cameraPosition) {
-
+    protected void onResume() {
+        super.onResume();
+        //在activity执行onResume时执行mMapView.onResume ()，重新绘制加载地图
+        mMapView.onResume();
     }
-
     @Override
-    public void onCameraChangeFinish(CameraPosition cameraPosition) {
-
+    protected void onPause() {
+        super.onPause();
+        //在activity执行onPause时执行mMapView.onPause ()，暂停地图的绘制
+        mMapView.onPause();
     }
-
     @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //在activity执行onSaveInstanceState时执行mMapView.onSaveInstanceState (outState)，保存地图当前的状态
+        mMapView.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onLocationChanged(AMapLocation aMapLocation) {
-
-    }
 }

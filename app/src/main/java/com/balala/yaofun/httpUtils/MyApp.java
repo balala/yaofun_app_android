@@ -32,7 +32,7 @@ import static com.balala.yaofun.util.Utils.getNowDate;
 
 public class MyApp extends Application {
     private static MyApp myApp;
-    public static UserBean user=null;
+    public static UserBean user = null;
     //手机唯一辨别码
     private static String unique_identifier;
     //用户自定义手机名称，暂时用来保存手机的各种信息
@@ -41,36 +41,36 @@ public class MyApp extends Application {
     private static String phone_model;
     //手机版本
     private static String phone_version;
-    public static boolean isTestApp=true;
+    public static boolean isTestApp = true;
     //服务通知
-    public static String SERVICE_ASSISTANT=isTestApp?"5cc7074aac38216e6a1382bb":"5da0397f769bd3da6591af01";
+    public static String SERVICE_ASSISTANT = isTestApp ? "5cc7074aac38216e6a1382bb" : "5da0397f769bd3da6591af01";
     //互动提醒助手
-    public static String INTERACTIVE_ASSISTANT=isTestApp?"5cd502a2fc6c04002c22c228":"5da03988769bd3da6591af03";
+    public static String INTERACTIVE_ASSISTANT = isTestApp ? "5cd502a2fc6c04002c22c228" : "5da03988769bd3da6591af03";
+
     @Override
     public void onCreate() {
         super.onCreate();
         myApp = this;
-        RongIM.init(this,"25wehl3u2ggfw",true);
-        UMConfigure.init(this,"5d3fbba33fc19519fb000296"
-                ,"umeng",UMConfigure.DEVICE_TYPE_PHONE,"");
+        RongIM.init(this, "25wehl3u2ggfw", true);
+        UMConfigure.init(this, "5d3fbba33fc19519fb000296", "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
         //微信平台
         PlatformConfig.setWeixin("wx24009bcc9adc6318", "aa1643259ceb30e64ccef3a4ce63459b");
+        //QQ
+        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
         getPhoneInformation();
         //读取缓存登陆信息
-        ACache aCache=ACache.get(this);
-        user= (UserBean) aCache.getAsObject("user");
-        if(user!=null){
-            ForLog.e("本地读取数据"+user);
+        ACache aCache = ACache.get(this);
+        user = (UserBean) aCache.getAsObject("user");
+        if (user != null) {
+            ForLog.e("本地读取数据" + user);
             goLogin(user);
-        }else{
+        } else {
             signOut();
         }
         RongIM.getInstance().registerConversationTemplate(new CustomPrivateConversationProvider());
 
-
         //mark备注：为了方便测试登录注册模块，默认直接退出登录
 //        signOut();
-
 
     }
 
@@ -78,8 +78,8 @@ public class MyApp extends Application {
         return myApp;
     }
 
-    public static Map<String, Object> getBaseMap(Map<String,? extends Object> maps){
-        Map<String, Object> map=new HashMap<>();
+    public static Map<String, Object> getBaseMap(Map<String, ? extends Object> maps) {
+        Map<String, Object> map = new HashMap<>();
 
         map.put("version", '1');
         map.put("current_device", "android");
@@ -90,47 +90,47 @@ public class MyApp extends Application {
         map.put("phone_version", phone_version);
         map.put("phone_model", phone_model);
         //请求时间
-        map.put("request_start_time",getNowDate());
-        if(maps!=null){
-            for(Map.Entry<String,? extends Object> entry:maps.entrySet()){
-                map.put(entry.getKey(),entry.getValue());
+        map.put("request_start_time", getNowDate());
+        if (maps != null) {
+            for (Map.Entry<String, ? extends Object> entry : maps.entrySet()) {
+                map.put(entry.getKey(), entry.getValue());
             }
         }
-        if(hasLogin()){
+        if (hasLogin()) {
             map.put("user_id", user.get_id());
             //sign=md5(request_start_time+用户id+key_ios+每次登陆返回的key)
-            map.put("sign", Utils.md5(map.get("request_start_time")+user.get_id()+Utils.Signs+user.getKey()));
-        }else{
+            map.put("sign", Utils.md5(map.get("request_start_time") + user.get_id() + Utils.Signs + user.getKey()));
+        } else {
             map.put("user_id", -1);
             map.put("sign", "");
         }
-        ForLog.e("before api"+map);
+        ForLog.e("before api" + map);
         return map;
     }
 
-    public static boolean hasLogin(){
-        if(user!=null && user.get_id().length()>5){
+    public static boolean hasLogin() {
+        if (user != null && user.get_id().length() > 5) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     //退出登录
-    public static void signOut(){
+    public static void signOut() {
         //登陆成功通用处理
-        ACache aCache=ACache.get(myApp);
+        ACache aCache = ACache.get(myApp);
         aCache.remove("user");
-        user=null;
+        user = null;
         IMLogout();
         EventBus.getDefault().post(new SignOutSuccessEvent());
     }
 
-    public static void goLogin(UserBean bean){
+    public static void goLogin(UserBean bean) {
         //登陆成功通用处理
-        ACache aCache=ACache.get(myApp);
-        aCache.put("user",bean);
-        user=bean;
+        ACache aCache = ACache.get(myApp);
+        aCache.put("user", bean);
+        user = bean;
         EventBus.getDefault().post(new LoginSuccessEvent());
         connectRongIM(user.getRc_token());
         RongIM.getInstance().setCurrentUserInfo(new UserInfo(user.get_id(),
@@ -139,49 +139,48 @@ public class MyApp extends Application {
     }
 
 
-
     @Override
 
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
     }
 
-    public static void getPhoneInformation(){
+    public static void getPhoneInformation() {
         // Android获得屏幕分辨率补充，
         // 使用上面的方法在大多数情况下都是有效的，但是 在存在虚拟导航栏的手机上
         // 获取的分辨率却不对，例如1280*720的分辨率，获取出来并不是这么多，因为导航栏占据了一部分高度，这个时候使用
         // windowMgr.getDefaultDisplay().getRealMetrics(dm);     即可
 
-        DisplayMetrics dm=new DisplayMetrics();
-        WindowManager windowMgr= (WindowManager) myApp.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        WindowManager windowMgr = (WindowManager) myApp.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         windowMgr.getDefaultDisplay().getRealMetrics(dm);
-        float width=dm.widthPixels*dm.density;
-        float height=dm.heightPixels*dm.density;
-        String information="[当前分辨率->"+width*height+"<-]";
-        ActivityManager am= (ActivityManager) myApp.getSystemService(Context.ACTIVITY_SERVICE);
-        int memoryClass=am.getMemoryClass();
-        int largeMemoryClass=am.getLargeMemoryClass();
-        information+="[内存大小->"+memoryClass+"<-]";
-        information+="[最大内存->"+largeMemoryClass+"<-]";
-        information+="[手机厂商->"+android.os.Build.MANUFACTURER+"<-]";
+        float width = dm.widthPixels * dm.density;
+        float height = dm.heightPixels * dm.density;
+        String information = "[当前分辨率->" + width * height + "<-]";
+        ActivityManager am = (ActivityManager) myApp.getSystemService(Context.ACTIVITY_SERVICE);
+        int memoryClass = am.getMemoryClass();
+        int largeMemoryClass = am.getLargeMemoryClass();
+        information += "[内存大小->" + memoryClass + "<-]";
+        information += "[最大内存->" + largeMemoryClass + "<-]";
+        information += "[手机厂商->" + android.os.Build.MANUFACTURER + "<-]";
         //获取手机型号：
-        phone_model=android.os.Build.MODEL;
+        phone_model = android.os.Build.MODEL;
         //获取版本号<--->当前sdk版本号
-        phone_version=android.os.Build.VERSION.RELEASE+"<--->"+ Build.VERSION.SDK_INT ;
-        user_defined_name=information;
-        unique_identifier="35"+Build.BOARD.length() % 10 +
+        phone_version = android.os.Build.VERSION.RELEASE + "<--->" + Build.VERSION.SDK_INT;
+        user_defined_name = information;
+        unique_identifier = "35" + Build.BOARD.length() % 10 +
                 Build.BRAND.length() % 10 +
-                Build.CPU_ABI.length()  % 10 +
-                Build.DEVICE.length()  % 10 +
-                Build.DISPLAY.length()  % 10 +
-                Build.HOST.length()  % 10 +
-                Build.ID.length()  % 10 +
-                Build.MANUFACTURER.length()  % 10 +
-                Build.MODEL.length()  % 10 +
-                Build.PRODUCT.length()  % 10 +
-                Build.TAGS.length()  % 10 +
-                Build.TYPE.length()  % 10 +
-                Build.USER.length()  % 10;
-        ForLog.e("获取到底unique_identifier"+unique_identifier);
+                Build.CPU_ABI.length() % 10 +
+                Build.DEVICE.length() % 10 +
+                Build.DISPLAY.length() % 10 +
+                Build.HOST.length() % 10 +
+                Build.ID.length() % 10 +
+                Build.MANUFACTURER.length() % 10 +
+                Build.MODEL.length() % 10 +
+                Build.PRODUCT.length() % 10 +
+                Build.TAGS.length() % 10 +
+                Build.TYPE.length() % 10 +
+                Build.USER.length() % 10;
+        ForLog.e("获取到底unique_identifier" + unique_identifier);
     }
 }

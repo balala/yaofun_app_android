@@ -115,7 +115,7 @@ public class AmapRouteActivity extends AppCompatActivity {
         address = intent.getStringExtra("address");
         longitude = intent.getStringExtra("longitude");
 
-        //转换为Int类型
+          //转换为Int类型
         latitudes = Double.valueOf(latitude).intValue();
         //转换为Int类型
         longitudes = Double.valueOf(longitude).intValue();

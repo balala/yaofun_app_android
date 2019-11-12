@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.balala.yaofun.R;
 import com.balala.yaofun.bean.result.HomedetailsBean;
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,7 +54,7 @@ public class DetailsactivityAdapter extends RecyclerView.Adapter {
             holder1.homedetails_text1.setText(content_array.get(position));
         }else if(viewType==1){
             ViewHolder2 holder2 = (ViewHolder2) holder;
-            Glide.with(context).load(content_array.get(position)).into(holder2.homedetails_img1);
+            Picasso.with(context).load(content_array.get(position)).into(holder2.homedetails_img1);
         }else {
 
         }

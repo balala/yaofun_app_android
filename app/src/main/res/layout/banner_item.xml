@@ -4,10 +4,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.youth.banner.Banner
+    <ImageView
         android:id="@+id/banners_item"
         android:layout_width="282dp"
+        android:scaleType="fitXY"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_5"
         android:layout_height="220dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_10" />
+
 </RelativeLayout>

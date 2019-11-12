@@ -1,14 +1,19 @@
 package com.balala.yaofun.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -20,24 +25,37 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.balala.yaofun.R;
 import com.balala.yaofun.util.CustomEditText;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CreateFunActivity extends AppCompatActivity {
 
+    private static final String TAG = "shanzhi";
+    private static final int CHOOSE_PHOTO = 1;
+    private static final int PHOTO_REQUEST_CUT = 2;
     @BindView(R.id.createfunback)
     LinearLayout mCreatefunback;
     @BindView(R.id.createfunwhy)
     LinearLayout mCreatefunwhy;
-    @BindView(R.id.createfunrv)
-    RecyclerView mCreatefunrv;
-    @BindView(R.id.createfunimg)
-    ImageView mCreatefunimg;
-    @BindView(R.id.createfuntext)
-    TextView mCreatefuntext;
-    @BindView(R.id.createfunaddimg)
-    RelativeLayout mCreatefunaddimg;
+    //    @BindView(R.id.createfunrv)
+//    RecyclerView mCreatefunrv;
+//    @BindView(R.id.createfunimg)
+//    ImageView mCreatefunimg;
+//    @BindView(R.id.createfuntext)
+//    TextView mCreatefuntext;
+//    @BindView(R.id.createfunaddimg)
+//    RelativeLayout mCreatefunaddimg;
     @BindView(R.id.createfun_name)
     CustomEditText mCreatefunName;
     @BindView(R.id.createfun_resume)
@@ -58,6 +76,10 @@ public class CreateFunActivity extends AppCompatActivity {
     CheckBox mCreatefunChoose;
     @BindView(R.id.immediately)
     Button mImmediately;
+    @BindView(R.id.gridview)
+    GridView gridview;
+//    private GridViewAddImageAdapter gridViewAddImageAdapter;
+    private ArrayList<Map<String, Object>> datas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +104,17 @@ public class CreateFunActivity extends AppCompatActivity {
 //                mEt2.setSelection(TextUtils.isEmpty(mEt2.getText()) ? 0 : mEt2.length());//光标挪到最后
             }
         });
+
     }
 
-    @OnClick({R.id.createfunback, R.id.createfunwhy, R.id.createfunrv, R.id.createfunimg, R.id.createfuntext, R.id.createfunaddimg, R.id.createfun_name, R.id.createfun_resume, R.id.createfun_dotext, R.id.createfun_doback, R.id.createfun_jointext, R.id.createfuninterestback, R.id.createfun_interesttext, R.id.createfun_interestback, R.id.createfun_choose, R.id.immediately})
+// case R.id.createfunrv:
+//                break;
+//            case R.id.createfunimg:
+//                break;
+//                R.id.createfunrv, R.id.createfunimg,
+//    }
+
+    @OnClick({R.id.createfunback, R.id.createfunwhy, R.id.createfuntext, R.id.createfunaddimg, R.id.createfun_name, R.id.createfun_resume, R.id.createfun_dotext, R.id.createfun_doback, R.id.createfun_jointext, R.id.createfuninterestback, R.id.createfun_interesttext, R.id.createfun_interestback, R.id.createfun_choose, R.id.immediately})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -95,10 +125,7 @@ public class CreateFunActivity extends AppCompatActivity {
             case R.id.createfunwhy:
 
                 break;
-            case R.id.createfunrv:
-                break;
-            case R.id.createfunimg:
-                break;
+
             case R.id.createfuntext:
                 break;
             case R.id.createfunaddimg:

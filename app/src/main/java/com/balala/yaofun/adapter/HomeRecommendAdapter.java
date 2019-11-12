@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.balala.yaofun.R;
@@ -25,17 +26,23 @@ import com.balala.yaofun.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 
-public class HomeRecommendAdapter extends RecyclerView.Adapter {
+import static com.umeng.commonsdk.stateless.UMSLEnvelopeBuild.mContext;
+
+public class HomeRecommendAdapter extends RecyclerView.Adapter implements View.OnClickListener {
     private Context context;
-    private ArrayList<HomeAllBean.DataBean.RecommendBean> recommendBeans;
     private ArrayList<HomeBannerDean.DataBean.SecondBean> beanArrayList;
+    private ArrayList<HomeAllBean.DataBean.RecommendBean> recommendBeans;
     private HomeAdapter.OnClickListener mListener;
     private HomeAdapter.OnClickListenerBanner mListenerBanner;
+    private Object OnClickListenerBanner;
+    private HomeAdapter.OnClickListenerBanner mListenerimg;
 
     public HomeRecommendAdapter(Context context, ArrayList<HomeAllBean.DataBean.RecommendBean> recommendBeans, ArrayList<HomeBannerDean.DataBean.SecondBean> beanArrayList) {
         this.context = context;
@@ -50,7 +57,7 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter {
         RecyclerView.ViewHolder holder = null;
         LayoutInflater inflater = LayoutInflater.from(context);
         if (viewType == 0) {
-            View banner = inflater.inflate(R.layout.banner_item, null);
+            View banner = inflater.inflate(R.layout.homeimgitem, null);
             return new BannerHolder(banner);
 
         } else if (viewType == 1) {
@@ -70,35 +77,22 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter {
         int itemViewType = getItemViewType(position);
         if (itemViewType == 0 && beanArrayList != null) {
             BannerHolder banq = (BannerHolder) holder;
-            banq.banner_item.setImages(beanArrayList);
-            banq.banner_item.setImageLoader(new MyLoder());
-            banq.banner_item.start();
-            banq.banner_item.setOutlineProvider(new ViewOutlineProvider() {
-                @Override
-                public void getOutline(View view, Outline outline) {
-                    outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), 10);
-                }
-            });
-            banq.banner_item.setClipToOutline(true);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            Homesecondadapter adapter = new Homesecondadapter(context, beanArrayList);
+            banq.recyclerview_item.setAdapter(adapter);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            banq.recyclerview_item.setLayoutManager(linearLayoutManager);
+
+        } else if (itemViewType == 1) {
+            ViewHolder2 holder2 = (ViewHolder2) holder;
+            holder2.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mListener != null) {
-                        mListener.OnClick(position);
+                    if (mListenerimg != null) {
+                        mListenerimg.OnClick(position);
                     }
                 }
             });
-        } else if (itemViewType == 1) {
-            ViewHolder2 holder2 = (ViewHolder2) holder;
-//            holder2.home_search2.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-////                    ToastUtils.showLong("搜索页面");
-//                    Log.i("xuzhiqi", "搜索页面跳转成功");
-//                    Intent intent = new Intent(context, SearchActivity.class);
-//                    context.startActivity(intent);
-//                }
-//            });
         } else if (itemViewType == 2) {
             ViewHolder1 holder1 = (ViewHolder1) holder;
             Log.i("热门解析", "热门解析: " + recommendBeans.toString());
@@ -113,7 +107,11 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter {
                 ((ViewHolder1) holder).item1priceyuan.setVisibility(View.VISIBLE);
                 ((ViewHolder1) holder).item1price.setText(cost);
             }
-            Glide.with(context).load(recommendBeans.get(position).getCover()).apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).into(holder1.iconcard1);
+            Picasso.with(context).load(recommendBeans.get(position).getCover())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+//                    .transform(new CircleTransform(mContext))
+//                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                    .into(holder1.iconcard1);
             holder1.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -181,17 +179,18 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter {
         public ViewHolder2(@NonNull View itemView) {
             super(itemView);
             home_search2 = itemView.findViewById(R.id.home_search2);
+            // 为ItemView添加点击事件
+//            home_search2.setOnClickListener(HomeRecommendAdapter.this);
         }
     }
 
     public class BannerHolder extends RecyclerView.ViewHolder {
 
-
-        private final Banner banner_item;
+        private final RecyclerView recyclerview_item;
 
         public BannerHolder(View itemView) {
             super(itemView);
-            banner_item = itemView.findViewById(R.id.banners_item);
+            recyclerview_item = itemView.findViewById(R.id.recyclerview_item);
         }
     }
 
@@ -206,6 +205,8 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter {
 
     public interface OnClickListenerBanner {
         void OnClick(int position);
+
+        void OnClick(View v, int position);
     }
 
     public void setOnClickListenerBanner(HomeAdapter.OnClickListenerBanner listener) {
@@ -213,4 +214,21 @@ public class HomeRecommendAdapter extends RecyclerView.Adapter {
         mListenerBanner = listener;
     }
 
+    public void setOnClickListenerimg(HomeAdapter.OnClickListenerBanner listener) {
+
+        mListenerimg = listener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int position = (int) v.getTag();      //getTag()获取数据
+        if (mListenerBanner != null) {
+            switch (v.getId()) {
+                case R.id.home_search2:
+                    mListenerBanner.OnClick(position);  //在这里实现
+                    break;
+
+            }
+        }
+    }
 }

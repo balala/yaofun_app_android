@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
@@ -67,6 +68,7 @@ import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,6 +77,7 @@ import java.util.Map;
 import java.util.Timer;
 
 import butterknife.BindView;
+import io.rong.imkit.MainActivity;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.balala.yaofun.httpUtils.MyApp.hasLogin;
@@ -147,6 +150,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
     ImageView homeperchs;
     @BindView(R.id.sv)
     NestedScrollView sv;
+    @BindView(R.id.hotpopupwindow)
+    ImageView hotpopupwindow;
 
     private PopupWindow popupWindow;
     private int reclen = 3;
@@ -177,27 +182,27 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             super.handleMessage(msg);
         }
     };
-//    @SuppressLint("HandlerLeak")
-//    private Handler mHandler = new Handler() {
-//        public void handleMessage(android.os.Message msg) {
-//            switch (msg.what) {
-//                case 1:
-////                    homeAdapter.notifyDataSetChanged();
-//                    homeAroundAdapter.notifyDataSetChanged();
-//                    adapter.notifyDataSetChanged();
-//                    //为了保险起见可以先判断当前是否在刷新中（旋转的小圈圈在旋转）....
-//                    if (mSwipeLayout.isRefreshing()) {
-//                        //关闭刷新动画
-//                        mSwipeLayout.setRefreshing(false);
-//                    }
-//
-//                    break;
-//
-//            }
-//        }
-//
-//        ;
-//    };
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case 1:
+//                    homeAdapter.notifyDataSetChanged();
+                    homeAroundAdapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
+                    //为了保险起见可以先判断当前是否在刷新中（旋转的小圈圈在旋转）....
+                    if (mSwipeLayout.isRefreshing()) {
+                        //关闭刷新动画
+                        mSwipeLayout.setRefreshing(false);
+                    }
+
+                    break;
+
+            }
+        }
+
+        ;
+    };
 
     private List<HomeBannerDean.DataBean.FirstBean> first;
     private List<HomeBannerDean.DataBean.SecondBean> second;
@@ -230,6 +235,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 
         }
     };
+    private HomeBannerDean.DataBean.FirstBean firstBean;
 
     @Override
     public void initImmersionBar() {
@@ -255,14 +261,15 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             daytext.setText(dayBean.getData().getSolar_time());
             monthtext.setText(dayBean.getData().getLunar_time());
             tabootext.setText(dayBean.getData().getPrompt());
-            Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
+            Picasso.with(getContext()).load(dayBean.getData().getImg()).into(homeBackground);
         } else {
             codetext.setText(dayBean.getData().getNumber_time());
             daytext.setText(dayBean.getData().getSolar_time());
             monthtext.setText(dayBean.getData().getLunar_time());
             tabootext.setText(dayBean.getData().getPrompt());
 //            people_name.setText(dayBean.getData().getUse_time());
-            Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
+//            Glide.with(this).load(dayBean.getData().getImg()).into(homeBackground);
+            Picasso.with(getContext()).load(dayBean.getData().getImg()).into(homeBackground);
             if (dayBean.getData().getTitle().equals("")) {
                 people_name.setText("尼采");
             } else {
@@ -287,6 +294,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         Log.e("hot", "onSuccessHomeall: " + first);
         homeAdapter = new HomeAdapter(getContext(), hot, first);
         recycleView1.setAdapter(homeAdapter);
+
         //展示全部的recycleView
 //        recycleView1.setNestedScrollingEnabled(false);
         homeAdapter.notifyDataSetChanged();
@@ -299,8 +307,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         homeAroundAdapter = new HomeAroundAdapter(getContext(), (ArrayList<HomeAllBean.DataBean.AroundBean>) around);
         recycleView2.setAdapter(homeAroundAdapter);
         homeAroundAdapter.notifyDataSetChanged();
-        //展示全部的recycleView
-//        recycleView2.setNestedScrollingEnabled(false);
+//        展示全部的recycleView
+        recycleView2.setNestedScrollingEnabled(false);
 
         //推荐
         List<HomeAllBean.DataBean.RecommendBean> recommend = homeAllBean.getData().getRecommend();
@@ -324,8 +332,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         homeAdapter.setOnClickListenerBanner(new HomeAdapter.OnClickListenerBanner() {
             @Override
             public void OnClick(int position) {
-                HomeBannerDean.DataBean.FirstBean firstBean = new HomeBannerDean.DataBean.FirstBean();
-                String id = firstBean.get_id();
+                String id = first.get(position).get_id();
+                Log.i("bannertuid", "OnClick: "+id);
                 Intent intent = new Intent(getContext(), HomedetailsActivity.class);
                 intent.putExtra("id", id);
                 startActivity(intent);
@@ -364,6 +372,12 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             }
         });
 
+        adapter.setOnClickListenerimg(new HomeAdapter.OnClickListenerBanner() {
+            @Override
+            public void OnClick(int position) {
+                startActivity(new Intent(getContext(), SearchActivity.class));
+            }
+        });
     }
 
 
@@ -377,6 +391,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         Log.i("首页解析", "onSuccessHome: " + body.toString());
         first = body.getData().getFirst();
         second = body.getData().getSecond();
+        firstBean = new HomeBannerDean.DataBean.FirstBean();
+
     }
 
     @Override
@@ -397,7 +413,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 //        viewsAddListener();
         // 开启定位
         startLocaion();
-        presenter.getHomeData(null);
+//        presenter.getHomeData(null);
 
         Map<String, String> daymap = new HashMap<>();
         presenter.getHomeData(daymap);
@@ -464,8 +480,10 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
         homeAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //将提示隐藏
+                hotpopupwindow.setVisibility(View.GONE);
                 if (hasLogin()) {
-                    //进入实名认证页面
+                    //如果登陆了 要弹出弹窗选择进入实名认证页面
                     startActivity(new Intent(getContext(), AuthenticationActivity.class));
                 } else {
                     // 跳入发布活动的页面
@@ -475,6 +493,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
 
             }
         });
+
 
         //创建fun团页面
         homeCreateparty.setOnClickListener(new View.OnClickListener() {

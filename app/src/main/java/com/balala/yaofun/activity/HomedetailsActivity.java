@@ -1,16 +1,22 @@
 package com.balala.yaofun.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.util.Config;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageView;
@@ -33,6 +39,7 @@ import com.balala.yaofun.bean.result.HomedetailsBean;
 import com.balala.yaofun.model.ApiModel;
 import com.balala.yaofun.presenter.HomedetailsPersenter;
 import com.balala.yaofun.util.FlowLayout;
+import com.balala.yaofun.util.ShareUtils;
 import com.balala.yaofun.util.SwZoomDragImageView;
 import com.balala.yaofun.view.HomedetailsView;
 import com.bm.library.PhotoView;
@@ -41,17 +48,35 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.util.Util;
 import com.gyf.immersionbar.ImmersionBar;
+import com.squareup.picasso.Picasso;
+import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.opensdk.modelmsg.WXMiniProgramObject;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.ShareContent;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMMin;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.rong.imkit.MainActivity;
 
+import static android.util.Config.DEBUG;
 import static com.balala.yaofun.httpUtils.MyApp.hasLogin;
 
 public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiModel> implements HomedetailsView {
@@ -110,7 +135,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     ImageView homedetailsicon;
     @BindView(R.id.homedetails_rv2)
     RecyclerView mHomedetailsRv2;
-//    @BindView(R.id.homedetails_message)
+    //    @BindView(R.id.homedetails_message)
 //    ImageView mHomedetailsMessage;
     @BindView(R.id.homedetailsgo)
     Button mHomedetailsgo;
@@ -132,7 +157,6 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     private LinearLayout popitem3;
     private LinearLayout popitem4;
     private String address;
-    private HomedetailsBean.DataBean data;
     private SwZoomDragImageView img;
     private String latitude;
     private String longitude;
@@ -147,6 +171,16 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     private View mPopView;
     private PopupWindow popup;
     private String name;
+    private PopupWindow window;
+    private HomedetailsBean.DataBean dataBean;
+    private String post_card_url;
+    private String id;
+    private HomedetailsBean.DataBean datas;
+    private String wx_share_image;
+    private String cover;
+    private Dialog dialog;
+    private String datacover;
+    private ImageView image;
 
     @Override
     protected void initView() {
@@ -160,8 +194,53 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         String id = intent.getStringExtra("id");
         HashMap<String, String> map = new HashMap<>();
         basePresenter.getHomedetailsdata(id, map);
+        UMShareAPI.get(this);//初始化sdk
+        //开启debug模式，方便定位错误，具体错误检查方式可以查看http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
+//        DEBUG = true;
+//        init();
+    }
+
+    private void init() {
+
+
+        //展示在dialog上面的大图
+//        dialog = new Dialog(HomedetailsActivity.this, R.style.FullActivity);
+//
+//        WindowManager.LayoutParams attributes = getWindow().getAttributes();
+//        attributes.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        attributes.height = WindowManager.LayoutParams.MATCH_PARENT;
+//        dialog.getWindow().setAttributes(attributes);
+//
+//        image = getImageView();
+//        dialog.setContentView(image);
+//
+//        //大图的点击事件（点击让他消失）
+//        mHomedetailsimg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
 
     }
+
+    //动态的ImageView
+//    private ImageView getImageView() {
+//        ImageView imageView = new ImageView(this);
+//
+//        //宽高
+//        imageView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+    //imageView设置图片
+//        @SuppressLint("ResourceType") InputStream is = getResources().openRawResource(R.drawable.lala);
+//
+//        Drawable drawable = BitmapDrawable.createFromStream(is, null);
+//        imageView.setImageDrawable(drawable);
+//
+//        Glide.with(this).load(datacover).into(imageView);
+//
+//        return imageView;
+//    }
 
     @Override
     protected void initData2() {
@@ -186,8 +265,8 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
                 break;
 
             case R.id.homedetailsimg:
+//                dialog.show();
                 initDialogData();
-
                 break;
             case R.id.homedetails_back:
                 finish();
@@ -225,7 +304,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
                 intent.putExtra("latitude", latitude);
                 intent.putExtra("longitude", longitude);
                 startActivity(intent);
-                Log.i("经纬度", "详情页传: "+latitude+"  "+"  "+longitude);
+                Log.i("经纬度", "详情页传: " + latitude + "  " + "  " + longitude);
                 break;
             case R.id.homedetails_ticket:
                 break;
@@ -246,12 +325,12 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
             case R.id.homedetailsgo:
                 //报名成功支付和报名二维码生成
                 //判断是否登陆和实名认证（在用户登陆成功的bean类里）
-                if(hasLogin()){
+//                if (hasLogin()) {
 //                    if ()
-
-                }else{
-                    startActivity(new Intent(HomedetailsActivity.this, LandingActivity.class));
-                }
+                initZhifuData();
+//                } else {
+//                    startActivity(new Intent(HomedetailsActivity.this, LandingActivity.class));
+//                }
                 break;
             case R.id.llt:
                 break;
@@ -263,12 +342,39 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         }
     }
 
+    private void initZhifuData() {
+//        商户APP工程中引入微信JAR包，调用API前，需要先向微信注册您的APPID，代码如下：
+        final IWXAPI msgApi = WXAPIFactory.createWXAPI(this, null);
+        // 将该app注册到微信
+        msgApi.registerApp("wx24009bcc9adc6318");
+        IWXAPI api = null;
+        PayReq request = new PayReq();
+        request.appId = "wxd930ea5d5a258f4f";
+        request.partnerId = "1900000109";
+        request.prepayId = "1101000000140415649af9fc314aa427";
+        request.packageValue = "Sign=WXPay";
+        request.nonceStr = "1101000000140429eb40476f8896f4c9";
+        request.timeStamp = "1398746574";
+        request.sign = "7FFECB600D7157C5AA49810D2D8F28BC2811827B";
+        api.sendReq(request);
+
+        //调用提交订单的方法
+//        submitOrder("2", "15110027513", name, 1, money, 5, 1, "没要求", 2, "12.23",band + models, 1);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
     private void initDialogData() {
         sll.setVisibility(View.GONE);
         popup = new PopupWindow();
         mPopView = getLayoutInflater().inflate(R.layout.homedetailspop, null);
         img = mPopView.findViewById(R.id.homedetailsimgpop);
-        Glide.with(this).load(data.getCover()).into(img);
+        Picasso.with(this).load(datas.getCover()).into(img);
         popup.setContentView(mPopView);
         popup.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
         popup.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -284,6 +390,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
             }
         });
 
+
     }
 
     private void showPopupMenu() {
@@ -295,6 +402,7 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         popupWindow.setOutsideTouchable(true);
         popupWindow.showAsDropDown(mHomedetailsMenu);
         LinearLayout share = mPopView.findViewById(R.id.share);
+        LinearLayout report = mPopView.findViewById(R.id.report);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -302,12 +410,20 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
             }
 
         });
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomedetailsActivity.this, ReportActivity.class));
+            }
+
+        });
+
 
     }
 
     private void initsharepop() {
         sharepop = getLayoutInflater().inflate(R.layout.sharepopuitem, null);
-        PopupWindow window = new PopupWindow();
+        window = new PopupWindow();
         window.setContentView(sharepop);
         window.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
         window.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
@@ -334,38 +450,42 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                window.dismiss();
             }
         });
 
         pengyouquan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                initsharepyqData();
+            }
+
+
+        });
+        qq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initqqData();
 
             }
         });
+
+    }
+
+    private void initsharepyqData() {
+        ShareUtils.shareWeb(this, name, post_card_url, SHARE_MEDIA.WEIXIN_CIRCLE);
     }
 
     private void initwechatData() {
+        ShareUtils.shareWeb(this, name, post_card_url, SHARE_MEDIA.WEIXIN);
 
-        Toast.makeText(HomedetailsActivity.this, "微信分享", Toast.LENGTH_SHORT).show();
-        UMMin umMin = new UMMin(data.getUM_wxFriends_url());
-        Log.i("wmkd", "initwechatData: " + data.getUM_wxFriends_url());
-//兼容低版本的网页链接
-//        umMin.setThumb(data.getUM_wxFriends_url());
-// 小程序消息封面图片
-//        umMin.setTitle(Defaultcontent.title);
-// 小程序消息title
-//        umMin.setDescription(Defaultcontent.text);
-// 小程序消息描述
-//        umMin.setPath("pages/page10007/xxxxxx");
-//小程序页面路径
-//        umMin.setUserName("gh_xxxxxxxxxxxx");
-// 小程序原始id,在微信平台查询
-        new ShareAction(HomedetailsActivity.this)
-                .withMedia(umMin).share();
-//                .setPlatform(share_media)
-//                .setCallback(shareListener).share();
+    }
+
+
+    private void initqqData() {
+
+        ShareUtils.shareWeb(this, name, post_card_url, SHARE_MEDIA.QQ);
+
     }
 
     @SuppressLint("ResourceAsColor")
@@ -373,27 +493,33 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
     public void onSuccessHomedetails(BaseBean<HomedetailsBean.DataBean> funhomeData) {
         homedetailsicon.setVisibility(View.GONE);
         sll.setVisibility(View.VISIBLE);
+        post_card_url = funhomeData.getData().getPost_card_url();
+        id = funhomeData.getData().get_id();
+        datas = funhomeData.getData();
+        wx_share_image = funhomeData.getData().getWx_share_image();
+        address = datas.getPlace_text().getAddress();
+        name = datas.getPlace_text().getName();
+        cover = funhomeData.getData().getCover();
+        datacover = datas.getCover();
 
-        data = funhomeData.getData();
-        address = data.getPlace_text().getAddress();
-        name = data.getPlace_text().getName();
         // 纬度
-        latitude = data.getPlace_text().getLocation().getLatitude();
+        latitude = datas.getPlace_text().getLocation().getLatitude();
         //经度
-        longitude = data.getPlace_text().getLocation().getLongitude();
-        Log.i("经纬度", "首页详情解析: " + "经度"+latitude+"纬度");
+        longitude = datas.getPlace_text().getLocation().getLongitude();
+        Log.i("经纬度", "首页详情解析: " + "经度" + latitude + "纬度");
         // 标签的个数
-        DetailsactivityAdapter adapter = new DetailsactivityAdapter(this, data);
+        DetailsactivityAdapter adapter = new DetailsactivityAdapter(this, datas);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         allrv.setLayoutManager(linearLayoutManager);
         allrv.setAdapter(adapter);
 
         Log.i("首页详情解析", "onSuccessHomedetails: " + funhomeData);
-        Glide.with(this).load(data.getCover()).into(mHomedetailsimg);
+        Picasso.with(this).load(datas.getCover()).into(mHomedetailsimg);
+//        Glide.with(this).load(datas.getCover()).into(mHomedetailsimg);
 
 
-        mHomedetailsTitle.setText(data.getTitle());
-        List<String> user_label = data.getUser_label();
+        mHomedetailsTitle.setText(datas.getTitle());
+        List<String> user_label = datas.getUser_label();
         if (user_label.isEmpty()) {
             flow.setVisibility(View.GONE);
             labelll.setVisibility(View.VISIBLE);
@@ -408,17 +534,19 @@ public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiM
                 flow.addView(textView);
             }
         }
-        mHomedetailsPeoplename.setText(data.getUser_nick_name());
-        mHomedetailsTime.setText(data.getStart_end_time());
-        mHomedetailsPeoplecount.setText(data.getLimit_number());
-        mHomedetailsSite.setText(data.getPlace_text().getName());
+        mHomedetailsPeoplename.setText(datas.getUser_nick_name());
+        mHomedetailsTime.setText(datas.getStart_end_time());
+        mHomedetailsPeoplecount.setText(datas.getLimit_number());
+        mHomedetailsSite.setText(datas.getPlace_text().getName());
 
-        mHomedetailsFuntitle.setText(data.getLocation_name());
+        mHomedetailsFuntitle.setText(datas.getLocation_name());
 //        mHomedetailsFunmessage.setText(data); 副标题
-        Glide.with(this).load(data.getUser_images()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mHomedetailsPeople);
-        homedetails_personcount.setText(data.getMy_status());
-        mHomedetailsTicket.setText(data.getCost());
-        Log.i("My_status", "onSuccessHomedetails: " + data.getMy_status() + data.getCost());
+        Picasso.with(this).load(datas.getUser_images())
+//                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .into(mHomedetailsPeople);
+        homedetails_personcount.setText(datas.getMy_status());
+        mHomedetailsTicket.setText(datas.getCost());
+        Log.i("My_status", "onSuccessHomedetails: " + datas.getMy_status() + datas.getCost());
 
     }
 

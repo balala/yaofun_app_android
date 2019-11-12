@@ -1,6 +1,7 @@
 package com.balala.yaofun.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -39,6 +40,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.squareup.picasso.Picasso;
 import com.wildma.pictureselector.PictureSelector;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -242,7 +244,7 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
     }
 
     private String getTime(Date date) {//可根据需要自行截取数据显示
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return format.format(date);
     }
 
@@ -350,7 +352,9 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
                         if (uploadPickBean != null) {
                             openfunimgs.setVisibility(View.GONE);
                             openfunphoto.setVisibility(View.GONE);
-                            Glide.with(PromotionalActivitiesActivity.this).load(uploadPickBean.getData()).apply(RequestOptions.bitmapTransform(new RoundedCorners(10))).into(mOpenfunimg);
+                            Picasso.with(PromotionalActivitiesActivity.this).load(uploadPickBean.getData())
+//                                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                                    .into(mOpenfunimg);
                         }
                     }
 
