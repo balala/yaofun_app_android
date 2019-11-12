@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 
+import com.balala.yaofun.MyApp;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;

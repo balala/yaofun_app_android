@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.balala.yaofun.R;
-import com.balala.yaofun.adapter.MyAlbumAdapter;
 import com.balala.yaofun.adapter.ViewpagerAdapter;
 import com.balala.yaofun.base.BaseActivity;
 import com.balala.yaofun.base.BasePresenter;

@@ -3,10 +3,6 @@ package com.balala.yaofun.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.balala.yaofun.R;
 import com.balala.yaofun.activity.MyAlbumActivity;
+import com.balala.yaofun.activity.SettingActivity;
 import com.balala.yaofun.base.BaseFragment;
 import com.balala.yaofun.util.ForLog;
 import com.bumptech.glide.Glide;
@@ -24,7 +21,7 @@ import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.BindView;
 
-import static com.balala.yaofun.httpUtils.MyApp.user;
+import static com.balala.yaofun.MyApp.user;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,10 +35,13 @@ public class MeFragment extends BaseFragment {
     LinearLayout ll_call_our;
     @BindView(R.id.ll_my_album)
     LinearLayout ll_my_album;
+    @BindView(R.id.ll_setting)
+    LinearLayout ll_setting;
 
 
     @Override
     protected void initView() {
+
         ForLog.e("我的页面调用了initView");
         ImmersionBar.with(this).statusBarColor(R.color.black).init();
         Glide.with(this).load(user.getImages())
@@ -58,7 +58,12 @@ public class MeFragment extends BaseFragment {
             Intent intent=new Intent(getContext(), MyAlbumActivity.class);
             startActivity(intent);
         }));
+        ll_setting.setOnClickListener(v->{
+            Intent intent=new Intent(getContext(), SettingActivity.class);
+            startActivity(intent);
+        });
     }
+
 
     @Override
     protected int getlayoutId() {

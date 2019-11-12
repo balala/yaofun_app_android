@@ -50,6 +50,15 @@ public class ForLog {
         Log.e(className, createLog(message));
     }
 
+    public static void e(String message,Object o) {
+        message+=o.toString();
+        if (!isDebuggable())
+            return;
+        getMethodNames(new Throwable().getStackTrace());
+        Log.e(className, createLog(message));
+    }
+
+
     public static void i(String message) {
         if (!isDebuggable())
             return;

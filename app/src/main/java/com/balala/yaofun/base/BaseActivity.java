@@ -24,10 +24,6 @@ public abstract class BaseActivity<p extends BasePresenter, v extends BaseView> 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // 渲染系统toolbar
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        hideBottomUIMenu();
         setContentView(getlayout());
         ButterKnife.bind(this);
         basePresenter = initPresenter();

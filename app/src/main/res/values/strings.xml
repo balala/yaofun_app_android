@@ -64,6 +64,8 @@
     <string name="homedetails_alter">修改</string>
     <string name="homedetails_delete">删除</string>
     <string name="maillist">通讯录</string>
+    <string name="setting">设置</string>
+    <string name="privacy_policy">隐私政策</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

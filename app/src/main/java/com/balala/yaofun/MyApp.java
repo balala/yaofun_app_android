@@ -1,4 +1,4 @@
-package com.balala.yaofun.httpUtils;
+package com.balala.yaofun;
 
 import android.app.ActivityManager;
 import android.app.Application;
@@ -31,8 +31,17 @@ import static com.balala.yaofun.httpUtils.IMManager.connectRongIM;
 import static com.balala.yaofun.util.Utils.getNowDate;
 
 public class MyApp extends Application {
+    //   String url = "https://192.168.0.164:8088/api/";
+    //    String url = "https://test.yaofun.vip/api/";
+    //    String url = "http://192.168.110.131:5001/api/";
+    //    String url = "https://api.yaofun.vip/api/";
+    // http://test.yaofun.vip/api/verification_code/send
+    public static String BaseUrl="http://192.168.110.131:5001/api/";
+
+
     private static MyApp myApp;
     public static UserBean user=null;
+    public static String AppVersion="1.0";
     //手机唯一辨别码
     private static String unique_identifier;
     //用户自定义手机名称，暂时用来保存手机的各种信息
@@ -81,7 +90,7 @@ public class MyApp extends Application {
     public static Map<String, Object> getBaseMap(Map<String,? extends Object> maps){
         Map<String, Object> map=new HashMap<>();
 
-        map.put("version", '1');
+        map.put("version", AppVersion);
         map.put("current_device", "android");
         map.put("unique_identifier", unique_identifier);
         map.put("user_defined_name", user_defined_name);

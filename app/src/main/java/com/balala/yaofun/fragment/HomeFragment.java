@@ -50,13 +50,11 @@ import com.balala.yaofun.bean.result.DayBeans;
 import com.balala.yaofun.bean.result.HomeAllBean;
 import com.balala.yaofun.bean.result.HomeBannerDean;
 import com.balala.yaofun.presenter.HomePresenter;
-import com.balala.yaofun.util.MyScrollView;
 import com.balala.yaofun.util.ToastUtils;
 import com.balala.yaofun.view.Homeview;
 import com.balala.yaofun.zxing.activity.CaptureActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -77,7 +75,7 @@ import java.util.Timer;
 import butterknife.BindView;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
-import static com.balala.yaofun.httpUtils.MyApp.hasLogin;
+import static com.balala.yaofun.MyApp.hasLogin;
 
 
 /**

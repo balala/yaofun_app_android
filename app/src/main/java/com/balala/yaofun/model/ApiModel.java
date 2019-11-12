@@ -1,7 +1,5 @@
 package com.balala.yaofun.model;
 
-import android.util.Log;
-
 import com.balala.yaofun.base.BaseModel;
 import com.balala.yaofun.base.BaseView;
 import com.balala.yaofun.bean.BaseBean;
@@ -13,15 +11,12 @@ import com.balala.yaofun.bean.result.DayBeans;
 import com.balala.yaofun.bean.result.HomeAllBean;
 import com.balala.yaofun.bean.result.HomeBannerDean;
 import com.balala.yaofun.bean.result.HomedetailsBean;
-import com.balala.yaofun.bean.result.LandingBean;
 import com.balala.yaofun.httpUtils.HttpUtils;
 import com.balala.yaofun.httpUtils.ResultCallBack;
 import com.balala.yaofun.httpUtils.ResultException;
-import com.balala.yaofun.httpUtils.ToastUtil;
 import com.balala.yaofun.util.ForLog;
 import com.balala.yaofun.util.MyServer;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -31,11 +26,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.balala.yaofun.httpUtils.MyApp.getBaseMap;
+import static com.balala.yaofun.MyApp.BaseUrl;
+import static com.balala.yaofun.MyApp.getBaseMap;
 
 
 public class ApiModel extends BaseModel implements BaseView {
-    private static MyServer movieService = HttpUtils.getInstance().getApiserver(MyServer.url, MyServer.class);
+    private static MyServer movieService = HttpUtils.getInstance().getApiserver(BaseUrl, MyServer.class);
 
 
     //获取用户详情

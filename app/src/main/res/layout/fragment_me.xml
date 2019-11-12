@@ -157,9 +157,9 @@
 
 
     <LinearLayout
-        android:layout_marginTop="@dimen/dp_18"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:paddingTop="@dimen/dp_18"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -198,9 +198,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="@dimen/dp_18"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:paddingTop="@dimen/dp_18"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -238,9 +238,10 @@
             android:layout_height="0.5dp"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_marginTop="@dimen/dp_18"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:id="@+id/ll_setting"
+        android:paddingTop="@dimen/dp_18"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -274,9 +275,9 @@
 
     <LinearLayout
         android:id="@+id/ll_my_album"
-        android:layout_marginTop="@dimen/dp_18"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:paddingTop="@dimen/dp_18"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -315,9 +316,9 @@
 
     <LinearLayout
         android:id="@+id/ll_call_our"
-        android:layout_marginTop="@dimen/dp_18"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:paddingTop="@dimen/dp_18"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

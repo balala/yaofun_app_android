@@ -2,17 +2,12 @@ package com.balala.yaofun.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -21,7 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,14 +29,11 @@ import com.balala.yaofun.presenter.HomedetailsPersenter;
 import com.balala.yaofun.util.FlowLayout;
 import com.balala.yaofun.util.SwZoomDragImageView;
 import com.balala.yaofun.view.HomedetailsView;
-import com.bm.library.PhotoView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.util.Util;
 import com.gyf.immersionbar.ImmersionBar;
 import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMMin;
 
 import java.util.HashMap;
@@ -52,7 +43,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.balala.yaofun.httpUtils.MyApp.hasLogin;
+import static com.balala.yaofun.MyApp.hasLogin;
 
 public class HomedetailsActivity extends BaseActivity<HomedetailsPersenter, ApiModel> implements HomedetailsView {
 

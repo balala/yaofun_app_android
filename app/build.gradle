@@ -160,5 +160,11 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    api 'com.just.agentweb:agentweb:4.1.2' //webview框架
+
+    api 'com.flyco.dialog:FlycoDialog_Lib:1.2.2@aar'
+    api 'com.flyco.animation:FlycoAnimation_Lib:1.0.0@aar'
+    api 'com.nineoldandroids:library:2.4.0'
+
 
 }
