@@ -18,8 +18,6 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -30,7 +28,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -66,7 +63,6 @@ import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,6 +73,7 @@ import butterknife.BindView;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.balala.yaofun.MyApp.hasLogin;
+import static com.balala.yaofun.MyApp.user;
 
 
 /**
@@ -511,12 +508,15 @@ public class HomeFragment extends BaseFragment<HomePresenter, Homeview> implemen
             @Override
             public void onClick(View v) {
                 if (hasLogin()) {
-                    //进入实名认证页面
-                    startActivity(new Intent(getContext(), AuthenticationActivity.class));
+                    if(user.getReal_name_authentication()){
+                        // 跳入发布活动的页面
+                        startActivity(new Intent(getContext(), PromotionalActivitiesActivity.class));
+                    }else{
+                        //进入实名认证页面
+                        startActivity(new Intent(getContext(), AuthenticationActivity.class));
+                    }
                 } else {
-                    // 跳入发布活动的页面
-//                    startActivity(new Intent(getContext(), LandingActivity.class));
-                    startActivity(new Intent(getContext(), PromotionalActivitiesActivity.class));
+                    startActivity(new Intent(getContext(), LandingActivity.class));
                 }
 
             }

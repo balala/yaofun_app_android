@@ -36,7 +36,8 @@ public class MyApp extends Application {
     //    String url = "http://192.168.110.131:5001/api/";
     //    String url = "https://api.yaofun.vip/api/";
     // http://test.yaofun.vip/api/verification_code/send
-    public static String BaseUrl="http://192.168.110.131:5001/api/";
+//    public static String BaseUrl="http://192.168.110.131:5001/api/";
+    public static String BaseUrl="https://api.yaofun.vip/api/";
 
 
     private static MyApp myApp;
