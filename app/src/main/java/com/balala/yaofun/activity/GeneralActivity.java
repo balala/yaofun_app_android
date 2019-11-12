@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.balala.yaofun.httpUtils.MyApp.hasLogin;
+import static com.balala.yaofun.MyApp.hasLogin;
 
 public class GeneralActivity extends AppCompatActivity {
 
@@ -46,6 +46,7 @@ public class GeneralActivity extends AppCompatActivity {
     private static final int TYPE_KONWLOGE = 1;
     private static final int TYPE_WX = 2;
     private static final int TYPE_NOTACTION = 3;
+    private int selectPage=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,27 +73,32 @@ public class GeneralActivity extends AppCompatActivity {
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = findViewById(checkedId);
                 switch (checkedId) {
                     case R.id.bottom_home:
                         switchFragment(TYPE_HEARD);
+                        selectPage=1;
                         break;
                     case R.id.bottom_fun:
                         switchFragment(TYPE_KONWLOGE);
+                        selectPage=2;
                         break;
                     case R.id.bottom_message:
                         if(hasLogin()){
                             switchFragment(TYPE_WX);
+                            selectPage=3;
                         }else{
-                            ShowFragmentone();
-                        startActivity(new Intent(GeneralActivity.this, LandingActivity.class));
+                            doCheckedChangedFail();
+                            startActivity(new Intent(GeneralActivity.this, LandingActivity.class));
                         }
                         break;
                     case R.id.bottom_me:
                         if(hasLogin()){
                             switchFragment(TYPE_NOTACTION);
+                            selectPage=4;
                         }else{
-                            ShowFragmentone();
                             startActivity(new Intent(GeneralActivity.this, LandingActivity.class));
+                            doCheckedChangedFail();
                         }
                         break;
                     default:
@@ -100,6 +106,22 @@ public class GeneralActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void doCheckedChangedFail(){
+        switch (selectPage){
+            case 2:
+                bottom_fun.setChecked(true);
+                break;
+            case 3:
+                bottom_message.setChecked(true);
+                break;
+            case 4:
+                bottom_me.setChecked(true);
+                break;
+            default:
+                bottom_home.setChecked(true);
+                break;
+        }
     }
 
     private void ShowFragmentone() {

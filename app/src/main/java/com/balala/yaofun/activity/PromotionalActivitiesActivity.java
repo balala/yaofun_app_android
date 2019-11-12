@@ -68,6 +68,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.balala.yaofun.MyApp.BaseUrl;
+
 @GlideModule
 public class PromotionalActivitiesActivity extends AppCompatActivity {
 
@@ -335,7 +337,7 @@ public class PromotionalActivitiesActivity extends AppCompatActivity {
         Retrofit retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(MyServer.url)
+                .baseUrl(BaseUrl)
                 .build();
         MyServer myServer = retrofit.create(MyServer.class);
         Observable<UploadPickBean> activitDataimg = myServer.getActivitDataimg(body, part);

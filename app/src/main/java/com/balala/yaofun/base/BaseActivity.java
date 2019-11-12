@@ -24,9 +24,6 @@ public abstract class BaseActivity<p extends BasePresenter, v extends BaseView> 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // 渲染系统toolbar
-        hideBottomUIMenu();
         setContentView(getlayout());
         ButterKnife.bind(this);
         basePresenter = initPresenter();
@@ -39,19 +36,19 @@ public abstract class BaseActivity<p extends BasePresenter, v extends BaseView> 
     }
 
     @Override
-    public void onStart() {
+    public void onStart(){
         super.onStart();
         EventBus.getDefault().register(this);
     }
 
     @Override
-    public void onStop() {
+    public void onStop(){
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(Object myEvent) {
+    public void onMessageEvent(Object myEvent){
 
     }
 
@@ -69,11 +66,10 @@ public abstract class BaseActivity<p extends BasePresenter, v extends BaseView> 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (basePresenter != null) {
+        if(basePresenter!=null){
             basePresenter.OnDestroy();
         }
     }
-
     /**
      * 隐藏虚拟按键，并且全屏
      */
@@ -81,7 +77,7 @@ public abstract class BaseActivity<p extends BasePresenter, v extends BaseView> 
         //隐藏虚拟按键，并且全屏
         Window window = getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
-        params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE;
+        params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE;
         window.setAttributes(params);
     }
 

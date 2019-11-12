@@ -3,6 +3,8 @@ package com.balala.yaofun.httpUtils;
 import android.graphics.Color;
 import android.os.Environment;
 
+import com.balala.yaofun.MyApp;
+
 import java.io.File;
 
 /**

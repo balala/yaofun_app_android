@@ -37,15 +37,6 @@ import retrofit2.http.QueryMap;
  */
 
 public interface MyServer {
-
-    //   String url = "https://192.168.0.164:8088/api/";
-//    String url = "https://test.yaofun.vip/api/";
-//    String url = "http://192.168.110.131:5001/api/";
-    String url = "https://api.yaofun.vip/api/";
-
-
-    // http://test.yaofun.vip/api/verification_code/send
-    // 发送验证码的接口 verification code
     @GET("verification_code/send")
     Observable<BaseBean<CodeBean>> getVerificationCode(@QueryMap Map<String, Object> map);
 
